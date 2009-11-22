@@ -33,7 +33,7 @@ bjam --libdir=..\boost_1_41_0\lib --includedir=..\boost_1_41_0\include --with-da
 
 Linux:
 
-./bjam --libdir=../boost_1_41_0/lib --includedir=../boost_1_41_0/include --with-date_time --with-filesystem --build-type=complete toolset=gcc install
+./bjam --libdir=../boost_1_41_0/lib --includedir=../boost_1_41_0/include --with-date_time --with-filesystem --build-type=complete --layout=versioned toolset=gcc install
 
 Note: This can take a VERY long time on some systems - it's worth going away and coming back.
 
