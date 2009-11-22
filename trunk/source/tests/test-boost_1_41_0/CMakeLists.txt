@@ -20,9 +20,9 @@ SET(sources main.cpp)
 
 SOURCE_GROUP(.cpp FILES ${sources})
 
-##############
-# Find Boost #
-##############
+################################
+# Specify the libraries to use #
+################################
 
 INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
 
@@ -32,11 +32,11 @@ INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
 
 INCLUDE(${hesperus2_SOURCE_DIR}/SetTarget.cmake)
 
-###########################################
-# Specify the necessary libraries to link #
-###########################################
+#################################
+# Specify the libraries to link #
+#################################
 
-TARGET_LINK_LIBRARIES(${targetname} ${Boost_LIBRARIES})
+INCLUDE(${hesperus2_SOURCE_DIR}/LinkBoost.cmake)
 
 #############################
 # Specify things to install #

@@ -20,17 +20,11 @@ SET(sources main.cpp)
 
 SOURCE_GROUP(.cpp FILES ${sources})
 
-###############################
-# Specify the necessary paths #
-###############################
+################################
+# Specify the libraries to use #
+################################
 
-INCLUDE_DIRECTORIES(
-${hesperus2_SOURCE_DIR}/../libraries/angelscript_2.17.2/sdk/angelscript/include
-)
-
-LINK_DIRECTORIES(
-${hesperus2_SOURCE_DIR}/../libraries/angelscript_2.17.2/sdk/angelscript/lib
-)
+INCLUDE(${hesperus2_SOURCE_DIR}/UseAngelScript.cmake)
 
 ##########################################
 # Specify the target and where to put it #
@@ -38,11 +32,11 @@ ${hesperus2_SOURCE_DIR}/../libraries/angelscript_2.17.2/sdk/angelscript/lib
 
 INCLUDE(${hesperus2_SOURCE_DIR}/SetTarget.cmake)
 
-###########################################
-# Specify the necessary libraries to link #
-###########################################
+#################################
+# Specify the libraries to link #
+#################################
 
-TARGET_LINK_LIBRARIES(${targetname} debug angelscriptd optimized angelscript)
+INCLUDE(${hesperus2_SOURCE_DIR}/LinkAngelScript.cmake)
 
 #############################
 # Specify things to install #
