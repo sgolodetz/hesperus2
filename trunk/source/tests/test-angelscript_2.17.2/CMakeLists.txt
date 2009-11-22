@@ -1,12 +1,12 @@
 ####################################################
-# CMakeLists.txt for tests/test-angelscript-2.17.2 #
+# CMakeLists.txt for tests/test-angelscript_2.17.2 #
 ####################################################
 
 ###########################
 # Specify the target name #
 ###########################
 
-SET(targetname test-angelscript-2.17.2)
+SET(targetname test-angelscript_2.17.2)
 
 #############################
 # Specify the project files #
@@ -48,7 +48,7 @@ ENDIF(MSVC_IDE)
 # Specify the necessary libraries to link #
 ###########################################
 
-TARGET_LINK_LIBRARIES(${targetname} debug angelscriptd.lib optimized angelscript.lib)
+TARGET_LINK_LIBRARIES(${targetname} debug angelscriptd optimized angelscript)
 
 #############################
 # Specify things to install #
