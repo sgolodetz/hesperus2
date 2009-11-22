@@ -1,8 +1,30 @@
-Instructions for Linux (revise when back in Windows);
+GLEW 1.5.1 Setup Instructions
+Last Updated by Stuart Golodetz on 22/11/09
+-------------------------------------------
 
-1) Extract tgz.
-2) Rename glew subdirectory to glew-1.5.1.
-3) Run 'fromdos config/config.guess' in glew-1.5.1 directory to convert line endings.
-4) Make sure the development files for libxmu are installed.
-5) Run 'make'.
+1) Extract glew-1.5.1-src.tgz into the libraries directory.
 
+	On Windows:
+
+	a) Just extract it using something like the shareware version of WinRAR.
+
+	On Linux:
+
+	a) Change to the libraries directory.
+	b) Run "tar xzf setup/glew-1.5.1/glew-1.5.1-src.tgz".
+
+2) Rename the glew subdirectory of libraries to glew-1.5.1.
+
+3) Build GLEW.
+
+	On Windows:
+
+	a) Open glew-1.5.1\build\vc6\glew.dsw (convert it to a new project/solution if prompted).
+	b) Build glew_shared and glew_static in release mode. (You can also build glewinfo and visualinfo if desired.)
+
+	On Linux:
+
+	a) Change to the glew-1.5.1 directory.
+	b) Run "fromdos config/config.guess" to convert its line endings to UNIX-style '\n'.
+	c) Make sure the development files for libxmu are installed (use the package manager).
+	d) Run "make".
