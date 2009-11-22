@@ -20,6 +20,18 @@ SET(sources main.cpp)
 
 SOURCE_GROUP(.cpp FILES ${sources})
 
+###############################
+# Specify the necessary paths #
+###############################
+
+INCLUDE_DIRECTORIES(
+${hesperus2_SOURCE_DIR}/../libraries/angelscript_2.17.2/sdk/angelscript/include
+)
+
+LINK_DIRECTORIES(
+${hesperus2_SOURCE_DIR}/../libraries/angelscript_2.17.2/sdk/angelscript/lib
+)
+
 ##########################################
 # Specify the target and where to put it #
 ##########################################
@@ -31,6 +43,12 @@ IF(MSVC_IDE)
 	SET_TARGET_PROPERTIES(${targetname} PROPERTIES PREFIX "../")
 	SET_TARGET_PROPERTIES(${targetname} PROPERTIES IMPORT_PREFIX "../")
 ENDIF(MSVC_IDE)
+
+###########################################
+# Specify the necessary libraries to link #
+###########################################
+
+TARGET_LINK_LIBRARIES(${targetname} debug angelscriptd.lib optimized angelscript.lib)
 
 #############################
 # Specify things to install #
