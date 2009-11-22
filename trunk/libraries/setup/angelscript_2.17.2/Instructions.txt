@@ -1,0 +1,11 @@
+AngelScript 2.17.2 Setup Instructions
+Last Updated by Stuart Golodetz on 22/11/09
+-------------------------------------------
+
+1. Extract angelscript_2.17.2.zip into libraries/angelscript_2.17.2.
+   - On Windows, just unzip it using something like WinRAR.
+   - On Linux, use 'unzip setup/angelscript_2.17.2/angelscript_2.17.2.zip -d angelscript_2.17.2' from the libraries directory.
+
+2. Find the appropriate project under angelscript_2.17.2/sdk/angelscript/projects and build it as appropriate.
+   - On Windows, just build the appropriate Visual Studio project using the IDE (remember both debug and release versions).
+   - On Linux, run 'make' in the gnuc subdirectory (but not 'make install').
