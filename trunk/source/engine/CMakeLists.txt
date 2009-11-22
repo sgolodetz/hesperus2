@@ -3,5 +3,4 @@
 #############################
 
 #ADD_SUBDIRECTORY(core)
-#ADD_SUBDIRECTORY(libraries)
 #ADD_SUBDIRECTORY(tools)
