@@ -1,0 +1,40 @@
+Boost 1.41.0 Setup Instructions
+Last Updated by Stuart Golodetz on 22/11/09
+-------------------------------------------
+
+1. Extract boost_1_41_0.tar.gz into the libraries directory.
+
+	On Windows:
+
+	a) Just extract it using something like the shareware version of WinRAR.
+
+	On Linux:
+
+	a) Change to the libraries directory.
+	b) Run "tar xzf setup/boost_1_41_0/boost_1_41_0.tar.gz".
+
+2. Rename the boost_1_41_0 subdirectory of libraries to boost-setup.
+
+3. Whilst most of the Boost libraries are header-only (i.e. there's no compilation needed), hesperus2 uses some Boost libraries which need compiling: in particular, date_time and filesystem. To compile those libraries, you need Boost Jam (bjam). There are binaries available for most common platforms, and I've put the zips containing the ones for Windows and Linux in this directory. The others are available by following the link from the original instructions, found here:
+
+http://www.boost.org/doc/libs/1_41_0/more/getting_started/index.html
+
+(If they're no longer there by this point, the Getting Started instructions for the latest version of Boost will hopefully suffice. Search for it on the main page at www.boost.org.)
+
+The actual executable needs to be extracted from one of those zip files and placed in libraries/boost-setup. You then need to run the following at the command prompt (from within the boost-setup directory).
+
+Windows (Visual Studio 2005):
+
+bjam --libdir=..\boost_1_41_0\lib --includedir=..\boost_1_41_0\include --with-date_time --with-filesystem --build-type=complete toolset=msvc-8.0 install
+
+Windows (Visual Studio 2008):
+
+bjam --libdir=..\boost_1_41_0\lib --includedir=..\boost_1_41_0\include --with-date_time --with-filesystem --build-type=complete toolset=msvc-9.0 install
+
+Linux:
+
+./bjam --libdir=../boost_1_41_0/lib --includedir=../boost_1_41_0/include --with-date_time --with-filesystem --build-type=complete toolset=gcc install
+
+Note: This can take a VERY long time on some systems - it's worth going away and coming back.
+
+4. (Optional) Remove the boost-setup directory as it is no longer needed.
