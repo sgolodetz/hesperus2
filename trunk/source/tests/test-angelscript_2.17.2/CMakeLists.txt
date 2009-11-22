@@ -36,13 +36,7 @@ ${hesperus2_SOURCE_DIR}/../libraries/angelscript_2.17.2/sdk/angelscript/lib
 # Specify the target and where to put it #
 ##########################################
 
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${hesperus2_BINARY_DIR}/bin/tests/${targetname}/bin)
-ADD_EXECUTABLE(${targetname} ${sources})
-IF(MSVC_IDE)
-	# A hack to get around the "Debug" and "Release" directories Visual Studio tries to add
-	SET_TARGET_PROPERTIES(${targetname} PROPERTIES PREFIX "../")
-	SET_TARGET_PROPERTIES(${targetname} PROPERTIES IMPORT_PREFIX "../")
-ENDIF(MSVC_IDE)
+INCLUDE(${hesperus2_SOURCE_DIR}/SetTarget.cmake)
 
 ###########################################
 # Specify the necessary libraries to link #
