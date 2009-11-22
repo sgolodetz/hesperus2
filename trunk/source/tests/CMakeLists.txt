@@ -3,3 +3,4 @@
 ############################
 
 ADD_SUBDIRECTORY(test-angelscript_2.17.2)
+ADD_SUBDIRECTORY(test-boost_1_41_0)
