@@ -135,8 +135,8 @@ static void draw_screen( void )
 	glRotatef( angle, 0.0, 1.0, 0.0 );
 
 	if( should_rotate ) {
-
-		if( ++angle > 360.0f ) {
+		angle += 0.1f;
+		if( angle > 360.0f ) {
 			angle = 0.0f;
 		}
 
@@ -357,7 +357,7 @@ int main( int argc, char* argv[] )
 	* handle the resize events properly with
 	* glViewport.
 	*/
-	flags = SDL_OPENGL | SDL_FULLSCREEN;
+	flags = SDL_OPENGL;
 
 	/*
 	* Set the video mode
