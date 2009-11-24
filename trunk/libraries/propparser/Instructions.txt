@@ -1,0 +1,21 @@
+propparser Instructions
+Last Updated by Stuart Golodetz on 24/11/09
+-------------------------------------------
+
+1) Make sure you have Bison and Flex installed.
+
+2) Build propparser using CMake, setting CMAKE_INSTALL_PREFIX to the propparser directory itself.
+
+***
+
+Note:
+
+It may be necessary to add the modules FindBISON.cmake and FindFLEX.cmake to CMake's module path.
+
+On Windows (using CMake 2.6 as an example), this is located at:
+
+<install location>\share\cmake-2.6\Modules\
+
+On Linux, it tends to be at:
+
+/usr/share/cmake-2.6/Modules
