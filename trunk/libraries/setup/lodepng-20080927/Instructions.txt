@@ -1,0 +1,9 @@
+lodepng-20080927 Setup Instructions
+Last Updated by Stuart Golodetz on 24/11/09
+-------------------------------------------
+
+1. Extract lodepng-20080927.zip into libraries.
+   - On Windows, just unzip it using something like WinRAR.
+   - On Linux, use 'unzip setup/lodepng-20080927/lodepng-20080927.zip' from the libraries directory.
+
+2. Build and install LodePNG using CMake - set the CMAKE_INSTALL_PREFIX to the lodepng-20080927 directory.
