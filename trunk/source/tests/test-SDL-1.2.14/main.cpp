@@ -135,7 +135,7 @@ static void draw_screen( void )
 	glRotatef( angle, 0.0, 1.0, 0.0 );
 
 	if( should_rotate ) {
-		angle += 0.1f;
+		angle += 0.3f;
 		if( angle > 360.0f ) {
 			angle = 0.0f;
 		}
