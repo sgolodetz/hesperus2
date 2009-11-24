@@ -1,0 +1,15 @@
+SDL 1.2.14 Setup Instructions
+Last Updated by Stuart Golodetz on 24/11/09
+-------------------------------------------
+
+On Windows:
+
+Extract SDL-devel-1.2.14-VC8 into the libraries directory.
+
+On Linux:
+
+Extract SDL-devel-1.2.14-gcc.tar.gz into the libraries directory.
+
+***
+
+Note: You'll need the runtime libraries to be placed somewhere sensible in order to get the program to run.

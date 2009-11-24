@@ -42,4 +42,4 @@ INCLUDE(${hesperus2_SOURCE_DIR}/LinkAngelScript.cmake)
 # Specify things to install #
 #############################
 
-INSTALL(TARGETS ${targetname} DESTINATION bin/tests/${targetname}/bin)
+INCLUDE(${hesperus2_SOURCE_DIR}/InstallTest.cmake)

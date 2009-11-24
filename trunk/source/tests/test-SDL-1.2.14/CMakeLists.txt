@@ -1,12 +1,12 @@
-##############################################
-# CMakeLists.txt for tests/test-boost_1_41_0 #
-##############################################
+############################################
+# CMakeLists.txt for tests/test-SDL-1.2.14 #
+############################################
 
 ###########################
 # Specify the target name #
 ###########################
 
-SET(targetname test-boost_1_41_0)
+SET(targetname test-SDL-1.2.14)
 
 #############################
 # Specify the project files #
@@ -24,7 +24,7 @@ SOURCE_GROUP(.cpp FILES ${sources})
 # Specify the libraries to use #
 ################################
 
-INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/UseSDL.cmake)
 
 ##########################################
 # Specify the target and where to put it #
@@ -36,7 +36,7 @@ INCLUDE(${hesperus2_SOURCE_DIR}/SetTarget.cmake)
 # Specify the libraries to link #
 #################################
 
-INCLUDE(${hesperus2_SOURCE_DIR}/LinkBoost.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/LinkSDL.cmake)
 
 #############################
 # Specify things to install #
