@@ -6,9 +6,13 @@ On Windows:
 
 Extract SDL-devel-1.2.14-VC8 into the libraries directory.
 
-On Linux:
+On Linux (32-bit):
 
 Extract SDL-devel-1.2.14-gcc.tar.gz into the libraries directory.
+
+On Linux (64-bit):
+
+Extract SDL-devel-1.2.14-gcc64.tar.gz into the libraries directory.
 
 ***
 
