@@ -1,0 +1,19 @@
+FMOD 4.28.02 Setup Instructions
+Last Updated by Stuart Golodetz on 24/11/09
+-------------------------------------------
+
+On Windows:
+
+Extract fmodapi42802win32.rar into the libraries directory.
+
+On Linux (32-bit):
+
+Extract fmodapi42802linux.tar.gz into the libraries directory and rename the subdirectory to FMOD-4.28.02.
+
+On Linux (64-bit):
+
+Extract fmodapi42802linux64.tar.gz into the libraries directory and rename the subdirectory to FMOD-4.28.02.
+
+***
+
+Note: You'll need the runtime libraries to be placed somewhere sensible in order to get the program to run.
