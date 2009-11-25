@@ -30,7 +30,7 @@ INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
 # Specify the target and where to put it #
 ##########################################
 
-INCLUDE(${hesperus2_SOURCE_DIR}/SetTarget.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/SetTestTarget.cmake)
 
 #################################
 # Specify the libraries to link #
