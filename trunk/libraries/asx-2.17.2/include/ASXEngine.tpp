@@ -33,19 +33,6 @@ void ASXEngine::register_global_function(F f, const std::string& name, const std
 	if(result < 0) throw ASXException("Global function " + name + " could not be registered");
 }
 
-template <typename F>
-void ASXEngine::register_global_operator(F f, asEBehaviours behaviour)
-{
-	register_global_operator<F>(f, behaviour, ASXTypeString<F>("f")());
-}
-
-template <typename F>
-void ASXEngine::register_global_operator(F f, asEBehaviours behaviour, const std::string& decl)
-{
-	int result = m_engine->RegisterGlobalBehaviour(behaviour, decl.c_str(), asFUNCTION(f), asCALL_CDECL);
-	if(result < 0) throw ASXException("Global operator could not be registered");
-}
-
 template <typename T, typename F>
 void ASXEngine::register_instantiable_ref_type(F factory)
 {

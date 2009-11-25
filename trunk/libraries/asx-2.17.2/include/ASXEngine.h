@@ -50,9 +50,6 @@ public:
 	template <typename F> void register_global_function(F f, const std::string& name);
 	template <typename F> void register_global_function(F f, const std::string& name, const std::string& decl);
 
-	template <typename F> void register_global_operator(F f, asEBehaviours behaviour);
-	template <typename F> void register_global_operator(F f, asEBehaviours behaviour, const std::string& decl);
-
 	template <typename T, typename F> void register_instantiable_ref_type(F factory);
 	template <typename T, typename F> void register_instantiable_ref_type(F factory, const std::string& obj);
 

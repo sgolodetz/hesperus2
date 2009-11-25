@@ -11,8 +11,6 @@
 #include <scriptbuilder.h>
 #include <scriptstdstring.h>
 
-#include "ASXException.h"
-
 //#################### CONSTRUCTORS ####################
 ASXEngine::ASXEngine()
 {
@@ -37,7 +35,8 @@ ASXEngine::~ASXEngine()
 //#################### PUBLIC METHODS ####################
 void ASXEngine::clear_messages()
 {
-	std::swap(m_messages, std::vector<ASXMessage>());
+	std::vector<ASXMessage> dummy;
+	std::swap(m_messages, dummy);
 }
 
 ASXModule_Ptr ASXEngine::get_module(const std::string& moduleName) const

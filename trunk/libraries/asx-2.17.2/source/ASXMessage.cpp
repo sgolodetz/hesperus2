@@ -5,6 +5,8 @@
 
 #include "ASXMessage.h"
 
+#include <iostream>
+
 //#################### CONSTRUCTORS ####################
 ASXMessage::ASXMessage(const std::string& type_, const std::string& section_, int row_, int col_, const std::string& message_)
 :	type(type_), section(section_), row(row_), col(col_), message(message_)

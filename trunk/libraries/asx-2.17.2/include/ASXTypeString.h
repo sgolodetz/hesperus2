@@ -96,7 +96,7 @@ template <typename T> struct ASXTypeString<const T> : ASXTypeString<T>
 	explicit ASXTypeString(const std::string& name_ = "")
 	:	ASXTypeString<T>(name_)
 	{
-		prefix = "const ";
+		this->prefix = "const ";
 	}
 
 	ASXTypeString& as_param()
@@ -114,7 +114,7 @@ template <typename T> struct ASXTypeString<T*> : ASXTypeString<T>
 	explicit ASXTypeString(const std::string& name_ = "")
 	:	ASXTypeString<T>(name_)
 	{
-		suffix = "@";
+		this->suffix = "@";
 	}
 };
 
@@ -123,12 +123,12 @@ template <typename T> struct ASXTypeString<T&> : ASXTypeString<T>
 	explicit ASXTypeString(const std::string& name_ = "")
 	:	ASXTypeString<T>(name_)
 	{
-		suffix = "&";
+		this->suffix = "&";
 	}
 
 	ASXTypeString& as_param()
 	{
-		suffix = "& out";
+		this->suffix = "& out";
 		return *this;
 	}
 };
@@ -138,13 +138,13 @@ template <typename T> struct ASXTypeString<const T&> : ASXTypeString<T>
 	explicit ASXTypeString(const std::string& name_ = "")
 	:	ASXTypeString<T>(name_)
 	{
-		prefix = "const";
-		suffix = "&";
+		this->prefix = "const";
+		this->suffix = "&";
 	}
 
 	ASXTypeString& as_param()
 	{
-		suffix = "& in";
+		this->suffix = "& in";
 		return *this;
 	}
 };

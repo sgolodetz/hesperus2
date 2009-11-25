@@ -7,6 +7,7 @@
 #define H_ASX_ASXFUNCTION
 
 #include "ASXContext.h"
+#include "ASXException.h"
 #include "ASXGetReturnValue.h"
 #include "ASXSetArgValue.h"
 
