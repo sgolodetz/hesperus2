@@ -9,3 +9,8 @@ double identity(double d)
 {
 	return d;
 }
+
+string identity(string s)
+{
+	return s;
+}

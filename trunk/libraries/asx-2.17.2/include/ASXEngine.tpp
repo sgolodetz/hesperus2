@@ -9,13 +9,47 @@
 
 //#################### PUBLIC METHODS ####################
 template <typename F>
-void ASXEngine::register_constructor(F f, std::string obj, std::string decl)
+void ASXEngine::register_constructor(F f)
+{
+#if 0
+	if(obj == "" || decl == "")
+	{
+		ASXStructorTypeString<F> structorTypeString;
+		if(obj == "") obj = structorTypeString.object_type();
+		if(decl == "") decl = structorTypeString.function_type();
+	}
+#endif
+	ASXStructorTypeString<F> structorTypeString;
+	register_constructor(f, structorTypeString.object_type(), structorTypeString.function_type());
+}
+
+template <typename F>
+void ASXEngine::register_constructor(F f, const std::string& obj)
+{
+	register_constructor(f, obj, ASXStructorTypeString<F>().function_type());
+}
+
+template <typename F>
+void ASXEngine::register_constructor(F f, const std::string& obj, const std::string& decl)
 {
 	register_structor(f, asBEHAVE_CONSTRUCT, obj, decl);
 }
 
 template <typename F>
-void ASXEngine::register_destructor(F f, std::string obj, std::string decl)
+void ASXEngine::register_destructor(F f)
+{
+	ASXStructorTypeString<F> structorTypeString;
+	register_destructor(f, structorTypeString.object_type(), structorTypeString.function_type());
+}
+
+template <typename F>
+void ASXEngine::register_destructor(F f, const std::string& obj)
+{
+	register_destructor(f, obj, ASXStructorTypeString<F>().function_type());
+}
+
+template <typename F>
+void ASXEngine::register_destructor(F f, const std::string& obj, const std::string& decl)
 {
 	register_structor(f, asBEHAVE_DESTRUCT, obj, decl);
 }
@@ -70,25 +104,21 @@ void ASXEngine::register_object_method(F f, const std::string& name, const std::
 	if(result < 0) throw ASXException("Object method " + name + " could not be registered");
 }
 
-template <typename F>
-void ASXEngine::register_object_operator(F f, asEBehaviours behaviour, std::string obj, std::string decl)
+template <typename T, typename M>
+void ASXEngine::register_object_property(M T::*m, const std::string& name, int byteOffset)
 {
-	if(obj == "" || decl == "")
-	{
-		ASXMethodTypeString<F> typeString("f");
-		if(obj == "") obj = typeString.object_type();
-		if(decl == "") decl = typeString.function_type();
-	}
-
-	int result = m_engine->RegisterObjectBehaviour(obj.c_str(), behaviour, decl.c_str(), asSMethodPtr<sizeof(f)>::Convert(f), asCALL_THISCALL);
-	if(result < 0) throw ASXException("Object operator could not be registered");
+	register_object_property(m, name, ASXTypeString<T>()(), ASXTypeString<M>(name)(), byteOffset);
 }
 
 template <typename T, typename M>
-void ASXEngine::register_object_property(M T::*m, const std::string& name, std::string obj, std::string decl, int byteOffset)
+void ASXEngine::register_object_property(M T::*m, const std::string& name, const std::string& obj, int byteOffset)
 {
-	if(obj == "") obj = ASXTypeString<T>()();
-	if(decl == "") decl = ASXTypeString<M>(name)();
+	register_object_property(m, name, obj, ASXTypeString<M>(name)(), byteOffset);
+}
+
+template <typename T, typename M>
+void ASXEngine::register_object_property(M T::*m, const std::string& name, const std::string& obj, const std::string& decl, int byteOffset)
+{
 	if(byteOffset == -1)
 	{
 		// Note: This is the equivalent of offsetof (but is technically not portable).
@@ -133,15 +163,8 @@ void ASXEngine::register_uninstantiable_ref_type(const std::string& obj)
 
 //#################### PRIVATE METHODS ####################
 template <typename F>
-void ASXEngine::register_structor(F f, asEBehaviours behaviour, std::string obj, std::string decl)
+void ASXEngine::register_structor(F f, asEBehaviours behaviour, const std::string& obj, const std::string& decl)
 {
-	if(obj == "" || decl == "")
-	{
-		ASXStructorTypeString<F> structorTypeString;
-		if(obj == "") obj = structorTypeString.object_type();
-		if(decl == "") decl = structorTypeString.function_type();
-	}
-
 	int result = m_engine->RegisterObjectBehaviour(obj.c_str(), behaviour, decl.c_str(), asFUNCTION(f), asCALL_CDECL_OBJFIRST);
 	if(result < 0) throw ASXException("'structor could not be registered");
 }

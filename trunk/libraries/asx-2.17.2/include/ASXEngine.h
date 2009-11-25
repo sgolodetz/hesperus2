@@ -43,9 +43,13 @@ public:
 
 	void output_messages(std::ostream& os) const;
 
-	template <typename F> void register_constructor(F f, std::string obj = "", std::string decl = "");
+	template <typename F> void register_constructor(F f);
+	template <typename F> void register_constructor(F f, const std::string& obj);
+	template <typename F> void register_constructor(F f, const std::string& obj, const std::string& decl);
 
-	template <typename F> void register_destructor(F f, std::string obj = "", std::string decl = "");
+	template <typename F> void register_destructor(F f);
+	template <typename F> void register_destructor(F f, const std::string& obj);
+	template <typename F> void register_destructor(F f, const std::string& obj, const std::string& decl);
 
 	template <typename F> void register_global_function(F f, const std::string& name);
 	template <typename F> void register_global_function(F f, const std::string& name, const std::string& decl);
@@ -57,9 +61,9 @@ public:
 	template <typename F> void register_object_method(F f, const std::string& name, const std::string& obj);
 	template <typename F> void register_object_method(F f, const std::string& name, const std::string& obj, const std::string& decl);
 
-	template <typename F> void register_object_operator(F f, asEBehaviours behaviour, std::string obj = "", std::string decl = "");
-
-	template <typename T, typename M> void register_object_property(M T::*m, const std::string& name, std::string obj = "", std::string decl = "", int byteOffset = -1);
+	template <typename T, typename M> void register_object_property(M T::*m, const std::string& name, int byteOffset = -1);
+	template <typename T, typename M> void register_object_property(M T::*m, const std::string& name, const std::string& obj, int byteOffset = -1);
+	template <typename T, typename M> void register_object_property(M T::*m, const std::string& name, const std::string& obj, const std::string& decl, int byteOffset = -1);
 
 	template <typename T> void register_pod_type();
 	template <typename T> void register_pod_type(const std::string& obj);
@@ -70,7 +74,7 @@ public:
 	//#################### PRIVATE METHODS ####################
 private:
 	void message_callback(const asSMessageInfo *msg);
-	template <typename F> void register_structor(F f, asEBehaviours behaviour, std::string obj = "", std::string decl = "");
+	template <typename F> void register_structor(F f, asEBehaviours behaviour, const std::string& obj, const std::string& decl);
 };
 
 //#################### TYPEDEFS ####################
