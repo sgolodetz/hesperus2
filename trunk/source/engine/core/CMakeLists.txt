@@ -53,13 +53,26 @@ hesp/math/geom/Polygon.tpp
 
 ##
 SET(math_vectors_sources
+hesp/math/vectors/TexturedLitVector3d.cpp
+hesp/math/vectors/TexturedVector3d.cpp
 hesp/math/vectors/Vector2d.cpp
 hesp/math/vectors/Vector3.cpp
 )
 
 SET(math_vectors_headers
+hesp/math/vectors/TexturedLitVector3d.h
+hesp/math/vectors/TexturedVector3d.h
 hesp/math/vectors/Vector2d.h
 hesp/math/vectors/Vector3.h
+)
+
+##
+SET(util_sources
+hesp/util/PolygonTypes.cpp
+)
+
+SET(util_headers
+hesp/util/PolygonTypes.h
 )
 
 #################################################################
@@ -70,6 +83,7 @@ SET(sources
 ${math_sources}
 ${math_geom_sources}
 ${math_vectors_sources}
+${util_sources}
 )
 
 SET(headers
@@ -77,6 +91,7 @@ ${exceptions_headers}
 ${math_headers}
 ${math_geom_headers}
 ${math_vectors_headers}
+${util_headers}
 )
 
 SET(templates
@@ -103,9 +118,13 @@ SOURCE_GROUP(math\\geom\\.tpp FILES ${math_geom_templates})
 SOURCE_GROUP(math\\vectors\\.cpp FILES ${math_vectors_sources})
 SOURCE_GROUP(math\\vectors\\.h FILES ${math_vectors_headers})
 
-###############################
-# Specify the necessary paths #
-###############################
+##
+SOURCE_GROUP(util\\.cpp FILES ${util_sources})
+SOURCE_GROUP(util\\.h FILES ${util_headers})
+
+###################################
+# Specify the include directories #
+###################################
 
 INCLUDE_DIRECTORIES(${hesperus2_SOURCE_DIR}/engine/core)
 

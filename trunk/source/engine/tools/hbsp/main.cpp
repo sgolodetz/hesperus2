@@ -17,9 +17,9 @@ using boost::lexical_cast;
 #include <source/io/files/GeometryFile.h>
 #include <source/io/files/TreeFile.h>
 #include <source/level/trees/BSPCompiler.h>
-#include <source/util/PolygonTypes.h>
-using namespace hesp;
 #endif
+#include <hesp/util/PolygonTypes.h>
+using namespace hesp;
 
 //#################### FUNCTIONS ####################
 void quit_with_error(const std::string& error)

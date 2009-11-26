@@ -20,6 +20,12 @@ SET(sources main.cpp)
 
 SOURCE_GROUP(.cpp FILES ${sources})
 
+###################################
+# Specify the include directories #
+###################################
+
+INCLUDE_DIRECTORIES(${hesperus2_SOURCE_DIR}/engine/core)
+
 ################################
 # Specify the libraries to use #
 ################################
