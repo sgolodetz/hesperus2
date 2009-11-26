@@ -56,6 +56,29 @@ hesp/level/brushes/PolyhedralBrush.tpp
 )
 
 ##
+SET(level_trees_sources
+hesp/level/trees/BSPBranch.cpp
+hesp/level/trees/BSPLeaf.cpp
+hesp/level/trees/BSPNode.cpp
+hesp/level/trees/BSPTree.cpp
+hesp/level/trees/BSPUtil.cpp
+)
+
+SET(level_trees_headers
+hesp/level/trees/BSPBranch.h
+hesp/level/trees/BSPCompiler.h
+hesp/level/trees/BSPLeaf.h
+hesp/level/trees/BSPNode.h
+hesp/level/trees/BSPTree.h
+hesp/level/trees/BSPUtil.h
+)
+
+SET(level_trees_templates
+hesp/level/trees/BSPCompiler.tpp
+hesp/level/trees/BSPUtil.tpp
+)
+
+##
 SET(math_sources
 hesp/math/Constants.cpp
 )
@@ -119,6 +142,7 @@ hesp/util/PolygonTypes.h
 SET(sources
 ${io_util_sources}
 ${level_brushes_sources}
+${level_trees_sources}
 ${math_sources}
 ${math_geom_sources}
 ${math_vectors_sources}
@@ -130,6 +154,7 @@ ${exceptions_headers}
 ${io_files_headers}
 ${io_util_headers}
 ${level_brushes_headers}
+${level_trees_headers}
 ${math_headers}
 ${math_geom_headers}
 ${math_vectors_headers}
@@ -140,6 +165,7 @@ SET(templates
 ${io_files_templates}
 ${io_util_templates}
 ${level_brushes_templates}
+${level_trees_templates}
 ${math_geom_templates}
 )
 
@@ -163,6 +189,11 @@ SOURCE_GROUP(io\\util\\.tpp FILES ${io_util_templates})
 SOURCE_GROUP(level\\brushes\\.cpp FILES ${level_brushes_sources})
 SOURCE_GROUP(level\\brushes\\.h FILES ${level_brushes_headers})
 SOURCE_GROUP(level\\brushes\\.tpp FILES ${level_brushes_templates})
+
+##
+SOURCE_GROUP(level\\trees\\.cpp FILES ${level_trees_sources})
+SOURCE_GROUP(level\\trees\\.h FILES ${level_trees_headers})
+SOURCE_GROUP(level\\trees\\.tpp FILES ${level_trees_templates})
 
 ##
 SOURCE_GROUP(math\\.cpp FILES ${math_sources})
@@ -202,9 +233,3 @@ ADD_LIBRARY(${targetname} STATIC ${sources} ${headers} ${templates})
 INCLUDE(${hesperus2_SOURCE_DIR}/VCTargetHack.cmake)
 
 SET_TARGET_PROPERTIES(${targetname} PROPERTIES DEBUG_OUTPUT_NAME "hesperus_d")
-
-#############################
-# Specify things to install #
-#############################
-
-INSTALL(TARGETS ${targetname} DESTINATION lib)
