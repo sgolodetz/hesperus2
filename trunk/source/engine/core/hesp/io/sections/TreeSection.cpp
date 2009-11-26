@@ -5,6 +5,8 @@
 
 #include "TreeSection.h"
 
+#include <iostream>
+
 #include <hesp/io/util/LineIO.h>
 #include <hesp/level/trees/BSPTree.h>
 
