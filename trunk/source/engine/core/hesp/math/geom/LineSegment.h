@@ -6,7 +6,7 @@
 #ifndef H_HESP_LINESEGMENT
 #define H_HESP_LINESEGMENT
 
-#include <ostream>
+#include <iostream>
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;

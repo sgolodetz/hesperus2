@@ -21,17 +21,19 @@ auxiliary data type of their choosing. For instance, they can create textured po
 specifying a vertex type with (u,v) texture coordinates and an auxiliary data type referencing
 the texture itself.
 */
-template <typename Vert, typename AuxData>
+template <typename Vertex, typename AuxiliaryData>
 class Polygon
 {
+#if 0
 	//#################### FRIENDS ####################
 	friend class Polygon;
+#endif
 
 	//#################### TYPEDEFS ####################
 public:
 	// Expose the template arguments so that they can easily be used by client code.
-	typedef Vert Vert;
-	typedef AuxData AuxData;
+	typedef Vertex Vert;
+	typedef AuxiliaryData AuxData;
 
 	typedef shared_ptr<Polygon> Polygon_Ptr;
 
