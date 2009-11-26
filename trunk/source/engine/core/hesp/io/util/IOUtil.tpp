@@ -174,7 +174,7 @@ void IOUtil::write_polygons(std::ostream& os, const std::vector<shared_ptr<Polyg
 	typedef std::vector<Poly_Ptr> PolyVector;
 
 	if(writeCount) os << polygons.size() << '\n';
-	for(PolyVector::const_iterator it=polygons.begin(), iend=polygons.end(); it!=iend; ++it)
+	for(typename PolyVector::const_iterator it=polygons.begin(), iend=polygons.end(); it!=iend; ++it)
 	{
 		const Poly& curPoly = **it;
 		int vertCount = curPoly.vertex_count();

@@ -5,6 +5,7 @@
 
 #include "BrushFunction.h"
 
+#include <iostream>
 #include <string>
 
 #include <hesp/exceptions/Exception.h>
