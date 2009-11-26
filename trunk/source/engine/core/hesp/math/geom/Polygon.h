@@ -24,11 +24,6 @@ the texture itself.
 template <typename Vertex, typename AuxiliaryData>
 class Polygon
 {
-#if 0
-	//#################### FRIENDS ####################
-	friend class Polygon;
-#endif
-
 	//#################### TYPEDEFS ####################
 public:
 	// Expose the template arguments so that they can easily be used by client code.
