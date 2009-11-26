@@ -19,6 +19,43 @@ hesp/exceptions/InvalidParameterException.h
 )
 
 ##
+SET(io_files_headers
+hesp/io/files/GeometryFile.h
+)
+
+SET(io_files_templates
+hesp/io/files/GeometryFile.tpp
+)
+
+##
+SET(io_util_sources
+hesp/io/util/LineIO.cpp
+)
+
+SET(io_util_headers
+hesp/io/util/IOUtil.h
+hesp/io/util/LineIO.h
+)
+
+SET(io_util_templates
+hesp/io/util/IOUtil.tpp
+)
+
+##
+SET(level_brushes_sources
+hesp/level/brushes/BrushFunction.cpp
+)
+
+SET(level_brushes_headers
+hesp/level/brushes/BrushFunction.h
+hesp/level/brushes/PolyhedralBrush.h
+)
+
+SET(level_brushes_templates
+hesp/level/brushes/PolyhedralBrush.tpp
+)
+
+##
 SET(math_sources
 hesp/math/Constants.cpp
 )
@@ -80,6 +117,8 @@ hesp/util/PolygonTypes.h
 #################################################################
 
 SET(sources
+${io_util_sources}
+${level_brushes_sources}
 ${math_sources}
 ${math_geom_sources}
 ${math_vectors_sources}
@@ -88,6 +127,9 @@ ${util_sources}
 
 SET(headers
 ${exceptions_headers}
+${io_files_headers}
+${io_util_headers}
+${level_brushes_headers}
 ${math_headers}
 ${math_geom_headers}
 ${math_vectors_headers}
@@ -95,6 +137,9 @@ ${util_headers}
 )
 
 SET(templates
+${io_files_templates}
+${io_util_templates}
+${level_brushes_templates}
 ${math_geom_templates}
 )
 
@@ -104,6 +149,20 @@ ${math_geom_templates}
 
 ##
 SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
+
+##
+SOURCE_GROUP(io\\files\\.h FILES ${io_files_headers})
+SOURCE_GROUP(io\\files\\.tpp FILES ${io_files_templates})
+
+##
+SOURCE_GROUP(io\\util\\.cpp FILES ${io_util_sources})
+SOURCE_GROUP(io\\util\\.h FILES ${io_util_headers})
+SOURCE_GROUP(io\\util\\.tpp FILES ${io_util_templates})
+
+##
+SOURCE_GROUP(level\\brushes\\.cpp FILES ${level_brushes_sources})
+SOURCE_GROUP(level\\brushes\\.h FILES ${level_brushes_headers})
+SOURCE_GROUP(level\\brushes\\.tpp FILES ${level_brushes_templates})
 
 ##
 SOURCE_GROUP(math\\.cpp FILES ${math_sources})

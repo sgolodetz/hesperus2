@@ -13,8 +13,8 @@
 using boost::bad_lexical_cast;
 using boost::lexical_cast;
 
+#include <hesp/io/files/GeometryFile.h>
 #if 0
-#include <source/io/files/GeometryFile.h>
 #include <source/io/files/TreeFile.h>
 #include <source/level/trees/BSPCompiler.h>
 #endif
@@ -34,7 +34,6 @@ void quit_with_usage()
 	exit(EXIT_FAILURE);
 }
 
-#if 0
 template <typename Poly>
 void run_compiler(const std::string& inputGeometryFilename, const std::string& hintGeometryFilename, const std::string& outputTreeFilename, double weight)
 {
@@ -49,19 +48,18 @@ void run_compiler(const std::string& inputGeometryFilename, const std::string& h
 	PolyVector hintPolygons;
 	if(hintGeometryFilename != "nohints") GeometryFile::load(hintGeometryFilename, hintPolygons);
 
+#if 0
 	// Build the BSP tree.
 	BSPCompiler<Poly> compiler(polygons, hintPolygons, weight);
 	compiler.build_tree();
 
 	// Save the polygons and the BSP tree to the output file.
 	TreeFile::save(outputTreeFilename, compiler.polygons(), compiler.tree());
-}
 #endif
+}
 
 int main(int argc, char *argv[])
-#if 0
 try
-#endif
 {
 	if(argc != 5 && argc != 6) quit_with_usage();
 
@@ -80,14 +78,10 @@ try
 		catch(bad_lexical_cast&)	{ quit_with_usage(); }
 	}
 
-#if 0
 	if(args[1] == "-r") run_compiler<TexturedPolygon>(inputGeometryFilename, hintGeometryFilename, outputTreeFilename, weight);
 	else if(args[1] == "-c") run_compiler<CollisionPolygon>(inputGeometryFilename, hintGeometryFilename, outputTreeFilename, weight);
 	else quit_with_usage();
-#endif
 
 	return 0;
 }
-#if 0
 catch(Exception& e) { quit_with_error(e.cause()); }
-#endif

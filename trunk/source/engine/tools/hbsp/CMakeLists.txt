@@ -42,7 +42,7 @@ INCLUDE(${hesperus2_SOURCE_DIR}/SetToolTarget.cmake)
 # Specify the libraries to link #
 #################################
 
-
+TARGET_LINK_LIBRARIES(${targetname} hesperus)
 
 #############################
 # Specify things to install #
