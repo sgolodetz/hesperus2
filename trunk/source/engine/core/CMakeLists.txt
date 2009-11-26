@@ -21,10 +21,26 @@ hesp/exceptions/InvalidParameterException.h
 ##
 SET(io_files_headers
 hesp/io/files/GeometryFile.h
+hesp/io/files/TreeFile.h
 )
 
 SET(io_files_templates
 hesp/io/files/GeometryFile.tpp
+hesp/io/files/TreeFile.tpp
+)
+
+##
+SET(io_sections_sources
+hesp/io/sections/TreeSection.cpp
+)
+
+SET(io_sections_headers
+hesp/io/sections/PolygonsSection.h
+hesp/io/sections/TreeSection.h
+)
+
+SET(io_sections_templates
+hesp/io/sections/PolygonsSection.tpp
 )
 
 ##
@@ -140,6 +156,7 @@ hesp/util/PolygonTypes.h
 #################################################################
 
 SET(sources
+${io_sections_sources}
 ${io_util_sources}
 ${level_brushes_sources}
 ${level_trees_sources}
@@ -152,6 +169,7 @@ ${util_sources}
 SET(headers
 ${exceptions_headers}
 ${io_files_headers}
+${io_sections_headers}
 ${io_util_headers}
 ${level_brushes_headers}
 ${level_trees_headers}
@@ -163,6 +181,7 @@ ${util_headers}
 
 SET(templates
 ${io_files_templates}
+${io_sections_templates}
 ${io_util_templates}
 ${level_brushes_templates}
 ${level_trees_templates}
@@ -179,6 +198,11 @@ SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
 ##
 SOURCE_GROUP(io\\files\\.h FILES ${io_files_headers})
 SOURCE_GROUP(io\\files\\.tpp FILES ${io_files_templates})
+
+##
+SOURCE_GROUP(io\\sections\\.cpp FILES ${io_sections_sources})
+SOURCE_GROUP(io\\sections\\.h FILES ${io_sections_headers})
+SOURCE_GROUP(io\\sections\\.tpp FILES ${io_sections_templates})
 
 ##
 SOURCE_GROUP(io\\util\\.cpp FILES ${io_util_sources})
