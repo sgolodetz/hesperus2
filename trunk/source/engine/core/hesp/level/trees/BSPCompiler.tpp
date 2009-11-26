@@ -87,7 +87,7 @@ BSPNode_Ptr BSPCompiler<Poly>::build_subtree(const std::vector<PolyIndex>& polyI
 
 	std::vector<PolyIndex> backPolys, frontPolys;
 
-	for(std::vector<PolyIndex>::const_iterator it=polyIndices.begin(), iend=polyIndices.end(); it!=iend; ++it)
+	for(typename std::vector<PolyIndex>::const_iterator it=polyIndices.begin(), iend=polyIndices.end(); it!=iend; ++it)
 	{
 		int curIndex = it->index;
 		const Polygon<Vert,AuxData>& curPoly = *m_polygons[curIndex];
