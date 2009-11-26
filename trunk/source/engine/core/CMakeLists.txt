@@ -15,6 +15,7 @@ SET(targetname hesperus)
 ##
 SET(exceptions_headers
 hesp/exceptions/Exception.h
+hesp/exceptions/InvalidParameterException.h
 )
 
 ##
@@ -27,11 +28,37 @@ hesp/math/Constants.h
 )
 
 ##
+SET(math_geom_sources
+hesp/math/geom/AABB.cpp
+hesp/math/geom/GeomUtil.cpp
+hesp/math/geom/Plane.cpp
+hesp/math/geom/Sphere.cpp
+hesp/math/geom/UniquePlanePred.cpp
+)
+
+SET(math_geom_headers
+hesp/math/geom/AABB.h
+hesp/math/geom/GeomUtil.h
+hesp/math/geom/LineSegment.h
+hesp/math/geom/Plane.h
+hesp/math/geom/Polygon.h
+hesp/math/geom/Sphere.h
+hesp/math/geom/UniquePlanePred.h
+)
+
+SET(math_geom_templates
+hesp/math/geom/GeomUtil.tpp
+hesp/math/geom/Polygon.tpp
+)
+
+##
 SET(math_vectors_sources
+hesp/math/vectors/Vector2d.cpp
 hesp/math/vectors/Vector3.cpp
 )
 
 SET(math_vectors_headers
+hesp/math/vectors/Vector2d.h
 hesp/math/vectors/Vector3.h
 )
 
@@ -41,16 +68,19 @@ hesp/math/vectors/Vector3.h
 
 SET(sources
 ${math_sources}
+${math_geom_sources}
 ${math_vectors_sources}
 )
 
 SET(headers
 ${exceptions_headers}
 ${math_headers}
+${math_geom_headers}
 ${math_vectors_headers}
 )
 
 SET(templates
+${math_geom_templates}
 )
 
 #############################
@@ -63,6 +93,11 @@ SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
 ##
 SOURCE_GROUP(math\\.cpp FILES ${math_sources})
 SOURCE_GROUP(math\\.h FILES ${math_headers})
+
+##
+SOURCE_GROUP(math\\geom\\.cpp FILES ${math_geom_sources})
+SOURCE_GROUP(math\\geom\\.h FILES ${math_geom_headers})
+SOURCE_GROUP(math\\geom\\.tpp FILES ${math_geom_templates})
 
 ##
 SOURCE_GROUP(math\\vectors\\.cpp FILES ${math_vectors_sources})
