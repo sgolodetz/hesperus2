@@ -3,3 +3,4 @@
 ###################################
 
 ADD_SUBDIRECTORY(hbsp)
+ADD_SUBDIRECTORY(mef2input)
