@@ -28,6 +28,22 @@ hesp/exceptions/InvalidParameterException.h
 )
 
 ##
+SET(images_sources
+hesp/images/PNGSaver.cpp
+)
+
+SET(images_headers
+hesp/images/Image.h
+hesp/images/PixelTypes.h
+hesp/images/PNGSaver.h
+hesp/images/SimpleImage.h
+)
+
+SET(images_templates
+hesp/images/SimpleImage.tpp
+)
+
+##
 SET(io_files_sources
 hesp/io/files/DefinitionsSpecifierFile.cpp
 hesp/io/files/LightsFile.cpp
@@ -40,6 +56,7 @@ hesp/io/files/BrushesFile.h
 hesp/io/files/DefinitionsSpecifierFile.h
 hesp/io/files/GeometryFile.h
 hesp/io/files/LightsFile.h
+hesp/io/files/LitTreeFile.h
 hesp/io/files/PortalsFile.h
 hesp/io/files/TreeFile.h
 hesp/io/files/VisFile.h
@@ -48,12 +65,14 @@ hesp/io/files/VisFile.h
 SET(io_files_templates
 hesp/io/files/BrushesFile.tpp
 hesp/io/files/GeometryFile.tpp
+hesp/io/files/LitTreeFile.tpp
 hesp/io/files/TreeFile.tpp
 )
 
 ##
 SET(io_sections_sources
 hesp/io/sections/DefinitionsSpecifierSection.cpp
+hesp/io/sections/LightmapPrefixSection.cpp
 hesp/io/sections/LightsSection.cpp
 hesp/io/sections/TreeSection.cpp
 hesp/io/sections/VisSection.cpp
@@ -61,6 +80,7 @@ hesp/io/sections/VisSection.cpp
 
 SET(io_sections_headers
 hesp/io/sections/DefinitionsSpecifierSection.h
+hesp/io/sections/LightmapPrefixSection.h
 hesp/io/sections/LightsSection.h
 hesp/io/sections/PolygonsSection.h
 hesp/io/sections/TreeSection.h
@@ -112,8 +132,21 @@ hesp/level/csg/CSGUtil.tpp
 )
 
 ##
+SET(level_lighting_sources
+hesp/level/lighting/Lightmap.cpp
+hesp/level/lighting/LightmapGenerator.cpp
+hesp/level/lighting/LightmapGrid.cpp
+)
+
 SET(level_lighting_headers
 hesp/level/lighting/Light.h
+hesp/level/lighting/Lightmap.h
+hesp/level/lighting/LightmapGenerator.h
+hesp/level/lighting/LightmapGrid.h
+)
+
+SET(level_lighting_templates
+hesp/level/lighting/LightmapGrid.tpp
 )
 
 ##
@@ -238,10 +271,12 @@ hesp/util/PolygonTypes.h
 
 SET(sources
 ${colours_sources}
+${images_sources}
 ${io_files_sources}
 ${io_sections_sources}
 ${io_util_sources}
 ${level_brushes_sources}
+${level_lighting_sources}
 ${level_portals_sources}
 ${level_trees_sources}
 ${level_vis_sources}
@@ -254,6 +289,7 @@ ${util_sources}
 SET(headers
 ${colours_headers}
 ${exceptions_headers}
+${images_headers}
 ${io_files_headers}
 ${io_sections_headers}
 ${io_util_headers}
@@ -270,11 +306,13 @@ ${util_headers}
 )
 
 SET(templates
+${images_templates}
 ${io_files_templates}
 ${io_sections_templates}
 ${io_util_templates}
 ${level_brushes_templates}
 ${level_csg_templates}
+${level_lighting_templates}
 ${level_portals_templates}
 ${level_trees_templates}
 ${level_vis_templates}
@@ -291,6 +329,11 @@ SOURCE_GROUP(colours\\.h FILES ${colours_headers})
 
 ##
 SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
+
+##
+SOURCE_GROUP(images\\.cpp FILES ${images_sources})
+SOURCE_GROUP(images\\.h FILES ${images_headers})
+SOURCE_GROUP(images\\.tpp FILES ${images_templates})
 
 ##
 SOURCE_GROUP(io\\files\\.cpp FILES ${io_files_sources})
@@ -317,7 +360,9 @@ SOURCE_GROUP(level\\csg\\.h FILES ${level_csg_headers})
 SOURCE_GROUP(level\\csg\\.tpp FILES ${level_csg_templates})
 
 ##
+SOURCE_GROUP(level\\lighting\\.cpp FILES ${level_lighting_sources})
 SOURCE_GROUP(level\\lighting\\.h FILES ${level_lighting_headers})
+SOURCE_GROUP(level\\lighting\\.tpp FILES ${level_lighting_templates})
 
 ##
 SOURCE_GROUP(level\\portals\\.cpp FILES ${level_portals_sources})
@@ -362,6 +407,7 @@ INCLUDE_DIRECTORIES(${hesperus2_SOURCE_DIR}/engine/core)
 ################################
 
 INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/UseLodePNG.cmake)
 
 ##########################################
 # Specify the target and where to put it #
