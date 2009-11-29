@@ -31,6 +31,7 @@ hesp/exceptions/InvalidParameterException.h
 SET(io_files_sources
 hesp/io/files/DefinitionsSpecifierFile.cpp
 hesp/io/files/LightsFile.cpp
+hesp/io/files/PortalsFile.cpp
 )
 
 SET(io_files_headers
@@ -38,6 +39,7 @@ hesp/io/files/BrushesFile.h
 hesp/io/files/DefinitionsSpecifierFile.h
 hesp/io/files/GeometryFile.h
 hesp/io/files/LightsFile.h
+hesp/io/files/PortalsFile.h
 hesp/io/files/TreeFile.h
 )
 
@@ -97,12 +99,33 @@ hesp/level/brushes/PolyhedralBrush.tpp
 )
 
 ##
-SET(level_csg_headers hesp/level/csg/CSGUtil.h)
-SET(level_csg_templates hesp/level/csg/CSGUtil.tpp)
+SET(level_csg_headers
+hesp/level/csg/CSGUtil.h
+)
+
+SET(level_csg_templates
+hesp/level/csg/CSGUtil.tpp
+)
 
 ##
 SET(level_lighting_headers
 hesp/level/lighting/Light.h
+)
+
+##
+SET(level_portals_sources
+hesp/level/portals/Portal.cpp
+hesp/level/portals/PortalGenerator.cpp
+)
+
+SET(level_portals_headers
+hesp/level/portals/BasePortalGenerator.h
+hesp/level/portals/Portal.h
+hesp/level/portals/PortalGenerator.h
+)
+
+SET(level_portals_templates
+hesp/level/portals/BasePortalGenerator.tpp
 )
 
 ##
@@ -121,11 +144,13 @@ hesp/level/trees/BSPLeaf.h
 hesp/level/trees/BSPNode.h
 hesp/level/trees/BSPTree.h
 hesp/level/trees/BSPUtil.h
+hesp/level/trees/TreeUtil.h
 )
 
 SET(level_trees_templates
 hesp/level/trees/BSPCompiler.tpp
 hesp/level/trees/BSPUtil.tpp
+hesp/level/trees/TreeUtil.tpp
 )
 
 ##
@@ -196,6 +221,7 @@ ${io_files_sources}
 ${io_sections_sources}
 ${io_util_sources}
 ${level_brushes_sources}
+${level_portals_sources}
 ${level_trees_sources}
 ${math_sources}
 ${math_geom_sources}
@@ -212,6 +238,7 @@ ${io_util_headers}
 ${level_brushes_headers}
 ${level_csg_headers}
 ${level_lighting_headers}
+${level_portals_headers}
 ${level_trees_headers}
 ${math_headers}
 ${math_geom_headers}
@@ -225,6 +252,7 @@ ${io_sections_templates}
 ${io_util_templates}
 ${level_brushes_templates}
 ${level_csg_templates}
+${level_portals_templates}
 ${level_trees_templates}
 ${math_geom_templates}
 )
@@ -266,6 +294,11 @@ SOURCE_GROUP(level\\csg\\.tpp FILES ${level_csg_templates})
 
 ##
 SOURCE_GROUP(level\\lighting\\.h FILES ${level_lighting_headers})
+
+##
+SOURCE_GROUP(level\\portals\\.cpp FILES ${level_portals_sources})
+SOURCE_GROUP(level\\portals\\.h FILES ${level_portals_headers})
+SOURCE_GROUP(level\\portals\\.tpp FILES ${level_portals_templates})
 
 ##
 SOURCE_GROUP(level\\trees\\.cpp FILES ${level_trees_sources})
