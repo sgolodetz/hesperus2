@@ -1,0 +1,5 @@
+asx-2.17.2 Instructions
+Last Updated by Stuart Golodetz on 29/11/09
+-------------------------------------------
+
+Build asx-2.17.2 using CMake, setting CMAKE_INSTALL_PREFIX to the asx-2.17.2 directory itself.
