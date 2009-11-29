@@ -24,9 +24,10 @@ typename CSGUtil_THIS::PolyList
 CSGUtil_THIS::clip_polygons_to_tree(const PolyList& polys, const BSPTree_CPtr& tree, bool coplanarFlag)
 {
 	PolyList ret;
-	for(PolyList::const_iterator it=polys.begin(), iend=polys.end(); it!=iend; ++it)
+	for(typename PolyList::const_iterator it=polys.begin(), iend=polys.end(); it!=iend; ++it)
 	{
-		ret.splice(ret.end(), clip_polygon_to_subtree(*it, tree->root(), coplanarFlag).first);
+		std::pair<PolyList,bool> result = clip_polygon_to_subtree(*it, tree->root(), coplanarFlag);
+		ret.splice(ret.end(), result.first);
 	}
 	return ret;
 }
