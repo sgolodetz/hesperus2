@@ -97,6 +97,10 @@ hesp/level/brushes/PolyhedralBrush.tpp
 )
 
 ##
+SET(level_csg_headers hesp/level/csg/CSGUtil.h)
+SET(level_csg_templates hesp/level/csg/CSGUtil.tpp)
+
+##
 SET(level_lighting_headers
 hesp/level/lighting/Light.h
 )
@@ -206,6 +210,7 @@ ${io_files_headers}
 ${io_sections_headers}
 ${io_util_headers}
 ${level_brushes_headers}
+${level_csg_headers}
 ${level_lighting_headers}
 ${level_trees_headers}
 ${math_headers}
@@ -219,6 +224,7 @@ ${io_files_templates}
 ${io_sections_templates}
 ${io_util_templates}
 ${level_brushes_templates}
+${level_csg_templates}
 ${level_trees_templates}
 ${math_geom_templates}
 )
@@ -253,6 +259,10 @@ SOURCE_GROUP(io\\util\\.tpp FILES ${io_util_templates})
 SOURCE_GROUP(level\\brushes\\.cpp FILES ${level_brushes_sources})
 SOURCE_GROUP(level\\brushes\\.h FILES ${level_brushes_headers})
 SOURCE_GROUP(level\\brushes\\.tpp FILES ${level_brushes_templates})
+
+##
+SOURCE_GROUP(level\\csg\\.h FILES ${level_csg_headers})
+SOURCE_GROUP(level\\csg\\.tpp FILES ${level_csg_templates})
 
 ##
 SOURCE_GROUP(level\\lighting\\.h FILES ${level_lighting_headers})
