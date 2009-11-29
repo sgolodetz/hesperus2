@@ -5,6 +5,8 @@
 
 #include "DefinitionsSpecifierSection.h"
 
+#include <iostream>
+
 #include <hesp/io/util/LineIO.h>
 
 namespace hesp {
