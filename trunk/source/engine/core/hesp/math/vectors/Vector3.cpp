@@ -36,9 +36,9 @@ Vector3<T>::Vector3(const std::vector<std::string>& components)
 
 	try
 	{
-		x = lexical_cast<T,std::string>(components[0]);
-		y = lexical_cast<T,std::string>(components[1]);
-		z = lexical_cast<T,std::string>(components[2]);
+		x = lexical_cast<T>(components[0]);
+		y = lexical_cast<T>(components[1]);
+		z = lexical_cast<T>(components[2]);
 	}
 	catch(bad_lexical_cast&) { throw Exception("One of the vector components is not a number"); }
 }

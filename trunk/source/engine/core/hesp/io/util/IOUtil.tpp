@@ -23,7 +23,7 @@ void IOUtil::read_counted_polygons(std::istream& is, std::vector<shared_ptr<Poly
 	LineIO::read_line(is, line, "polygon count");
 	try
 	{
-		int polyCount = boost::lexical_cast<int,std::string>(line);
+		int polyCount = boost::lexical_cast<int>(line);
 		read_polygons(is, polygons, polyCount);
 	}
 	catch(boost::bad_lexical_cast&) { throw Exception("The polygon count is not an integer"); }
@@ -47,7 +47,7 @@ shared_ptr<Polygon<Vert,AuxData> > IOUtil::read_polygon(const std::string& line,
 	if(L == std::string::npos) throw Exception("Bad input on line " + n);
 	std::string vertCountString = line.substr(0,L);
 	int vertCount;
-	try								{ vertCount = boost::lexical_cast<int,std::string>(vertCountString); }
+	try								{ vertCount = boost::lexical_cast<int>(vertCountString); }
 	catch(boost::bad_lexical_cast&)	{ throw Exception("Bad vertex count on line " + n); }
 
 	// Read the auxiliary data.
@@ -56,7 +56,7 @@ shared_ptr<Polygon<Vert,AuxData> > IOUtil::read_polygon(const std::string& line,
 	std::string auxDataString = line.substr(R+2);
 	boost::trim(auxDataString);
 	AuxData auxData;
-	try								{ auxData = boost::lexical_cast<AuxData,std::string>(auxDataString); }
+	try								{ auxData = boost::lexical_cast<AuxData>(auxDataString); }
 	catch(boost::bad_lexical_cast&)	{ throw Exception("Bad auxiliary data on line " + n); }
 
 	// Read the vertices.
@@ -97,12 +97,12 @@ void IOUtil::read_polygons(std::istream& is, std::vector<shared_ptr<Polygon<Vert
 
 	std::string line;
 	int n = 1;
-	while(std::getline(is, line))
+	while(LineIO::portable_getline(is, line))
 	{
 		boost::trim(line);
 		if(line != "")
 		{
-			polygons.push_back(read_polygon<Vert,AuxData>(line, boost::lexical_cast<std::string,int>(n)));
+			polygons.push_back(read_polygon<Vert,AuxData>(line, boost::lexical_cast<std::string>(n)));
 		}
 
 		++n;
@@ -125,12 +125,12 @@ shared_ptr<PolyhedralBrush<Poly> > IOUtil::read_polyhedral_brush(std::istream& i
 
 	std::string line;
 
-	if(!std::getline(is,line)) return PolyBrush_Ptr();
+	if(!LineIO::portable_getline(is,line)) return PolyBrush_Ptr();
 	if(line != "{") throw Exception("Expected {");
 
 	// Read brush function.
 	LineIO::read_line(is, line, "brush function");
-	BrushFunction function = boost::lexical_cast<BrushFunction,std::string>(line);
+	BrushFunction function = boost::lexical_cast<BrushFunction>(line);
 
 	// Read bounds.
 	LineIO::read_line(is, line, "bounds");

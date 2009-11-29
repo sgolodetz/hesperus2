@@ -4,7 +4,6 @@
  ***/
 
 #include <cstdlib>
-#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -70,7 +69,7 @@ try
 	{
 		if(args[5].substr(0,2) != "-w") quit_with_usage();
 
-		try							{ weight = lexical_cast<double,std::string>(args[5].substr(2)); }
+		try							{ weight = lexical_cast<double>(args[5].substr(2)); }
 		catch(bad_lexical_cast&)	{ quit_with_usage(); }
 	}
 

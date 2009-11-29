@@ -26,11 +26,11 @@ TexturedVector3d::TexturedVector3d(const std::vector<std::string>& components)
 
 	try
 	{
-		x = lexical_cast<double,std::string>(components[0]);
-		y = lexical_cast<double,std::string>(components[1]);
-		z = lexical_cast<double,std::string>(components[2]);
-		u = lexical_cast<double,std::string>(components[3]);
-		v = lexical_cast<double,std::string>(components[4]);
+		x = lexical_cast<double>(components[0]);
+		y = lexical_cast<double>(components[1]);
+		z = lexical_cast<double>(components[2]);
+		u = lexical_cast<double>(components[3]);
+		v = lexical_cast<double>(components[4]);
 	}
 	catch(bad_lexical_cast&) { throw Exception("One of the vector components is not a number"); }
 }

@@ -20,7 +20,7 @@ Loads the polygons and BSP tree from the specified tree file.
 template <typename Poly>
 void TreeFile::load(const std::string& filename, std::vector<shared_ptr<Poly> >& polygons, BSPTree_Ptr& tree)
 {
-	std::ifstream is(filename.c_str());
+	std::ifstream is(filename.c_str(), std::ios_base::binary);
 	if(is.fail()) throw Exception("Could not open " + filename + " for reading");
 
 	PolygonsSection::load(is, "Polygons", polygons);
@@ -38,7 +38,7 @@ Saves the polygons and BSP tree to the specified tree file.
 template <typename Poly>
 void TreeFile::save(const std::string& filename, const std::vector<shared_ptr<Poly> >& polygons, const BSPTree_CPtr& tree)
 {
-	std::ofstream os(filename.c_str());
+	std::ofstream os(filename.c_str(), std::ios_base::binary);
 	if(os.fail()) throw Exception("Could not open " + filename + " for writing");
 
 	PolygonsSection::save(os, "Polygons", polygons);

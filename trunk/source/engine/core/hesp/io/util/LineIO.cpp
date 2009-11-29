@@ -13,6 +13,24 @@ namespace hesp {
 
 //#################### READING METHODS ####################
 /**
+Provides a more portable version of std::getline by stripping any trailing '\r'
+extracted from the std::istream.
+
+@param is	The std::istream
+@param s	The string in which the extracted line is to be stored
+@return		The std::istream
+*/
+std::istream& LineIO::portable_getline(std::istream& is, std::string& s)
+{
+	std::getline(is, s);
+	if(!s.empty() && s[s.length()-1] == '\r')
+	{
+		s = s.substr(0, s.length()-1);
+	}
+	return is;
+}
+
+/**
 Attempts to read a line from a std::istream into a string and check its validity.
 
 @param is			The std::istream
@@ -46,7 +64,7 @@ Attempts to read a line from a std::istream into a string.
 */
 void LineIO::read_line(std::istream& is, std::string& line, const std::string& description)
 {
-	if(!std::getline(is, line)) throw Exception("Unexpected EOF whilst trying to read " + description);
+	if(!portable_getline(is, line)) throw Exception("Unexpected EOF whilst trying to read " + description);
 }
 
 /**

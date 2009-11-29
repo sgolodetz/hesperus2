@@ -19,7 +19,7 @@ Loads an array of polygons from the specified file.
 template <typename Poly>
 void GeometryFile::load(const std::string& filename, std::vector<shared_ptr<Poly> >& polygons)
 {
-	std::ifstream is(filename.c_str());
+	std::ifstream is(filename.c_str(), std::ios_base::binary);
 	if(is.fail()) throw Exception("Could not open " + filename + " for reading");
 	IOUtil::read_uncounted_polygons(is, polygons);
 }
@@ -34,7 +34,7 @@ Saves an array of polygons to the specified file.
 template <typename Poly>
 void GeometryFile::save(const std::string& filename, const std::vector<shared_ptr<Poly> >& polygons)
 {
-	std::ofstream os(filename.c_str());
+	std::ofstream os(filename.c_str(), std::ios_base::binary);
 	if(os.fail()) throw Exception("Could not open" + filename + " for writing");
 	IOUtil::write_polygons(os, polygons, false);
 }

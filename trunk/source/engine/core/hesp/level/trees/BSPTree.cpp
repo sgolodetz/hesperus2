@@ -14,6 +14,7 @@ using boost::bad_lexical_cast;
 using boost::lexical_cast;
 
 #include <hesp/exceptions/Exception.h>
+#include <hesp/io/util/LineIO.h>
 #include <hesp/math/geom/GeomUtil.h>
 
 namespace hesp {
@@ -63,15 +64,15 @@ const BSPLeaf *BSPTree::leaf(int n) const
 BSPTree_Ptr BSPTree::load_postorder_text(std::istream& is)
 {
 	std::string line;
-	std::getline(is, line);
+	LineIO::portable_getline(is, line);
 	int nodeCount;
-	try							{ nodeCount = lexical_cast<int,std::string>(line); }
+	try							{ nodeCount = lexical_cast<int>(line); }
 	catch(bad_lexical_cast&)	{ throw Exception("The BSP node count is not a number"); }
 
 	std::vector<BSPNode_Ptr> nodes(nodeCount);
 
 	int n = 0;
-	while(n < nodeCount && std::getline(is, line))
+	while(n < nodeCount && LineIO::portable_getline(is, line))
 	{
 		typedef boost::char_separator<char> sep;
 		typedef boost::tokenizer<sep> tokenizer;
@@ -79,24 +80,24 @@ BSPTree_Ptr BSPTree::load_postorder_text(std::istream& is)
 		tokenizer tok(line, sep(" "));
 		std::vector<std::string> tokens(tok.begin(), tok.end());
 		size_t tokenCount = tokens.size();
-		if(tokenCount < 2) throw Exception("Bad BSP node: " + lexical_cast<std::string,int>(n));
+		if(tokenCount < 2) throw Exception("Bad BSP node: " + lexical_cast<std::string>(n));
 
 		if(tokens[1] == "E")
 		{
 			if(tokenCount < 6 || tokens[4] != "[" || tokens[tokenCount-1] != "]")
-				throw Exception("Bad empty leaf node: " + lexical_cast<std::string,int>(n));
+				throw Exception("Bad empty leaf node: " + lexical_cast<std::string>(n));
 
 			int polyCount;
-			try							{ polyCount = lexical_cast<int,std::string>(tokens[3]); }
-			catch(bad_lexical_cast&)	{ throw Exception("The leaf polygon count is not a number: " + lexical_cast<std::string,int>(n)); }
+			try							{ polyCount = lexical_cast<int>(tokens[3]); }
+			catch(bad_lexical_cast&)	{ throw Exception("The leaf polygon count is not a number: " + lexical_cast<std::string>(n)); }
 
 			std::vector<int> polyIndices;
 
 			for(size_t i=5; i<tokenCount-1; ++i)
 			{
 				int polyIndex;
-				try							{ polyIndex = lexical_cast<int,std::string>(tokens[i]); }
-				catch(bad_lexical_cast&)	{ throw Exception("A polygon index is not a number in leaf: " + lexical_cast<std::string,int>(n)); }
+				try							{ polyIndex = lexical_cast<int>(tokens[i]); }
+				catch(bad_lexical_cast&)	{ throw Exception("A polygon index is not a number in leaf: " + lexical_cast<std::string>(n)); }
 
 				polyIndices.push_back(polyIndex);
 			}
@@ -110,20 +111,20 @@ BSPTree_Ptr BSPTree::load_postorder_text(std::istream& is)
 		else if(tokens[1] == "B")
 		{
 			if(tokenCount != 11 || tokens[5] != "(" || tokens[10] != ")")
-				throw Exception("Bad branch node: " + lexical_cast<std::string,int>(n));
+				throw Exception("Bad branch node: " + lexical_cast<std::string>(n));
 
 			int leftIndex, rightIndex;
 			double a, b, c, d;
 			try
 			{
-				leftIndex = lexical_cast<int,std::string>(tokens[2]);
-				rightIndex = lexical_cast<int,std::string>(tokens[3]);
-				a = lexical_cast<double,std::string>(tokens[6]);
-				b = lexical_cast<double,std::string>(tokens[7]);
-				c = lexical_cast<double,std::string>(tokens[8]);
-				d = lexical_cast<double,std::string>(tokens[9]);
+				leftIndex = lexical_cast<int>(tokens[2]);
+				rightIndex = lexical_cast<int>(tokens[3]);
+				a = lexical_cast<double>(tokens[6]);
+				b = lexical_cast<double>(tokens[7]);
+				c = lexical_cast<double>(tokens[8]);
+				d = lexical_cast<double>(tokens[9]);
 			}
-			catch(bad_lexical_cast&)	{ throw Exception("One of the values was not a number in branch node: " + lexical_cast<std::string,int>(n)); }
+			catch(bad_lexical_cast&)	{ throw Exception("One of the values was not a number in branch node: " + lexical_cast<std::string>(n)); }
 
 			BSPNode_Ptr left = nodes[leftIndex];
 			BSPNode_Ptr right = nodes[rightIndex];

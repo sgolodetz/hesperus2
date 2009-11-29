@@ -26,13 +26,13 @@ TexturedLitVector3d::TexturedLitVector3d(const std::vector<std::string>& compone
 
 	try
 	{
-		x = lexical_cast<double,std::string>(components[0]);
-		y = lexical_cast<double,std::string>(components[1]);
-		z = lexical_cast<double,std::string>(components[2]);
-		u = lexical_cast<double,std::string>(components[3]);
-		v = lexical_cast<double,std::string>(components[4]);
-		lu = lexical_cast<double,std::string>(components[5]);
-		lv = lexical_cast<double,std::string>(components[6]);
+		x = lexical_cast<double>(components[0]);
+		y = lexical_cast<double>(components[1]);
+		z = lexical_cast<double>(components[2]);
+		u = lexical_cast<double>(components[3]);
+		v = lexical_cast<double>(components[4]);
+		lu = lexical_cast<double>(components[5]);
+		lv = lexical_cast<double>(components[6]);
 	}
 	catch(bad_lexical_cast&) { throw Exception("One of the vector components is not a number"); }
 }
