@@ -32,6 +32,7 @@ SET(io_files_sources
 hesp/io/files/DefinitionsSpecifierFile.cpp
 hesp/io/files/LightsFile.cpp
 hesp/io/files/PortalsFile.cpp
+hesp/io/files/VisFile.cpp
 )
 
 SET(io_files_headers
@@ -41,6 +42,7 @@ hesp/io/files/GeometryFile.h
 hesp/io/files/LightsFile.h
 hesp/io/files/PortalsFile.h
 hesp/io/files/TreeFile.h
+hesp/io/files/VisFile.h
 )
 
 SET(io_files_templates
@@ -54,6 +56,7 @@ SET(io_sections_sources
 hesp/io/sections/DefinitionsSpecifierSection.cpp
 hesp/io/sections/LightsSection.cpp
 hesp/io/sections/TreeSection.cpp
+hesp/io/sections/VisSection.cpp
 )
 
 SET(io_sections_headers
@@ -61,6 +64,7 @@ hesp/io/sections/DefinitionsSpecifierSection.h
 hesp/io/sections/LightsSection.h
 hesp/io/sections/PolygonsSection.h
 hesp/io/sections/TreeSection.h
+hesp/io/sections/VisSection.h
 )
 
 SET(io_sections_templates
@@ -154,6 +158,23 @@ hesp/level/trees/TreeUtil.tpp
 )
 
 ##
+SET(level_vis_sources
+hesp/level/vis/Antipenumbra.cpp
+hesp/level/vis/VisCalculator.cpp
+)
+
+SET(level_vis_headers
+hesp/level/vis/Antipenumbra.h
+hesp/level/vis/VisCalculator.h
+hesp/level/vis/VisTable.h
+)
+
+SET(level_vis_templates
+hesp/level/vis/Antipenumbra.tpp
+hesp/level/vis/VisTable.tpp
+)
+
+##
 SET(math_sources
 hesp/math/Constants.cpp
 )
@@ -223,6 +244,7 @@ ${io_util_sources}
 ${level_brushes_sources}
 ${level_portals_sources}
 ${level_trees_sources}
+${level_vis_sources}
 ${math_sources}
 ${math_geom_sources}
 ${math_vectors_sources}
@@ -240,6 +262,7 @@ ${level_csg_headers}
 ${level_lighting_headers}
 ${level_portals_headers}
 ${level_trees_headers}
+${level_vis_headers}
 ${math_headers}
 ${math_geom_headers}
 ${math_vectors_headers}
@@ -254,6 +277,7 @@ ${level_brushes_templates}
 ${level_csg_templates}
 ${level_portals_templates}
 ${level_trees_templates}
+${level_vis_templates}
 ${math_geom_templates}
 )
 
@@ -304,6 +328,11 @@ SOURCE_GROUP(level\\portals\\.tpp FILES ${level_portals_templates})
 SOURCE_GROUP(level\\trees\\.cpp FILES ${level_trees_sources})
 SOURCE_GROUP(level\\trees\\.h FILES ${level_trees_headers})
 SOURCE_GROUP(level\\trees\\.tpp FILES ${level_trees_templates})
+
+##
+SOURCE_GROUP(level\\vis\\.cpp FILES ${level_vis_sources})
+SOURCE_GROUP(level\\vis\\.h FILES ${level_vis_headers})
+SOURCE_GROUP(level\\vis\\.tpp FILES ${level_vis_templates})
 
 ##
 SOURCE_GROUP(math\\.cpp FILES ${math_sources})
