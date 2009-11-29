@@ -79,10 +79,14 @@ std::list<Plane_CPtr> TreeUtil::split_planes_sub(shared_ptr<const typename Tree:
 
 	if(!node->is_leaf())
 	{
-		const Tree::Branch *branch = node->as_branch();
+		const typename Tree::Branch *branch = node->as_branch();
 		ret.push_back(branch->splitter());
-		ret.splice(ret.end(), split_planes_sub<Tree>(branch->left()));
-		ret.splice(ret.end(), split_planes_sub<Tree>(branch->right()));
+
+		std::list<Plane_CPtr> result = split_planes_sub<Tree>(branch->left());
+		ret.splice(ret.end(), result);
+
+		result = split_planes_sub<Tree>(branch->right());
+		ret.splice(ret.end(), result);
 	}
 
 	return ret;

@@ -5,6 +5,8 @@
 
 #include "Portal.h"
 
+#include <iostream>
+
 namespace hesp {
 
 //#################### GLOBAL OPERATORS ####################

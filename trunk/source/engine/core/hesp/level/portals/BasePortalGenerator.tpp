@@ -27,11 +27,12 @@ BPG_THIS::generate_portals(const TreeT_CPtr& tree) const
 	for(std::list<Plane_CPtr>::const_iterator it=planes.begin(), iend=planes.end(); it!=iend; ++it)
 	{
 		PortalT_Ptr portal = make_initial_portal(**it);
-		portals->splice(portals->end(), clip_portal_to_tree(portal, tree));
+		PortalTList result = clip_portal_to_tree(portal, tree);
+		portals->splice(portals->end(), result);
 	}
 
 	// Generate the opposite-facing portals.
-	for(PortalTList::iterator it=portals->begin(), iend=portals->end(); it!=iend; ++it)
+	for(typename PortalTList::iterator it=portals->begin(), iend=portals->end(); it!=iend; ++it)
 	{
 		PortalT_Ptr portal = *it;
 
@@ -89,9 +90,10 @@ BPG_THIS::clip_portal_to_subtree(const PortalT_Ptr& portal, const NodeT_CPtr& su
 				}
 				PortalTList fromPortals = clip_portal_to_subtree(portal, fromSubtree, CP_BACK);
 				PortalTList ret;
-				for(PortalTList::const_iterator it=fromPortals.begin(), iend=fromPortals.end(); it!=iend; ++it)
+				for(typename PortalTList::const_iterator it=fromPortals.begin(), iend=fromPortals.end(); it!=iend; ++it)
 				{
-					ret.splice(ret.end(), clip_portal_to_subtree(*it, toSubtree, CP_FRONT));
+					PortalTList result = clip_portal_to_subtree(*it, toSubtree, CP_FRONT);
+					ret.splice(ret.end(), result);
 				}
 				return ret;
 			}
@@ -104,7 +106,7 @@ BPG_THIS::clip_portal_to_subtree(const PortalT_Ptr& portal, const NodeT_CPtr& su
 				// Note: The leaf links for the two half polygons are inherited from the original polygon here.
 				typedef typename PortalT::Vert PortalTVert;
 				typedef typename PortalT::AuxData PortalTAuxData;
-				SplitResults<typename PortalTVert,PortalTAuxData> sr = split_polygon(*portal, *branch->splitter());
+				SplitResults<PortalTVert,PortalTAuxData> sr = split_polygon(*portal, *branch->splitter());
 
 				PortalTList frontResult = clip_portal_to_subtree(sr.front, branch->left(), relativeToPortal);
 				PortalTList backResult = clip_portal_to_subtree(sr.back, branch->right(), relativeToPortal);
