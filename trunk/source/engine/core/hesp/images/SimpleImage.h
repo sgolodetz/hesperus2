@@ -19,8 +19,15 @@ This class template provides a simple implementation of Image.
 template <typename Pixel>
 class SimpleImage : public Image<Pixel>
 {
+	//#################### TYPEDEFS ####################
+protected:
+	typedef shared_ptr<Image<Pixel> > Image_Ptr;
+	typedef shared_ptr<const Image<Pixel> > Image_CPtr;
+
 	//#################### PRIVATE VARIABLES ####################
 private:
+	using Image<Pixel>::m_width;
+	using Image<Pixel>::m_height;
 	shared_array<Pixel> m_pixels;
 
 	//#################### CONSTRUCTORS ####################

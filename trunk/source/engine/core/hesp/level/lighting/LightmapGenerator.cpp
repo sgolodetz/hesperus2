@@ -58,7 +58,8 @@ Cleans up the intermediate data structures used during lightmap generation.
 */
 void LightmapGenerator::clean_intermediate()
 {
-	m_grids.swap(LightmapGridVector());
+	LightmapGridVector dummy;
+	m_grids.swap(dummy);
 }
 
 /**

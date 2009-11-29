@@ -16,15 +16,12 @@ This class template allows users to create images with a pixel type of their cho
 Several simple pixel types, such as 8-bit and 24-bit pixels, are provided as a starting
 point.
 */
-template <typename Pixel>
+template <typename PixelType>
 class Image
 {
 	//#################### TYPEDEFS ####################
-protected:
-	typedef shared_ptr<Image> Image_Ptr;
-	typedef shared_ptr<const Image> Image_CPtr;
 public:
-	typedef Pixel Pixel;
+	typedef PixelType Pixel;
 
 	//#################### PROTECTED VARIABLES ####################
 protected:

@@ -14,7 +14,7 @@ Constructs a blank SimpleImage with the specified width and height.
 */
 template <typename Pixel>
 SimpleImage<Pixel>::SimpleImage(int width, int height)
-:	Image(width, height)
+:	Image<Pixel>(width, height)
 {
 	int size = width * height;
 	Pixel *pixels = new Pixel[size]();	// <-- Note that this *default constructs* every Pixel in the array.
@@ -31,7 +31,7 @@ of size width * height, laid out in rows in memory.
 */
 template <typename Pixel>
 SimpleImage<Pixel>::SimpleImage(Pixel *pixels, int width, int height)
-:	Image(width, height), m_pixels(pixels)
+:	Image<Pixel>(width, height), m_pixels(pixels)
 {}
 
 /**
@@ -44,7 +44,7 @@ of size width * height, laid out in rows in memory.
 */
 template <typename Pixel>
 SimpleImage<Pixel>::SimpleImage(const shared_array<Pixel>& pixels, int width, int height)
-:	Image(width, height), m_pixels(pixels)
+:	Image<Pixel>(width, height), m_pixels(pixels)
 {}
 
 /**
@@ -55,7 +55,7 @@ a more useful version of what would be the copy constructor).
 */
 template <typename Pixel>
 SimpleImage<Pixel>::SimpleImage(const Image_CPtr& rhs)
-:	Image(rhs->width(), rhs->height())
+:	Image<Pixel>(rhs->width(), rhs->height())
 {
 	int size = m_width * m_height;
 	Pixel *pixels = new Pixel[size];
