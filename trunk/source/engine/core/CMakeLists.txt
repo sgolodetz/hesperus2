@@ -47,6 +47,7 @@ hesp/images/SimpleImage.tpp
 SET(io_files_sources
 hesp/io/files/DefinitionsSpecifierFile.cpp
 hesp/io/files/LightsFile.cpp
+hesp/io/files/OnionPortalsFile.cpp
 hesp/io/files/PortalsFile.cpp
 hesp/io/files/VisFile.cpp
 )
@@ -57,6 +58,7 @@ hesp/io/files/DefinitionsSpecifierFile.h
 hesp/io/files/GeometryFile.h
 hesp/io/files/LightsFile.h
 hesp/io/files/LitTreeFile.h
+hesp/io/files/OnionPortalsFile.h
 hesp/io/files/OnionTreeFile.h
 hesp/io/files/PortalsFile.h
 hesp/io/files/TreeFile.h
@@ -155,12 +157,16 @@ hesp/level/lighting/LightmapGrid.tpp
 
 ##
 SET(level_portals_sources
+hesp/level/portals/OnionPortal.cpp
+hesp/level/portals/OnionPortalGenerator.cpp
 hesp/level/portals/Portal.cpp
 hesp/level/portals/PortalGenerator.cpp
 )
 
 SET(level_portals_headers
 hesp/level/portals/BasePortalGenerator.h
+hesp/level/portals/OnionPortal.h
+hesp/level/portals/OnionPortalGenerator.h
 hesp/level/portals/Portal.h
 hesp/level/portals/PortalGenerator.h
 )
