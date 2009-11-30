@@ -57,6 +57,7 @@ hesp/io/files/DefinitionsSpecifierFile.h
 hesp/io/files/GeometryFile.h
 hesp/io/files/LightsFile.h
 hesp/io/files/LitTreeFile.h
+hesp/io/files/OnionTreeFile.h
 hesp/io/files/PortalsFile.h
 hesp/io/files/TreeFile.h
 hesp/io/files/VisFile.h
@@ -66,6 +67,7 @@ SET(io_files_templates
 hesp/io/files/BrushesFile.tpp
 hesp/io/files/GeometryFile.tpp
 hesp/io/files/LitTreeFile.tpp
+hesp/io/files/OnionTreeFile.tpp
 hesp/io/files/TreeFile.tpp
 )
 
@@ -74,6 +76,7 @@ SET(io_sections_sources
 hesp/io/sections/DefinitionsSpecifierSection.cpp
 hesp/io/sections/LightmapPrefixSection.cpp
 hesp/io/sections/LightsSection.cpp
+hesp/io/sections/OnionTreeSection.cpp
 hesp/io/sections/TreeSection.cpp
 hesp/io/sections/VisSection.cpp
 )
@@ -82,6 +85,7 @@ SET(io_sections_headers
 hesp/io/sections/DefinitionsSpecifierSection.h
 hesp/io/sections/LightmapPrefixSection.h
 hesp/io/sections/LightsSection.h
+hesp/io/sections/OnionTreeSection.h
 hesp/io/sections/PolygonsSection.h
 hesp/io/sections/TreeSection.h
 hesp/io/sections/VisSection.h
@@ -172,6 +176,11 @@ hesp/level/trees/BSPLeaf.cpp
 hesp/level/trees/BSPNode.cpp
 hesp/level/trees/BSPTree.cpp
 hesp/level/trees/BSPUtil.cpp
+hesp/level/trees/OnionBranch.cpp
+hesp/level/trees/OnionLeaf.cpp
+hesp/level/trees/OnionNode.cpp
+hesp/level/trees/OnionTree.cpp
+hesp/level/trees/OnionUtil.cpp
 )
 
 SET(level_trees_headers
@@ -181,12 +190,19 @@ hesp/level/trees/BSPLeaf.h
 hesp/level/trees/BSPNode.h
 hesp/level/trees/BSPTree.h
 hesp/level/trees/BSPUtil.h
+hesp/level/trees/OnionBranch.h
+hesp/level/trees/OnionCompiler.h
+hesp/level/trees/OnionLeaf.h
+hesp/level/trees/OnionNode.h
+hesp/level/trees/OnionTree.h
+hesp/level/trees/OnionUtil.h
 hesp/level/trees/TreeUtil.h
 )
 
 SET(level_trees_templates
 hesp/level/trees/BSPCompiler.tpp
 hesp/level/trees/BSPUtil.tpp
+hesp/level/trees/OnionCompiler.tpp
 hesp/level/trees/TreeUtil.tpp
 )
 
