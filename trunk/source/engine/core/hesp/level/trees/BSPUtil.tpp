@@ -43,8 +43,13 @@ std::list<int> BSPUtil::find_leaf_indices_sub(const Polygon<Vert,AuxData>& poly,
 			{
 				SplitResults<Vert,AuxData> sr = split_polygon(poly, *branch->splitter());
 				std::list<int> leafIndices;
-				leafIndices.splice(leafIndices.end(), find_leaf_indices_sub(*sr.front, branch->left()));
-				leafIndices.splice(leafIndices.end(), find_leaf_indices_sub(*sr.back, branch->right()));
+
+				std::list<int> result = find_leaf_indices_sub(*sr.front, branch->left());
+				leafIndices.splice(leafIndices.end(), result);
+
+				result = find_leaf_indices_sub(*sr.back, branch->right());
+				leafIndices.splice(leafIndices.end(), result);
+
 				return leafIndices;
 			}
 		}

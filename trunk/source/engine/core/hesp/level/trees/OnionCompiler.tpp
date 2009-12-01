@@ -18,7 +18,7 @@ OnionCompiler<Poly>::OnionCompiler(const std::vector<PolyVector>& maps,
 {
 	for(int i=0; i<m_mapCount; ++i)
 	{
-		for(PolyVector::const_iterator jt=maps[i].begin(), jend=maps[i].end(); jt!=jend; ++jt)
+		for(typename PolyVector::const_iterator jt=maps[i].begin(), jend=maps[i].end(); jt!=jend; ++jt)
 		{
 			const Poly_Ptr& poly = *jt;
 			int polyIndex = static_cast<int>(m_polygons->size());
@@ -75,7 +75,7 @@ OnionNode_Ptr OnionCompiler<Poly>::build_subtree(const std::vector<PolyIndex>& p
 
 	std::vector<PolyIndex> backPolys, frontPolys;
 
-	for(std::vector<PolyIndex>::const_iterator it=polyIndices.begin(), iend=polyIndices.end(); it!=iend; ++it)
+	for(typename std::vector<PolyIndex>::const_iterator it=polyIndices.begin(), iend=polyIndices.end(); it!=iend; ++it)
 	{
 		int curIndex = it->index;
 		const Poly& curPoly = *(*m_polygons)[curIndex];
