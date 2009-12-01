@@ -99,11 +99,13 @@ hesp/io/sections/PolygonsSection.tpp
 
 ##
 SET(io_util_sources
+hesp/io/util/DirectoryFinder.cpp
 hesp/io/util/FieldIO.cpp
 hesp/io/util/LineIO.cpp
 )
 
 SET(io_util_headers
+hesp/io/util/DirectoryFinder.h
 hesp/io/util/FieldIO.h
 hesp/io/util/IOUtil.h
 hesp/io/util/LineIO.h
