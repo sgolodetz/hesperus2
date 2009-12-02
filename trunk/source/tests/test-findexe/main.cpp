@@ -12,7 +12,7 @@ namespace bf = boost::filesystem;
 
 int main()
 {
-	bf::path path = determine_executable_location();
+	bf::path path = DirectoryFinder::instance().determine_executable_location();
 	std::cout << path.file_string() << '\n';
 	return 0;
 }

@@ -45,6 +45,7 @@ hesp/images/SimpleImage.tpp
 
 ##
 SET(io_files_sources
+hesp/io/files/DefinitionsFile.cpp
 hesp/io/files/DefinitionsSpecifierFile.cpp
 hesp/io/files/LightsFile.cpp
 hesp/io/files/OnionPortalsFile.cpp
@@ -54,6 +55,7 @@ hesp/io/files/VisFile.cpp
 
 SET(io_files_headers
 hesp/io/files/BrushesFile.h
+hesp/io/files/DefinitionsFile.h
 hesp/io/files/DefinitionsSpecifierFile.h
 hesp/io/files/GeometryFile.h
 hesp/io/files/LightsFile.h
@@ -102,6 +104,9 @@ SET(io_util_sources
 hesp/io/util/DirectoryFinder.cpp
 hesp/io/util/FieldIO.cpp
 hesp/io/util/LineIO.cpp
+hesp/io/util/PropertyIO.cpp
+hesp/io/util/PropFormatter.cpp
+hesp/io/util/PropReader.cpp
 )
 
 SET(io_util_headers
@@ -109,19 +114,43 @@ hesp/io/util/DirectoryFinder.h
 hesp/io/util/FieldIO.h
 hesp/io/util/IOUtil.h
 hesp/io/util/LineIO.h
+hesp/io/util/PropertyIO.h
+hesp/io/util/PropFormatter.h
+hesp/io/util/PropReader.h
 )
 
 SET(io_util_templates
 hesp/io/util/FieldIO.tpp
 hesp/io/util/IOUtil.tpp
+hesp/io/util/PropertyIO.tpp
+hesp/io/util/PropFormatter.tpp
+hesp/io/util/PropReader.tpp
+)
+
+##
+SET(level_bounds_sources
+hesp/level/bounds/AABBBounds.cpp
+hesp/level/bounds/BoundsManager.cpp
+hesp/level/bounds/PointBounds.cpp
+hesp/level/bounds/SphereBounds.cpp
+)
+
+SET(level_bounds_headers
+hesp/level/bounds/AABBBounds.h
+hesp/level/bounds/Bounds.h
+hesp/level/bounds/BoundsManager.h
+hesp/level/bounds/PointBounds.h
+hesp/level/bounds/SphereBounds.h
 )
 
 ##
 SET(level_brushes_sources
+hesp/level/brushes/BrushExpander.cpp
 hesp/level/brushes/BrushFunction.cpp
 )
 
 SET(level_brushes_headers
+hesp/level/brushes/BrushExpander.h
 hesp/level/brushes/BrushFunction.h
 hesp/level/brushes/PolyhedralBrush.h
 )
@@ -155,6 +184,28 @@ hesp/level/lighting/LightmapGrid.h
 
 SET(level_lighting_templates
 hesp/level/lighting/LightmapGrid.tpp
+)
+
+##
+SET(level_objects_base_sources
+hesp/level/objects/base/ComponentPropertyTypeMap.cpp
+hesp/level/objects/base/ObjectID.cpp
+hesp/level/objects/base/ObjectSpecification.cpp
+)
+
+SET(level_objects_base_headers
+hesp/level/objects/base/ComponentPropertyTypeMap.h
+hesp/level/objects/base/ObjectID.h
+hesp/level/objects/base/ObjectSpecification.h
+)
+
+SET(level_objects_base_templates
+hesp/level/objects/base/ObjectSpecification.tpp
+)
+
+##
+SET(level_physics_headers
+hesp/level/physics/PhysicsMaterial.h
 )
 
 ##
@@ -281,12 +332,37 @@ hesp/math/vectors/Vector3.h
 )
 
 ##
+SET(ogl_headers
+hesp/ogl/WrappedGL.h
+)
+
+##
 SET(util_sources
 hesp/util/PolygonTypes.cpp
+hesp/util/Properties.cpp
 )
 
 SET(util_headers
 hesp/util/PolygonTypes.h
+hesp/util/Properties.h
+)
+
+SET(util_templates
+hesp/util/Properties.tpp
+)
+
+##
+SET(xml_sources
+hesp/xml/XMLElement.cpp
+hesp/xml/XMLLexer.cpp
+hesp/xml/XMLParser.cpp
+)
+
+SET(xml_headers
+hesp/xml/XMLElement.h
+hesp/xml/XMLLexer.h
+hesp/xml/XMLParser.h
+hesp/xml/XMLToken.h
 )
 
 #################################################################
@@ -299,8 +375,10 @@ ${images_sources}
 ${io_files_sources}
 ${io_sections_sources}
 ${io_util_sources}
+${level_bounds_sources}
 ${level_brushes_sources}
 ${level_lighting_sources}
+${level_objects_base_sources}
 ${level_portals_sources}
 ${level_trees_sources}
 ${level_vis_sources}
@@ -308,6 +386,7 @@ ${math_sources}
 ${math_geom_sources}
 ${math_vectors_sources}
 ${util_sources}
+${xml_sources}
 )
 
 SET(headers
@@ -317,16 +396,21 @@ ${images_headers}
 ${io_files_headers}
 ${io_sections_headers}
 ${io_util_headers}
+${level_bounds_headers}
 ${level_brushes_headers}
 ${level_csg_headers}
 ${level_lighting_headers}
+${level_objects_base_headers}
+${level_physics_headers}
 ${level_portals_headers}
 ${level_trees_headers}
 ${level_vis_headers}
 ${math_headers}
 ${math_geom_headers}
 ${math_vectors_headers}
+${ogl_headers}
 ${util_headers}
+${xml_headers}
 )
 
 SET(templates
@@ -337,10 +421,12 @@ ${io_util_templates}
 ${level_brushes_templates}
 ${level_csg_templates}
 ${level_lighting_templates}
+${level_objects_base_templates}
 ${level_portals_templates}
 ${level_trees_templates}
 ${level_vis_templates}
 ${math_geom_templates}
+${util_templates}
 )
 
 #############################
@@ -375,6 +461,10 @@ SOURCE_GROUP(io\\util\\.h FILES ${io_util_headers})
 SOURCE_GROUP(io\\util\\.tpp FILES ${io_util_templates})
 
 ##
+SOURCE_GROUP(level\\bounds\\.cpp FILES ${level_bounds_sources})
+SOURCE_GROUP(level\\bounds\\.h FILES ${level_bounds_headers})
+
+##
 SOURCE_GROUP(level\\brushes\\.cpp FILES ${level_brushes_sources})
 SOURCE_GROUP(level\\brushes\\.h FILES ${level_brushes_headers})
 SOURCE_GROUP(level\\brushes\\.tpp FILES ${level_brushes_templates})
@@ -387,6 +477,14 @@ SOURCE_GROUP(level\\csg\\.tpp FILES ${level_csg_templates})
 SOURCE_GROUP(level\\lighting\\.cpp FILES ${level_lighting_sources})
 SOURCE_GROUP(level\\lighting\\.h FILES ${level_lighting_headers})
 SOURCE_GROUP(level\\lighting\\.tpp FILES ${level_lighting_templates})
+
+##
+SOURCE_GROUP(level\\objects\\base\\.cpp FILES ${level_objects_base_sources})
+SOURCE_GROUP(level\\objects\\base\\.h FILES ${level_objects_base_headers})
+SOURCE_GROUP(level\\objects\\base\\.tpp FILES ${level_objects_base_templates})
+
+##
+SOURCE_GROUP(level\\physics\\.h FILES ${level_physics_headers})
 
 ##
 SOURCE_GROUP(level\\portals\\.cpp FILES ${level_portals_sources})
@@ -417,8 +515,16 @@ SOURCE_GROUP(math\\vectors\\.cpp FILES ${math_vectors_sources})
 SOURCE_GROUP(math\\vectors\\.h FILES ${math_vectors_headers})
 
 ##
+SOURCE_GROUP(ogl\\.h FILES ${ogl_headers})
+
+##
 SOURCE_GROUP(util\\.cpp FILES ${util_sources})
 SOURCE_GROUP(util\\.h FILES ${util_headers})
+SOURCE_GROUP(util\\.tpp FILES ${util_templates})
+
+##
+SOURCE_GROUP(xml\\.cpp FILES ${xml_sources})
+SOURCE_GROUP(xml\\.h FILES ${xml_headers})
 
 ###################################
 # Specify the include directories #
@@ -432,6 +538,7 @@ INCLUDE_DIRECTORIES(${hesperus2_SOURCE_DIR}/engine/core)
 
 INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UseLodePNG.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/UsePropParser.cmake)
 
 ##########################################
 # Specify the target and where to put it #

@@ -1,0 +1,164 @@
+<definitions>
+	<objects>
+		<bounds>
+			<bound name="biped_crouch" nav="true" type="aabb" sx="0.5" sy="0.5" sz="0.5"/>
+			<bound name="biped_stand" nav="true" type="aabb" sx="0.5" sy="0.5" sz="1"/>
+			<bound name="pistol_bullet" nav="false" type="sphere" radius="0.1"/>
+			<group name="biped">
+				<posture name="crouch" bound="biped_crouch"/>
+				<posture name="stand" bound="biped_stand"/>
+			</group>
+			<group name="pistol_bullet">
+				<posture name="default" bound="pistol_bullet"/>
+			</group>
+		</bounds>
+		<components>
+			<component name="BasicModelRender">
+				<property name="ModelName" type="string"/>
+			</component>
+			<component name="BasicProjectile">
+				<property name="DamageAmount" type="int"/>
+				<property name="Firer" type="ObjectID"/>
+			</component>
+			<component name="BipedAnimChooser"/>
+			<component name="CharacterModelRender">
+				<property name="InclineBones" type="string -> (string -> Vector3d)"/>
+				<property name="ModelName" type="string"/>
+			</component>
+			<component name="ConsumeActivatable">
+				<property name="Amount" type="int"/>
+				<property name="Type" type="string"/>
+			</component>
+			<component name="Health">
+				<property name="Health" type="int"/>
+				<property name="MaxHealth" type="int"/>
+			</component>
+			<component name="Inventory">
+				<property name="ActiveItem" type="ObjectID"/>
+				<property name="Consumables" type="string -> int"/>
+				<property name="Items" type="{ObjectID}"/>
+			</component>
+			<component name="ItemActivatable"/>
+			<component name="MinimusScriptYoke">
+				<property name="Script" type="string"/>
+			</component>
+			<component name="Movement"/>
+			<component name="Orientation">
+				<property name="Look" type="Vector3d"/>
+			</component>
+			<component name="Ownable">
+				<property name="AnimExtension" type="string"/>
+				<property name="AttachPoint" type="string"/>
+				<property name="Owner" type="ObjectID"/>
+			</component>
+			<component name="Position">
+				<property name="Position" type="Vector3d"/>
+			</component>
+			<component name="ProjectileWeaponUsable">
+				<property name="AmmoType" type="string"/>
+				<property name="FiringInterval" type="int"/>
+				<property name="Group" type="string"/>
+				<property name="Hotspots" type="[string]"/>
+				<property name="MuzzleSpeed" type="double"/>
+				<property name="TimeTillCanFire" type="int"/>
+			</component>
+			<component name="ScriptedUsable">
+				<property name="Group" type="string"/>
+				<property name="Hotspots" type="[string]"/>
+				<property name="Script" type="string"/>
+			</component>
+			<component name="Simulation">
+				<property name="BoundsGroup" type="string"/>
+				<property name="DampingFactor" type="double"/>
+				<property name="GravityStrength" type="double"/>
+				<property name="InverseMass" type="double"/>
+				<property name="Material" type="PhysicsMaterial"/>
+				<property name="Position" type="Vector3d"/>
+				<property name="Posture" type="string"/>
+				<property name="Velocity" type="Vector3d"/>
+			</component>
+			<component name="SpriteRender">
+				<property name="Height" type="double"/>
+				<property name="SpriteName" type="string"/>
+				<property name="Width" type="double"/>
+			</component>
+			<component name="UserBipedYoke"/>
+		</components>
+		<archetypes>
+			<archetype name="Guard">
+				<component name="BipedAnimChooser"/>
+				<component name="CharacterModelRender">
+					<property name="InclineBones" default='&lt; ("",&lt;("head",( 1 0 0 ))&gt;) ; ("with_onehanded",&lt;("head",( 1 0 0 ));("shoulder.r",( 1 0 0 ))&gt;) &gt;'/>
+					<property name="ModelName" default='"Guard"'/>
+				</component>
+				<component name="Health">
+					<property name="Health" default='100'/>
+					<property name="MaxHealth" default='100'/>
+				</component>
+				<component name="Inventory">
+					<property name="ActiveItem" default='-1'/>
+					<property name="Consumables" default='&lt;&gt;'/>
+					<property name="Items" default='[]'/>
+				</component>
+				<component name="MinimusScriptYoke"/>
+				<component name="Movement"/>
+				<component name="Orientation"/>
+				<component name="Simulation">
+					<property name="BoundsGroup" fixed='"biped"'/>
+					<property name="DampingFactor" fixed='0.95'/>
+					<property name="GravityStrength" fixed='0'/>
+					<property name="InverseMass" default='0.02'/>
+					<property name="Material" fixed='"character"'/>
+					<property name="Posture" default='"stand"'/>
+					<property name="Velocity" fixed='( 0 0 0 )'/>
+				</component>
+			</archetype>
+			<archetype name="PistolBullet">
+				<component name="BasicProjectile">
+					<property name="DamageAmount" fixed='50'/>
+				</component>
+				<component name="Simulation">
+					<property name="BoundsGroup" fixed='"pistol_bullet"'/>
+					<property name="DampingFactor" fixed='1.0'/>
+					<property name="GravityStrength" fixed='0'/>
+					<property name="InverseMass" fixed='1.0'/>
+					<property name="Material" fixed='"bullet"'/>
+					<property name="Posture" fixed='"default"'/>
+				</component>
+				<component name="SpriteRender">
+					<property name="Height" fixed='0.2'/>
+					<property name="SpriteName" fixed='"Test"'/>
+					<property name="Width" fixed='0.2'/>
+				</component>
+			</archetype>
+			<archetype name="Player">
+				<component name="BipedAnimChooser"/>
+				<component name="CharacterModelRender">
+					<property name="InclineBones" default='&lt; ("",&lt;("head",( 1 0 0 ))&gt;) ; ("with_onehanded",&lt;("head",( 1 0 0 ));("shoulder.r",( 1 0 0 ))&gt;) &gt;'/>
+					<property name="ModelName" default='"Percy"'/>
+				</component>
+				<component name="Health">
+					<property name="Health" default='100'/>
+					<property name="MaxHealth" default='100'/>
+				</component>
+				<component name="Inventory">
+					<property name="ActiveItem" default='-1'/>
+					<property name="Consumables" default='&lt;&gt;'/>
+					<property name="Items" default='[]'/>
+				</component>
+				<component name="Movement"/>
+				<component name="Orientation"/>
+				<component name="Simulation">
+					<property name="BoundsGroup" fixed='"biped"'/>
+					<property name="DampingFactor" fixed='0.95'/>
+					<property name="GravityStrength" fixed='0'/>
+					<property name="InverseMass" default='0.02'/>
+					<property name="Material" fixed='"character"'/>
+					<property name="Posture" default='"stand"'/>
+					<property name="Velocity" fixed='( 0 0 0 )'/>
+				</component>
+				<component name="UserBipedYoke"/>
+			</archetype>
+		</archetypes>
+	</objects>
+</definitions>
