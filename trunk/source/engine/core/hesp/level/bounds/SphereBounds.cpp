@@ -6,7 +6,7 @@
 #include "SphereBounds.h"
 
 #include <hesp/ogl/WrappedGL.h>
-#include <gl/glu.h>
+#include <GL/glu.h>
 
 #include <hesp/math/geom/GeomUtil.h>
 #include <hesp/math/geom/Sphere.h>

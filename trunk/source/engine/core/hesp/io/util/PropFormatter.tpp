@@ -24,7 +24,7 @@ std::string PropFormatter<std::map<K,V> >::format(const std::map<K,V>& input)
 	std::ostringstream os;
 
 	os << '<';
-	for(std::map<K,V>::const_iterator it=input.begin(), iend=input.end(); it!=iend;)
+	for(typename std::map<K,V>::const_iterator it=input.begin(), iend=input.end(); it!=iend;)
 	{
 		os << '(' << format_property(it->first) << ',' << format_property(it->second) << ')';
 		++it;

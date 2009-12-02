@@ -45,6 +45,7 @@ INCLUDE(${hesperus2_SOURCE_DIR}/SetToolTarget.cmake)
 #################################
 
 TARGET_LINK_LIBRARIES(${targetname} hesperus)
+INCLUDE(${hesperus2_SOURCE_DIR}/LinkBoost.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/LinkOpenGL.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/LinkPropParser.cmake)
 

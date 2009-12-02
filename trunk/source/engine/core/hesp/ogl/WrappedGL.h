@@ -8,4 +8,4 @@
 	#include <windows.h>
 #endif
 
-#include <gl/gl.h>
+#include <GL/gl.h>
