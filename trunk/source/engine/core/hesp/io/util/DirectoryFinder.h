@@ -28,7 +28,12 @@ private:
 public:
 	boost::filesystem::path determine_definitions_directory() const;
 	boost::filesystem::path determine_executable_location() const;
+	boost::filesystem::path determine_models_directory() const;
+	boost::filesystem::path determine_profiles_directory() const;
 	boost::filesystem::path determine_resources_directory_from_tool(const std::string& game) const;
+	boost::filesystem::path determine_scripts_directory() const;
+	boost::filesystem::path determine_sprites_directory() const;
+	boost::filesystem::path determine_textures_directory() const;
 	void set_resources_directory(const boost::filesystem::path& resourcesDir);
 
 	//#################### PRIVATE METHODS ####################

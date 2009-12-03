@@ -13,6 +13,17 @@ SET(targetname hesperus)
 #############################
 
 ##
+SET(axes_sources
+hesp/axes/NUVAxes.cpp
+hesp/axes/VerticallyConstrainedNUVAxes.cpp
+)
+
+SET(axes_headers
+hesp/axes/NUVAxes.h
+hesp/axes/VerticallyConstrainedNUVAxes.h
+)
+
+##
 SET(colours_sources
 hesp/colours/Colour3d.cpp
 )
@@ -22,19 +33,37 @@ hesp/colours/Colour3d.h
 )
 
 ##
+SET(datastructures_headers
+hesp/datastructures/PriorityQueue.h
+)
+
+SET(datastructures_templates
+hesp/datastructures/PriorityQueue.tpp
+)
+
+##
 SET(exceptions_headers
 hesp/exceptions/Exception.h
+hesp/exceptions/FileNotFoundException.h
 hesp/exceptions/InvalidParameterException.h
 )
 
 ##
 SET(images_sources
+hesp/images/BitmapLoader.cpp
+hesp/images/BitmapSaver.cpp
+hesp/images/ImageLoader.cpp
+hesp/images/PNGLoader.cpp
 hesp/images/PNGSaver.cpp
 )
 
 SET(images_headers
+hesp/images/BitmapLoader.h
+hesp/images/BitmapSaver.h
 hesp/images/Image.h
+hesp/images/ImageLoader.h
 hesp/images/PixelTypes.h
+hesp/images/PNGLoader.h
 hesp/images/PNGSaver.h
 hesp/images/SimpleImage.h
 )
@@ -44,24 +73,51 @@ hesp/images/SimpleImage.tpp
 )
 
 ##
+SET(input_sources
+hesp/input/InputAction.cpp
+hesp/input/InputBinding.cpp
+hesp/input/InputState.cpp
+hesp/input/KeyInputter.cpp
+hesp/input/MouseButtonInputter.cpp
+)
+
+SET(input_headers
+hesp/input/InputAction.h
+hesp/input/InputBinding.h
+hesp/input/InputState.h
+hesp/input/Inputter.h
+hesp/input/KeyInputter.h
+hesp/input/MouseButton.h
+hesp/input/MouseButtonInputter.h
+)
+
+##
 SET(io_files_sources
+hesp/io/files/BindingFile.cpp
 hesp/io/files/DefinitionsFile.cpp
 hesp/io/files/DefinitionsSpecifierFile.cpp
+hesp/io/files/LevelFile.cpp
 hesp/io/files/LightsFile.cpp
+hesp/io/files/ModelFiles.cpp
 hesp/io/files/NavFile.cpp
+hesp/io/files/ObjectsFile.cpp
 hesp/io/files/OnionPortalsFile.cpp
 hesp/io/files/PortalsFile.cpp
 hesp/io/files/VisFile.cpp
 )
 
 SET(io_files_headers
+hesp/io/files/BindingFile.h
 hesp/io/files/BrushesFile.h
 hesp/io/files/DefinitionsFile.h
 hesp/io/files/DefinitionsSpecifierFile.h
 hesp/io/files/GeometryFile.h
+hesp/io/files/LevelFile.h
 hesp/io/files/LightsFile.h
 hesp/io/files/LitTreeFile.h
+hesp/io/files/ModelFiles.h
 hesp/io/files/NavFile.h
+hesp/io/files/ObjectsFile.h
 hesp/io/files/OnionPortalsFile.h
 hesp/io/files/OnionTreeFile.h
 hesp/io/files/PortalsFile.h
@@ -81,9 +137,13 @@ hesp/io/files/TreeFile.tpp
 SET(io_sections_sources
 hesp/io/sections/DefinitionsSpecifierSection.cpp
 hesp/io/sections/LightmapPrefixSection.cpp
+hesp/io/sections/LightmapsSection.cpp
 hesp/io/sections/LightsSection.cpp
+hesp/io/sections/ModelNamesSection.cpp
 hesp/io/sections/NavSection.cpp
+hesp/io/sections/ObjectsSection.cpp
 hesp/io/sections/OnionTreeSection.cpp
+hesp/io/sections/SpriteNamesSection.cpp
 hesp/io/sections/TreeSection.cpp
 hesp/io/sections/VisSection.cpp
 )
@@ -91,16 +151,22 @@ hesp/io/sections/VisSection.cpp
 SET(io_sections_headers
 hesp/io/sections/DefinitionsSpecifierSection.h
 hesp/io/sections/LightmapPrefixSection.h
+hesp/io/sections/LightmapsSection.h
 hesp/io/sections/LightsSection.h
+hesp/io/sections/ModelNamesSection.h
 hesp/io/sections/NavSection.h
+hesp/io/sections/ObjectsSection.h
 hesp/io/sections/OnionTreeSection.h
 hesp/io/sections/PolygonsSection.h
+hesp/io/sections/ResourceNamesSection.h
+hesp/io/sections/SpriteNamesSection.h
 hesp/io/sections/TreeSection.h
 hesp/io/sections/VisSection.h
 )
 
 SET(io_sections_templates
 hesp/io/sections/PolygonsSection.tpp
+hesp/io/sections/ResourceNamesSection.tpp
 )
 
 ##
@@ -131,6 +197,21 @@ hesp/io/util/IOUtil.tpp
 hesp/io/util/PropertyIO.tpp
 hesp/io/util/PropFormatter.tpp
 hesp/io/util/PropReader.tpp
+)
+
+##
+SET(level_sources
+hesp/level/GeometryRenderer.cpp
+hesp/level/Level.cpp
+hesp/level/LitGeometryRenderer.cpp
+hesp/level/UnlitGeometryRenderer.cpp
+)
+
+SET(level_headers
+hesp/level/GeometryRenderer.h
+hesp/level/Level.h
+hesp/level/LitGeometryRenderer.h
+hesp/level/UnlitGeometryRenderer.h
 )
 
 ##
@@ -193,6 +274,42 @@ hesp/level/lighting/LightmapGrid.tpp
 )
 
 ##
+SET(level_models_sources
+hesp/level/models/Animation.cpp
+hesp/level/models/AnimationController.cpp
+hesp/level/models/Bone.cpp
+hesp/level/models/BoneHierarchy.cpp
+hesp/level/models/BoneWeight.cpp
+hesp/level/models/ConfiguredBone.cpp
+hesp/level/models/ConfiguredPose.cpp
+hesp/level/models/Mesh.cpp
+hesp/level/models/Model.cpp
+hesp/level/models/ModelManager.cpp
+hesp/level/models/ModelVertex.cpp
+hesp/level/models/Pose.cpp
+hesp/level/models/Skeleton.cpp
+hesp/level/models/Submesh.cpp
+)
+
+SET(level_models_headers
+hesp/level/models/Animation.h
+hesp/level/models/AnimationController.h
+hesp/level/models/Bone.h
+hesp/level/models/BoneHierarchy.h
+hesp/level/models/BoneWeight.h
+hesp/level/models/ConfiguredBone.h
+hesp/level/models/ConfiguredPose.h
+hesp/level/models/Mesh.h
+hesp/level/models/Model.h
+hesp/level/models/ModelManager.h
+hesp/level/models/ModelVertex.h
+hesp/level/models/Pose.h
+hesp/level/models/PoseModifier.h
+hesp/level/models/Skeleton.h
+hesp/level/models/Submesh.h
+)
+
+##
 SET(level_nav_sources
 hesp/level/nav/AdjacencyList.cpp
 hesp/level/nav/AdjacencyTable.cpp
@@ -232,23 +349,278 @@ hesp/level/nav/WalkLink.h
 ##
 SET(level_objects_base_sources
 hesp/level/objects/base/ComponentPropertyTypeMap.cpp
+hesp/level/objects/base/IObjectComponent.cpp
+hesp/level/objects/base/ListenerTable.cpp
 hesp/level/objects/base/ObjectID.cpp
+hesp/level/objects/base/ObjectManager.cpp
 hesp/level/objects/base/ObjectSpecification.cpp
 )
 
 SET(level_objects_base_headers
 hesp/level/objects/base/ComponentPropertyTypeMap.h
+hesp/level/objects/base/IObjectComponent.h
+hesp/level/objects/base/IYoke.h
+hesp/level/objects/base/ListenerTable.h
+hesp/level/objects/base/Message.h
+hesp/level/objects/base/MessageHandler.h
+hesp/level/objects/base/ObjectCommand.h
+hesp/level/objects/base/ObjectComponent.h
 hesp/level/objects/base/ObjectID.h
+hesp/level/objects/base/ObjectManager.h
 hesp/level/objects/base/ObjectSpecification.h
 )
 
 SET(level_objects_base_templates
+hesp/level/objects/base/ObjectComponent.tpp
+hesp/level/objects/base/ObjectManager.tpp
 hesp/level/objects/base/ObjectSpecification.tpp
 )
 
 ##
+SET(level_objects_commands_sources
+hesp/level/objects/commands/CmdBipedChangePosture.cpp
+hesp/level/objects/commands/CmdBipedJump.cpp
+hesp/level/objects/commands/CmdBipedMove.cpp
+hesp/level/objects/commands/CmdBipedRun.cpp
+hesp/level/objects/commands/CmdBipedSetLook.cpp
+hesp/level/objects/commands/CmdBipedTurn.cpp
+hesp/level/objects/commands/CmdBipedWalk.cpp
+hesp/level/objects/commands/CmdUseActiveItem.cpp
+)
+
+SET(level_objects_commands_headers
+hesp/level/objects/commands/CmdBipedChangePosture.h
+hesp/level/objects/commands/CmdBipedJump.h
+hesp/level/objects/commands/CmdBipedMove.h
+hesp/level/objects/commands/CmdBipedRun.h
+hesp/level/objects/commands/CmdBipedSetLook.h
+hesp/level/objects/commands/CmdBipedTurn.h
+hesp/level/objects/commands/CmdBipedWalk.h
+hesp/level/objects/commands/CmdUseActiveItem.h
+)
+
+##
+SET(level_objects_components_Activatable_sources
+hesp/level/objects/components/CmpConsumeActivatable.cpp
+hesp/level/objects/components/CmpItemActivatable.cpp
+hesp/level/objects/components/ICmpActivatable.cpp
+)
+
+SET(level_objects_components_Activatable_headers
+hesp/level/objects/components/CmpConsumeActivatable.h
+hesp/level/objects/components/CmpItemActivatable.h
+hesp/level/objects/components/ICmpActivatable.h
+)
+
+SET(level_objects_components_AnimChooser_sources
+hesp/level/objects/components/CmpBipedAnimChooser.cpp
+)
+
+SET(level_objects_components_AnimChooser_headers
+hesp/level/objects/components/CmpBipedAnimChooser.h
+hesp/level/objects/components/ICmpAnimChooser.h
+hesp/level/objects/components/ICmpBipedAnimChooser.h
+)
+
+SET(level_objects_components_Health_sources
+hesp/level/objects/components/CmpHealth.cpp
+)
+
+SET(level_objects_components_Health_headers
+hesp/level/objects/components/CmpHealth.h
+hesp/level/objects/components/ICmpHealth.h
+)
+
+SET(level_objects_components_Inventory_sources
+hesp/level/objects/components/CmpInventory.cpp
+)
+
+SET(level_objects_components_Inventory_headers
+hesp/level/objects/components/CmpInventory.h
+hesp/level/objects/components/ICmpInventory.h
+)
+
+SET(level_objects_components_Movement_sources
+hesp/level/objects/components/CmpMovement.cpp
+)
+
+SET(level_objects_components_Movement_headers
+hesp/level/objects/components/CmpMovement.h
+hesp/level/objects/components/ICmpMovement.h
+)
+
+SET(level_objects_components_Orientation_sources
+hesp/level/objects/components/CmpOrientation.cpp
+)
+
+SET(level_objects_components_Orientation_headers
+hesp/level/objects/components/CmpOrientation.h
+hesp/level/objects/components/ICmpOrientation.h
+)
+
+SET(level_objects_components_Ownable_sources
+hesp/level/objects/components/CmpOwnable.cpp
+)
+
+SET(level_objects_components_Ownable_headers
+hesp/level/objects/components/CmpOwnable.h
+hesp/level/objects/components/ICmpOwnable.h
+)
+
+SET(level_objects_components_Projectile_sources
+hesp/level/objects/components/CmpBasicProjectile.cpp
+)
+
+SET(level_objects_components_Projectile_headers
+hesp/level/objects/components/CmpBasicProjectile.h
+hesp/level/objects/components/ICmpProjectile.h
+)
+
+SET(level_objects_components_Render_sources
+hesp/level/objects/components/CmpBasicModelRender.cpp
+hesp/level/objects/components/CmpCharacterModelRender.cpp
+hesp/level/objects/components/CmpModelRender.cpp
+hesp/level/objects/components/CmpSpriteRender.cpp
+)
+
+SET(level_objects_components_Render_headers
+hesp/level/objects/components/CmpBasicModelRender.h
+hesp/level/objects/components/CmpCharacterModelRender.h
+hesp/level/objects/components/CmpModelRender.h
+hesp/level/objects/components/CmpSpriteRender.h
+hesp/level/objects/components/ICmpBasicModelRender.h
+hesp/level/objects/components/ICmpModelRender.h
+hesp/level/objects/components/ICmpRender.h
+)
+
+SET(level_objects_components_Simulation_sources
+hesp/level/objects/components/CmpPosition.cpp
+hesp/level/objects/components/CmpSimulation.cpp
+)
+
+SET(level_objects_components_Simulation_headers
+hesp/level/objects/components/CmpPosition.h
+hesp/level/objects/components/CmpSimulation.h
+hesp/level/objects/components/ICmpPosition.h
+hesp/level/objects/components/ICmpSimulation.h
+)
+
+SET(level_objects_components_Usable_sources
+hesp/level/objects/components/CmpProjectileWeaponUsable.cpp
+hesp/level/objects/components/CmpScriptedUsable.cpp
+hesp/level/objects/components/CmpUsable.cpp
+)
+
+SET(level_objects_components_Usable_headers
+hesp/level/objects/components/CmpProjectileWeaponUsable.h
+hesp/level/objects/components/CmpScriptedUsable.h
+hesp/level/objects/components/CmpUsable.h
+hesp/level/objects/components/ICmpAmmoNeedingUsable.h
+hesp/level/objects/components/ICmpUsable.h
+)
+
+SET(level_objects_components_Yoke_sources
+hesp/level/objects/components/CmpMinimusScriptYoke.cpp
+hesp/level/objects/components/CmpUserBipedYoke.cpp
+)
+
+SET(level_objects_components_Yoke_headers
+hesp/level/objects/components/CmpMinimusScriptYoke.h
+hesp/level/objects/components/CmpUserBipedYoke.h
+hesp/level/objects/components/ICmpYoke.h
+)
+
+##
+SET(level_objects_contactresolvers_sources
+hesp/level/objects/contactresolvers/AbsorbProjectileContactResolver.cpp
+hesp/level/objects/contactresolvers/BounceContactResolver.cpp
+hesp/level/objects/contactresolvers/ProjectileDamageContactResolver.cpp
+)
+
+SET(level_objects_contactresolvers_headers
+hesp/level/objects/contactresolvers/AbsorbProjectileContactResolver.h
+hesp/level/objects/contactresolvers/BounceContactResolver.h
+hesp/level/objects/contactresolvers/ProjectileDamageContactResolver.h
+)
+
+##
+SET(level_objects_forcegenerators_sources
+hesp/level/objects/forcegenerators/WeightForceGenerator.cpp
+)
+
+SET(level_objects_forcegenerators_headers
+hesp/level/objects/forcegenerators/WeightForceGenerator.h
+)
+
+##
+SET(level_objects_messages_sources
+hesp/level/objects/messages/MsgObjectDestroyed.cpp
+hesp/level/objects/messages/MsgObjectPredestroyed.cpp
+hesp/level/objects/messages/MsgTimeElapsed.cpp
+)
+
+SET(level_objects_messages_headers
+hesp/level/objects/messages/MsgObjectDestroyed.h
+hesp/level/objects/messages/MsgObjectPredestroyed.h
+hesp/level/objects/messages/MsgTimeElapsed.h
+)
+
+##
+SET(level_objects_yokes_minimus_sources
+hesp/level/objects/yokes/minimus/MinimusGotoPositionYoke.cpp
+hesp/level/objects/yokes/minimus/MinimusScriptYoke.cpp
+)
+
+SET(level_objects_yokes_minimus_headers
+hesp/level/objects/yokes/minimus/MinimusGotoPositionYoke.h
+hesp/level/objects/yokes/minimus/MinimusScriptYoke.h
+)
+
+##
+SET(level_objects_yokes_user_sources
+hesp/level/objects/yokes/user/UserBipedYoke.cpp
+)
+
+SET(level_objects_yokes_user_headers
+hesp/level/objects/yokes/user/UserBipedYoke.h
+)
+
+##
+SET(level_physics_sources
+hesp/level/physics/BoundsSupportMapping.cpp
+hesp/level/physics/BroadPhaseCollisionDetector.cpp
+hesp/level/physics/Contact.cpp
+hesp/level/physics/ContactResolver.cpp
+hesp/level/physics/ContactResolverRegistry.cpp
+hesp/level/physics/ForceGeneratorRegistry.cpp
+hesp/level/physics/MinkDiffSupportMapping.cpp
+hesp/level/physics/NarrowPhaseCollisionDetector.cpp
+hesp/level/physics/NormalPhysicsObject.cpp
+hesp/level/physics/PhysicsObject.cpp
+hesp/level/physics/PhysicsSystem.cpp
+hesp/level/physics/SegmentSupportMapping.cpp
+hesp/level/physics/SweptSupportMapping.cpp
+hesp/level/physics/TranslatedSupportMapping.cpp
+)
+
 SET(level_physics_headers
+hesp/level/physics/BoundsSupportMapping.h
+hesp/level/physics/BroadPhaseCollisionDetector.h
+hesp/level/physics/Contact.h
+hesp/level/physics/ContactResolver.h
+hesp/level/physics/ContactResolverRegistry.h
+hesp/level/physics/ForceGenerator.h
+hesp/level/physics/ForceGeneratorRegistry.h
+hesp/level/physics/MinkDiffSupportMapping.h
+hesp/level/physics/NarrowPhaseCollisionDetector.h
+hesp/level/physics/NormalPhysicsObject.h
 hesp/level/physics/PhysicsMaterial.h
+hesp/level/physics/PhysicsObject.h
+hesp/level/physics/PhysicsSystem.h
+hesp/level/physics/SegmentSupportMapping.h
+hesp/level/physics/SupportMapping.h
+hesp/level/physics/SweptSupportMapping.h
+hesp/level/physics/TranslatedSupportMapping.h
 )
 
 ##
@@ -269,6 +641,17 @@ hesp/level/portals/PortalGenerator.h
 
 SET(level_portals_templates
 hesp/level/portals/BasePortalGenerator.tpp
+)
+
+##
+SET(level_sprites_sources
+hesp/level/sprites/Sprite.cpp
+hesp/level/sprites/SpriteManager.cpp
+)
+
+SET(level_sprites_headers
+hesp/level/sprites/Sprite.h
+hesp/level/sprites/SpriteManager.h
 )
 
 ##
@@ -326,14 +709,28 @@ hesp/level/vis/VisTable.tpp
 )
 
 ##
+SET(materials_sources
+hesp/materials/BasicMaterial.cpp
+hesp/materials/TextureMaterial.cpp
+)
+
+SET(materials_headers
+hesp/materials/BasicMaterial.h
+hesp/materials/Material.h
+hesp/materials/TextureMaterial.h
+)
+
+##
 SET(math_sources
 hesp/math/Constants.cpp
 hesp/math/Interval.cpp
+hesp/math/MathUtil.cpp
 )
 
 SET(math_headers
 hesp/math/Constants.h
 hesp/math/Interval.h
+hesp/math/MathUtil.h
 )
 
 ##
@@ -361,11 +758,32 @@ hesp/math/geom/Polygon.tpp
 )
 
 ##
+SET(math_matrices_sources
+hesp/math/matrices/RBTMatrix.cpp
+)
+
+SET(math_matrices_headers
+hesp/math/matrices/RBTMatrix.h
+)
+
+##
+SET(math_quaternions_sources
+hesp/math/quaternions/Quaternion.cpp
+hesp/math/quaternions/RBTQuaternion.cpp
+)
+
+SET(math_quaternions_headers
+hesp/math/quaternions/Quaternion.h
+hesp/math/quaternions/RBTQuaternion.h
+)
+
+##
 SET(math_vectors_sources
 hesp/math/vectors/TexturedLitVector3d.cpp
 hesp/math/vectors/TexturedVector3d.cpp
 hesp/math/vectors/Vector2d.cpp
 hesp/math/vectors/Vector3.cpp
+hesp/math/vectors/VectorUtil.cpp
 )
 
 SET(math_vectors_headers
@@ -374,6 +792,7 @@ hesp/math/vectors/TexturedLitVector3d.h
 hesp/math/vectors/TexturedVector3d.h
 hesp/math/vectors/Vector2d.h
 hesp/math/vectors/Vector3.h
+hesp/math/vectors/VectorUtil.h
 )
 
 ##
@@ -382,18 +801,40 @@ hesp/ogl/WrappedGL.h
 )
 
 ##
+SET(textures_sources
+hesp/textures/Image24Texture.cpp
+hesp/textures/Image32Texture.cpp
+hesp/textures/Texture.cpp
+hesp/textures/TextureFactory.cpp
+)
+
+SET(textures_headers
+hesp/textures/Image24Texture.h
+hesp/textures/Image32Texture.h
+hesp/textures/Texture.h
+hesp/textures/TextureFactory.h
+)
+
+##
 SET(util_sources
+hesp/util/ConfigOptions.cpp
+hesp/util/IDAllocator.cpp
 hesp/util/PolygonTypes.cpp
 hesp/util/Properties.cpp
 )
 
 SET(util_headers
+hesp/util/ConfigOptions.h
+hesp/util/IDAllocator.h
 hesp/util/PolygonTypes.h
 hesp/util/Properties.h
+hesp/util/ResourceManager.h
 )
 
 SET(util_templates
+hesp/util/ConfigOptions.tpp
 hesp/util/Properties.tpp
+hesp/util/ResourceManager.tpp
 )
 
 ##
@@ -415,52 +856,109 @@ hesp/xml/XMLToken.h
 #################################################################
 
 SET(sources
+${axes_sources}
 ${colours_sources}
 ${images_sources}
+${input_sources}
 ${io_files_sources}
 ${io_sections_sources}
 ${io_util_sources}
+${level_sources}
 ${level_bounds_sources}
 ${level_brushes_sources}
 ${level_lighting_sources}
+${level_models_sources}
 ${level_nav_sources}
 ${level_objects_base_sources}
+${level_objects_commands_sources}
+${level_objects_components_Activatable_sources}
+${level_objects_components_AnimChooser_sources}
+${level_objects_components_Health_sources}
+${level_objects_components_Inventory_sources}
+${level_objects_components_Movement_sources}
+${level_objects_components_Orientation_sources}
+${level_objects_components_Ownable_sources}
+${level_objects_components_Projectile_sources}
+${level_objects_components_Render_sources}
+${level_objects_components_Simulation_sources}
+${level_objects_components_Usable_sources}
+${level_objects_components_Yoke_sources}
+${level_objects_contactresolvers_sources}
+${level_objects_forcegenerators_sources}
+${level_objects_messages_sources}
+${level_objects_yokes_minimus_sources}
+${level_objects_yokes_user_sources}
+${level_physics_sources}
 ${level_portals_sources}
+${level_sprites_sources}
 ${level_trees_sources}
 ${level_vis_sources}
+${materials_sources}
 ${math_sources}
 ${math_geom_sources}
+${math_matrices_sources}
+${math_quaternions_sources}
 ${math_vectors_sources}
+${textures_sources}
 ${util_sources}
 ${xml_sources}
 )
 
 SET(headers
+${axes_headers}
 ${colours_headers}
+${datastructures_headers}
 ${exceptions_headers}
 ${images_headers}
+${input_headers}
 ${io_files_headers}
 ${io_sections_headers}
 ${io_util_headers}
+${level_headers}
 ${level_bounds_headers}
 ${level_brushes_headers}
 ${level_csg_headers}
 ${level_lighting_headers}
+${level_models_headers}
 ${level_nav_headers}
 ${level_objects_base_headers}
+${level_objects_commands_headers}
+${level_objects_components_Activatable_headers}
+${level_objects_components_AnimChooser_headers}
+${level_objects_components_Health_headers}
+${level_objects_components_Inventory_headers}
+${level_objects_components_Movement_headers}
+${level_objects_components_Orientation_headers}
+${level_objects_components_Ownable_headers}
+${level_objects_components_Projectile_headers}
+${level_objects_components_Render_headers}
+${level_objects_components_Simulation_headers}
+${level_objects_components_Usable_headers}
+${level_objects_components_Yoke_headers}
+${level_objects_contactresolvers_headers}
+${level_objects_forcegenerators_headers}
+${level_objects_messages_headers}
+${level_objects_yokes_minimus_headers}
+${level_objects_yokes_user_headers}
 ${level_physics_headers}
 ${level_portals_headers}
+${level_sprites_headers}
 ${level_trees_headers}
 ${level_vis_headers}
+${materials_headers}
 ${math_headers}
 ${math_geom_headers}
+${math_matrices_headers}
+${math_quaternions_headers}
 ${math_vectors_headers}
 ${ogl_headers}
+${textures_headers}
 ${util_headers}
 ${xml_headers}
 )
 
 SET(templates
+${datastructures_templates}
 ${images_templates}
 ${io_files_templates}
 ${io_sections_templates}
@@ -481,8 +979,16 @@ ${util_templates}
 #############################
 
 ##
+SOURCE_GROUP(axes\\.cpp FILES ${axes_sources})
+SOURCE_GROUP(axes\\.h FILES ${axes_headers})
+
+##
 SOURCE_GROUP(colours\\.cpp FILES ${colours_sources})
 SOURCE_GROUP(colours\\.h FILES ${colours_headers})
+
+##
+SOURCE_GROUP(datastructures\\.h FILES ${datastructures_headers})
+SOURCE_GROUP(datastructures\\.tpp FILES ${datastructures_templates})
 
 ##
 SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
@@ -491,6 +997,10 @@ SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
 SOURCE_GROUP(images\\.cpp FILES ${images_sources})
 SOURCE_GROUP(images\\.h FILES ${images_headers})
 SOURCE_GROUP(images\\.tpp FILES ${images_templates})
+
+##
+SOURCE_GROUP(input\\.cpp FILES ${input_sources})
+SOURCE_GROUP(input\\.h FILES ${input_headers})
 
 ##
 SOURCE_GROUP(io\\files\\.cpp FILES ${io_files_sources})
@@ -506,6 +1016,10 @@ SOURCE_GROUP(io\\sections\\.tpp FILES ${io_sections_templates})
 SOURCE_GROUP(io\\util\\.cpp FILES ${io_util_sources})
 SOURCE_GROUP(io\\util\\.h FILES ${io_util_headers})
 SOURCE_GROUP(io\\util\\.tpp FILES ${io_util_templates})
+
+##
+SOURCE_GROUP(level\\.cpp FILES ${level_sources})
+SOURCE_GROUP(level\\.h FILES ${level_headers})
 
 ##
 SOURCE_GROUP(level\\bounds\\.cpp FILES ${level_bounds_sources})
@@ -526,6 +1040,10 @@ SOURCE_GROUP(level\\lighting\\.h FILES ${level_lighting_headers})
 SOURCE_GROUP(level\\lighting\\.tpp FILES ${level_lighting_templates})
 
 ##
+SOURCE_GROUP(level\\models\\.cpp FILES ${level_models_sources})
+SOURCE_GROUP(level\\models\\.h FILES ${level_models_headers})
+
+##
 SOURCE_GROUP(level\\nav\\.cpp FILES ${level_nav_sources})
 SOURCE_GROUP(level\\nav\\.h FILES ${level_nav_headers})
 
@@ -535,12 +1053,67 @@ SOURCE_GROUP(level\\objects\\base\\.h FILES ${level_objects_base_headers})
 SOURCE_GROUP(level\\objects\\base\\.tpp FILES ${level_objects_base_templates})
 
 ##
+SOURCE_GROUP(level\\objects\\commands\\.cpp FILES ${level_objects_commands_sources})
+SOURCE_GROUP(level\\objects\\commands\\.h FILES ${level_objects_commands_headers})
+
+##
+SOURCE_GROUP(level\\objects\\components\\Activatable\\.cpp FILES ${level_objects_components_Activatable_sources})
+SOURCE_GROUP(level\\objects\\components\\Activatable\\.h FILES ${level_objects_components_Activatable_headers})
+SOURCE_GROUP(level\\objects\\components\\AnimChooser\\.cpp FILES ${level_objects_components_AnimChooser_sources})
+SOURCE_GROUP(level\\objects\\components\\AnimChooser\\.h FILES ${level_objects_components_AnimChooser_headers})
+SOURCE_GROUP(level\\objects\\components\\Health\\.cpp FILES ${level_objects_components_Health_sources})
+SOURCE_GROUP(level\\objects\\components\\Health\\.h FILES ${level_objects_components_Health_headers})
+SOURCE_GROUP(level\\objects\\components\\Inventory\\.cpp FILES ${level_objects_components_Inventory_sources})
+SOURCE_GROUP(level\\objects\\components\\Inventory\\.h FILES ${level_objects_components_Inventory_headers})
+SOURCE_GROUP(level\\objects\\components\\Movement\\.cpp FILES ${level_objects_components_Movement_sources})
+SOURCE_GROUP(level\\objects\\components\\Movement\\.h FILES ${level_objects_components_Movement_headers})
+SOURCE_GROUP(level\\objects\\components\\Orientation\\.cpp FILES ${level_objects_components_Orientation_sources})
+SOURCE_GROUP(level\\objects\\components\\Orientation\\.h FILES ${level_objects_components_Orientation_headers})
+SOURCE_GROUP(level\\objects\\components\\Ownable\\.cpp FILES ${level_objects_components_Ownable_sources})
+SOURCE_GROUP(level\\objects\\components\\Ownable\\.h FILES ${level_objects_components_Ownable_headers})
+SOURCE_GROUP(level\\objects\\components\\Projectile\\.cpp FILES ${level_objects_components_Projectile_sources})
+SOURCE_GROUP(level\\objects\\components\\Projectile\\.h FILES ${level_objects_components_Projectile_headers})
+SOURCE_GROUP(level\\objects\\components\\Render\\.cpp FILES ${level_objects_components_Render_sources})
+SOURCE_GROUP(level\\objects\\components\\Render\\.h FILES ${level_objects_components_Render_headers})
+SOURCE_GROUP(level\\objects\\components\\Simulation\\.cpp FILES ${level_objects_components_Simulation_sources})
+SOURCE_GROUP(level\\objects\\components\\Simulation\\.h FILES ${level_objects_components_Simulation_headers})
+SOURCE_GROUP(level\\objects\\components\\Usable\\.cpp FILES ${level_objects_components_Usable_sources})
+SOURCE_GROUP(level\\objects\\components\\Usable\\.h FILES ${level_objects_components_Usable_headers})
+SOURCE_GROUP(level\\objects\\components\\Yoke\\.cpp FILES ${level_objects_components_Yoke_sources})
+SOURCE_GROUP(level\\objects\\components\\Yoke\\.h FILES ${level_objects_components_Yoke_headers})
+
+##
+SOURCE_GROUP(level\\objects\\contactresolvers\\.cpp FILES ${level_objects_contactresolvers_sources})
+SOURCE_GROUP(level\\objects\\contactresolvers\\.h FILES ${level_objects_contactresolvers_headers})
+
+##
+SOURCE_GROUP(level\\objects\\forcegenerators\\.cpp FILES ${level_objects_forcegenerators_sources})
+SOURCE_GROUP(level\\objects\\forcegenerators\\.h FILES ${level_objects_forcegenerators_headers})
+
+##
+SOURCE_GROUP(level\\objects\\messages\\.cpp FILES ${level_objects_messages_sources})
+SOURCE_GROUP(level\\objects\\messages\\.h FILES ${level_objects_messages_headers})
+
+##
+SOURCE_GROUP(level\\objects\\yokes\\minimus\\.cpp FILES ${level_objects_yokes_minimus_sources})
+SOURCE_GROUP(level\\objects\\yokes\\minimus\\.h FILES ${level_objects_yokes_minimus_headers})
+
+##
+SOURCE_GROUP(level\\objects\\yokes\\user\\.cpp FILES ${level_objects_yokes_user_sources})
+SOURCE_GROUP(level\\objects\\yokes\\user\\.h FILES ${level_objects_yokes_user_headers})
+
+##
+SOURCE_GROUP(level\\physics\\.cpp FILES ${level_physics_sources})
 SOURCE_GROUP(level\\physics\\.h FILES ${level_physics_headers})
 
 ##
 SOURCE_GROUP(level\\portals\\.cpp FILES ${level_portals_sources})
 SOURCE_GROUP(level\\portals\\.h FILES ${level_portals_headers})
 SOURCE_GROUP(level\\portals\\.tpp FILES ${level_portals_templates})
+
+##
+SOURCE_GROUP(level\\sprites\\.cpp FILES ${level_sprites_sources})
+SOURCE_GROUP(level\\sprites\\.h FILES ${level_sprites_headers})
 
 ##
 SOURCE_GROUP(level\\trees\\.cpp FILES ${level_trees_sources})
@@ -553,6 +1126,10 @@ SOURCE_GROUP(level\\vis\\.h FILES ${level_vis_headers})
 SOURCE_GROUP(level\\vis\\.tpp FILES ${level_vis_templates})
 
 ##
+SOURCE_GROUP(materials\\.cpp FILES ${materials_sources})
+SOURCE_GROUP(materials\\.h FILES ${materials_headers})
+
+##
 SOURCE_GROUP(math\\.cpp FILES ${math_sources})
 SOURCE_GROUP(math\\.h FILES ${math_headers})
 
@@ -562,11 +1139,23 @@ SOURCE_GROUP(math\\geom\\.h FILES ${math_geom_headers})
 SOURCE_GROUP(math\\geom\\.tpp FILES ${math_geom_templates})
 
 ##
+SOURCE_GROUP(math\\matrices\\.cpp FILES ${math_matrices_sources})
+SOURCE_GROUP(math\\matrices\\.h FILES ${math_matrices_headers})
+
+##
+SOURCE_GROUP(math\\quaternions\\.cpp FILES ${math_quaternions_sources})
+SOURCE_GROUP(math\\quaternions\\.h FILES ${math_quaternions_headers})
+
+##
 SOURCE_GROUP(math\\vectors\\.cpp FILES ${math_vectors_sources})
 SOURCE_GROUP(math\\vectors\\.h FILES ${math_vectors_headers})
 
 ##
 SOURCE_GROUP(ogl\\.h FILES ${ogl_headers})
+
+##
+SOURCE_GROUP(textures\\.cpp FILES ${textures_sources})
+SOURCE_GROUP(textures\\.h FILES ${textures_headers})
 
 ##
 SOURCE_GROUP(util\\.cpp FILES ${util_sources})
@@ -587,9 +1176,12 @@ INCLUDE_DIRECTORIES(${hesperus2_SOURCE_DIR}/engine/core)
 # Specify the libraries to use #
 ################################
 
+INCLUDE(${hesperus2_SOURCE_DIR}/UseASX.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/UseGLEW.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UseLodePNG.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UsePropParser.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/UseSDL.cmake)
 
 ##########################################
 # Specify the target and where to put it #

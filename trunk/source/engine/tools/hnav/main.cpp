@@ -47,13 +47,8 @@ void run(const std::string& definitionsSpecifierFilename, const std::string& tre
 	// Read in the definitions specifier.
 	std::string definitionsFilename = DefinitionsSpecifierFile::load(definitionsSpecifierFilename);
 
-	// Set the appropriate resources directory.
-	// FIXME: The game to use shouldn't be hard-coded like this.
-	DirectoryFinder& finder = DirectoryFinder::instance();
-	finder.set_resources_directory(finder.determine_resources_directory_from_tool("ScarletPimpernel"));
-
 	// Read in the bounds.
-	bf::path definitionsDir = finder.determine_definitions_directory();
+	bf::path definitionsDir = DirectoryFinder::instance().determine_definitions_directory();
 	BoundsManager_Ptr boundsManager = DefinitionsFile::load_bounds_only((definitionsDir / definitionsFilename).file_string());
 
 	// Read in the polygons and onion tree.
@@ -113,6 +108,12 @@ try
 {
 	if(argc != 4) quit_with_usage();
 	std::vector<std::string> args(argv, argv + argc);
+
+	// Set the appropriate resources directory.
+	// FIXME: The game to use shouldn't be hard-coded like this.
+	DirectoryFinder& finder = DirectoryFinder::instance();
+	finder.set_resources_directory(finder.determine_resources_directory_from_tool("ScarletPimpernel"));
+
 	run(args[1], args[2], args[3]);
 	return 0;
 }

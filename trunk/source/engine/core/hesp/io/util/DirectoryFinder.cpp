@@ -65,6 +65,18 @@ bf::path DirectoryFinder::determine_executable_location() const
 	return s;
 }
 
+bf::path DirectoryFinder::determine_models_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "models/";
+}
+
+bf::path DirectoryFinder::determine_profiles_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "profiles/";
+}
+
 bf::path DirectoryFinder::determine_resources_directory_from_tool(const std::string& game) const
 {
 	bf::path p = determine_executable_location();	// hesperus2/<build|install>/bin/engine/tools/<?>.exe
@@ -73,6 +85,24 @@ bf::path DirectoryFinder::determine_resources_directory_from_tool(const std::str
 
 	if(bf::exists(p)) return p;
 	else throw Exception("Resources directory does not exist: " + p.file_string());
+}
+
+bf::path DirectoryFinder::determine_scripts_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "scripts/";
+}
+
+bf::path DirectoryFinder::determine_sprites_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "sprites/";
+}
+
+bf::path DirectoryFinder::determine_textures_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "textures/";
 }
 
 void DirectoryFinder::set_resources_directory(const bf::path& resourcesDir)

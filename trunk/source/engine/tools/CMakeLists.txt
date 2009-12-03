@@ -3,6 +3,7 @@
 ###################################
 
 ADD_SUBDIRECTORY(hbsp)
+ADD_SUBDIRECTORY(hcollate)
 ADD_SUBDIRECTORY(hcsg)
 ADD_SUBDIRECTORY(hdetail)
 ADD_SUBDIRECTORY(hdivide)

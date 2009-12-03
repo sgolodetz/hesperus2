@@ -5,7 +5,6 @@
 
 #include "ObjectSpecification.h"
 
-#if NOT_RIGHT_NOW
 #include <hesp/level/objects/components/CmpBasicModelRender.h>
 #include <hesp/level/objects/components/CmpBasicProjectile.h>
 #include <hesp/level/objects/components/CmpBipedAnimChooser.h>
@@ -24,7 +23,6 @@
 #include <hesp/level/objects/components/CmpSimulation.h>
 #include <hesp/level/objects/components/CmpSpriteRender.h>
 #include <hesp/level/objects/components/CmpUserBipedYoke.h>
-#endif
 #include <hesp/util/Properties.h>
 
 namespace hesp {
@@ -62,7 +60,6 @@ void ObjectSpecification::build_maps()
 {
 	if(!s_mapsBuilt)
 	{
-#if NOT_RIGHT_NOW
 		ADD_ELEMENTS(BasicModelRender);
 		ADD_ELEMENTS(BasicProjectile);
 		ADD_ELEMENTS(BipedAnimChooser);
@@ -82,7 +79,6 @@ void ObjectSpecification::build_maps()
 		ADD_ELEMENTS(SpriteRender);
 		ADD_ELEMENTS(UserBipedYoke);
 		s_mapsBuilt = true;
-#endif
 	}
 }
 
