@@ -245,7 +245,7 @@ Clears all the intermediate data used when generating the mesh.
 void NavMeshGenerator::clean_intermediate()
 {
 	m_edgePlaneTable.clear();
-	m_navLinks.swap(NavLinkVector());
+	NavLinkVector().swap(m_navLinks);
 }
 
 void NavMeshGenerator::determine_links()
