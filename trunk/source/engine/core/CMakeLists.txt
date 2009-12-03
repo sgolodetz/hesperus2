@@ -48,6 +48,7 @@ SET(io_files_sources
 hesp/io/files/DefinitionsFile.cpp
 hesp/io/files/DefinitionsSpecifierFile.cpp
 hesp/io/files/LightsFile.cpp
+hesp/io/files/NavFile.cpp
 hesp/io/files/OnionPortalsFile.cpp
 hesp/io/files/PortalsFile.cpp
 hesp/io/files/VisFile.cpp
@@ -60,6 +61,7 @@ hesp/io/files/DefinitionsSpecifierFile.h
 hesp/io/files/GeometryFile.h
 hesp/io/files/LightsFile.h
 hesp/io/files/LitTreeFile.h
+hesp/io/files/NavFile.h
 hesp/io/files/OnionPortalsFile.h
 hesp/io/files/OnionTreeFile.h
 hesp/io/files/PortalsFile.h
@@ -80,6 +82,7 @@ SET(io_sections_sources
 hesp/io/sections/DefinitionsSpecifierSection.cpp
 hesp/io/sections/LightmapPrefixSection.cpp
 hesp/io/sections/LightsSection.cpp
+hesp/io/sections/NavSection.cpp
 hesp/io/sections/OnionTreeSection.cpp
 hesp/io/sections/TreeSection.cpp
 hesp/io/sections/VisSection.cpp
@@ -89,6 +92,7 @@ SET(io_sections_headers
 hesp/io/sections/DefinitionsSpecifierSection.h
 hesp/io/sections/LightmapPrefixSection.h
 hesp/io/sections/LightsSection.h
+hesp/io/sections/NavSection.h
 hesp/io/sections/OnionTreeSection.h
 hesp/io/sections/PolygonsSection.h
 hesp/io/sections/TreeSection.h
@@ -104,6 +108,7 @@ SET(io_util_sources
 hesp/io/util/DirectoryFinder.cpp
 hesp/io/util/FieldIO.cpp
 hesp/io/util/LineIO.cpp
+hesp/io/util/NavLinkFactory.cpp
 hesp/io/util/PropertyIO.cpp
 hesp/io/util/PropFormatter.cpp
 hesp/io/util/PropReader.cpp
@@ -114,6 +119,7 @@ hesp/io/util/DirectoryFinder.h
 hesp/io/util/FieldIO.h
 hesp/io/util/IOUtil.h
 hesp/io/util/LineIO.h
+hesp/io/util/NavLinkFactory.h
 hesp/io/util/PropertyIO.h
 hesp/io/util/PropFormatter.h
 hesp/io/util/PropReader.h
@@ -184,6 +190,43 @@ hesp/level/lighting/LightmapGrid.h
 
 SET(level_lighting_templates
 hesp/level/lighting/LightmapGrid.tpp
+)
+
+##
+SET(level_nav_sources
+hesp/level/nav/AdjacencyList.cpp
+hesp/level/nav/AdjacencyTable.cpp
+hesp/level/nav/GlobalPathfinder.cpp
+hesp/level/nav/NavManager.cpp
+hesp/level/nav/NavMesh.cpp
+hesp/level/nav/NavMeshGenerator.cpp
+hesp/level/nav/NavMeshUtil.cpp
+hesp/level/nav/NavPolygon.cpp
+hesp/level/nav/PathTable.cpp
+hesp/level/nav/PathTableGenerator.cpp
+hesp/level/nav/StepDownLink.cpp
+hesp/level/nav/StepLink.cpp
+hesp/level/nav/StepUpLink.cpp
+hesp/level/nav/WalkLink.cpp
+)
+
+SET(level_nav_headers
+hesp/level/nav/AdjacencyList.h
+hesp/level/nav/AdjacencyTable.h
+hesp/level/nav/GlobalPathfinder.h
+hesp/level/nav/NavDataset.h
+hesp/level/nav/NavLink.h
+hesp/level/nav/NavManager.h
+hesp/level/nav/NavMesh.h
+hesp/level/nav/NavMeshGenerator.h
+hesp/level/nav/NavMeshUtil.h
+hesp/level/nav/NavPolygon.h
+hesp/level/nav/PathTable.h
+hesp/level/nav/PathTableGenerator.h
+hesp/level/nav/StepDownLink.h
+hesp/level/nav/StepLink.h
+hesp/level/nav/StepUpLink.h
+hesp/level/nav/WalkLink.h
 )
 
 ##
@@ -285,10 +328,12 @@ hesp/level/vis/VisTable.tpp
 ##
 SET(math_sources
 hesp/math/Constants.cpp
+hesp/math/Interval.cpp
 )
 
 SET(math_headers
 hesp/math/Constants.h
+hesp/math/Interval.h
 )
 
 ##
@@ -378,6 +423,7 @@ ${io_util_sources}
 ${level_bounds_sources}
 ${level_brushes_sources}
 ${level_lighting_sources}
+${level_nav_sources}
 ${level_objects_base_sources}
 ${level_portals_sources}
 ${level_trees_sources}
@@ -400,6 +446,7 @@ ${level_bounds_headers}
 ${level_brushes_headers}
 ${level_csg_headers}
 ${level_lighting_headers}
+${level_nav_headers}
 ${level_objects_base_headers}
 ${level_physics_headers}
 ${level_portals_headers}
@@ -477,6 +524,10 @@ SOURCE_GROUP(level\\csg\\.tpp FILES ${level_csg_templates})
 SOURCE_GROUP(level\\lighting\\.cpp FILES ${level_lighting_sources})
 SOURCE_GROUP(level\\lighting\\.h FILES ${level_lighting_headers})
 SOURCE_GROUP(level\\lighting\\.tpp FILES ${level_lighting_templates})
+
+##
+SOURCE_GROUP(level\\nav\\.cpp FILES ${level_nav_sources})
+SOURCE_GROUP(level\\nav\\.h FILES ${level_nav_headers})
 
 ##
 SOURCE_GROUP(level\\objects\\base\\.cpp FILES ${level_objects_base_sources})
