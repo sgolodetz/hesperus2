@@ -102,7 +102,7 @@ void PhysicsSystem::check_objects()
 			int id = it->first;
 			m_idAllocator.deallocate(id);
 			m_forceGeneratorRegistry.deregister_id(id);
-			it = m_objects.erase(it);
+			m_objects.erase(it++);
 		}
 		else ++it;
 	}

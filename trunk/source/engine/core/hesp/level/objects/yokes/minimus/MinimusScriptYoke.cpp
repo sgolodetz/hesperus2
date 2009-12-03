@@ -62,10 +62,10 @@ std::vector<ObjectCommand_Ptr> MinimusScriptYoke::generate_commands(InputState& 
 void MinimusScriptYoke::register_for_scripting(const ASXEngine_Ptr& engine)
 {
 	engine->register_uninstantiable_ref_type<MinimusScriptYoke>();
-	engine->register_object_method(&clear_subyoke, "clear_subyoke");
-	engine->register_object_method(&goto_position, "goto_position");
-	engine->register_object_method(&subyoke_active, "subyoke_active");
-	engine->register_object_method(&subyoke_exists, "subyoke_exists");
+	engine->register_object_method(&MinimusScriptYoke::clear_subyoke, "clear_subyoke");
+	engine->register_object_method(&MinimusScriptYoke::goto_position, "goto_position");
+	engine->register_object_method(&MinimusScriptYoke::subyoke_active, "subyoke_active");
+	engine->register_object_method(&MinimusScriptYoke::subyoke_exists, "subyoke_exists");
 }
 
 void MinimusScriptYoke::release()

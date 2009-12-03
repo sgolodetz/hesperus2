@@ -14,7 +14,7 @@ Loads all the registered resources.
 template <typename Resource>
 void ResourceManager<Resource>::load_all()
 {
-	for(std::map<std::string,shared_ptr<Resource> >::iterator it=m_resources.begin(), iend=m_resources.end(); it!=iend; ++it)
+	for(typename std::map<std::string,shared_ptr<Resource> >::iterator it=m_resources.begin(), iend=m_resources.end(); it!=iend; ++it)
 	{
 		const std::string& name = it->first;
 		shared_ptr<Resource>& resource = it->second;
@@ -43,7 +43,7 @@ Returns the resource with the specified name, if any.
 template <typename Resource>
 const shared_ptr<Resource>& ResourceManager<Resource>::resource(const std::string& resourceName)
 {
-	std::map<std::string,shared_ptr<Resource> >::const_iterator it = m_resources.find(resourceName);
+	typename std::map<std::string,shared_ptr<Resource> >::const_iterator it = m_resources.find(resourceName);
 	if(it != m_resources.end())
 	{
 		return it->second;
@@ -61,7 +61,7 @@ The const version of the above.
 template <typename Resource>
 shared_ptr<const Resource> ResourceManager<Resource>::resource(const std::string& resourceName) const
 {
-	std::map<std::string,shared_ptr<Resource> >::const_iterator it = m_resources.find(resourceName);
+	typename std::map<std::string,shared_ptr<Resource> >::const_iterator it = m_resources.find(resourceName);
 	if(it != m_resources.end())
 	{
 		return it->second;
@@ -82,7 +82,7 @@ template <typename Resource>
 std::set<std::string> ResourceManager<Resource>::resource_names() const
 {
 	std::set<std::string> ret;
-	for(std::map<std::string,shared_ptr<Resource> >::const_iterator it=m_resources.begin(), iend=m_resources.end(); it!=iend; ++it)
+	for(typename std::map<std::string,shared_ptr<Resource> >::const_iterator it=m_resources.begin(), iend=m_resources.end(); it!=iend; ++it)
 	{
 		ret.insert(it->first);
 	}

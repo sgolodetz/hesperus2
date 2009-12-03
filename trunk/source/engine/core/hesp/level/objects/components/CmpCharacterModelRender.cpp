@@ -5,6 +5,8 @@
 
 #include "CmpCharacterModelRender.h"
 
+#include <cmath>
+
 #include <hesp/ogl/WrappedGL.h>
 
 #include <hesp/axes/NUVAxes.h>

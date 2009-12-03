@@ -16,7 +16,7 @@ struct TextureDeleter
 	{
 		GLuint *id = static_cast<GLuint*>(p);
 		if(glIsTexture(*id)) glDeleteTextures(1, id);
-		delete p;
+		delete id;
 	}
 };
 

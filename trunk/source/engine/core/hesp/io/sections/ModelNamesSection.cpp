@@ -9,7 +9,7 @@ namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 ModelNamesSection::ModelNamesSection()
-:	ResourceNamesSection("ModelNames", "model")
+:	ResourceNamesSection<ModelManager>("ModelNames", "model")
 {}
 
 }

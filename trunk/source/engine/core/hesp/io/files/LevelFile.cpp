@@ -5,6 +5,8 @@
 
 #include "LevelFile.h"
 
+#include <fstream>
+
 #include <boost/filesystem/operations.hpp>
 namespace bf = boost::filesystem;
 

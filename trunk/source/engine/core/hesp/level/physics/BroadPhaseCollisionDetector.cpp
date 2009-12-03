@@ -5,6 +5,7 @@
 
 #include "BroadPhaseCollisionDetector.h"
 
+#include <cmath>
 #include <limits>
 
 #include <hesp/level/bounds/Bounds.h>

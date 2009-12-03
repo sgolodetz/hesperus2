@@ -11,8 +11,6 @@
 #ifdef _WIN32
 	// Provides BITMAPFILEHEADER, BITMAPINFOHEADER, etc.
 	#include <windows.h>
-#else
-	#error Need to define the relevant bitmap structs for non-Windows platforms.
 #endif
 
 #include <hesp/exceptions/FileNotFoundException.h>
@@ -43,6 +41,7 @@ Loads a 24-bit bitmap from a std::istream.
 */
 Image24_Ptr BitmapLoader::load_streamed_image24(std::istream& is)
 {
+#ifdef _WIN32
 	// Read in the file header and check that we're dealing with a valid bitmap.
 	BITMAPFILEHEADER bfh;
 	is.read(reinterpret_cast<char*>(&bfh), sizeof(BITMAPFILEHEADER));
@@ -97,6 +96,9 @@ Image24_Ptr BitmapLoader::load_streamed_image24(std::istream& is)
 	}
 
 	return Image24_Ptr(new SimpleImage24(pixels, width, height));
+#else
+	throw Exception("Bitmap loading not yet implemented on non-Windows platforms");
+#endif
 }
 
 }

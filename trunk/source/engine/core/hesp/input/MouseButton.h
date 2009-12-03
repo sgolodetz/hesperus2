@@ -6,7 +6,7 @@
 #ifndef H_HESP_MOUSEBUTTON
 #define H_HESP_MOUSEBUTTON
 
-#include <sdl_mouse.h>
+#include <SDL_mouse.h>
 
 namespace hesp {
 

@@ -9,7 +9,7 @@ namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 SpriteNamesSection::SpriteNamesSection()
-:	ResourceNamesSection("SpriteNames", "sprite")
+:	ResourceNamesSection<SpriteManager>("SpriteNames", "sprite")
 {}
 
 }

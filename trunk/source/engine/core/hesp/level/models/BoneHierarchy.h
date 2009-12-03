@@ -43,7 +43,7 @@ public:
 	Bone_CPtr bones(int i) const;
 	Bone_Ptr bones(const std::string& name);
 	Bone_CPtr bones(const std::string& name) const;
-	ConfiguredPose_Ptr configure_pose(const Pose_CPtr& unconfiguredPose, const std::map<std::string,PoseModifier>& modifiers = std::map<std::string,PoseModifier>()) const;
+	ConfiguredPose_Ptr configure_pose(const Pose_CPtr& unconfiguredPose, const std::map<std::string,PoseModifier>& modifiers = (std::map<std::string,PoseModifier>())) const;
 	void detach_from_parent();
 	int find_bone(const std::string& name) const;
 

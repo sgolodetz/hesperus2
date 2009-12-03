@@ -3,6 +3,8 @@
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
+#include <iostream>
+
 #include <hesp/io/util/LineIO.h>
 
 namespace hesp {

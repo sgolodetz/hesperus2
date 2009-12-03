@@ -6,7 +6,7 @@
 #ifndef H_HESP_KEYINPUTTER
 #define H_HESP_KEYINPUTTER
 
-#include <sdl_keysym.h>
+#include <SDL_keysym.h>
 
 #include "Inputter.h"
 

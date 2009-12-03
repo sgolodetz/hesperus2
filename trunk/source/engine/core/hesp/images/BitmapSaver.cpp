@@ -11,8 +11,6 @@
 #ifdef _WIN32
 	// Provides BITMAPFILEHEADER, BITMAPINFOHEADER, etc.
 	#include <windows.h>
-#else
-	#error Need to define the relevant bitmap structs for non-Windows platforms.
 #endif
 
 #include <hesp/exceptions/Exception.h>
@@ -43,6 +41,7 @@ Saves a 24-bit bitmap to a std::ostream.
 */
 void BitmapSaver::save_streamed_image24(std::ostream& os, const Image24_CPtr& image)
 {
+#ifdef _WIN32
 	const int w = image->width();
 	const int h = image->height();
 
@@ -81,6 +80,9 @@ void BitmapSaver::save_streamed_image24(std::ostream& os, const Image24_CPtr& im
 
 	// Write the image data.
 	os.write(reinterpret_cast<char *>(&data[0]), bih.biSizeImage);
+#else
+	throw Exception("Bitmap saving not yet implemented on non-Windows platforms");
+#endif
 }
 
 }

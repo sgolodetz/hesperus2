@@ -8,7 +8,7 @@
 
 #include <boost/dynamic_bitset.hpp>
 
-#include <sdl_keysym.h>
+#include <SDL_keysym.h>
 
 #include "MouseButton.h"
 
