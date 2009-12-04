@@ -1,0 +1,68 @@
+ModelNames
+{
+	Test-15
+}
+SpriteNames
+{
+}
+Objects
+{
+	Count = 2
+	Object
+	{
+		BipedAnimChooser;
+		CharacterModelRender
+		{
+			InclineBones = < ("",<("head",( 1 0 0 ))>) ; ("with_onehanded",<("head",( 1 0 0 ));("shoulder.r",( 1 0 0 ))>) >
+			ModelName = "Test-15"
+		}
+		Health
+		{
+			Health = 100
+			MaxHealth = 100
+		}
+		Inventory
+		{
+			ActiveItem = -1
+			Consumables = <>
+			Items = []
+		}
+		Movement;
+		Orientation
+		{
+			Look = ( 1 -0.5 0 )
+		}
+		Simulation
+		{
+			BoundsGroup = "biped"
+			DampingFactor = 0.95
+			GravityStrength = 0
+			InverseMass = 0.02
+			Material = "character"
+			Position = ( 7 10 5 )
+			Posture = "stand"
+			Velocity = ( 0 0 0 )
+		}
+		UserBipedYoke;
+	}
+	Object
+	{
+		BasicModelRender
+		{
+			ModelName = "Test-15"
+		}
+		Health
+		{
+			Health = 100
+			MaxHealth = 100
+		}
+		Orientation
+		{
+			Look = ( -1 0 0 )
+		}
+		Position
+		{
+			Position = ( 20 15 9 )
+		}
+	}
+}

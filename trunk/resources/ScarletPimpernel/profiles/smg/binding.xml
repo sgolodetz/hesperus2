@@ -1,0 +1,10 @@
+<binding>
+	<action name="Crouch" input="c"/>
+	<action name="Jump" input="space"/>
+	<action name="MoveBackward" input="s"/>
+	<action name="MoveForward" input="w"/>
+	<action name="StrafeLeft" input="a"/>
+	<action name="StrafeRight" input="d"/>
+	<action name="UseItem" input="left mouse"/>
+	<action name="Walk" input="left shift"/>
+</binding>

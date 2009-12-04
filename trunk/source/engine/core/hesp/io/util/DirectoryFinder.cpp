@@ -30,6 +30,12 @@ DirectoryFinder& DirectoryFinder::instance()
 }
 
 //#################### PUBLIC METHODS ####################
+bf::path DirectoryFinder::determine_audio_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "audio/";
+}
+
 bf::path DirectoryFinder::determine_definitions_directory() const
 {
 	check_resources_directory();
@@ -65,6 +71,18 @@ bf::path DirectoryFinder::determine_executable_location() const
 	return s;
 }
 
+bf::path DirectoryFinder::determine_images_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "images/";
+}
+
+bf::path DirectoryFinder::determine_levels_directory() const
+{
+	check_resources_directory();
+	return m_resourcesDir / "levels/";
+}
+
 bf::path DirectoryFinder::determine_models_directory() const
 {
 	check_resources_directory();
@@ -75,6 +93,18 @@ bf::path DirectoryFinder::determine_profiles_directory() const
 {
 	check_resources_directory();
 	return m_resourcesDir / "profiles/";
+}
+
+bf::path DirectoryFinder::determine_resources_directory_from_game(const std::string& game) const
+{
+	// TODO: Search for a resources subdirectory of the game directory first (for deployed games).
+
+	bf::path p = determine_executable_location();	// hesperus2/<build|install>/bin/games/<?>/<?>.exe
+	for(int i=0; i<5; ++i) p = p.parent_path();		// -> hesperus2
+	p = p / "resources" / game;						// -> hesperus2/resources/<game>
+
+	if(bf::exists(p)) return p;
+	else throw Exception("Resources directory does not exist: " + p.file_string());
 }
 
 bf::path DirectoryFinder::determine_resources_directory_from_tool(const std::string& game) const

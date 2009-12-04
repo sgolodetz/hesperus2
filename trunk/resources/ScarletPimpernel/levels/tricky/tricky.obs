@@ -1,0 +1,185 @@
+ModelNames
+{
+	Percy
+	Test-15
+	TestWeapon
+}
+SpriteNames
+{
+	Test
+}
+Objects
+{
+	Count = 5
+	Object
+	{
+		BipedAnimChooser;
+		CharacterModelRender
+		{
+			InclineBones = < ("",<("head",( 1 0 0 ))>) ; ("with_onehanded",<("head",( 1 0 0 ));("shoulder.r",( 1 0 0 ))>) >
+			ModelName = "Percy"
+		}
+		Health
+		{
+			Health = 100
+			MaxHealth = 100
+		}
+		Inventory
+		{
+			ActiveItem = 4
+			Consumables = <>
+			Items = [4]
+		}
+		Movement;
+		Orientation
+		{
+			Look = ( 1 -0.5 0 )
+		}
+		Simulation
+		{
+			BoundsGroup = "biped"
+			DampingFactor = 0.95
+			GravityStrength = 0
+			InverseMass = 0.02
+			Material = "character"
+			Position = ( 6 24 6 )
+			Posture = "stand"
+			Velocity = ( 0 0 0 )
+		}
+		UserBipedYoke;
+	}
+	Object
+	{
+		BipedAnimChooser;
+		CharacterModelRender
+		{
+			InclineBones = < ("",<("head",( 1 0 0 ))>) ; ("with_onehanded",<("head",( 1 0 0 ));("shoulder.r",( 1 0 0 ))>) >
+			ModelName = "Percy"
+		}
+		Health
+		{
+			Health = 100
+			MaxHealth = 100
+		}
+		Inventory
+		{
+			ActiveItem = 3
+			Consumables = <>
+			Items = [3]
+		}
+		Movement;
+		MinimusScriptYoke
+		{
+			Script = "guard-ai"
+		}
+		Orientation
+		{
+			Look = ( -1 0 0 )
+		}
+		Simulation
+		{
+			BoundsGroup = "biped"
+			DampingFactor = 0.95
+			GravityStrength = 0
+			InverseMass = 0.02
+			Material = "character"
+			Position = ( 20 20 6 )
+			Posture = "stand"
+			Velocity = ( 0 0 0 )
+		}
+	}
+	Object
+	{
+		BasicModelRender
+		{
+			ModelName = "Test-15"
+		}
+		ConsumeActivatable
+		{
+			Amount = 20
+			Type = "PistolBullet"
+		}
+		Movement;
+		Orientation
+		{
+			Look = ( 0 1 0 )
+		}
+		Ownable
+		{
+			AnimExtension = "with_onehanded"
+			AttachPoint = "tag_item.r"
+			Owner = -1
+		}
+		Simulation
+		{
+			BoundsGroup = "biped"
+			DampingFactor = 0.95
+			GravityStrength = 0
+			InverseMass = 1.0
+			Material = "item"
+			Position = ( 8 15 6 )
+			Posture = "stand"
+			Velocity = ( 0 0 0 )
+		}
+	}
+	Object
+	{
+		BasicModelRender
+		{
+			ModelName = "TestWeapon"
+		}
+		Orientation
+		{
+			Look = ( 0 -1 0 )
+		}
+		Ownable
+		{
+			AnimExtension = "with_onehanded"
+			AttachPoint = "tag_item.r"
+			Owner = 1
+		}
+		Position
+		{
+			Position = ( 0 0 0 )
+		}
+		ProjectileWeaponUsable
+		{
+			AmmoType = "PistolBullet"
+			FiringInterval = 500
+			Group = "Pistol"
+			Hotspots = ["root"]
+			MuzzleSpeed = 100.0
+			TimeTillCanFire = 0
+		}
+	}
+	Object
+	{
+		BasicModelRender
+		{
+			ModelName = "TestWeapon"
+		}
+		Orientation
+		{
+			Look = ( 0 -1 0 )
+		}
+		Ownable
+		{
+			AnimExtension = "with_onehanded"
+			AttachPoint = "tag_item.r"
+			Owner = 0
+		}
+		Position
+		{
+			Position = ( 0 0 0 )
+		}
+		ProjectileWeaponUsable
+		{
+			AmmoType = "PistolBullet"
+			FiringInterval = 500
+			Group = "Pistol"
+			Hotspots = ["root"]
+			MuzzleSpeed = 100.0
+			TimeTillCanFire = 0
+		}
+	}
+}

@@ -26,10 +26,14 @@ private:
 
 	//#################### PUBLIC METHODS ####################
 public:
+	boost::filesystem::path determine_audio_directory() const;
 	boost::filesystem::path determine_definitions_directory() const;
 	boost::filesystem::path determine_executable_location() const;
+	boost::filesystem::path determine_images_directory() const;
+	boost::filesystem::path determine_levels_directory() const;
 	boost::filesystem::path determine_models_directory() const;
 	boost::filesystem::path determine_profiles_directory() const;
+	boost::filesystem::path determine_resources_directory_from_game(const std::string& game) const;
 	boost::filesystem::path determine_resources_directory_from_tool(const std::string& game) const;
 	boost::filesystem::path determine_scripts_directory() const;
 	boost::filesystem::path determine_sprites_directory() const;

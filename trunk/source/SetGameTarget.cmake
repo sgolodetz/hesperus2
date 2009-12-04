@@ -1,8 +1,8 @@
 #######################
-# SetTestTarget.cmake #
+# SetGameTarget.cmake #
 #######################
 
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${hesperus2_BINARY_DIR}/bin/tests/${targetname}/bin)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${hesperus2_BINARY_DIR}/bin/games/${targetname})
 ADD_EXECUTABLE(${targetname} ${sources} ${headers} ${templates})
 INCLUDE(${hesperus2_SOURCE_DIR}/VCTargetHack.cmake)
 

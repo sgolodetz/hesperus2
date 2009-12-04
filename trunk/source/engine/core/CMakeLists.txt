@@ -13,6 +13,21 @@ SET(targetname hesperus)
 #############################
 
 ##
+SET(audio_sources
+hesp/audio/SoundInstance.cpp
+hesp/audio/SoundInstanceUpdater.cpp
+hesp/audio/SoundListenerUpdater.cpp
+hesp/audio/SoundSystem.cpp
+)
+
+SET(audio_headers
+hesp/audio/SoundInstance.h
+hesp/audio/SoundInstanceUpdater.h
+hesp/audio/SoundListenerUpdater.h
+hesp/audio/SoundSystem.h
+)
+
+##
 SET(axes_sources
 hesp/axes/NUVAxes.cpp
 hesp/axes/VerticallyConstrainedNUVAxes.cpp
@@ -21,6 +36,18 @@ hesp/axes/VerticallyConstrainedNUVAxes.cpp
 SET(axes_headers
 hesp/axes/NUVAxes.h
 hesp/axes/VerticallyConstrainedNUVAxes.h
+)
+
+##
+SET(cameras_sources
+hesp/cameras/FirstPersonCamera.cpp
+hesp/cameras/FixedCamera.cpp
+)
+
+SET(cameras_headers
+hesp/cameras/Camera.h
+hesp/cameras/FirstPersonCamera.h
+hesp/cameras/FixedCamera.h
 )
 
 ##
@@ -46,6 +73,48 @@ SET(exceptions_headers
 hesp/exceptions/Exception.h
 hesp/exceptions/FileNotFoundException.h
 hesp/exceptions/InvalidParameterException.h
+)
+
+##
+SET(game_sources
+hesp/game/Game.cpp
+hesp/game/GameState.cpp
+hesp/game/GameState_Level.cpp
+hesp/game/GameState_Load.cpp
+hesp/game/GameState_Menu.cpp
+)
+
+SET(game_headers
+hesp/game/Game.h
+hesp/game/GameState.h
+hesp/game/GameState_Level.h
+hesp/game/GameState_Load.h
+hesp/game/GameState_Menu.h
+)
+
+##
+SET(gui_sources
+hesp/gui/Button.cpp
+hesp/gui/ExplicitLayout.cpp
+hesp/gui/GUIComponent.cpp
+hesp/gui/LaidOutGUIComponent.cpp
+hesp/gui/Picture.cpp
+hesp/gui/Screen.cpp
+)
+
+SET(gui_headers
+hesp/gui/Button.h
+hesp/gui/ExplicitLayout.h
+hesp/gui/Extents.h
+hesp/gui/GUIComponent.h
+hesp/gui/GUIContainer.h
+hesp/gui/LaidOutGUIComponent.h
+hesp/gui/Picture.h
+hesp/gui/Screen.h
+)
+
+SET(gui_templates
+hesp/gui/GUIContainer.tpp
 )
 
 ##
@@ -202,14 +271,18 @@ hesp/io/util/PropReader.tpp
 ##
 SET(level_sources
 hesp/level/GeometryRenderer.cpp
+hesp/level/HUDViewer.cpp
 hesp/level/Level.cpp
+hesp/level/LevelViewer.cpp
 hesp/level/LitGeometryRenderer.cpp
 hesp/level/UnlitGeometryRenderer.cpp
 )
 
 SET(level_headers
 hesp/level/GeometryRenderer.h
+hesp/level/HUDViewer.h
 hesp/level/Level.h
+hesp/level/LevelViewer.h
 hesp/level/LitGeometryRenderer.h
 hesp/level/UnlitGeometryRenderer.h
 )
@@ -821,6 +894,7 @@ hesp/util/ConfigOptions.cpp
 hesp/util/IDAllocator.cpp
 hesp/util/PolygonTypes.cpp
 hesp/util/Properties.cpp
+hesp/util/TextRenderer.cpp
 )
 
 SET(util_headers
@@ -829,6 +903,7 @@ hesp/util/IDAllocator.h
 hesp/util/PolygonTypes.h
 hesp/util/Properties.h
 hesp/util/ResourceManager.h
+hesp/util/TextRenderer.h
 )
 
 SET(util_templates
@@ -856,8 +931,12 @@ hesp/xml/XMLToken.h
 #################################################################
 
 SET(sources
+${audio_sources}
 ${axes_sources}
+${cameras_sources}
 ${colours_sources}
+${game_sources}
+${gui_sources}
 ${images_sources}
 ${input_sources}
 ${io_files_sources}
@@ -905,10 +984,14 @@ ${xml_sources}
 )
 
 SET(headers
+${audio_headers}
 ${axes_headers}
+${cameras_headers}
 ${colours_headers}
 ${datastructures_headers}
 ${exceptions_headers}
+${game_headers}
+${gui_headers}
 ${images_headers}
 ${input_headers}
 ${io_files_headers}
@@ -959,6 +1042,7 @@ ${xml_headers}
 
 SET(templates
 ${datastructures_templates}
+${gui_templates}
 ${images_templates}
 ${io_files_templates}
 ${io_sections_templates}
@@ -979,8 +1063,16 @@ ${util_templates}
 #############################
 
 ##
+SOURCE_GROUP(audio\\.cpp FILES ${audio_sources})
+SOURCE_GROUP(audio\\.h FILES ${audio_headers})
+
+##
 SOURCE_GROUP(axes\\.cpp FILES ${axes_sources})
 SOURCE_GROUP(axes\\.h FILES ${axes_headers})
+
+##
+SOURCE_GROUP(cameras\\.cpp FILES ${cameras_sources})
+SOURCE_GROUP(cameras\\.h FILES ${cameras_headers})
 
 ##
 SOURCE_GROUP(colours\\.cpp FILES ${colours_sources})
@@ -992,6 +1084,15 @@ SOURCE_GROUP(datastructures\\.tpp FILES ${datastructures_templates})
 
 ##
 SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
+
+##
+SOURCE_GROUP(game\\.cpp FILES ${game_sources})
+SOURCE_GROUP(game\\.h FILES ${game_headers})
+
+##
+SOURCE_GROUP(gui\\.cpp FILES ${gui_sources})
+SOURCE_GROUP(gui\\.h FILES ${gui_headers})
+SOURCE_GROUP(gui\\.tpp FILES ${gui_templates})
 
 ##
 SOURCE_GROUP(images\\.cpp FILES ${images_sources})
@@ -1178,6 +1279,7 @@ INCLUDE_DIRECTORIES(${hesperus2_SOURCE_DIR}/engine/core)
 
 INCLUDE(${hesperus2_SOURCE_DIR}/UseASX.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UseBoost.cmake)
+INCLUDE(${hesperus2_SOURCE_DIR}/UseFMOD.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UseGLEW.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UseLodePNG.cmake)
 INCLUDE(${hesperus2_SOURCE_DIR}/UsePropParser.cmake)
