@@ -20,7 +20,7 @@ ObjectManager_Ptr ObjectsFile::load(const std::string& filename, const BoundsMan
 									const ComponentPropertyTypeMap& componentPropertyTypes,
 									const std::map<std::string,ObjectSpecification>& archetypes)
 {
-	std::ifstream is(filename.c_str());
+	std::ifstream is(filename.c_str(), std::ios_base::binary);
 	if(is.fail()) throw Exception("Could not open " + filename + " for reading");
 	ModelManager_Ptr modelManager = ModelNamesSection().load(is);
 	SpriteManager_Ptr spriteManager = SpriteNamesSection().load(is);
@@ -30,7 +30,7 @@ ObjectManager_Ptr ObjectsFile::load(const std::string& filename, const BoundsMan
 //#################### SAVING METHODS ####################
 void ObjectsFile::save(const std::string& filename, const ObjectManager_Ptr& objectManager)
 {
-	std::ofstream os(filename.c_str());
+	std::ofstream os(filename.c_str(), std::ios_base::binary);
 	if(os.fail()) throw Exception("Could not open " + filename + " for writing");
 	ModelNamesSection().save(os, objectManager->model_manager());
 	SpriteNamesSection().save(os, objectManager->sprite_manager());

@@ -34,7 +34,7 @@ int IDAllocator::allocate()
 void IDAllocator::deallocate(int n)
 {
 	std::set<int>::iterator it = m_used.find(n);
-	if(it == m_used.end()) throw Exception("ID " + lexical_cast<std::string,int>(n) + " is not currently allocated");
+	if(it == m_used.end()) throw Exception("ID " + lexical_cast<std::string>(n) + " is not currently allocated");
 
 	// Note: If we get here, m_used is guaranteed to be non-empty (as it contains n).
 	if(n == *m_used.rbegin())

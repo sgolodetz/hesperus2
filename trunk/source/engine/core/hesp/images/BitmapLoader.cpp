@@ -97,6 +97,7 @@ Image24_Ptr BitmapLoader::load_streamed_image24(std::istream& is)
 
 	return Image24_Ptr(new SimpleImage24(pixels, width, height));
 #else
+	// FIXME: Implement bitmap loading on other platforms.
 	throw Exception("Bitmap loading not yet implemented on non-Windows platforms");
 #endif
 }

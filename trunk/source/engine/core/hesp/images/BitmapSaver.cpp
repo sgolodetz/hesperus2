@@ -81,6 +81,7 @@ void BitmapSaver::save_streamed_image24(std::ostream& os, const Image24_CPtr& im
 	// Write the image data.
 	os.write(reinterpret_cast<char *>(&data[0]), bih.biSizeImage);
 #else
+	// FIXME: Implement bitmap saving on other platforms.
 	throw Exception("Bitmap saving not yet implemented on non-Windows platforms");
 #endif
 }

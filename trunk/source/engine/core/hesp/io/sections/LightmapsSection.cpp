@@ -34,7 +34,7 @@ std::vector<Image24_Ptr> LightmapsSection::load(std::istream& is)
 	std::string line;
 	LineIO::read_line(is, line, "lightmap count");
 	int lightmapCount;
-	try							{ lightmapCount = lexical_cast<int,std::string>(line); }
+	try							{ lightmapCount = lexical_cast<int>(line); }
 	catch(bad_lexical_cast&)	{ throw Exception("The lightmap count was not an integer"); }
 
 	lightmaps.resize(lightmapCount);

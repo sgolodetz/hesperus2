@@ -50,7 +50,7 @@ std::map<std::string,Material_Ptr> ModelFiles::load_materials(const std::string&
 {
 	std::map<std::string,Material_Ptr> ret;
 
-	std::ifstream is(filename.c_str());
+	std::ifstream is(filename.c_str(), std::ios_base::binary);
 	if(is.fail()) throw Exception("Could not open " + filename + " for reading");
 
 	NamedMaterial_Ptr material;
@@ -113,9 +113,9 @@ try
 		for(int j=0; j<faceCount; ++j)
 		{
 			const XMLElement_CPtr& faceElt = faceElts[j];
-			unsigned int v1 = lexical_cast<unsigned int,std::string>(faceElt->attribute("v1"));
-			unsigned int v2 = lexical_cast<unsigned int,std::string>(faceElt->attribute("v2"));
-			unsigned int v3 = lexical_cast<unsigned int,std::string>(faceElt->attribute("v3"));
+			unsigned int v1 = lexical_cast<unsigned int>(faceElt->attribute("v1"));
+			unsigned int v2 = lexical_cast<unsigned int>(faceElt->attribute("v2"));
+			unsigned int v3 = lexical_cast<unsigned int>(faceElt->attribute("v3"));
 			vertIndices.push_back(v1);
 			vertIndices.push_back(v2);
 			vertIndices.push_back(v3);
@@ -171,12 +171,12 @@ try
 		{
 			const XMLElement_CPtr& vbaElt = vertexboneassignmentElts[j];
 
-			int vertIndex = lexical_cast<int,std::string>(vbaElt->attribute("vertexindex"));
+			int vertIndex = lexical_cast<int>(vbaElt->attribute("vertexindex"));
 			if(vertIndex < 0 || vertIndex >= vertCount)
-				throw Exception("Invalid vertex index in bone assignment " + lexical_cast<std::string,int>(j));
+				throw Exception("Invalid vertex index in bone assignment " + lexical_cast<std::string>(j));
 
-			int boneIndex = lexical_cast<int,std::string>(vbaElt->attribute("boneindex"));
-			double weight = lexical_cast<double,std::string>(vbaElt->attribute("weight"));
+			int boneIndex = lexical_cast<int>(vbaElt->attribute("boneindex"));
+			double weight = lexical_cast<double>(vbaElt->attribute("weight"));
 
 			vertices[vertIndex].add_bone_weight(BoneWeight(boneIndex, weight));
 		}
@@ -237,7 +237,7 @@ try
 		// Extract all the necessary bits of information from the XML tree below each bone, then construct the bone itself.
 		const XMLElement_CPtr& boneElt = boneElts[i];
 
-		int id = lexical_cast<int,std::string>(boneElt->attribute("id"));
+		int id = lexical_cast<int>(boneElt->attribute("id"));
 
 		std::string name = boneElt->attribute("name");
 
@@ -246,7 +246,7 @@ try
 
 		XMLElement_CPtr rotationElt = boneElt->find_unique_child("rotation");
 
-		double rotationAngle = lexical_cast<double,std::string>(rotationElt->attribute("angle"));
+		double rotationAngle = lexical_cast<double>(rotationElt->attribute("angle"));
 
 		XMLElement_CPtr axisElt = rotationElt->find_unique_child("axis");
 		Vector3d rotationAxis = extract_vector3d(axisElt);
@@ -313,7 +313,7 @@ try
 					Vector3d translation = extract_vector3d(translateElt) * SCALE;
 
 					XMLElement_CPtr rotateElt = keyframeElt->find_unique_child("rotate");
-					double rotateAngle = lexical_cast<double,std::string>(rotateElt->attribute("angle"));
+					double rotateAngle = lexical_cast<double>(rotateElt->attribute("angle"));
 					XMLElement_CPtr axisElt = rotateElt->find_unique_child("axis");
 					Vector3d rotateAxis = extract_vector3d(axisElt);
 
@@ -357,7 +357,7 @@ try
 			}
 
 			std::string name = animationElt->attribute("name");
-			double length = lexical_cast<double,std::string>(animationElt->attribute("length"));
+			double length = lexical_cast<double>(animationElt->attribute("length"));
 			Animation_CPtr animation(new Animation(length, keyframes));
 			animations.insert(std::make_pair(name, animation));
 		}
@@ -379,8 +379,8 @@ Extracts (u,v) texture coordinates from the specified XML element.
 */
 TexCoords ModelFiles::extract_texcoords(const XMLElement_CPtr& elt)
 {
-	double u = lexical_cast<double,std::string>(elt->attribute("u"));
-	double v = lexical_cast<double,std::string>(elt->attribute("v"));
+	double u = lexical_cast<double>(elt->attribute("u"));
+	double v = lexical_cast<double>(elt->attribute("v"));
 	return TexCoords(u,v);
 }
 
@@ -392,9 +392,9 @@ Extracts a 3D vector from the specified XML element.
 */
 Vector3d ModelFiles::extract_vector3d(const XMLElement_CPtr& elt)
 {
-	double x = lexical_cast<double,std::string>(elt->attribute("x"));
-	double y = lexical_cast<double,std::string>(elt->attribute("y"));
-	double z = lexical_cast<double,std::string>(elt->attribute("z"));
+	double x = lexical_cast<double>(elt->attribute("x"));
+	double y = lexical_cast<double>(elt->attribute("y"));
+	double z = lexical_cast<double>(elt->attribute("z"));
 	return Vector3d(x,y,z);
 }
 
@@ -404,7 +404,7 @@ ModelFiles::NamedMaterial_Ptr ModelFiles::read_material(std::istream& is)
 	//			which is why the code might look strange.
 
 	std::string line;
-	if(!std::getline(is, line)) return NamedMaterial_Ptr();
+	if(!LineIO::portable_getline(is, line)) return NamedMaterial_Ptr();
 
 	NamedMaterial_Ptr ret;
 

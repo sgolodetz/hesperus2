@@ -42,7 +42,7 @@ Level_Ptr LevelFile::load(const std::string& filename)
 	if(is.fail()) throw Exception("Could not open " + filename + " for reading");
 
 	std::string fileType;
-	if(!std::getline(is, fileType)) throw Exception("Unexpected EOF whilst trying to read file type");
+	if(!LineIO::portable_getline(is, fileType)) throw Exception("Unexpected EOF whilst trying to read file type");
 
 	if(fileType == "HBSPL") return load_lit(is);
 	else if(fileType == "HBSPU") return load_unlit(is);

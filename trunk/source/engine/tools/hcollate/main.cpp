@@ -71,7 +71,7 @@ try
 	std::vector<Image24_Ptr> lightmaps(polyCount);
 	for(int i=0; i<polyCount; ++i)
 	{
-		std::string filename = lightmapPrefix + lexical_cast<std::string,int>(i) + ".png";
+		std::string filename = lightmapPrefix + lexical_cast<std::string>(i) + ".png";
 		lightmaps[i] = PNGLoader::load_image24(filename);
 	}
 

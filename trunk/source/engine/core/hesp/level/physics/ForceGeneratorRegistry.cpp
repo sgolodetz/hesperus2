@@ -19,14 +19,14 @@ void ForceGeneratorRegistry::deregister_id(int id)
 	//			is referenced as the other endpoint of the spring).
 	std::map<int,ForceGenerators>::iterator it = m_generators.find(id);
 	if(it != m_generators.end()) m_generators.erase(it);
-	else throw Exception("No such ID in force generator registry: " + boost::lexical_cast<std::string,int>(id));
+	else throw Exception("No such ID in force generator registry: " + boost::lexical_cast<std::string>(id));
 }
 
 const ForceGeneratorRegistry::ForceGenerators& ForceGeneratorRegistry::generators(int id) const
 {
 	std::map<int,ForceGenerators>::const_iterator it = m_generators.find(id);
 	if(it != m_generators.end()) return it->second;
-	else throw Exception("No such ID in force generator registry: " + boost::lexical_cast<std::string,int>(id));
+	else throw Exception("No such ID in force generator registry: " + boost::lexical_cast<std::string>(id));
 }
 
 void ForceGeneratorRegistry::register_id(int id)
@@ -42,7 +42,7 @@ void ForceGeneratorRegistry::remove_generator(int id, const std::string& forceNa
 	{
 		it->second.erase(forceName);
 	}
-	else throw Exception("No such ID in force generator registry: " + boost::lexical_cast<std::string,int>(id));
+	else throw Exception("No such ID in force generator registry: " + boost::lexical_cast<std::string>(id));
 }
 
 void ForceGeneratorRegistry::set_generator(int id, const std::string& forceName, const ForceGenerator_CPtr& generator)
