@@ -37,7 +37,7 @@ Removes all the components from the layout.
 */
 void ExplicitLayout::clear()
 {
-	m_components.swap(std::vector<LaidOutGUIComponent>());
+	std::vector<LaidOutGUIComponent>().swap(m_components);
 }
 
 /**

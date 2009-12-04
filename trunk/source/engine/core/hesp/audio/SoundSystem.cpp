@@ -214,7 +214,8 @@ void SoundSystem::update()
 {
 	if(m_listenerUpdateFunc)
 	{
-		(*m_listenerUpdateFunc)(SoundListenerUpdater(m_system));
+		SoundListenerUpdater updater(m_system);
+		(*m_listenerUpdateFunc)(updater);
 	}
 
 	for(InstanceMap::iterator it=m_instances.begin(), iend=m_instances.end(); it!=iend;)
@@ -222,7 +223,11 @@ void SoundSystem::update()
 		InstanceData& data = it->second;
 		if(data.m_instance->is_playing())
 		{
-			if(data.m_updateFunc) (*data.m_updateFunc)(SoundInstanceUpdater(*data.m_instance));
+			if(data.m_updateFunc)
+			{
+				SoundInstanceUpdater updater(*data.m_instance);
+				(*data.m_updateFunc)(updater);
+			}
 			++it;
 		}
 		else it = destroy_instance(it);
@@ -243,7 +248,7 @@ void SoundSystem::check(FMOD_RESULT result)
 SoundSystem::InstanceMap::iterator SoundSystem::destroy_instance(InstanceMap::iterator it) const
 {
 	int id = it->first;
-	it = m_instances.erase(it);
+	m_instances.erase(it++);
 	m_idAllocator.deallocate(id);
 	return it;
 }
@@ -260,7 +265,11 @@ SoundSystem::play_sound_sub(const std::string& name, const boost::optional<Insta
 	check(result);
 
 	SoundInstance_Ptr instance(new SoundInstance(channel));
-	if(updateFunc) (*updateFunc)(SoundInstanceUpdater(*instance));
+	if(updateFunc)
+	{
+		SoundInstanceUpdater updater(*instance);
+		(*updateFunc)(updater);
+	}
 	shared_ptr<int> id(new int(m_idAllocator.allocate()));
 	m_instances.insert(std::make_pair(*id, InstanceData(id, instance, name, updateFunc)));
 

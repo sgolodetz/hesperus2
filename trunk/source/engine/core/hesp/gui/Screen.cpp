@@ -29,7 +29,7 @@ const Extents& Screen::dimensions() const
 
 void Screen::fit()
 {
-	GUIContainer::fit(*m_dimensions, NULL);
+	GUIContainer<ExplicitLayout>::fit(*m_dimensions, NULL);
 }
 
 void Screen::render() const
@@ -40,7 +40,7 @@ void Screen::render() const
 	glClearColor(0,0,0,0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	GUIContainer::render();
+	GUIContainer<ExplicitLayout>::render();
 
 	SDL_GL_SwapBuffers();
 }

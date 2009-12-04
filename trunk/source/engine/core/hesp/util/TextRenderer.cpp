@@ -38,7 +38,8 @@ TextRenderer::TextRenderer(const std::string& typeface, int pointSize)
 	DeleteFont(font);
 	if(!succeeded) throw Exception("The text renderer could not be constructed");
 #else
-	#error TextRenderer - Platform not yet supported.
+	// FIXME: Implement text rendering on other platforms.
+	throw Exception("Text rendering not yet implemented on non-Windows platforms.");
 #endif
 }
 
@@ -58,7 +59,8 @@ TextRenderer::TextExtents TextRenderer::text_extents(const std::string& text) co
 	GetTextExtentPoint32(hdc, text.c_str(), static_cast<int>(text.length()), &dimensions);
 	return TextExtents(dimensions.cx, dimensions.cy);
 #else
-	#error TextRenderer - Platform not yet supported.
+	// FIXME: Implement text rendering on other platforms.
+	throw Exception("Text rendering not yet implemented on non-Windows platforms.");
 #endif
 }
 

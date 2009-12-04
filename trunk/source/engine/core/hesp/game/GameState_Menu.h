@@ -6,6 +6,7 @@
 #ifndef H_HESP_GAMESTATE_MENU
 #define H_HESP_GAMESTATE_MENU
 
+#include <string>
 #include <vector>
 
 #include "GameState.h"

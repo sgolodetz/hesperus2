@@ -30,14 +30,19 @@ void GameState_Menu::enter()
 	// TODO: Construct the appropriate menu based on the parameter to the constructor.
 	set_display(construct_buttons_menu(menu_buttons_main()));
 
+#ifndef __linux__
+	// Load and play the menu music (except on Linux, which has a problem with MIDI files for some reason).
 	bf::path audioDir = DirectoryFinder::instance().determine_audio_directory();
 	m_soundSystem.create_sound("menu", (audioDir / "menu.mid").file_string(), SF_STREAM | SF_2D | SF_LOOP);
 	m_soundSystem.play_sound("menu");
+#endif
 }
 
 void GameState_Menu::leave()
 {
+#ifndef __linux__
 	m_soundSystem.destroy_sound("menu");
+#endif
 }
 
 GameState_Ptr GameState_Menu::update(int milliseconds, InputState& input)
