@@ -14,11 +14,24 @@ SET(targetname ScarletPimpernel)
 
 SET(sources main.cpp)
 
+SET(definitions
+${hesperus2_SOURCE_DIR}/../resources/ScarletPimpernel/definitions/test-def.xml
+)
+
+SET(scripts
+${hesperus2_SOURCE_DIR}/../resources/ScarletPimpernel/scripts/config.as
+${hesperus2_SOURCE_DIR}/../resources/ScarletPimpernel/scripts/guard-ai.as
+)
+
+SET(others ${definitions} ${scripts})
+
 #############################
 # Specify the source groups #
 #############################
 
 SOURCE_GROUP(.cpp FILES ${sources})
+SOURCE_GROUP(resources\\definitions FILES ${definitions})
+SOURCE_GROUP(resources\\scripts FILES ${scripts})
 
 ###################################
 # Specify the include directories #
