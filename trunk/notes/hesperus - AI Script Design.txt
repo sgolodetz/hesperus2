@@ -1,0 +1,130 @@
+This is an example AI script - it's in pseudo-code, rather than the actual scripting language, because it's
+for design purposes.
+
+===========================================================================================================
+
+void check_senses()
+{
+	// Sight
+	bool canSeePlayer = can_see(player);
+	if(canSeePlayer && !couldSeePlayer) push_relevant_event(Appeared(player));
+	else if(!canSeePlayer && couldSeePlayer) push_relevant_event(Disappeared(player));
+
+	// Hearing
+	for each(AudibleEvent e in GlobalEventList)
+	{
+		if(find_leaf(e.position) is in our potentially audible set)
+		{
+			if(we_can_hear(e)) push_relevant_event(e);
+		}
+	}
+
+	switch(state)
+	{
+		...
+		case SeekingItem:
+			bool canSeeItem = can_see(soughtItem);
+			etc.
+			...
+	}
+}
+
+void process()
+{
+	check_completion(state);
+
+	while(!relevant_events.empty())
+	{
+		e = relevant_events.pop();
+		process_event(state, e);
+	}
+}
+
+void check_completion(State state)
+{
+	switch(state)
+	{
+		case Attacking:
+			Enemy is dead -> Find new goal
+			...
+		case CollectingItem:
+			Picked up item -> Find new goal
+			...
+		case Exploring:
+			Explored whole map -> Find new goal
+			...
+		case Fleeing:
+			Far enough away from enemy && health low -> SeekingItem (e.g. a medkit)
+			...
+		case Following:
+			...
+		case Guarding:
+			...
+		case Investigating:
+			A certain amount of time has elapsed in this state -> Listening
+			...
+		case Listening:
+			A certain amount of time has elapsed in this state -> Find new goal
+			...
+		case Patrolling:
+			...
+		case SeekingItem:
+			A certain amount of time has elapsed in this state -> Find new goal
+			...
+	}	
+}
+
+void process_event(State state, Event e)
+{
+	switch(state)
+	{
+		case Attacking:
+			Player disappears -> Investigating (player's last position)
+			Health low && player's health high -> Fleeing
+			...
+		case CollectingItem:
+			Item collected (e.g. by player) -> SeekingItem
+			...
+		case Exploring:
+			...
+		case Fleeing:
+			...
+		case Following:
+			...
+		case Guarding:
+			Hear interesting noise -> Listening
+			Player appears -> Attacking
+			...
+		case Investigating:
+			Player appears -> Attacking
+			...
+		case Listening:
+			Hear interesting noise -> Investigating
+			Player appears -> Attacking
+			...
+		case Patrolling:
+			Hear interesting noise -> Listening
+			Player appears -> Attacking
+			...
+		case SeekingItem:
+			Item appears -> CollectingItem
+			...
+	}
+}
+
+===========================================================================================================
+
+Notes:
+
+Attacking - head towards entity and attack it
+CollectingItem - head towards item and pick it up
+Exploring - find a bit of the map we haven't seen and head towards it
+Fleeing - heading away from an entity (e.g. the player)
+Following - follow a specific entity, maintaining a reasonable distance
+Guarding - stay near a specific thing, but maybe wander a little
+Investigating - head towards an interesting trigger, e.g. a noise
+Listening - stand stock still and listen for further noises, etc.
+Patrolling - follow a specific patrol route
+SeekingItem - head towards a likely place for an item (e.g. where we've seen one before), or just wander randomly until we find one
+
+Finding a new goal - this depends on what the entity's purpose in life is (guard / patroller / ...)

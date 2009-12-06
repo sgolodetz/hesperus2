@@ -1,0 +1,115 @@
+Entity Type Definition File (.etd)
+
+Use Notes:
+
+- Loaded into MapEditor: user can create an instance of any defined entity type. Both these definitions and the instances are written out to file when saving the map. The model specified as "EditingModel" is rendered within MapEditor to allow the user to see what's going on more easily.
+- Entities can have instance-specific properties, e.g. Health 0 100 50 means "this entity has a health property which can be set to anything between 0 and 100 and defaults to 50"
+- Stored with a compiled level and loaded into the game: this tells us which AABB is used for a given entity and state of that entity, allowing us to index into the navigation mesh and see where that entity can walk (note that the AABBs are numbered from 0 upwards when compiling a level)
+- Changing the entity definition file for a map (within MapEditor) can cause existing entities to become invalid: to the greatest extent possible, the pain arising from this should be minimised.
+- It might be worth writing a simple editor for .etd files (e.g. using some sort of tree control from wxWidgets).
+
+Format:
+
+HESPENTDEF 0
+AABBs
+{
+	human_crouch = ( -0.5 -0.5 -0.5 ) ( 0.5 0.5 0.5 )
+	human_stand = ( -0.5 -0.5 -1 ) ( 0.5 0.5 1 )
+}
+EntityClass player
+{
+	Health : int 0 100
+	Position : Vector3d
+}
+EntityClass enemy
+{
+	Health : int 0 100
+	Position : Vector3d
+}
+EntityType player
+{
+	AABB crouch = human_crouch
+	AABB stand = human_stand
+	Class = player
+	EditingModel = player-simplified.x
+	GameModel = player.x
+	---
+	Health : 100
+}
+EntityType guard
+{
+	AABB crouch = human_crouch
+	AABB stand = human_stand
+	Class = enemy
+	EditingModel = guard-simplified.x
+	GameModel = guard.x
+	---
+	Health : 50
+}
+
+***
+
+Entity File (.ent)
+
+Use Notes:
+
+- One of the outputs of mef2input.
+- Note that fields like EditingModel can now be removed if desired.
+
+Format:
+
+HESPENT 0
+AABBs
+{
+	0 = ( -0.5 -0.5 -0.5 ) ( 0.5 0.5 0.5 )
+	1 = ( -0.5 -0.5 -1 ) ( 0.5 0.5 1 )
+}
+EntityClass player
+{
+	Health : int 0 100
+	Position : Vector3d
+}
+EntityClass enemy
+{
+	Health : int 0 100
+	Position : Vector3d
+}
+EntityType player
+{
+	AABB crouch = 0
+	AABB stand = 1
+	Class = player
+	GameModel = player.x
+	---
+	Health : 100
+}
+EntityType guard
+{
+	AABB crouch = 0
+	AABB stand = 1
+	Class = enemy
+	GameModel = guard.x
+	---
+	Health : 50
+}
+EntityInstance player	// note: this references the entity *type*, not the entity *class*
+{
+	Position = ( 10 10 0 )
+}
+EntityInstance guard
+{
+	Health = 75
+	Position = ( 20 15 0 )
+}
+
+***
+
+Compiled Level File (.bsp)
+
+Use Notes:
+
+- The contents of the entity (.ent) file are stored as a section in the .bsp.
+- There is a difference between entity types and entity classes, e.g entities of type "guard" and "monster" are of class "enemy". Adding new entity classes requires changing the game; adding new entity types shouldn't.
+- The game should load entities of any class it recognises and issue warnings if there are classes it doesn't understand.
+- An entity class in the game should know how to load entity types for its class (i.e. the enemy class should know how to read the guard type definition) and how to load entity instances.
+- Entity types are essentially there to vary the construction parameters for entity classes at a higher-level than per-instance.

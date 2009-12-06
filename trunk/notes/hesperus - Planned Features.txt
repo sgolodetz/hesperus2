@@ -1,0 +1,33 @@
+This file contains a (non-exhaustive) list of features I ultimately want to implement in the hesperus engine.
+
+=========
+Essential
+=========
+
+* Weapons and projectiles
+* Items (e.g. medkits) - probably requires picking for item collection
+* Inventory
+* Menu system
+* Scripting subsystem (probably using AngelScript)
+* HUD
+* Objectives
+
+==========
+Reasonable
+==========
+
+* Skybox
+* Doors
+* Ladders
+* Console
+* Audio subsystem
+* Particle generation
+* Scripted communication with NPCs
+* Windows
+
+===========
+Speculative
+===========
+
+* Inverse kinematics
+* Mirrors

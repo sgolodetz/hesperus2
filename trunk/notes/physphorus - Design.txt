@@ -1,0 +1,56 @@
+==========================================
+physphorus - A Physics Engine for Hesperus
+==========================================
+
+------------
+Design Goals
+------------
+
+- As simple as possible (has to be implementable alongside writing my thesis)
+- Must be able to handle objects with extent, but won't deal with rotational mechanics
+- Physical realism not really a big issue here, just want something that "sort of works"
+- Want to accommodate a variety of collision resolution effects
+  - Bouncing
+  - Sliding
+  - Breaking/Exploding
+- Want to support special effects
+  - Explosion wave (implemented essentially as an expanding sphere)
+
+--------
+Strategy
+--------
+
+- Apply forces using something like the force generator strategy described in the book
+  - Note that this is very similar to the way I implemented things for the Beryl demo in any case
+- Two-stage physical simulation of objects
+  1) If objects are moving using the mesh, resolve any mesh movement first (including "collisions")
+  2) Then physically simulate objects as particles (i.e. treat them as particles for the integration step)
+
+- The second simulation stage (i.e. the proper physical simulation) may generate collisions
+  - The collisions may be with each other or with the world
+  - Find the appropriate contact information in each case, treating them as objects with extent
+
+- Broad-phase collision detection
+- Narrow-phase collision detection and contact generation
+    - Consider using something like the XenoCollide algorithm to sweep-test the objects against each other
+      (note that we do a sweep test against the world in any case)
+- Collision resolution
+  - Maintain a collision resolver registry indexed in two dimensions by material type
+    - For instance, if a glass object hits a hard one, the glass object should break
+
+----------------------
+Implementation Details
+----------------------
+
+Classes:
+
+Contact
+ContactResolver
+ContactResolverRegistry
+ForceGenerator
+ForceGeneratorRegistry
+NarrowPhaseCollisionDetector
+NormalPhysicsObject
+PhysicsObject
+PhysicsSystem
+SpecialPhysicsObject

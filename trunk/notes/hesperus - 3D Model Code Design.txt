@@ -1,0 +1,85 @@
+BoneWeight
+{
+	int boneIndex
+	double weight
+}
+
+ModelVertex
+{
+	Vector3d position
+	Vector3d normal
+	std::vector<BoneWeight> boneWeights
+}
+
+Material
+{
+	Colour4d ambient
+	Colour4d diffuse
+	Colour4d specular
+	Colour4d emissive
+}
+
+Submesh
+{
+	Material material
+	<OpenGL index buffer> faces
+	std::vector<ModelVertex> vertices
+}
+
+Mesh
+{
+	std::vector<Submesh> submeshes
+}
+
+***
+
+Bone
+{
+	int id
+	std::string name
+	Matrix44 absoluteMatrix
+	Matrix44 relativeMatrix
+	Bone_Ptr parent (we use a Bone_Ptr so that we can link to bones in other models)
+}
+
+BoneConfiguration
+{
+	std::vector<Bone_Ptr> bones
+	std::map<std::string,int> boneLookup
+}
+
+Keyframe
+{
+	std::vector<Matrix44> boneMatrices
+	double time
+}
+
+Animation
+{
+	std::vector<Keyframe> keyframes
+	double length
+}
+
+Skeleton
+{
+	BoneConfiguration boneConfiguration
+	std::vector<Matrix44> baseBoneMatrices
+	std::map<std::string,Animation> animations
+}
+
+***
+
+Model
+{
+	Mesh mesh
+	Skeleton skeleton
+	//...
+}
+
+***
+
+1) Depending on the current animation and timing, we use the base bone matrices and the relevant animation keyframe(s) to construct the current bone configuration.
+
+2) For each submesh, we construct vertex and normal buffers from the base vertex and normal data and the current bone configuration.
+
+3) For each submesh, we use these buffers and the index buffer to render the submesh with its appropriate material.

@@ -1,0 +1,7 @@
+* Yokeable entities can have a yoke attached to them.
+* Yokes have read-only access to the level state. They yield a sequence of movement commands.
+
+The update process therefore works as follows:
+
+1) The yoke for each entity is invoked in turn to generate the desired movement commands. In the case of the player, the moves generated are based on user input.
+2) The movement commands are pushed onto the command queue and executed in turn, resolving collisions where necessary.

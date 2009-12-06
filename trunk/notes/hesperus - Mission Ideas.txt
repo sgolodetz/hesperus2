@@ -1,0 +1,127 @@
+Mission Ideas:
+
+-----------------
+Luck for a Legend
+-----------------
+
+Type: Tutorial
+Location: Blakeney Hall, England
+Primary Goal: Practise rescuing friends in the makeshift 'prison' in the basement of Blakeney Hall
+
+Thoughts:
+
+- As per prison level, but will possibly have an 'outdoor' section too
+
+-------------------------
+In De Cambret's Footsteps
+-------------------------
+
+Type: Covert Entry
+Location: Streets of Paris
+Primary Goal: Locate and use the Duc de Cambret's (sp.?) secret tunnel into La Force
+
+Thoughts:
+
+- Will need to be able to wander around the streets of Paris (need a sense of bustle)
+- Lots of French soldiers to dodge
+- Could have subgoals involving meeting contacts, finding information, etc.
+
+--------
+La Force
+--------
+
+Type: Prison Rescue
+Location: La Force, Paris
+Primary Goal: Rescue an aristocrat from La Force the night before they're due to be guillotined
+
+Thoughts:
+
+- Dynamic lighting (you need to be able to extinguish torches etc.)
+- AI needs to be able to patrol, react to suspicious noises etc. (incl. appropriate sound effects)
+- Doors/cell gates (incl. their effects on AI visibility and possibly lighting - although the latter can be dodged)
+
+--------------
+Paris by Night
+--------------
+
+Type: Wagon Escape
+Location: Streets of Paris
+Primary Goal: Flee in a wagon through the streets of Paris, chased by French soldiers on horseback
+
+Thoughts:
+
+- Scripted paths for wagon and horses
+- Limit player to firing at soldiers out of back of wagon (doing it 'properly' and allowing the player to drive the wagon would be too hard from a collision handling point of view)
+- Make it short but exciting - not being able to move around can get dull quickly
+
+------------------------
+A Prince and a Pimpernel
+------------------------
+
+Type: Sneaky Information Gathering
+Location: St. James' Palace, England
+Primary Goal: Find out key information from a rescued aristo without getting caught acting suspiciously
+
+Thoughts:
+
+- The aristo wants to meet in the gardens to avoid drawing attention
+- Chauvelin is at the ball with his men, trying to figure out who the Scarlet Pimpernel is - you can't get caught acting suspiciously by anyone
+- The last time there was a ball at the palace, a drunk lord trampled the Prince's prized turnips - his guards are out in force to avoid a repeat occurrence
+- Obviously you can't kill anyone - murdering the Prince's guests or guards wouldn't make Percy Blakeney flavour of the month
+- Your wife Margarite (sp.?) is also at the ball, and she doesn't know you're the Pimpernel yet - you'll need to find a way to distract her or she'll complain to one and all that you've disappeared without trace...
+
+--------------
+Family Matters
+--------------
+
+Type: Covert Entry
+Location: Streets of Paris
+Primary Goal: Find your way to an inn overlooking the square, without getting caught by French soldiers
+
+Thoughts:
+
+- Margarite's brother is due to be guillotined in the morning - there's no time to prepare a rescue from the Bastille
+- Paris is locked down tight ready for the execution in the morning - expect lots of French soldiers
+- You'll need to find your way into the city first - don't try going through the main gate!
+- The innkeeper is an associate of the Pimpernel - he promised to leave a ladder lowered for you to get over the city wall
+
+------------------
+Off With His Head!
+------------------
+
+Type: Last-Ditch Rescue (Sniper)
+Location: A public square, Paris
+Primary Goal: Rescue someone as they're being taken to the guillotine
+
+Thoughts:
+
+- This is a hard level to implement normally, so it's going to be a sniper level with lots of scripting
+- At the end of the level (i.e. once you've dispatched the guards on the prisoner wagon and allowed it to escape), French soldiers will storm the inn - you'll need to jump out of a back window to escape
+
+------------------
+A Boat for England
+------------------
+
+Type: Escort Rescued Person
+Location: The port of Calais
+Primary Goal: Get Margarite's brother aboard a ship for England
+
+Thoughts:
+
+- Will need a way to make other entities (e.g. Margarite's brother) follow you
+- Will need to implement water (incl. sea sounds)
+- At the end of the level, Margarite's brother will board the ship (will need scripted sequences to prevent you following him) and you will be surrounded by French soldiers - apparently Margarite followed you without realising you were the Pimpernel, and it allowed Chauvelin to lay a trap for you
+
+--------------------------
+Bad Day for a Prison Break
+--------------------------
+
+Type: Prison Escape
+Location: The Bastille, Paris
+Primary Goal: Make your escape any way you can - you're due to be executed in the morning!
+
+Thoughts:
+
+- You've got limited time for this mission - the Paris mob has a mind to storm the Bastille and kill everyone in it (guillotining's behind schedule and Robespierre's disinclined to stop them!); you probably don't want to be there when they arrive...
+- They're keeping a pretty tight watch on your cell - the Scarlet Pimpernel is too great a prize to let slip easily
+- You should probably rescue Margarite - she's now in the Bastille too

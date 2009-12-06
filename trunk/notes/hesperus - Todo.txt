@@ -1,0 +1,41 @@
+===============
+hesperus - Todo
+===============
+
+Last Updated: 12-08-09
+
+----
+Easy
+----
+
+* Walk/run etc. - sort out where the various different entity speeds are coming from (I'd suggest the definitions file).
+* Add verbose modes for tools (particularly hvis, where it's helpful to see current progress).
+* Sort out the mess of functions in FieldIO.
+* Ensure the object ID of the viewer is loaded in from the objects file, rather than hard-coded.
+* Fix the untidy initialisation in CmpInventory.
+* Rename the various yokes.
+  - MinimusScriptYoke -> BipedScriptedYoke, UserBipedYoke -> BipedUserYoke, MinimusGotoPositionYoke -> BipedGotoPositionYoke.
+
+------
+Medium
+------
+
+* Implement some AI yokes (it probably makes sense to have composite yokes so that we can switch between different yokes for different behaviours - could we have yoke trees corresponding to goal trees?).
+* View frustum culling.
+* Move the item activation code into an object command.
+* Sort out how crouching can be properly determined in CmpBipedAnimChooser::choose_animation().
+
+----
+Hard
+----
+
+* Update MapEditor to allow placement of entities, etc. Some sort of scripted paths should be added as well.
+* Implement AI scripting.
+* Implement collision handling between dynamic objects.
+* Reimplement hlight to allow dynamic lighting.
+* Implement weapons and projectiles.
+* Refactor the movement functionality from MoveFunctions into the relevant movement components.
+  - DirectMovement should be parameterised on a collision response "strategy", e.g. sliding, bouncing, sticking, exploding
+  - MeshMovement should be derived from DirectMovement, and use a sliding collision response strategy
+  - Refactor the physics functionality into the movement components.
+* Sort out the bounds functionality.

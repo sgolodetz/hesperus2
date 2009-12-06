@@ -1,0 +1,36 @@
+Simple Animation Picker
+=======================
+
+movement type: idle|walk|run|jump
+pose type: stand|crouch
+status type: alive|die|dead
+modifier: <none> | with_onehanded | with_twohanded
+
+string anim;
+if(status == dead) anim = "dead";
+else
+{
+	if(status == die)
+	{
+		if(movement == jump) anim = "diejump";
+		else anim = "die";
+	}
+	else
+	{
+		if(movement == idle) anim = "idle";
+		else if(movement == walk) anim = "walk";
+		else if(movement == run) anim = "run";
+		else if(movement == jump) anim = "jump";
+	}
+	if(pose == crouch) anim += "crouch";
+}
+anim += modifier;
+return anim;
+
+***
+
+- Movement type is cleared at the beginning of each frame and partly determined by what commands are executed.
+  - But "jump" is determined by whether the player's in the air or not.
+- Pose type can be extracted from the bounds component (at present).
+- Status type can be extracted from the health component.
+- Modifier can be extracted from the inventory component.

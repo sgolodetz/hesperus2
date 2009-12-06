@@ -1,0 +1,78 @@
+================
+Changes Required
+================
+
+----------
+Structural
+----------
+
+* Replace hr2cbrush with hdivide
+* Add hdetail
+
+----
+hbsp
+----
+
+* Iff constructing a rendering tree, read in hint planes from the .rhp and use them during construction
+
+-------
+hdetail
+-------
+
+* Run after the second rendering tree is constructed
+* Read in the .rt2 and .dgm
+* Clip each detail brush face to the rendering tree and add face fragments to the relevant leaves
+* Output the result to the .rt3
+
+-------
+hdivide
+-------
+
+* Read in each brush from the .bru
+* Output NORMAL brushes (no need to include their functions) to the .rbr (rendering brushes)
+* Output DETAIL polygons (i.e. the detail brush faces) to the .dgm (detail geometry)
+* Output HINT planes (i.e. the planes of HINT brush faces marked with the hint texture) to the .rhp (rendering hint planes)
+* Output (converted) NORMAL/COLLISION brushes (no need to include their functions) to the .cbr (collision brushes)
+* Output WATER brushes (include their functions) to the .sbr (special brushes)
+
+-------
+hportal
+-------
+
+* Update this to use the tree node split planes (i.e. including any hint planes), not the planes of the tree polygons
+
+---------
+mef2input
+---------
+
+* Output all the brushes (including their functions) to a .bru file
+
+==================
+Migration Strategy
+==================
+
+--------------------------
+Phase 1: Collision Brushes
+--------------------------
+
+1) Implement hdivide and test it (outside the toolchain).
+2) Update the toolchain to use hdivide and remove hr2cbrush.
+
+----------------------------------------
+Phase 2: Fix Inconvenient Implementation
+----------------------------------------
+
+1) Update hportal to use the tree node split planes.
+
+-----------------------------
+Phase 3 or 4: Detail Polygons
+-----------------------------
+
+1) Implement hdetail and test it.
+2) Update the toolchain to use hdetail.
+
+-------------------------
+Phase 3 or 4: Hint Planes
+-------------------------
+
+1) Update hbsp to use hint planes when building rendering trees.

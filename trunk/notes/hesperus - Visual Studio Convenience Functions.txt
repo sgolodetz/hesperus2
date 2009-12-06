@@ -1,0 +1,140 @@
+Imports System
+Imports EnvDTE
+Imports EnvDTE80
+Imports System.Diagnostics
+
+Public Module ConvenienceFunctions
+
+    Sub OpenCorrespondingFile(ByVal extension As String)
+        Dim filename As String = DTE.ActiveDocument.FullName
+        Dim dotPos As Integer = filename.LastIndexOf(".")
+        If dotPos <> -1 Then
+            Dim newFilename As String = filename.Substring(0, dotPos) + extension
+            If System.IO.File.Exists(newFilename) Then
+                DTE.ItemOperations.OpenFile(newFilename)
+            End If
+        End If
+    End Sub
+
+    Sub OpenCPPFile()
+        OpenCorrespondingFile(".cpp")
+    End Sub
+
+    Sub OpenHFile()
+        OpenCorrespondingFile(".h")
+    End Sub
+
+    Sub OpenTPPFile()
+        OpenCorrespondingFile(".tpp")
+    End Sub
+
+    Sub OpenPartnerFile()
+        Dim filename As String = DTE.ActiveDocument.FullName
+        Dim partnerFilename As String
+        If filename.EndsWith(".h") Then
+            partnerFilename = filename.Substring(0, filename.Length() - 1) + "cpp"
+        End If
+        If filename.EndsWith(".cpp") Then
+            partnerFilename = filename.Substring(0, filename.Length() - 3) + "h"
+        End If
+        If System.IO.File.Exists(partnerFilename) Then
+            DTE.ItemOperations.OpenFile(partnerFilename)
+        End If
+    End Sub
+
+    Function OutputFileHeader() As String
+        Dim project As String = InputBox("Project?", "Output File Template")
+        Dim sel As TextSelection = DTE.ActiveDocument.Selection
+        Dim text As System.Text.StringBuilder = New System.Text.StringBuilder
+        text.Append("/***" + vbNewLine)
+        text.Append(" * " + project + ": " + DTE.ActiveDocument.Name + vbNewLine)
+        text.Append(" * Copyright Stuart Golodetz, 2009. All rights reserved." + vbNewLine)
+        text.Append(" ***/" + vbNewLine)
+        text.Append(vbNewLine)
+        sel.StartOfDocument()
+        sel.Insert(text.ToString())
+        Return project
+    End Function
+
+    Sub OutputCPPFileTemplate()
+        OutputFileHeader()
+
+        Dim header As String = DTE.ActiveDocument.Name
+        Dim dotPos As Integer = header.LastIndexOf(".")
+        If dotPos <> -1 Then
+            header = header.Substring(0, dotPos) + ".h"
+        Else
+            Return
+        End If
+
+        Dim nspace As String = InputBox("Namespace?", "Output File Template")
+
+        Dim sel As TextSelection = DTE.ActiveDocument.Selection
+        Dim text As System.Text.StringBuilder = New System.Text.StringBuilder
+        text.Append("#include """ + header + """" + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("namespace " + nspace + " {" + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append(vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("}" + vbNewLine)
+        sel.Insert(text.ToString())
+    End Sub
+
+    Sub OutputHFileTemplate()
+        Dim project As String = OutputFileHeader()
+
+        Dim classname As String = DTE.ActiveDocument.Name
+        Dim dotPos As Integer = classname.LastIndexOf(".")
+        If dotPos <> -1 Then
+            classname = classname.Substring(0, dotPos)
+        End If
+
+        Dim guardProj As String = InputBox("Include guard project name? (defaults to project name)", "Output File Template")
+        If guardProj = "" Then
+            guardProj = project
+        End If
+        Dim includeGuard As String = "H_" + guardProj.ToUpper + "_" + classname.ToUpper
+
+        Dim nspace As String = InputBox("Namespace?", "Output File Template")
+
+        Dim sel As TextSelection = DTE.ActiveDocument.Selection
+        Dim text As System.Text.StringBuilder = New System.Text.StringBuilder
+        text.Append("#ifndef " + includeGuard + vbNewLine)
+        text.Append("#define " + includeGuard + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("namespace " + nspace + " {" + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("class " + classname + vbNewLine)
+        text.Append("{" + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("};" + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("}" + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("#endif" + vbNewLine)
+        sel.Insert(text.ToString())
+    End Sub
+
+    Sub OutputTPPFileTemplate()
+        OutputFileHeader()
+
+        Dim nspace As String = InputBox("Namespace?", "Output File Template")
+
+        Dim sel As TextSelection = DTE.ActiveDocument.Selection
+        Dim text As System.Text.StringBuilder = New System.Text.StringBuilder
+        text.Append("namespace " + nspace + " {" + vbNewLine)
+        text.Append(vbNewLine)
+        text.Append(vbNewLine)
+        text.Append(vbNewLine)
+        text.Append("}" + vbNewLine)
+        sel.Insert(text.ToString())
+    End Sub
+
+    Sub OutputSectionSeparator()
+        Dim section As String = InputBox("Section Name?", "Output Section Separator")
+        Dim sel As TextSelection = DTE.ActiveDocument.Selection
+        sel.Insert("//#################### " + section.ToUpper + " ####################")
+    End Sub
+
+End Module

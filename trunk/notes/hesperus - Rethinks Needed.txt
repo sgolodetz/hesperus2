@@ -1,0 +1,7 @@
+Things which need a rethink:
+
+- Movement components
+- Lighting
+- Collision detection (should support spheres as well)
+- AI Scripting
+- Level rendering (the Level class should be the model, and the view code should be separated out from it)

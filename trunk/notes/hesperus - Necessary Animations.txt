@@ -1,0 +1,59 @@
+(Idle|Walk|Run|Jump) x (Stand|Crouch) x (Fine|Die|Expired)
+
+Modifiers:
+
+none
+with_onehanded
+with_twohanded
+
+Thus:
+
+4 x 2 x 3 x 3 potential animations per character = 72
+
+In practice, not quite this bad. We have:
+
+ISF -> Idle
+ISD -> Die
+ISE -> Dead
+ICF -> Crouch
+ICD -> DieCrouch
+ICE -> Dead
+
+WSF -> Walk
+WSD -> Die
+WSE -> Dead
+WCF -> WalkCrouch
+WCD -> DieCrouch
+WCE -> Dead
+
+RSF -> Run
+RSD -> Die
+RSE -> Dead
+RCF -> RunCrouch
+RCD -> DieCrouch
+RCE -> Dead
+
+JSF -> Jump
+JSD -> DieJump
+JSE -> Dead
+JCF -> JumpCrouch
+JCD -> DieJumpCrouch
+JCE -> Dead
+
+Necessary animations (excluding modifiers):
+
+Crouch
+Dead
+Die
+DieCrouch
+DieJump
+DieJumpCrouch
+Idle
+Jump
+JumpCrouch
+Run
+RunCrouch
+Walk
+WalkCrouch
+
+Total: 13 (thus with modifiers, we have 39 potential animations per character)

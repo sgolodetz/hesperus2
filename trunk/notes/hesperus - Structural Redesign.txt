@@ -1,0 +1,100 @@
+hesperus2
+\branches
+\tags
+\trunk
+  \build (NOT UNDER SOURCE CONTROL)
+  \install (NOT UNDER SOURCE CONTROL)
+  \libraries
+    \asx-2.17.2
+    \propparser
+    \setup
+      \angelscript-2.17.2 - FOR NOW
+      \boost_1_41_0
+      \FMOD-4.27.06
+      \glew-1.5.1
+      \lodepng-20080927
+      \SDL-1.2.13
+  \notes
+  \programs
+    \setup
+      \bison
+      \flex
+  \resources
+    \audio
+    \images
+    \levels
+    \models
+    \profiles
+    \scripts
+    \sprites
+    \textures
+  \source
+    \engine
+      \core
+        \audio
+        \axes
+        \cameras
+        \colours
+        \datastructures
+        \exceptions
+        \game
+        \gui
+        \images
+        \input
+        \io
+          \files
+          \sections
+          \util
+        \level
+          \bounds
+          \brushes
+          \csg
+          \lighting
+          \models
+          \nav
+          \objects
+            \base
+            \commands
+            \components
+            \contactresolvers
+            \forcegenerators
+            \messages
+            \yokes
+              \minimus
+              \user
+          \physics
+          \portals
+          \sprites
+          \trees
+          \vis
+        \materials
+        \math
+          \geom
+          \matrices
+          \quaternions
+          \vectors
+        \ogl
+        \textures
+        \util
+        \xml
+      \tools
+        \hbsp
+        \hcollate
+        \hcsg
+        \hdeploygame - TODO
+        \hdetail
+        \hdivide
+        \hexpand
+        \hflood
+        \hlight
+        \hmakelevel - TODO
+        \hnav
+        \hobsp
+        \hoportal
+        \hportal
+        \hvis
+        \mef2input
+    \games
+      \ScarletPimpernel
+        \code
+        \design

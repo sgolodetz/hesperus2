@@ -1,0 +1,54 @@
+ICmpCollectible
+-CmpCollectible
+
+ICmpCollision
+-CmpCollision
+
+ICmpDamage
+-CmpDamage
+
+ICmpHealth
+-CmpHealth
+
+ICmpInventory
+-CmpInventory
+
+ICmpMovement
+-ICmpHingeMovement
+--CmpHingeMovement
+-ICmpLinearMovement
+--CmpLinearMovement
+--ICmpMeshMovement
+---CmpMeshMovement
+
+ICmpOrientation
+-CmpOrientation
+
+ICmpPhysics
+-CmpPhysics
+
+ICmpPosition
+-CmpPosition
+
+ICmpRender
+-CmpModelRender
+-CmpSpriteRender
+
+ICmpUsable
+-CmpUsable
+
+ICmpYoke
+-CmpMinimusGotoPositionYoke
+-CmpMinimusScriptYoke
+-CmpUserBipedYoke
+
+***
+
+Door: CmpCollision*, CmpHingeMovement, CmpOrientation, CmpPosition, CmpModelRender, CmpUsable
+Guard: CmpCollision, CmpHealth, CmpInventory, CmpMeshMovement, CmpOrientation, CmpPhysics, CmpPosition, CmpModelRender, CmpMinimusScriptYoke
+Item: CmpCollectible, CmpCollision, CmpLinearMovement, CmpPhysics, CmpPosition, CmpModelRender, CmpUsable?
+Particle: CmpCollision*, CmpLinearMovement*, CmpPhysics, CmpPosition, CmpSpriteRender
+Player: CmpCollision, CmpHealth, CmpInventory, CmpMeshMovement, CmpOrientation, CmpPhysics, CmpPosition, CmpModelRender, CmpUserBipedYoke
+Projectile: CmpCollision*, CmpDamage, CmpLinearMovement*, CmpPhysics, CmpPosition, CmpSpriteRender
+
+* More thought required
