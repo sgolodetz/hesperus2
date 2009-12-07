@@ -54,7 +54,7 @@ void FSM_THIS::execute()
 			m_currentState->leave();
 
 			std::string newState = transitions[j]->execute(m_sharedData);
-			StateMap::const_iterator kt = m_stateMap.find(newState);
+			typename StateMap::const_iterator kt = m_stateMap.find(newState);
 			if(kt != m_stateMap.end()) m_currentState = kt->second;
 			else throw Exception("No such state: " + newState);
 
@@ -70,7 +70,7 @@ void FSM_THIS::set_initial_state(const std::string& name)
 {
 	if(!m_currentState)
 	{
-		StateMap::const_iterator it = m_stateMap.find(name);
+		typename StateMap::const_iterator it = m_stateMap.find(name);
 		if(it != m_stateMap.end())
 		{
 			m_currentState = it->second;
