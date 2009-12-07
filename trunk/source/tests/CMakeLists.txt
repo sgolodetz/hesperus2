@@ -18,3 +18,4 @@ ADD_SUBDIRECTORY(test-SDL-1.2.14)
 ###############
 
 ADD_SUBDIRECTORY(test-findexe)
+ADD_SUBDIRECTORY(test-fsm)

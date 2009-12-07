@@ -1,12 +1,12 @@
-#########################################
-# CMakeLists.txt for tests/test-findexe #
-#########################################
+#####################################
+# CMakeLists.txt for tests/test-fsm #
+#####################################
 
 ###########################
 # Specify the target name #
 ###########################
 
-SET(targetname test-findexe)
+SET(targetname test-fsm)
 
 #############################
 # Specify the project files #
@@ -43,7 +43,6 @@ INCLUDE(${hesperus2_SOURCE_DIR}/SetTestTarget.cmake)
 #################################
 
 TARGET_LINK_LIBRARIES(${targetname} hesperus)
-INCLUDE(${hesperus2_SOURCE_DIR}/LinkBoost.cmake)
 
 #############################
 # Specify things to install #

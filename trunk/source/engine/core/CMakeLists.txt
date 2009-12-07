@@ -61,10 +61,12 @@ hesp/colours/Colour3d.h
 
 ##
 SET(datastructures_headers
+hesp/datastructures/FiniteStateMachine.h
 hesp/datastructures/PriorityQueue.h
 )
 
 SET(datastructures_templates
+hesp/datastructures/FiniteStateMachine.tpp
 hesp/datastructures/PriorityQueue.tpp
 )
 
