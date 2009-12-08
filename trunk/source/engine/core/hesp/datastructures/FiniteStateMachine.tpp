@@ -57,11 +57,16 @@ void FSM_THIS::execute()
 
 			m_currentState->enter();
 
-			break;
+			// If a transition's been triggered, we don't want to execute the new state yet,
+			// as one of its transitions may be triggered as well. Rather than trying to
+			// potentially follow an entire chain of triggered transitions in a single
+			// execution of the FSM, we choose to only allow either a transition or an
+			// execution of the current state each time.
+			return;
 		}
 	}
 
-	// Execute the (possibly new) current state.
+	// If there was no transition above, execute the current state.
 	m_currentState->execute(m_sharedData);
 }
 
