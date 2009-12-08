@@ -41,28 +41,29 @@ void FSM_THIS::execute()
 {
 	// Check the current state's outgoing transitions, and change to a new state if necessary.
 	typename TransitionMap::const_iterator it = m_transitionMap.find(m_currentState->name());
-	if(it == m_transitionMap.end()) return;
-
-	const std::vector<Transition_Ptr>& transitions = it->second;
-	for(size_t j=0, size=transitions.size(); j<size; ++j)
+	if(it != m_transitionMap.end())
 	{
-		if(transitions[j]->triggered(m_sharedData))
+		const std::vector<Transition_Ptr>& transitions = it->second;
+		for(size_t j=0, size=transitions.size(); j<size; ++j)
 		{
-			m_currentState->leave();
+			if(transitions[j]->triggered(m_sharedData))
+			{
+				m_currentState->leave();
 
-			std::string newState = transitions[j]->execute(m_sharedData);
-			typename StateMap::const_iterator kt = m_stateMap.find(newState);
-			if(kt != m_stateMap.end()) m_currentState = kt->second;
-			else throw Exception("No such state: " + newState);
+				std::string newState = transitions[j]->execute(m_sharedData);
+				typename StateMap::const_iterator kt = m_stateMap.find(newState);
+				if(kt != m_stateMap.end()) m_currentState = kt->second;
+				else throw Exception("No such state: " + newState);
 
-			m_currentState->enter();
+				m_currentState->enter();
 
-			// If a transition's been triggered, we don't want to execute the new state yet,
-			// as one of its transitions may be triggered as well. Rather than trying to
-			// potentially follow an entire chain of triggered transitions in a single
-			// execution of the FSM, we choose to only allow either a transition or an
-			// execution of the current state each time.
-			return;
+				// If a transition's been triggered, we don't want to execute the new state yet,
+				// as one of its transitions may be triggered as well. Rather than trying to
+				// potentially follow an entire chain of triggered transitions in a single
+				// execution of the FSM, we choose to only allow either a transition or an
+				// execution of the current state each time.
+				return;
+			}
 		}
 	}
 
