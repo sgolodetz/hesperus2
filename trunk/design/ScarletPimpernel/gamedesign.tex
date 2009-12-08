@@ -1,0 +1,80 @@
+%%% Preamble %%%
+\documentclass[a4paper,12pt]{report}
+\usepackage{alltt}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{color}
+\usepackage{epigraph}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{latexsym}						% Include extra symbols like \Box and \sqsubset
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{times}
+\usepackage[nottoc]{tocbibind}	% Include the bibliography in the table of contents
+\usepackage{url}
+\usepackage{vmargin}
+
+% Useful commands for including images
+\newcommand{\stufigc}[5]					% images with captions
+{
+	\begin{figure}[#5]
+	\begin{center}
+		\includegraphics[#1]{#2}
+		\caption{#3}
+		\label{#4}
+	\end{center}
+	\end{figure}
+}
+
+\newcommand{\stufignc}[4]					% images without captions
+{
+	\begin{figure}[#4]
+		\includegraphics[#1]{#2}
+	\label{#3}
+	\end{figure}
+}
+
+\newcommand{\stufigcnc}[4]					% centred images without captions
+{
+	\begin{figure}[#4]
+	\begin{center}
+		\includegraphics[#1]{#2}
+	\label{#3}
+	\end{center}
+	\end{figure}
+}
+
+% Set the table of contents depth
+\setcounter{tocdepth}{3}
+
+%---
+\begin{document}
+
+\title{The Scarlet Pimpernel: Game Design Document}
+\author{Stuart Golodetz}
+\date{Last Updated: \today}
+\maketitle
+
+\tableofcontents
+
+% Get rid of the unnecessary space before chapter titles
+\dropchapter{-2cm}
+
+% Add page numbers
+\pagestyle{plain}
+
+% Stop the page numbers overlapping the text at the bottom of the page
+\addtolength{\footskip}{7mm}
+
+\input{concept}
+\input{business}
+\input{programming}
+\input{art}
+\input{audio}
+\input{missiondesign}
+\input{leveldesign}
+\input{testing}
+
+\end{document}
