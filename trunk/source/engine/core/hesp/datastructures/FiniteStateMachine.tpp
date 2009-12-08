@@ -39,10 +39,7 @@ void FSM_THIS::add_transition(const Transition_Ptr& transition)
 FSM_HEADER
 void FSM_THIS::execute()
 {
-	// Execute the current state.
-	m_currentState->execute(m_sharedData);
-
-	// Check its outgoing transitions.
+	// Check the current state's outgoing transitions, and change to a new state if necessary.
 	typename TransitionMap::const_iterator it = m_transitionMap.find(m_currentState->name());
 	if(it == m_transitionMap.end()) return;
 
@@ -63,6 +60,9 @@ void FSM_THIS::execute()
 			break;
 		}
 	}
+
+	// Execute the (possibly new) current state.
+	m_currentState->execute(m_sharedData);
 }
 
 FSM_HEADER
