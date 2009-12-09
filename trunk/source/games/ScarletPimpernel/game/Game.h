@@ -6,25 +6,30 @@
 #ifndef H_SCARLETPIMPERNEL_GAME
 #define H_SCARLETPIMPERNEL_GAME
 
-#include "GameFSM.h"
-
 #include <string>
+
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
 
 #include <SDL.h>
 
 namespace hesp {
+
+//#################### FORWARD DECLARATIONS ####################
+typedef shared_ptr<class FiniteStateMachine> FiniteStateMachine_Ptr;
+typedef shared_ptr<struct GameData> GameData_Ptr;
 
 class Game
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
 	GameData_Ptr m_data;
-	GameFSM_Ptr m_fsm;
+	FiniteStateMachine_Ptr m_fsm;
 	bool m_mouseMotionSinceStateChange;		// whether or not the mouse has been moved since the last state change
 
 	//#################### CONSTRUCTORS ####################
 public:
-	Game(const GameFSM_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data);
+	Game(const FiniteStateMachine_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data);
 
 	//#################### PUBLIC METHODS ####################
 public:

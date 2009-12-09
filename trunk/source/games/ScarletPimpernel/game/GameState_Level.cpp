@@ -15,6 +15,7 @@
 #include <hesp/level/HUDViewer.h>
 #include <hesp/level/LevelViewer.h>
 #include <hesp/level/objects/base/ObjectManager.h>
+#include "GameData.h"
 
 namespace bf = boost::filesystem;
 
@@ -22,7 +23,7 @@ namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 GameState_Level::GameState_Level(const GameData_Ptr& gameData)
-:	GameFSMState("Level"), m_gameData(gameData), m_inputGrabbed(false)
+:	GameState("Level"), m_gameData(gameData), m_inputGrabbed(false)
 {}
 
 //#################### PUBLIC METHODS ####################

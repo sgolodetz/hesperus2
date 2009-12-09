@@ -6,6 +6,8 @@
 #include <iostream>
 
 #include <hesp/datastructures/FiniteStateMachine.h>
+#include <hesp/datastructures/FSMState.h>
+#include <hesp/datastructures/FSMTransition.h>
 using namespace hesp;
 
 //#################### SHARED DATA ####################
@@ -25,12 +27,12 @@ typedef shared_ptr<GameData> GameData_Ptr;
 
 // Exit State
 
-struct ExitState : FSMState<GameData>
+struct ExitState : FSMState
 {
 	GameData_Ptr m_sharedData;
 
 	ExitState(const GameData_Ptr& sharedData)
-	:	FSMState<GameData>("Exit"), m_sharedData(sharedData)
+	:	FSMState("Exit"), m_sharedData(sharedData)
 	{}
 
 	void enter()
@@ -63,13 +65,13 @@ struct LevelData
 
 typedef shared_ptr<LevelData> LevelData_Ptr;
 
-struct LevelState : FSMState<GameData>
+struct LevelState : FSMState
 {
 	GameData_Ptr m_sharedData;
 	LevelData_Ptr m_localData;
 
 	explicit LevelState(const GameData_Ptr& sharedData, const LevelData_Ptr& localData)
-	:	FSMState<GameData>("Level"), m_sharedData(sharedData), m_localData(localData)
+	:	FSMState("Level"), m_sharedData(sharedData), m_localData(localData)
 	{}
 
 	void enter()
@@ -102,13 +104,13 @@ struct MenuData
 
 typedef shared_ptr<MenuData> MenuData_Ptr;
 
-struct MenuState : FSMState<GameData>
+struct MenuState : FSMState
 {
 	GameData_Ptr m_sharedData;
 	MenuData_Ptr m_localData;
 
 	explicit MenuState(const GameData_Ptr& sharedData, const MenuData_Ptr& localData)
-	:	FSMState<GameData>("Menu"), m_sharedData(sharedData), m_localData(localData)
+	:	FSMState("Menu"), m_sharedData(sharedData), m_localData(localData)
 	{}
 
 	void enter()
@@ -129,13 +131,13 @@ struct MenuState : FSMState<GameData>
 };
 
 //#################### TRANSITIONS ####################
-struct MenuToLevelTransition : FSMTransition<GameData>
+struct MenuToLevelTransition : FSMTransition
 {
 	GameData_Ptr m_sharedData;
 	MenuData_Ptr m_localData;
 
 	explicit MenuToLevelTransition(const std::string& name, const std::string& from, const std::string& to, const GameData_Ptr& sharedData, const MenuData_Ptr& localData)
-	:	FSMTransition<GameData>(name, from, to), m_sharedData(sharedData), m_localData(localData)
+	:	FSMTransition(name, from, to), m_sharedData(sharedData), m_localData(localData)
 	{}
 
 	std::string execute()
@@ -150,13 +152,13 @@ struct MenuToLevelTransition : FSMTransition<GameData>
 	}
 };
 
-struct LevelToExitTransition : FSMTransition<GameData>
+struct LevelToExitTransition : FSMTransition
 {
 	GameData_Ptr m_sharedData;
 	LevelData_Ptr m_localData;
 
 	explicit LevelToExitTransition(const std::string& name, const std::string& from, const std::string& to, const GameData_Ptr& sharedData, const LevelData_Ptr& localData)
-	:	FSMTransition<GameData>(name, from, to), m_sharedData(sharedData), m_localData(localData)
+	:	FSMTransition(name, from, to), m_sharedData(sharedData), m_localData(localData)
 	{}
 
 	std::string execute()
@@ -173,23 +175,22 @@ struct LevelToExitTransition : FSMTransition<GameData>
 
 int main()
 {
-	typedef FiniteStateMachine<GameData> GameFSM;
-	GameFSM fsm;
+	FiniteStateMachine fsm;
 
 	// Add the states.
 	shared_ptr<GameData> sharedData(new GameData(false));
 
-	fsm.add_state(GameFSM::State_Ptr(new ExitState(sharedData)));
+	fsm.add_state(FSMState_Ptr(new ExitState(sharedData)));
 
 	LevelData_Ptr levelData(new LevelData);
-	fsm.add_state(GameFSM::State_Ptr(new LevelState(sharedData, levelData)));
+	fsm.add_state(FSMState_Ptr(new LevelState(sharedData, levelData)));
 
 	MenuData_Ptr menuData(new MenuData);
-	fsm.add_state(GameFSM::State_Ptr(new MenuState(sharedData, menuData)));
+	fsm.add_state(FSMState_Ptr(new MenuState(sharedData, menuData)));
 
 	// Add the transitions.
-	fsm.add_transition(GameFSM::Transition_Ptr(new LevelToExitTransition("LevelToExit", "Level", "Exit", sharedData, levelData)));
-	fsm.add_transition(GameFSM::Transition_Ptr(new MenuToLevelTransition("MenuToLevel", "Menu", "Level", sharedData, menuData)));
+	fsm.add_transition(FSMTransition_Ptr(new LevelToExitTransition("LevelToExit", "Level", "Exit", sharedData, levelData)));
+	fsm.add_transition(FSMTransition_Ptr(new MenuToLevelTransition("MenuToLevel", "Menu", "Level", sharedData, menuData)));
 
 	// Set the initial state.
 	fsm.set_initial_state("Menu");

@@ -6,11 +6,14 @@
 #ifndef H_SCARLETPIMPERNEL_GAMESTATE_LEVEL
 #define H_SCARLETPIMPERNEL_GAMESTATE_LEVEL
 
-#include "GameFSM.h"
+#include "GameState.h"
 
 namespace hesp {
 
-class GameState_Level : public GameFSMState
+//#################### FORWARD DECLARATIONS ####################
+typedef shared_ptr<struct GameData> GameData_Ptr;
+
+class GameState_Level : public GameState
 {
 	//#################### PRIVATE VARIABLES ####################
 private:

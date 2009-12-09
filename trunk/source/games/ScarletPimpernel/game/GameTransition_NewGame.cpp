@@ -7,6 +7,7 @@
 
 #include <hesp/io/util/DirectoryFinder.h>
 #include <hesp/util/ConfigOptions.h>
+#include "GameData.h"
 #include "GameState_MainMenu.h"
 
 namespace bf = boost::filesystem;
@@ -15,7 +16,7 @@ namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 GameTransition_NewGame::GameTransition_NewGame(const GameData_Ptr& gameData, const GameState_MainMenu_Ptr& mainMenuState)
-:	GameFSMTransition("NewGame", "MainMenu", "LoadLevel"), m_gameData(gameData), m_mainMenuState(mainMenuState)
+:	FSMTransition("NewGame", "MainMenu", "LoadLevel"), m_gameData(gameData), m_mainMenuState(mainMenuState)
 {}
 
 //#################### PUBLIC METHODS ####################

@@ -10,6 +10,7 @@
 #include <hesp/gui/Screen.h>
 #include <hesp/io/files/LevelFile.h>
 #include <hesp/io/util/DirectoryFinder.h>
+#include "GameData.h"
 
 namespace bf = boost::filesystem;
 
@@ -17,7 +18,7 @@ namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 GameState_LoadLevel::GameState_LoadLevel(const GameData_Ptr& gameData)
-:	GameFSMState("LoadLevel"), m_gameData(gameData), m_firstTime(true)
+:	GameState("LoadLevel"), m_gameData(gameData), m_firstTime(true)
 {}
 
 //#################### PUBLIC METHODS ####################

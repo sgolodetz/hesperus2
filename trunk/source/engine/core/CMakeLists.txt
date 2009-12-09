@@ -60,13 +60,20 @@ hesp/colours/Colour3d.h
 )
 
 ##
+SET(datastructures_sources
+hesp/datastructures/FiniteStateMachine.cpp
+hesp/datastructures/FSMState.cpp
+hesp/datastructures/FSMTransition.cpp
+)
+
 SET(datastructures_headers
 hesp/datastructures/FiniteStateMachine.h
+hesp/datastructures/FSMState.h
+hesp/datastructures/FSMTransition.h
 hesp/datastructures/PriorityQueue.h
 )
 
 SET(datastructures_templates
-hesp/datastructures/FiniteStateMachine.tpp
 hesp/datastructures/PriorityQueue.tpp
 )
 
@@ -920,6 +927,7 @@ ${audio_sources}
 ${axes_sources}
 ${cameras_sources}
 ${colours_sources}
+${datastructures_sources}
 ${gui_sources}
 ${images_sources}
 ${input_sources}
@@ -1062,6 +1070,7 @@ SOURCE_GROUP(colours\\.cpp FILES ${colours_sources})
 SOURCE_GROUP(colours\\.h FILES ${colours_headers})
 
 ##
+SOURCE_GROUP(datastructures\\.cpp FILES ${datastructures_sources})
 SOURCE_GROUP(datastructures\\.h FILES ${datastructures_headers})
 SOURCE_GROUP(datastructures\\.tpp FILES ${datastructures_templates})
 

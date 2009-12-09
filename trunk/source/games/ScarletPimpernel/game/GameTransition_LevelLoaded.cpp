@@ -5,11 +5,13 @@
 
 #include "GameTransition_LevelLoaded.h"
 
+#include "GameData.h"
+
 namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 GameTransition_LevelLoaded::GameTransition_LevelLoaded(const GameData_Ptr& gameData)
-:	GameFSMTransition("LevelLoaded", "LoadLevel", "Level"), m_gameData(gameData)
+:	FSMTransition("LevelLoaded", "LoadLevel", "Level"), m_gameData(gameData)
 {}
 
 //#################### PUBLIC METHODS ####################

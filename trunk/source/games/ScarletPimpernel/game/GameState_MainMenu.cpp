@@ -11,6 +11,7 @@
 #include <hesp/gui/Picture.h>
 #include <hesp/gui/Screen.h>
 #include <hesp/io/util/DirectoryFinder.h>
+#include "GameData.h"
 
 namespace bf = boost::filesystem;
 
@@ -18,7 +19,7 @@ namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 GameState_MainMenu::GameState_MainMenu(const GameData_Ptr& gameData)
-:	GameFSMState("MainMenu"), m_gameData(gameData)
+:	GameState("MainMenu"), m_gameData(gameData)
 {}
 
 //#################### PUBLIC METHODS ####################

@@ -11,15 +11,18 @@
 
 #include <ASXEngine.h>
 
+#include <hesp/datastructures/FiniteStateMachine.h>
 #include <hesp/gui/Screen.h>
 #include <hesp/io/util/DirectoryFinder.h>
 #include <hesp/util/ConfigOptions.h>
+#include "GameData.h"
+
 namespace bf = boost::filesystem;
 
 namespace hesp {
 
 //#################### CONSTRUCTORS ####################
-Game::Game(const GameFSM_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data)
+Game::Game(const FiniteStateMachine_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data)
 try
 :	m_data(data), m_fsm(fsm), m_mouseMotionSinceStateChange(false)
 {

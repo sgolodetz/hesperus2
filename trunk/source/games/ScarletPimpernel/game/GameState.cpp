@@ -1,21 +1,21 @@
 /***
- * ScarletPimpernel: GameFSM.cpp
+ * hesperus: GameState.cpp
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#include "GameFSM.h"
+#include "GameState.h"
 
 #include <hesp/gui/Screen.h>
 
 namespace hesp {
 
 //#################### CONSTRUCTORS ####################
-GameFSMState::GameFSMState(const std::string& name)
-:	FSMState<GameData>(name)
+GameState::GameState(const std::string& name)
+:	FSMState(name)
 {}
 
 //#################### PROTECTED METHODS ####################
-void GameFSMState::set_display(const GUIComponent_Ptr& display)
+void GameState::set_display(const GUIComponent_Ptr& display)
 {
 	Screen& screen = Screen::instance();
 	screen.layout().clear();

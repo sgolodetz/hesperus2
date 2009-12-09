@@ -6,14 +6,20 @@
 #ifndef H_SCARLETPIMPERNEL_GAMETRANSITION_NEWGAME
 #define H_SCARLETPIMPERNEL_GAMETRANSITION_NEWGAME
 
-#include "GameFSM.h"
+#include <string>
+
+#include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
+
+#include <hesp/datastructures/FSMTransition.h>
 
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
+typedef shared_ptr<struct GameData> GameData_Ptr;
 typedef shared_ptr<class GameState_MainMenu> GameState_MainMenu_Ptr;
 
-class GameTransition_NewGame : public GameFSMTransition
+class GameTransition_NewGame : public FSMTransition
 {
 	//#################### PRIVATE VARIABLES ####################
 private:

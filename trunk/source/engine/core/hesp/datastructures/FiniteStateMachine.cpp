@@ -1,20 +1,18 @@
 /***
- * hesperus: FiniteStateMachine.tpp
+ * hesperus: FiniteStateMachine.cpp
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#include <cassert>
+#include "FiniteStateMachine.h"
 
 #include <hesp/exceptions/Exception.h>
-
-#define FSM_HEADER	template <typename Dummy>
-#define FSM_THIS	FiniteStateMachine<Dummy>
+#include "FSMState.h"
+#include "FSMTransition.h"
 
 namespace hesp {
 
 //#################### PUBLIC METHODS ####################
-FSM_HEADER
-void FSM_THIS::add_state(const State_Ptr& state)
+void FiniteStateMachine::add_state(const FSMState_Ptr& state)
 {
 	assert(state);
 	if(!m_stateMap.insert(std::make_pair(state->name(), state)).second)
@@ -23,8 +21,7 @@ void FSM_THIS::add_state(const State_Ptr& state)
 	}
 }
 
-FSM_HEADER
-void FSM_THIS::add_transition(const Transition_Ptr& transition)
+void FiniteStateMachine::add_transition(const FSMTransition_Ptr& transition)
 {
 	assert(transition);
 	m_transitionMap[transition->from()].push_back(transition);
@@ -33,14 +30,13 @@ void FSM_THIS::add_transition(const Transition_Ptr& transition)
 /**
 @return		true, if there has been a state transition during this execution, or false otherwise
 */
-FSM_HEADER
-bool FSM_THIS::execute()
+bool FiniteStateMachine::execute()
 {
 	// Check the current state's outgoing transitions, and change to a new state if necessary.
-	typename TransitionMap::const_iterator it = m_transitionMap.find(m_currentState->name());
+	TransitionMap::const_iterator it = m_transitionMap.find(m_currentState->name());
 	if(it != m_transitionMap.end())
 	{
-		const std::vector<Transition_Ptr>& transitions = it->second;
+		const std::vector<FSMTransition_Ptr>& transitions = it->second;
 		for(size_t j=0, size=transitions.size(); j<size; ++j)
 		{
 			if(transitions[j]->triggered())
@@ -48,7 +44,7 @@ bool FSM_THIS::execute()
 				m_currentState->leave();
 
 				std::string newState = transitions[j]->execute();
-				typename StateMap::const_iterator kt = m_stateMap.find(newState);
+				StateMap::const_iterator kt = m_stateMap.find(newState);
 				if(kt != m_stateMap.end()) m_currentState = kt->second;
 				else throw Exception("No such state: " + newState);
 
@@ -69,12 +65,11 @@ bool FSM_THIS::execute()
 	return false;
 }
 
-FSM_HEADER
-void FSM_THIS::set_initial_state(const std::string& name)
+void FiniteStateMachine::set_initial_state(const std::string& name)
 {
 	if(!m_currentState)
 	{
-		typename StateMap::const_iterator it = m_stateMap.find(name);
+		StateMap::const_iterator it = m_stateMap.find(name);
 		if(it != m_stateMap.end())
 		{
 			m_currentState = it->second;
@@ -86,6 +81,3 @@ void FSM_THIS::set_initial_state(const std::string& name)
 }
 
 }
-
-#undef FSM_HEADER
-#undef FSM_THIS
