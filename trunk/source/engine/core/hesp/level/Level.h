@@ -21,6 +21,7 @@ typedef shared_ptr<class BSPTree> BSPTree_Ptr;
 typedef shared_ptr<const class BSPTree> BSPTree_CPtr;
 typedef shared_ptr<class GeometryRenderer> GeometryRenderer_Ptr;
 typedef shared_ptr<const class GeometryRenderer> GeometryRenderer_CPtr;
+class InputState;
 typedef shared_ptr<class ModelManager> ModelManager_Ptr;
 typedef shared_ptr<class NavManager> NavManager_Ptr;
 typedef shared_ptr<const class NavManager> NavManager_CPtr;
@@ -66,6 +67,15 @@ public:
 	const ColPolyVector& onion_polygons() const;
 	OnionTree_CPtr onion_tree() const;
 	const PortalVector& portals() const;
+	void update(int milliseconds, InputState& input);
+
+	//#################### PRIVATE METHODS ####################
+private:
+	void do_activatables(InputState& input);
+	void do_animations(int milliseconds);
+	void do_gravity(int milliseconds);
+	void do_physics(int milliseconds);
+	void do_yokes(int milliseconds, InputState& input);
 };
 
 //#################### TYPEDEFS ####################

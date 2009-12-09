@@ -12,25 +12,66 @@ SET(targetname ScarletPimpernel)
 # Specify the project files #
 #############################
 
-SET(sources main.cpp)
+##
+SET(ScarletPimpernel_sources main.cpp)
 
+##
+SET(game_sources
+game/GameData.cpp
+game/GameFSM.cpp
+game/GameRunner.cpp
+game/GameState_LoadLevel.cpp
+game/GameState_MainMenu.cpp
+game/GameState_Play.cpp
+game/GameTransition_LevelLoaded.cpp
+game/GameTransition_NewGame.cpp
+)
+
+SET(game_headers
+game/GameData.h
+game/GameFSM.h
+game/GameRunner.h
+game/GameState_LoadLevel.h
+game/GameState_MainMenu.h
+game/GameState_Play.h
+game/GameTransition_LevelLoaded.h
+game/GameTransition_NewGame.h
+)
+
+##
 SET(definitions
 ${hesperus2_SOURCE_DIR}/../resources/ScarletPimpernel/definitions/test-def.xml
 )
 
+##
 SET(scripts
 ${hesperus2_SOURCE_DIR}/../resources/ScarletPimpernel/scripts/config.as
 ${hesperus2_SOURCE_DIR}/../resources/ScarletPimpernel/scripts/guard-ai.as
 )
 
+##############################################################
+# Collect the project files into sources, headers and others #
+##############################################################
+
+SET(sources ${ScarletPimpernel_sources} ${game_sources})
+SET(headers ${game_headers})
 SET(others ${definitions} ${scripts})
 
 #############################
 # Specify the source groups #
 #############################
 
+##
 SOURCE_GROUP(.cpp FILES ${sources})
+
+##
+SOURCE_GROUP(game\\.cpp FILES ${game_sources})
+SOURCE_GROUP(game\\.h FILES ${game_headers})
+
+##
 SOURCE_GROUP(resources\\definitions FILES ${definitions})
+
+##
 SOURCE_GROUP(resources\\scripts FILES ${scripts})
 
 ###################################

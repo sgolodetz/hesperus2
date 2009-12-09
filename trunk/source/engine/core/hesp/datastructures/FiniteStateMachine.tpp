@@ -7,16 +7,10 @@
 
 #include <hesp/exceptions/Exception.h>
 
-#define FSM_HEADER	template <typename SharedData>
-#define FSM_THIS	FiniteStateMachine<SharedData>
+#define FSM_HEADER	template <typename Dummy>
+#define FSM_THIS	FiniteStateMachine<Dummy>
 
 namespace hesp {
-
-//#################### CONSTRUCTORS ####################
-FSM_HEADER
-FSM_THIS::FiniteStateMachine(const shared_ptr<SharedData>& sharedData)
-:	m_sharedData(sharedData)
-{}
 
 //#################### PUBLIC METHODS ####################
 FSM_HEADER
@@ -36,8 +30,11 @@ void FSM_THIS::add_transition(const Transition_Ptr& transition)
 	m_transitionMap[transition->from()].push_back(transition);
 }
 
+/**
+@return		true, if there has been a state transition during this execution, or false otherwise
+*/
 FSM_HEADER
-void FSM_THIS::execute()
+bool FSM_THIS::execute()
 {
 	// Check the current state's outgoing transitions, and change to a new state if necessary.
 	typename TransitionMap::const_iterator it = m_transitionMap.find(m_currentState->name());
@@ -46,11 +43,11 @@ void FSM_THIS::execute()
 		const std::vector<Transition_Ptr>& transitions = it->second;
 		for(size_t j=0, size=transitions.size(); j<size; ++j)
 		{
-			if(transitions[j]->triggered(m_sharedData))
+			if(transitions[j]->triggered())
 			{
 				m_currentState->leave();
 
-				std::string newState = transitions[j]->execute(m_sharedData);
+				std::string newState = transitions[j]->execute();
 				typename StateMap::const_iterator kt = m_stateMap.find(newState);
 				if(kt != m_stateMap.end()) m_currentState = kt->second;
 				else throw Exception("No such state: " + newState);
@@ -62,13 +59,14 @@ void FSM_THIS::execute()
 				// potentially follow an entire chain of triggered transitions in a single
 				// execution of the FSM, we choose to only allow either a transition or an
 				// execution of the current state each time.
-				return;
+				return true;
 			}
 		}
 	}
 
 	// If there was no transition above, execute the current state.
-	m_currentState->execute(m_sharedData);
+	m_currentState->execute();
+	return false;
 }
 
 FSM_HEADER

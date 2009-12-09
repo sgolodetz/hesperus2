@@ -1,36 +1,31 @@
 /***
- * hesperus: GameState_Level.h
+ * ScarletPimpernel: GameState_Play.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_HESP_GAMESTATE_LEVEL
-#define H_HESP_GAMESTATE_LEVEL
+#ifndef H_SCARLETPIMPERNEL_GAMESTATE_PLAY
+#define H_SCARLETPIMPERNEL_GAMESTATE_PLAY
 
-#include <string>
-
-#include "GameState.h"
+#include "GameFSM.h"
 
 namespace hesp {
 
-//#################### FORWARD DECLARATIONS ####################
-typedef shared_ptr<class Level> Level_Ptr;
-
-class GameState_Level : public GameState
+class GameState_Play : public GameFSMState
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
-	Level_Ptr m_level;
+	GameData_Ptr m_gameData;
 	bool m_inputGrabbed;
 
 	//#################### CONSTRUCTORS ####################
 public:
-	explicit GameState_Level(const std::string& levelFilename);
+	GameState_Play(const GameData_Ptr& gameData);
 
 	//#################### PUBLIC METHODS ####################
 public:
 	void enter();
+	void execute();
 	void leave();
-	GameState_Ptr update(int milliseconds, InputState& input);
 
 	//#################### PRIVATE METHODS ####################
 private:

@@ -19,14 +19,18 @@ struct GameData
 	{}
 };
 
+typedef shared_ptr<GameData> GameData_Ptr;
+
 //#################### STATES ####################
 
 // Exit State
 
 struct ExitState : FSMState<GameData>
 {
-	ExitState()
-	:	FSMState<GameData>("Exit")
+	GameData_Ptr m_sharedData;
+
+	ExitState(const GameData_Ptr& sharedData)
+	:	FSMState<GameData>("Exit"), m_sharedData(sharedData)
 	{}
 
 	void enter()
@@ -34,10 +38,10 @@ struct ExitState : FSMState<GameData>
 		std::cout << "Entering Exit\n";
 	}
 
-	void execute(const shared_ptr<GameData>& sharedData)
+	void execute()
 	{
 		std::cout << "Executing Exit\n";
-		sharedData->m_quit = true;
+		m_sharedData->m_quit = true;
 	}
 
 	void leave()
@@ -61,10 +65,11 @@ typedef shared_ptr<LevelData> LevelData_Ptr;
 
 struct LevelState : FSMState<GameData>
 {
+	GameData_Ptr m_sharedData;
 	LevelData_Ptr m_localData;
 
-	explicit LevelState(const LevelData_Ptr& localData)
-	:	FSMState<GameData>("Level"), m_localData(localData)
+	explicit LevelState(const GameData_Ptr& sharedData, const LevelData_Ptr& localData)
+	:	FSMState<GameData>("Level"), m_sharedData(sharedData), m_localData(localData)
 	{}
 
 	void enter()
@@ -72,7 +77,7 @@ struct LevelState : FSMState<GameData>
 		std::cout << "Entering Level\n";
 	}
 
-	void execute(const shared_ptr<GameData>&)
+	void execute()
 	{
 		std::cout << "Executing Level\n";
 		++m_localData->m_frameCount;
@@ -99,10 +104,11 @@ typedef shared_ptr<MenuData> MenuData_Ptr;
 
 struct MenuState : FSMState<GameData>
 {
+	GameData_Ptr m_sharedData;
 	MenuData_Ptr m_localData;
 
-	explicit MenuState(const MenuData_Ptr& localData)
-	:	FSMState<GameData>("Menu"), m_localData(localData)
+	explicit MenuState(const GameData_Ptr& sharedData, const MenuData_Ptr& localData)
+	:	FSMState<GameData>("Menu"), m_sharedData(sharedData), m_localData(localData)
 	{}
 
 	void enter()
@@ -110,7 +116,7 @@ struct MenuState : FSMState<GameData>
 		std::cout << "Entering Menu\n";
 	}
 
-	void execute(const shared_ptr<GameData>&)
+	void execute()
 	{
 		std::cout << "Executing Menu\n";
 		m_localData->m_buttonPressed = true;
@@ -125,39 +131,41 @@ struct MenuState : FSMState<GameData>
 //#################### TRANSITIONS ####################
 struct MenuToLevelTransition : FSMTransition<GameData>
 {
+	GameData_Ptr m_sharedData;
 	MenuData_Ptr m_localData;
 
-	explicit MenuToLevelTransition(const std::string& name, const std::string& from, const std::string& to, const MenuData_Ptr& localData)
-	:	FSMTransition<GameData>(name, from, to), m_localData(localData)
+	explicit MenuToLevelTransition(const std::string& name, const std::string& from, const std::string& to, const GameData_Ptr& sharedData, const MenuData_Ptr& localData)
+	:	FSMTransition<GameData>(name, from, to), m_sharedData(sharedData), m_localData(localData)
 	{}
 
-	std::string execute(const shared_ptr<GameData>&)
+	std::string execute()
 	{
 		std::cout << "Executing MenuToLevelTransition\n";
 		return "Level";
 	}
 
-	bool triggered(const shared_ptr<const GameData>& sharedData) const
+	bool triggered() const
 	{
-		return sharedData->m_skipMenu || m_localData->m_buttonPressed;
+		return m_sharedData->m_skipMenu || m_localData->m_buttonPressed;
 	}
 };
 
 struct LevelToExitTransition : FSMTransition<GameData>
 {
+	GameData_Ptr m_sharedData;
 	LevelData_Ptr m_localData;
 
-	explicit LevelToExitTransition(const std::string& name, const std::string& from, const std::string& to, const LevelData_Ptr& localData)
-	:	FSMTransition<GameData>(name, from, to), m_localData(localData)
+	explicit LevelToExitTransition(const std::string& name, const std::string& from, const std::string& to, const GameData_Ptr& sharedData, const LevelData_Ptr& localData)
+	:	FSMTransition<GameData>(name, from, to), m_sharedData(sharedData), m_localData(localData)
 	{}
 
-	std::string execute(const shared_ptr<GameData>&)
+	std::string execute()
 	{
 		std::cout << "Executing LevelToExitTransition\n";
 		return "Exit";
 	}
 
-	bool triggered(const shared_ptr<const GameData>&) const
+	bool triggered() const
 	{
 		return m_localData->m_frameCount == 3;
 	}
@@ -166,21 +174,22 @@ struct LevelToExitTransition : FSMTransition<GameData>
 int main()
 {
 	typedef FiniteStateMachine<GameData> GameFSM;
-	shared_ptr<GameData> sharedData(new GameData(false));
-	GameFSM fsm(sharedData);
+	GameFSM fsm;
 
 	// Add the states.
-	fsm.add_state(GameFSM::State_Ptr(new ExitState));
+	shared_ptr<GameData> sharedData(new GameData(false));
+
+	fsm.add_state(GameFSM::State_Ptr(new ExitState(sharedData)));
 
 	LevelData_Ptr levelData(new LevelData);
-	fsm.add_state(GameFSM::State_Ptr(new LevelState(levelData)));
+	fsm.add_state(GameFSM::State_Ptr(new LevelState(sharedData, levelData)));
 
 	MenuData_Ptr menuData(new MenuData);
-	fsm.add_state(GameFSM::State_Ptr(new MenuState(menuData)));
+	fsm.add_state(GameFSM::State_Ptr(new MenuState(sharedData, menuData)));
 
 	// Add the transitions.
-	fsm.add_transition(GameFSM::Transition_Ptr(new LevelToExitTransition("LevelToExit", "Level", "Exit", levelData)));
-	fsm.add_transition(GameFSM::Transition_Ptr(new MenuToLevelTransition("MenuToLevel", "Menu", "Level", menuData)));
+	fsm.add_transition(GameFSM::Transition_Ptr(new LevelToExitTransition("LevelToExit", "Level", "Exit", sharedData, levelData)));
+	fsm.add_transition(GameFSM::Transition_Ptr(new MenuToLevelTransition("MenuToLevel", "Menu", "Level", sharedData, menuData)));
 
 	// Set the initial state.
 	fsm.set_initial_state("Menu");

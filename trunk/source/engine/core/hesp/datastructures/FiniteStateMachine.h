@@ -15,7 +15,7 @@ using boost::shared_ptr;
 
 namespace hesp {
 
-template <typename SharedData>
+template <typename>
 class FSMState
 {
 	//#################### PRIVATE VARIABLES ####################
@@ -35,7 +35,7 @@ public:
 	//#################### PUBLIC ABSTRACT METHODS ####################
 public:
 	virtual void enter() {}
-	virtual void execute(const shared_ptr<SharedData>& sharedData) = 0;
+	virtual void execute() = 0;
 	virtual void leave() {}
 
 	//#################### PUBLIC METHODS ####################
@@ -43,7 +43,7 @@ public:
 	const std::string& name() const	{ return m_name; }
 };
 
-template <typename SharedData>
+template <typename>
 class FSMTransition
 {
 	//#################### PRIVATE VARIABLES ####################
@@ -62,8 +62,8 @@ public:
 
 	//#################### PUBLIC ABSTRACT METHODS ####################
 public:
-	virtual std::string execute(const shared_ptr<SharedData>& sharedData) = 0;
-	virtual bool triggered(const shared_ptr<const SharedData>& sharedData) const = 0;
+	virtual std::string execute() = 0;
+	virtual bool triggered() const = 0;
 
 	//#################### PUBLIC METHODS ####################
 public:
@@ -72,13 +72,13 @@ public:
 	const std::string& to() const	{ return m_to; }
 };
 
-template <typename SharedData>
+template <typename Dummy>
 class FiniteStateMachine
 {
 	//#################### TYPEDEFS ####################
 private:
-	typedef FSMState<SharedData> State;
-	typedef FSMTransition<SharedData> Transition;
+	typedef FSMState<Dummy> State;
+	typedef FSMTransition<Dummy> Transition;
 public:
 	typedef shared_ptr<State> State_Ptr;
 	typedef shared_ptr<Transition> Transition_Ptr;
@@ -89,7 +89,6 @@ private:
 	//#################### PRIVATE VARIABLES ####################
 private:
 	State_Ptr m_currentState;
-	shared_ptr<SharedData> m_sharedData;
 
 	// Note:	These data structures will need to be changed if we ever want to support removal of states/transitions,
 	//			but the class interface will stay the same. This is by design - I'm avoiding implementing the removal
@@ -97,15 +96,11 @@ private:
 	StateMap m_stateMap;
 	TransitionMap m_transitionMap;
 
-	//#################### CONSTRUCTORS ####################
-public:
-	explicit FiniteStateMachine(const shared_ptr<SharedData>& sharedData);
-
 	//#################### PUBLIC METHODS ####################
 public:
 	void add_state(const State_Ptr& state);
 	void add_transition(const Transition_Ptr& transition);
-	void execute();
+	bool execute();
 #if 0
 	void remove_state(const std::string& name);
 	void remove_transition(const std::string& name);
