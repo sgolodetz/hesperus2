@@ -8,8 +8,8 @@
 
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/util/DirectoryFinder.h>
+#include "game/Game.h"
 #include "game/GameFSM.h"
-#include "game/GameRunner.h"
 #include "game/GameState_LoadLevel.h"
 #include "game/GameState_MainMenu.h"
 #include "game/GameState_Play.h"
@@ -38,11 +38,9 @@ try
 	gameFSM->add_transition(GameFSMTransition_Ptr(new GameTransition_LevelLoaded(gameData)));
 	gameFSM->add_transition(GameFSMTransition_Ptr(new GameTransition_NewGame(gameData, mainMenuState)));
 
-	// Construct the game runner.
-	GameRunner gameRunner(gameFSM, "MainMenu", gameData);
-
-	// Execute the game runner.
-	gameRunner.run();
+	// Construct and run the game.
+	Game game(gameFSM, "MainMenu", gameData);
+	game.run();
 
 	return 0;
 }

@@ -1,10 +1,10 @@
 /***
- * ScarletPimpernel: GameRunner.h
+ * ScarletPimpernel: Game.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_SCARLETPIMPERNEL_GAMERUNNER
-#define H_SCARLETPIMPERNEL_GAMERUNNER
+#ifndef H_SCARLETPIMPERNEL_GAME
+#define H_SCARLETPIMPERNEL_GAME
 
 #include "GameFSM.h"
 
@@ -14,7 +14,7 @@
 
 namespace hesp {
 
-class GameRunner
+class Game
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
@@ -24,7 +24,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	GameRunner(const GameFSM_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data);
+	Game(const GameFSM_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data);
 
 	//#################### PUBLIC METHODS ####################
 public:

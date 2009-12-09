@@ -1,9 +1,9 @@
 /***
- * ScarletPimpernel: GameRunner.cpp
+ * ScarletPimpernel: Game.cpp
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#include "GameRunner.h"
+#include "Game.h"
 
 #include <iostream>
 
@@ -19,7 +19,7 @@ namespace bf = boost::filesystem;
 namespace hesp {
 
 //#################### CONSTRUCTORS ####################
-GameRunner::GameRunner(const GameFSM_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data)
+Game::Game(const GameFSM_Ptr& fsm, const std::string& initialState, const GameData_Ptr& data)
 try
 :	m_data(data), m_fsm(fsm), m_mouseMotionSinceStateChange(false)
 {
@@ -76,7 +76,7 @@ try
 catch(Exception& e) { quit_with_error(e.cause()); }
 
 //#################### PUBLIC METHODS ####################
-void GameRunner::run()
+void Game::run()
 {
 	const Screen& screen = Screen::instance();
 
@@ -114,17 +114,17 @@ void GameRunner::run()
 }
 
 //#################### PRIVATE METHODS ####################
-void GameRunner::handle_key_down(const SDL_keysym& keysym)
+void Game::handle_key_down(const SDL_keysym& keysym)
 {
 	m_data->m_input.press_key(keysym.sym);
 }
 
-void GameRunner::handle_key_up(const SDL_keysym& keysym)
+void Game::handle_key_up(const SDL_keysym& keysym)
 {
 	m_data->m_input.release_key(keysym.sym);
 }
 
-void GameRunner::handle_mousebutton_down(const SDL_MouseButtonEvent& e)
+void Game::handle_mousebutton_down(const SDL_MouseButtonEvent& e)
 {
 	switch(e.button)
 	{
@@ -142,7 +142,7 @@ void GameRunner::handle_mousebutton_down(const SDL_MouseButtonEvent& e)
 	}
 }
 
-void GameRunner::handle_mousebutton_up(const SDL_MouseButtonEvent& e)
+void Game::handle_mousebutton_up(const SDL_MouseButtonEvent& e)
 {
 	switch(e.button)
 	{
@@ -160,7 +160,7 @@ void GameRunner::handle_mousebutton_up(const SDL_MouseButtonEvent& e)
 	}
 }
 
-void GameRunner::process_events()
+void Game::process_events()
 {
 	SDL_Event event;
 	while(SDL_PollEvent(&event))
@@ -193,13 +193,13 @@ void GameRunner::process_events()
 	}
 }
 
-void GameRunner::quit(int code)
+void Game::quit(int code)
 {
 	SDL_Quit();
 	exit(code);
 }
 
-void GameRunner::quit_with_error(const std::string& error)
+void Game::quit_with_error(const std::string& error)
 {
 	SDL_Quit();
 	std::cout << "Error: " << error << std::endl;

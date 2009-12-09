@@ -17,9 +17,9 @@ SET(ScarletPimpernel_sources main.cpp)
 
 ##
 SET(game_sources
+game/Game.cpp
 game/GameData.cpp
 game/GameFSM.cpp
-game/GameRunner.cpp
 game/GameState_LoadLevel.cpp
 game/GameState_MainMenu.cpp
 game/GameState_Play.cpp
@@ -28,9 +28,9 @@ game/GameTransition_NewGame.cpp
 )
 
 SET(game_headers
+game/Game.h
 game/GameData.h
 game/GameFSM.h
-game/GameRunner.h
 game/GameState_LoadLevel.h
 game/GameState_MainMenu.h
 game/GameState_Play.h
