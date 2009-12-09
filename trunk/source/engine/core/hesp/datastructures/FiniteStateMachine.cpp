@@ -42,8 +42,9 @@ bool FiniteStateMachine::execute()
 			if(transitions[j]->triggered())
 			{
 				m_currentState->leave();
+				transitions[j]->execute();
 
-				std::string newState = transitions[j]->execute();
+				std::string newState = transitions[j]->to();
 				StateMap::const_iterator kt = m_stateMap.find(newState);
 				if(kt != m_stateMap.end()) m_currentState = kt->second;
 				else throw Exception("No such state: " + newState);

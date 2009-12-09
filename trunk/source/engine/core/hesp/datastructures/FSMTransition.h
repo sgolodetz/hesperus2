@@ -26,7 +26,7 @@ public:
 
 	//#################### PUBLIC ABSTRACT METHODS ####################
 public:
-	virtual std::string execute() = 0;
+	virtual void execute() = 0;
 	virtual bool triggered() const = 0;
 
 	//#################### PUBLIC METHODS ####################

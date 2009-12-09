@@ -140,10 +140,9 @@ struct MenuToLevelTransition : FSMTransition
 	:	FSMTransition(name, from, to), m_sharedData(sharedData), m_localData(localData)
 	{}
 
-	std::string execute()
+	void execute()
 	{
 		std::cout << "Executing MenuToLevelTransition\n";
-		return "Level";
 	}
 
 	bool triggered() const
@@ -161,10 +160,9 @@ struct LevelToExitTransition : FSMTransition
 	:	FSMTransition(name, from, to), m_sharedData(sharedData), m_localData(localData)
 	{}
 
-	std::string execute()
+	void execute()
 	{
 		std::cout << "Executing LevelToExitTransition\n";
-		return "Exit";
 	}
 
 	bool triggered() const

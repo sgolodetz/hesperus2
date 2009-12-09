@@ -15,9 +15,9 @@ GameTransition_LevelLoaded::GameTransition_LevelLoaded(const GameData_Ptr& gameD
 {}
 
 //#################### PUBLIC METHODS ####################
-std::string GameTransition_LevelLoaded::execute()
+void GameTransition_LevelLoaded::execute()
 {
-	return to();
+	// Nothing to do
 }
 
 bool GameTransition_LevelLoaded::triggered() const

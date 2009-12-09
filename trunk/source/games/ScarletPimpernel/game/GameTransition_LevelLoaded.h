@@ -28,7 +28,7 @@ public:
 
 	//#################### PUBLIC METHODS ####################
 public:
-	std::string execute();
+	void execute();
 	bool triggered() const;
 };
 
