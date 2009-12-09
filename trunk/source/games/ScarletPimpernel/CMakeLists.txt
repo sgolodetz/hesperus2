@@ -20,9 +20,9 @@ SET(game_sources
 game/Game.cpp
 game/GameData.cpp
 game/GameFSM.cpp
+game/GameState_Level.cpp
 game/GameState_LoadLevel.cpp
 game/GameState_MainMenu.cpp
-game/GameState_Play.cpp
 game/GameTransition_LevelLoaded.cpp
 game/GameTransition_NewGame.cpp
 )
@@ -31,9 +31,9 @@ SET(game_headers
 game/Game.h
 game/GameData.h
 game/GameFSM.h
+game/GameState_Level.h
 game/GameState_LoadLevel.h
 game/GameState_MainMenu.h
-game/GameState_Play.h
 game/GameTransition_LevelLoaded.h
 game/GameTransition_NewGame.h
 )

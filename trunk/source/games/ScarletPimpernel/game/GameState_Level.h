@@ -1,16 +1,16 @@
 /***
- * ScarletPimpernel: GameState_Play.h
+ * ScarletPimpernel: GameState_Level.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_SCARLETPIMPERNEL_GAMESTATE_PLAY
-#define H_SCARLETPIMPERNEL_GAMESTATE_PLAY
+#ifndef H_SCARLETPIMPERNEL_GAMESTATE_LEVEL
+#define H_SCARLETPIMPERNEL_GAMESTATE_LEVEL
 
 #include "GameFSM.h"
 
 namespace hesp {
 
-class GameState_Play : public GameFSMState
+class GameState_Level : public GameFSMState
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
@@ -19,7 +19,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	GameState_Play(const GameData_Ptr& gameData);
+	GameState_Level(const GameData_Ptr& gameData);
 
 	//#################### PUBLIC METHODS ####################
 public:

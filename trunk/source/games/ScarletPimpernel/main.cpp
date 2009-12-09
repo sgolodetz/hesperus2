@@ -10,9 +10,9 @@
 #include <hesp/io/util/DirectoryFinder.h>
 #include "game/Game.h"
 #include "game/GameFSM.h"
+#include "game/GameState_Level.h"
 #include "game/GameState_LoadLevel.h"
 #include "game/GameState_MainMenu.h"
-#include "game/GameState_Play.h"
 #include "game/GameTransition_LevelLoaded.h"
 #include "game/GameTransition_NewGame.h"
 using namespace hesp;
@@ -29,10 +29,10 @@ try
 
 	// Add game states.
 	GameData_Ptr gameData(new GameData);
+	gameFSM->add_state(GameFSMState_Ptr(new GameState_Level(gameData)));
 	gameFSM->add_state(GameFSMState_Ptr(new GameState_LoadLevel(gameData)));
 	GameState_MainMenu_Ptr mainMenuState(new GameState_MainMenu(gameData));
 	gameFSM->add_state(mainMenuState);
-	gameFSM->add_state(GameFSMState_Ptr(new GameState_Play(gameData)));
 
 	// Add game transitions.
 	gameFSM->add_transition(GameFSMTransition_Ptr(new GameTransition_LevelLoaded(gameData)));

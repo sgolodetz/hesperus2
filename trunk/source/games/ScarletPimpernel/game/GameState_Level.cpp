@@ -1,9 +1,9 @@
 /***
- * ScarletPimpernel: GameState_Play.cpp
+ * ScarletPimpernel: GameState_Level.cpp
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#include "GameState_Play.h"
+#include "GameState_Level.h"
 
 #include <SDL.h>
 
@@ -21,12 +21,12 @@ namespace bf = boost::filesystem;
 namespace hesp {
 
 //#################### CONSTRUCTORS ####################
-GameState_Play::GameState_Play(const GameData_Ptr& gameData)
-:	GameFSMState("Play"), m_gameData(gameData), m_inputGrabbed(false)
+GameState_Level::GameState_Level(const GameData_Ptr& gameData)
+:	GameFSMState("Level"), m_gameData(gameData), m_inputGrabbed(false)
 {}
 
 //#################### PUBLIC METHODS ####################
-void GameState_Play::enter()
+void GameState_Level::enter()
 {
 	// Clear all pending SDL events before we get started.
 	{ SDL_Event e; while(SDL_PollEvent(&e)) {} }
@@ -35,7 +35,7 @@ void GameState_Play::enter()
 	grab_input();
 }
 
-void GameState_Play::execute()
+void GameState_Level::execute()
 {
 	if(m_gameData->m_input.key_down(SDLK_ESCAPE))
 	{
@@ -54,13 +54,13 @@ void GameState_Play::execute()
 	m_gameData->m_level->update(m_gameData->m_milliseconds, m_gameData->m_input);
 }
 
-void GameState_Play::leave()
+void GameState_Level::leave()
 {
 	ungrab_input();
 }
 
 //#################### PRIVATE METHODS ####################
-GUIComponent_Ptr GameState_Play::construct_display()
+GUIComponent_Ptr GameState_Level::construct_display()
 {
 	GUIContainer<ExplicitLayout> *display = new GUIContainer<ExplicitLayout>;
 
@@ -81,14 +81,14 @@ GUIComponent_Ptr GameState_Play::construct_display()
 	return GUIComponent_Ptr(display);
 }
 
-void GameState_Play::grab_input()
+void GameState_Level::grab_input()
 {
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_WM_GrabInput(SDL_GRAB_ON);
 	m_inputGrabbed = true;
 }
 
-void GameState_Play::ungrab_input()
+void GameState_Level::ungrab_input()
 {
 	SDL_WM_GrabInput(SDL_GRAB_OFF);
 	SDL_ShowCursor(SDL_ENABLE);

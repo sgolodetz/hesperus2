@@ -9,7 +9,7 @@ namespace hesp {
 
 //#################### CONSTRUCTORS ####################
 GameTransition_LevelLoaded::GameTransition_LevelLoaded(const GameData_Ptr& gameData)
-:	GameFSMTransition("LevelLoaded", "LoadLevel", "Play"), m_gameData(gameData)
+:	GameFSMTransition("LevelLoaded", "LoadLevel", "Level"), m_gameData(gameData)
 {}
 
 //#################### PUBLIC METHODS ####################
