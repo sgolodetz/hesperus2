@@ -28,6 +28,11 @@ private:
 public:
 	InputState();
 
+	//#################### COPY CONSTRUCTOR & ASSIGNMENT OPERATOR ####################
+private:
+	InputState(const InputState&);
+	InputState& operator=(const InputState&);
+
 	//#################### PUBLIC METHODS ####################
 public:
 	bool key_down(SDLKey key) const;

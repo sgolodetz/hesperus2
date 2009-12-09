@@ -33,20 +33,20 @@ void GameState_MainMenu::enter()
 #ifndef __linux__
 	// Load and play the menu music (except on Linux, which has a problem with MIDI files for some reason).
 	bf::path audioDir = DirectoryFinder::instance().determine_audio_directory();
-	m_gameData->m_soundSystem.create_sound("menu", (audioDir / "menu.mid").file_string(), SF_STREAM | SF_2D | SF_LOOP);
-	m_gameData->m_soundSystem.play_sound("menu");
+	m_gameData->sound_system().create_sound("menu", (audioDir / "menu.mid").file_string(), SF_STREAM | SF_2D | SF_LOOP);
+	m_gameData->sound_system().play_sound("menu");
 #endif
 }
 
 void GameState_MainMenu::execute()
 {
-	Screen::instance().handle_input(m_gameData->m_input);
+	Screen::instance().handle_input(m_gameData->input());
 }
 
 void GameState_MainMenu::leave()
 {
 #ifndef __linux__
-	m_gameData->m_soundSystem.destroy_sound("menu");
+	m_gameData->sound_system().destroy_sound("menu");
 #endif
 }
 
@@ -133,7 +133,7 @@ std::vector<Button*> GameState_MainMenu::menu_buttons()
 //#################### BUTTON HANDLERS ####################
 void GameState_MainMenu::on_released_ExitGame()
 {
-	m_gameData->m_quitRequested = true;
+	m_gameData->set_quit_requested();
 }
 
 void GameState_MainMenu::on_released_NewGame()

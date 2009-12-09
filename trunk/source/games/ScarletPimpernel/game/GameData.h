@@ -21,7 +21,8 @@ typedef shared_ptr<class Level> Level_Ptr;
 
 struct GameData
 {
-	//#################### PUBLIC VARIABLES ####################
+	//#################### PRIVATE VARIABLES ####################
+private:
 	InputState m_input;
 	Level_Ptr m_level;
 	std::string m_levelFilename;
@@ -30,7 +31,21 @@ struct GameData
 	SoundSystem m_soundSystem;
 
 	//#################### CONSTRUCTORS ####################
+public:
 	GameData();
+
+	//#################### PUBLIC METHODS ####################
+public:
+	InputState& input();
+	Level_Ptr level();
+	const std::string& level_filename();
+	int milliseconds() const;
+	bool quit_requested() const;
+	void set_level(const Level_Ptr& level);
+	void set_level_filename(const std::string& levelFilename);
+	void set_milliseconds(int milliseconds);
+	void set_quit_requested();
+	SoundSystem& sound_system();
 };
 
 //#################### TYPEDEFS ####################

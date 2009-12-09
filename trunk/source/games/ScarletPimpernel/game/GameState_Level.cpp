@@ -38,21 +38,21 @@ void GameState_Level::enter()
 
 void GameState_Level::execute()
 {
-	if(m_gameData->m_input.key_down(SDLK_ESCAPE))
+	if(m_gameData->input().key_down(SDLK_ESCAPE))
 	{
-		m_gameData->m_quitRequested = true;
+		m_gameData->set_quit_requested();
 		return;
 	}
 
 	// TEMPORARY: Allow quick toggling of the input grab using the 'g' key (for debugging purposes).
-	if(m_gameData->m_input.key_down(SDLK_g))
+	if(m_gameData->input().key_down(SDLK_g))
 	{
-		m_gameData->m_input.release_key(SDLK_g);
+		m_gameData->input().release_key(SDLK_g);
 		if(m_inputGrabbed) ungrab_input();
 		else grab_input();
 	}
 
-	m_gameData->m_level->update(m_gameData->m_milliseconds, m_gameData->m_input);
+	m_gameData->level()->update(m_gameData->milliseconds(), m_gameData->input());
 }
 
 void GameState_Level::leave()
@@ -74,10 +74,10 @@ GUIComponent_Ptr GameState_Level::construct_display()
 
 	Extents mainExtents(50, width/8, width - 50, height - 50);
 
-	Camera_Ptr camera(new FirstPersonCamera(m_gameData->m_level->object_manager()->player(), m_gameData->m_level->object_manager()));
-	display->layout().add(new LevelViewer(m_gameData->m_level, camera), mainExtents);
+	Camera_Ptr camera(new FirstPersonCamera(m_gameData->level()->object_manager()->player(), m_gameData->level()->object_manager()));
+	display->layout().add(new LevelViewer(m_gameData->level(), camera), mainExtents);
 
-	display->layout().add(new HUDViewer(m_gameData->m_level), mainExtents);
+	display->layout().add(new HUDViewer(m_gameData->level()), mainExtents);
 
 	return GUIComponent_Ptr(display);
 }

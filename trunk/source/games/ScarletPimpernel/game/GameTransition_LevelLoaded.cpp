@@ -22,7 +22,7 @@ std::string GameTransition_LevelLoaded::execute()
 
 bool GameTransition_LevelLoaded::triggered() const
 {
-	return m_gameData->m_level != NULL;
+	return m_gameData->level() != NULL;
 }
 
 }

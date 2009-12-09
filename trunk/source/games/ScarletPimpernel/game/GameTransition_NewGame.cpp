@@ -25,7 +25,7 @@ std::string GameTransition_NewGame::execute()
 	std::string levelName = ConfigOptions::instance().get<std::string>("levelName");
 	bf::path levelsDir = DirectoryFinder::instance().determine_levels_directory();
 	std::string relativeLevelPath = levelName + "/" + levelName + ".bsp";
-	m_gameData->m_levelFilename = (levelsDir / relativeLevelPath).file_string();
+	m_gameData->set_level_filename((levelsDir / relativeLevelPath).file_string());
 	return to();
 }
 

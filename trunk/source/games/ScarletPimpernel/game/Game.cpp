@@ -86,7 +86,7 @@ void Game::run()
 	Uint32 lastDraw = SDL_GetTicks();
 	for(;;)
 	{
-		if(m_data->m_quitRequested) quit(0);
+		if(m_data->quit_requested()) quit(0);
 
 		process_events();
 
@@ -103,9 +103,9 @@ void Game::run()
 
 			// Note:	We clamp the elapsed time to 50ms to prevent things moving
 			//			too far between one frame and the next.
-			m_data->m_milliseconds = std::min(timeElapsed, Uint32(50));
+			m_data->set_milliseconds(std::min(timeElapsed, Uint32(50)));
 			bool changedState = m_fsm->execute();
-			m_data->m_input.set_mouse_motion(0, 0);
+			m_data->input().set_mouse_motion(0, 0);
 
 			if(changedState)
 			{
@@ -119,12 +119,12 @@ void Game::run()
 //#################### PRIVATE METHODS ####################
 void Game::handle_key_down(const SDL_keysym& keysym)
 {
-	m_data->m_input.press_key(keysym.sym);
+	m_data->input().press_key(keysym.sym);
 }
 
 void Game::handle_key_up(const SDL_keysym& keysym)
 {
-	m_data->m_input.release_key(keysym.sym);
+	m_data->input().release_key(keysym.sym);
 }
 
 void Game::handle_mousebutton_down(const SDL_MouseButtonEvent& e)
@@ -132,13 +132,13 @@ void Game::handle_mousebutton_down(const SDL_MouseButtonEvent& e)
 	switch(e.button)
 	{
 		case SDL_BUTTON_LEFT:
-			m_data->m_input.press_mouse_button(MOUSE_BUTTON_LEFT, e.x, e.y);
+			m_data->input().press_mouse_button(MOUSE_BUTTON_LEFT, e.x, e.y);
 			break;
 		case SDL_BUTTON_MIDDLE:
-			m_data->m_input.press_mouse_button(MOUSE_BUTTON_MIDDLE, e.x, e.y);
+			m_data->input().press_mouse_button(MOUSE_BUTTON_MIDDLE, e.x, e.y);
 			break;
 		case SDL_BUTTON_RIGHT:
-			m_data->m_input.press_mouse_button(MOUSE_BUTTON_RIGHT, e.x, e.y);
+			m_data->input().press_mouse_button(MOUSE_BUTTON_RIGHT, e.x, e.y);
 			break;
 		default:
 			break;
@@ -150,13 +150,13 @@ void Game::handle_mousebutton_up(const SDL_MouseButtonEvent& e)
 	switch(e.button)
 	{
 		case SDL_BUTTON_LEFT:
-			m_data->m_input.release_mouse_button(MOUSE_BUTTON_LEFT);
+			m_data->input().release_mouse_button(MOUSE_BUTTON_LEFT);
 			break;
 		case SDL_BUTTON_MIDDLE:
-			m_data->m_input.release_mouse_button(MOUSE_BUTTON_MIDDLE);
+			m_data->input().release_mouse_button(MOUSE_BUTTON_MIDDLE);
 			break;
 		case SDL_BUTTON_RIGHT:
-			m_data->m_input.release_mouse_button(MOUSE_BUTTON_RIGHT);
+			m_data->input().release_mouse_button(MOUSE_BUTTON_RIGHT);
 			break;
 		default:
 			break;
@@ -183,8 +183,8 @@ void Game::process_events()
 				handle_mousebutton_up(event.button);
 				break;
 			case SDL_MOUSEMOTION:
-				m_data->m_input.set_mouse_position(event.motion.x, event.motion.y);
-				if(m_mouseMotionSinceStateChange) m_data->m_input.set_mouse_motion(event.motion.xrel, event.motion.yrel);
+				m_data->input().set_mouse_position(event.motion.x, event.motion.y);
+				if(m_mouseMotionSinceStateChange) m_data->input().set_mouse_motion(event.motion.xrel, event.motion.yrel);
 				else m_mouseMotionSinceStateChange = true;
 				break;
 			case SDL_QUIT:

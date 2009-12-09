@@ -25,14 +25,14 @@ GameState_LoadLevel::GameState_LoadLevel(const GameData_Ptr& gameData)
 void GameState_LoadLevel::enter()
 {
 	set_display(construct_display());
-	m_gameData->m_level.reset();
+	m_gameData->set_level(Level_Ptr());
 }
 
 void GameState_LoadLevel::execute()
 {
 	// Ensure that the loading screen's been rendered before we try and load the level (render happens after updating).
 	if(m_firstTime) m_firstTime = false;
-	else m_gameData->m_level = LevelFile::load(m_gameData->m_levelFilename);
+	else m_gameData->set_level(LevelFile::load(m_gameData->level_filename()));
 }
 
 //#################### PRIVATE METHODS ####################
@@ -48,8 +48,9 @@ GUIComponent_Ptr GameState_LoadLevel::construct_display()
 	display->layout().add(new Picture((imagesDir / "loading.png").file_string()), Extents(width/4, 0, width*3/4, width/8));
 
 	// Determine the level name.
-	size_t i = m_gameData->m_levelFilename.find_last_of("/\\");		// find the last slash (slanting either way) in the filename
-	std::string levelName = i == std::string::npos ? m_gameData->m_levelFilename.substr(0) : m_gameData->m_levelFilename.substr(i+1);
+	std::string levelFilename = m_gameData->level_filename();
+	size_t i = levelFilename.find_last_of("/\\");		// find the last slash (slanting either way) in the filename
+	std::string levelName = i == std::string::npos ? levelFilename.substr(0) : levelFilename.substr(i+1);
 	levelName = levelName.substr(0, levelName.length()-4);
 
 	// Load the appropriate loading image for the level.
