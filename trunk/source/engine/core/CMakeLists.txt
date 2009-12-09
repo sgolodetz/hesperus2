@@ -78,23 +78,6 @@ hesp/exceptions/InvalidParameterException.h
 )
 
 ##
-SET(game_sources
-hesp/game/Game.cpp
-hesp/game/GameState.cpp
-hesp/game/GameState_Level.cpp
-hesp/game/GameState_Load.cpp
-hesp/game/GameState_Menu.cpp
-)
-
-SET(game_headers
-hesp/game/Game.h
-hesp/game/GameState.h
-hesp/game/GameState_Level.h
-hesp/game/GameState_Load.h
-hesp/game/GameState_Menu.h
-)
-
-##
 SET(gui_sources
 hesp/gui/Button.cpp
 hesp/gui/ExplicitLayout.cpp
@@ -937,7 +920,6 @@ ${audio_sources}
 ${axes_sources}
 ${cameras_sources}
 ${colours_sources}
-${game_sources}
 ${gui_sources}
 ${images_sources}
 ${input_sources}
@@ -992,7 +974,6 @@ ${cameras_headers}
 ${colours_headers}
 ${datastructures_headers}
 ${exceptions_headers}
-${game_headers}
 ${gui_headers}
 ${images_headers}
 ${input_headers}
@@ -1086,10 +1067,6 @@ SOURCE_GROUP(datastructures\\.tpp FILES ${datastructures_templates})
 
 ##
 SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
-
-##
-SOURCE_GROUP(game\\.cpp FILES ${game_sources})
-SOURCE_GROUP(game\\.h FILES ${game_headers})
 
 ##
 SOURCE_GROUP(gui\\.cpp FILES ${gui_sources})
