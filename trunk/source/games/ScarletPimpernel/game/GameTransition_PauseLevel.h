@@ -1,10 +1,10 @@
 /***
- * ScarletPimpernel: GameTransition_NewGame.h
+ * ScarletPimpernel: GameTransition_PauseLevel.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_SCARLETPIMPERNEL_GAMETRANSITION_NEWGAME
-#define H_SCARLETPIMPERNEL_GAMETRANSITION_NEWGAME
+#ifndef H_SCARLETPIMPERNEL_GAMETRANSITION_PAUSELEVEL
+#define H_SCARLETPIMPERNEL_GAMETRANSITION_PAUSELEVEL
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
@@ -14,23 +14,20 @@ using boost::shared_ptr;
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
-typedef shared_ptr<class GameData> GameData_Ptr;
-typedef shared_ptr<class GameState_MainMenu> GameState_MainMenu_Ptr;
+typedef shared_ptr<class GameState_Level> GameState_Level_Ptr;
 
-class GameTransition_NewGame : public FSMTransition
+class GameTransition_PauseLevel : public FSMTransition
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
-	GameData_Ptr m_gameData;
-	GameState_MainMenu_Ptr m_mainMenuState;
+	GameState_Level_Ptr m_levelState;
 
 	//#################### CONSTRUCTORS ####################
 public:
-	GameTransition_NewGame(const GameData_Ptr& gameData, const GameState_MainMenu_Ptr& mainMenuState);
+	explicit GameTransition_PauseLevel(const GameState_Level_Ptr& levelState);
 
 	//#################### PUBLIC METHODS ####################
 public:
-	void execute();
 	bool triggered() const;
 };
 

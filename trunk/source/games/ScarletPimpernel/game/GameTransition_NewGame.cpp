@@ -30,7 +30,7 @@ void GameTransition_NewGame::execute()
 
 bool GameTransition_NewGame::triggered() const
 {
-	return m_mainMenuState->new_game_pressed();
+	return m_mainMenuState->new_game_flag();
 }
 
 }

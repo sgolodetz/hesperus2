@@ -8,7 +8,6 @@
 #include <boost/bind.hpp>
 
 #include <hesp/gui/Button.h>
-#include <hesp/gui/Screen.h>
 #include <hesp/io/util/DirectoryFinder.h>
 #include "GameData.h"
 
@@ -24,29 +23,15 @@ GameState_MainMenu::GameState_MainMenu(const GameData_Ptr& gameData)
 //#################### PUBLIC METHODS ####################
 void GameState_MainMenu::enter()
 {
-	// Reset all the button flags.
-	m_newGamePressed = false;
+	GameState_ButtonsMenu::enter();
 
-	set_display(construct_menu(menu_buttons()));
-
-#ifndef __linux__
-	// Load and play the menu music (except on Linux, which has a problem with MIDI files for some reason).
-	bf::path audioDir = DirectoryFinder::instance().determine_audio_directory();
-	m_gameData->sound_system().create_sound("menu", (audioDir / "menu.mid").file_string(), SF_STREAM | SF_2D | SF_LOOP);
-	m_gameData->sound_system().play_sound("menu");
-#endif
+	// Reset the flags.
+	m_newGameFlag = false;
 }
 
-void GameState_MainMenu::leave()
+bool GameState_MainMenu::new_game_flag() const
 {
-#ifndef __linux__
-	m_gameData->sound_system().destroy_sound("menu");
-#endif
-}
-
-bool GameState_MainMenu::new_game_pressed() const
-{
-	return m_newGamePressed;
+	return m_newGameFlag;
 }
 
 //#################### PRIVATE METHODS ####################
@@ -74,7 +59,7 @@ void GameState_MainMenu::on_released_ExitGame()
 
 void GameState_MainMenu::on_released_NewGame()
 {
-	m_newGamePressed = true;
+	m_newGameFlag = true;
 }
 
 }

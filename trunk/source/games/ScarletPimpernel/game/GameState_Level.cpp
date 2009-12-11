@@ -34,13 +34,16 @@ void GameState_Level::enter()
 
 	set_display(construct_display());
 	grab_input();
+
+	// Reset the flags.
+	m_pauseLevelFlag = false;
 }
 
 void GameState_Level::execute()
 {
 	if(m_gameData->input().key_down(SDLK_ESCAPE))
 	{
-		m_gameData->set_quit_requested();
+		m_pauseLevelFlag = true;
 		return;
 	}
 
@@ -58,6 +61,11 @@ void GameState_Level::execute()
 void GameState_Level::leave()
 {
 	ungrab_input();
+}
+
+bool GameState_Level::pause_level_flag() const
+{
+	return m_pauseLevelFlag;
 }
 
 //#################### PRIVATE METHODS ####################

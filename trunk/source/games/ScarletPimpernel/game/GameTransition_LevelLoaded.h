@@ -14,7 +14,7 @@ using boost::shared_ptr;
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
-typedef shared_ptr<struct GameData> GameData_Ptr;
+typedef shared_ptr<class GameData> GameData_Ptr;
 
 class GameTransition_LevelLoaded : public FSMTransition
 {
@@ -28,7 +28,6 @@ public:
 
 	//#################### PUBLIC METHODS ####################
 public:
-	void execute();
 	bool triggered() const;
 };
 

@@ -19,7 +19,7 @@ namespace hesp {
 //#################### FORWARD DECLARATIONS ####################
 typedef shared_ptr<class Level> Level_Ptr;
 
-struct GameData
+class GameData
 {
 	//#################### PRIVATE VARIABLES ####################
 private:

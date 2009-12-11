@@ -1,10 +1,10 @@
 /***
- * ScarletPimpernel: GameTransition_NewGame.h
+ * ScarletPimpernel: GameTransition_ResumeLevel.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_SCARLETPIMPERNEL_GAMETRANSITION_NEWGAME
-#define H_SCARLETPIMPERNEL_GAMETRANSITION_NEWGAME
+#ifndef H_SCARLETPIMPERNEL_GAMETRANSITION_RESUMELEVEL
+#define H_SCARLETPIMPERNEL_GAMETRANSITION_RESUMELEVEL
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
@@ -14,23 +14,20 @@ using boost::shared_ptr;
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
-typedef shared_ptr<class GameData> GameData_Ptr;
-typedef shared_ptr<class GameState_MainMenu> GameState_MainMenu_Ptr;
+typedef shared_ptr<class GameState_InGameMenu> GameState_InGameMenu_Ptr;
 
-class GameTransition_NewGame : public FSMTransition
+class GameTransition_ResumeLevel : public FSMTransition
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
-	GameData_Ptr m_gameData;
-	GameState_MainMenu_Ptr m_mainMenuState;
+	GameState_InGameMenu_Ptr m_inGameMenuState;
 
 	//#################### CONSTRUCTORS ####################
 public:
-	GameTransition_NewGame(const GameData_Ptr& gameData, const GameState_MainMenu_Ptr& mainMenuState);
+	explicit GameTransition_ResumeLevel(const GameState_InGameMenu_Ptr& inGameMenuState);
 
 	//#################### PUBLIC METHODS ####################
 public:
-	void execute();
 	bool triggered() const;
 };
 

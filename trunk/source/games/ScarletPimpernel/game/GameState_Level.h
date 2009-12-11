@@ -11,7 +11,7 @@
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
-typedef shared_ptr<struct GameData> GameData_Ptr;
+typedef shared_ptr<class GameData> GameData_Ptr;
 
 class GameState_Level : public GameState
 {
@@ -19,6 +19,9 @@ class GameState_Level : public GameState
 private:
 	GameData_Ptr m_gameData;
 	bool m_inputGrabbed;
+
+	// Flags
+	bool m_pauseLevelFlag;
 
 	//#################### CONSTRUCTORS ####################
 public:
@@ -29,6 +32,7 @@ public:
 	void enter();
 	void execute();
 	void leave();
+	bool pause_level_flag() const;
 
 	//#################### PRIVATE METHODS ####################
 private:

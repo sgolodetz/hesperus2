@@ -21,11 +21,15 @@ game/Game.cpp
 game/GameData.cpp
 game/GameState.cpp
 game/GameState_ButtonsMenu.cpp
+game/GameState_InGameMenu.cpp
 game/GameState_Level.cpp
 game/GameState_LoadLevel.cpp
 game/GameState_MainMenu.cpp
+game/GameTransition_ExitLevel.cpp
 game/GameTransition_LevelLoaded.cpp
 game/GameTransition_NewGame.cpp
+game/GameTransition_PauseLevel.cpp
+game/GameTransition_ResumeLevel.cpp
 )
 
 SET(game_headers
@@ -33,11 +37,15 @@ game/Game.h
 game/GameData.h
 game/GameState.h
 game/GameState_ButtonsMenu.h
+game/GameState_InGameMenu.h
 game/GameState_Level.h
 game/GameState_LoadLevel.h
 game/GameState_MainMenu.h
+game/GameTransition_ExitLevel.h
 game/GameTransition_LevelLoaded.h
 game/GameTransition_NewGame.h
+game/GameTransition_PauseLevel.h
+game/GameTransition_ResumeLevel.h
 )
 
 ##

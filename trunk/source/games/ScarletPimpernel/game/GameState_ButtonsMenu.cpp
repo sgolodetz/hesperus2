@@ -21,9 +21,36 @@ GameState_ButtonsMenu::GameState_ButtonsMenu(const std::string& name, const Game
 {}
 
 //#################### PUBLIC METHODS ####################
+void GameState_ButtonsMenu::enter()
+{
+	set_display(construct_menu(menu_buttons()));
+
+#ifndef __linux__
+	// FIXME: Linux has a problem with MIDI files for some reason.
+	if(!m_gameData->sound_system().has_sound("menu"))
+	{
+		// Load the menu music if it's not already loaded.
+		bf::path audioDir = DirectoryFinder::instance().determine_audio_directory();
+		m_gameData->sound_system().create_sound("menu", (audioDir / "menu.mid").file_string(), SF_STREAM | SF_2D | SF_LOOP);
+	}
+	m_menuSoundInstance = m_gameData->sound_system().play_sound("menu");
+#endif
+}
+
 void GameState_ButtonsMenu::execute()
 {
 	Screen::instance().handle_input(m_gameData->input());
+}
+
+void GameState_ButtonsMenu::leave()
+{
+#ifndef __linux__
+	if(m_menuSoundInstance)
+	{
+		m_gameData->sound_system().destroy_instance(*m_menuSoundInstance);
+		m_menuSoundInstance.reset();
+	}
+#endif
 }
 
 //#################### PROTECTED METHODS ####################

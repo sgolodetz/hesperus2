@@ -11,7 +11,7 @@
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
-typedef shared_ptr<struct GameData> GameData_Ptr;
+typedef shared_ptr<class GameData> GameData_Ptr;
 
 class GameState_LoadLevel : public GameState
 {

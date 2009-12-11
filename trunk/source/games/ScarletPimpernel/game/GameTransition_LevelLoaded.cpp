@@ -15,11 +15,6 @@ GameTransition_LevelLoaded::GameTransition_LevelLoaded(const GameData_Ptr& gameD
 {}
 
 //#################### PUBLIC METHODS ####################
-void GameTransition_LevelLoaded::execute()
-{
-	// Nothing to do
-}
-
 bool GameTransition_LevelLoaded::triggered() const
 {
 	return m_gameData->level() != NULL;

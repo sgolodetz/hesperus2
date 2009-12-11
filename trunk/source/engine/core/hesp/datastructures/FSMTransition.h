@@ -26,7 +26,7 @@ public:
 
 	//#################### PUBLIC ABSTRACT METHODS ####################
 public:
-	virtual void execute() = 0;
+	virtual void execute();
 	virtual bool triggered() const = 0;
 
 	//#################### PUBLIC METHODS ####################

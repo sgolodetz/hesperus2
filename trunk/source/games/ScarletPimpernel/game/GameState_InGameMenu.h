@@ -1,29 +1,31 @@
 /***
- * ScarletPimpernel: GameState_MainMenu.h
+ * ScarletPimpernel: GameState_InGameMenu.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_SCARLETPIMPERNEL_GAMESTATE_MAINMENU
-#define H_SCARLETPIMPERNEL_GAMESTATE_MAINMENU
+#ifndef H_SCARLETPIMPERNEL_GAMESTATE_INGAMEMENU
+#define H_SCARLETPIMPERNEL_GAMESTATE_INGAMEMENU
 
 #include "GameState_ButtonsMenu.h"
 
 namespace hesp {
 
-class GameState_MainMenu : public GameState_ButtonsMenu
+class GameState_InGameMenu : public GameState_ButtonsMenu
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
-	bool m_newGameFlag;
+	bool m_exitLevelFlag;
+	bool m_resumeLevelFlag;
 
 	//#################### CONSTRUCTORS ####################
 public:
-	GameState_MainMenu(const GameData_Ptr& gameData);
+	explicit GameState_InGameMenu(const GameData_Ptr& gameData);
 
 	//#################### PUBLIC METHODS ####################
 public:
 	void enter();
-	bool new_game_flag() const;
+	bool exit_level_flag() const;
+	bool resume_level_flag() const;
 
 	//#################### PRIVATE METHODS ####################
 private:
@@ -31,8 +33,8 @@ private:
 
 	//#################### BUTTON HANDLERS ####################
 private:
-	void on_released_ExitGame();
-	void on_released_NewGame();
+	void on_released_ExitLevel();
+	void on_released_ResumeLevel();
 };
 
 }

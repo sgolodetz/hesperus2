@@ -15,6 +15,14 @@ FSMTransition::FSMTransition(const std::string& name, const std::string& from, c
 //#################### DESTRUCTOR ####################
 FSMTransition::~FSMTransition() {}
 
+//#################### PUBLIC ABSTRACT METHODS ####################
+void FSMTransition::execute()
+{
+	// Note:	A default implementation is provided so that transitions that don't
+	//			need to do anything special when they're triggered aren't forced to
+	//			provide an empty implementation.
+}
+
 //#################### PUBLIC METHODS ####################
 const std::string& FSMTransition::from() const
 {

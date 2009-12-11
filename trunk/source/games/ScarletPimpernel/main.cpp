@@ -11,11 +11,15 @@
 #include <hesp/io/util/DirectoryFinder.h>
 #include "game/Game.h"
 #include "game/GameData.h"
+#include "game/GameState_InGameMenu.h"
 #include "game/GameState_Level.h"
 #include "game/GameState_LoadLevel.h"
 #include "game/GameState_MainMenu.h"
+#include "game/GameTransition_ExitLevel.h"
 #include "game/GameTransition_LevelLoaded.h"
 #include "game/GameTransition_NewGame.h"
+#include "game/GameTransition_PauseLevel.h"
+#include "game/GameTransition_ResumeLevel.h"
 using namespace hesp;
 
 int main(int argc, char* argv[])
@@ -30,14 +34,24 @@ try
 
 	// Add game states.
 	GameData_Ptr gameData(new GameData);
-	gameFSM->add_state(FSMState_Ptr(new GameState_Level(gameData)));
+
+	GameState_InGameMenu_Ptr inGameMenuState(new GameState_InGameMenu(gameData));
+	gameFSM->add_state(inGameMenuState);
+
+	GameState_Level_Ptr levelState(new GameState_Level(gameData));
+	gameFSM->add_state(levelState);
+
 	gameFSM->add_state(FSMState_Ptr(new GameState_LoadLevel(gameData)));
+
 	GameState_MainMenu_Ptr mainMenuState(new GameState_MainMenu(gameData));
 	gameFSM->add_state(mainMenuState);
 
 	// Add game transitions.
+	gameFSM->add_transition(FSMTransition_Ptr(new GameTransition_ExitLevel(gameData, inGameMenuState)));
 	gameFSM->add_transition(FSMTransition_Ptr(new GameTransition_LevelLoaded(gameData)));
 	gameFSM->add_transition(FSMTransition_Ptr(new GameTransition_NewGame(gameData, mainMenuState)));
+	gameFSM->add_transition(FSMTransition_Ptr(new GameTransition_PauseLevel(levelState)));
+	gameFSM->add_transition(FSMTransition_Ptr(new GameTransition_ResumeLevel(inGameMenuState)));
 
 	// Construct and run the game.
 	Game game(gameFSM, "MainMenu", gameData);
