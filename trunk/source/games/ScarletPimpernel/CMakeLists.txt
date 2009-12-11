@@ -20,6 +20,7 @@ SET(game_sources
 game/Game.cpp
 game/GameData.cpp
 game/GameState.cpp
+game/GameState_ButtonsMenu.cpp
 game/GameState_Level.cpp
 game/GameState_LoadLevel.cpp
 game/GameState_MainMenu.cpp
@@ -31,6 +32,7 @@ SET(game_headers
 game/Game.h
 game/GameData.h
 game/GameState.h
+game/GameState_ButtonsMenu.h
 game/GameState_Level.h
 game/GameState_LoadLevel.h
 game/GameState_MainMenu.h

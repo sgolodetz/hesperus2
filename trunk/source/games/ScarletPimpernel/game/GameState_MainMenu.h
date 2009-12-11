@@ -6,22 +6,14 @@
 #ifndef H_SCARLETPIMPERNEL_GAMESTATE_MAINMENU
 #define H_SCARLETPIMPERNEL_GAMESTATE_MAINMENU
 
-#include <vector>
-
-#include "GameState.h"
+#include "GameState_ButtonsMenu.h"
 
 namespace hesp {
 
-//#################### FORWARD DECLARATIONS ####################
-class Button;
-typedef shared_ptr<struct GameData> GameData_Ptr;
-typedef shared_ptr<class GUIComponent> GUIComponent_Ptr;
-
-class GameState_MainMenu : public GameState
+class GameState_MainMenu : public GameState_ButtonsMenu
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
-	GameData_Ptr m_gameData;
 	bool m_newGamePressed;
 
 	//#################### CONSTRUCTORS ####################
@@ -31,14 +23,12 @@ public:
 	//#################### PUBLIC METHODS ####################
 public:
 	void enter();
-	void execute();
 	void leave();
 
 	bool new_game_pressed() const;
 
 	//#################### PRIVATE METHODS ####################
 private:
-	GUIComponent_Ptr construct_buttons_menu(const std::vector<Button*> menuButtons);
 	std::vector<Button*> menu_buttons();
 
 	//#################### BUTTON HANDLERS ####################
