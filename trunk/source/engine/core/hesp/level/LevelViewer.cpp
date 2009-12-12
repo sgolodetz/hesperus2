@@ -11,14 +11,14 @@
 #include <hesp/cameras/Camera.h>
 #include <hesp/colours/Colour3d.h>
 #include <hesp/gui/Screen.h>
-#include <hesp/level/nav/NavDataset.h>
-#include <hesp/level/nav/NavLink.h>
-#include <hesp/level/nav/NavManager.h>
-#include <hesp/level/nav/NavMesh.h>
-#include <hesp/level/nav/NavPolygon.h>
-#include <hesp/level/objects/components/ICmpModelRender.h>
-#include <hesp/level/sprites/SpriteManager.h>
-#include <hesp/level/trees/BSPTree.h>
+#include <hesp/nav/NavDataset.h>
+#include <hesp/nav/NavLink.h>
+#include <hesp/nav/NavManager.h>
+#include <hesp/nav/NavMesh.h>
+#include <hesp/nav/NavPolygon.h>
+#include <hesp/objects/components/ICmpModelRender.h>
+#include <hesp/sprites/SpriteManager.h>
+#include <hesp/trees/BSPTree.h>
 #include "GeometryRenderer.h"
 
 namespace hesp {

@@ -7,10 +7,10 @@
 #include <string>
 #include <vector>
 
+#include <hesp/brushes/PolyhedralBrush.h>
 #include <hesp/io/files/BrushesFile.h>
 #include <hesp/io/files/GeometryFile.h>
 #include <hesp/io/util/IOUtil.h>
-#include <hesp/level/brushes/PolyhedralBrush.h>
 #include <hesp/math/geom/GeomUtil.h>
 #include <hesp/math/geom/Plane.h>
 #include <hesp/util/PolygonTypes.h>

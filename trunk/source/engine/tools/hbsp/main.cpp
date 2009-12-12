@@ -14,7 +14,7 @@ using boost::lexical_cast;
 
 #include <hesp/io/files/GeometryFile.h>
 #include <hesp/io/files/TreeFile.h>
-#include <hesp/level/trees/BSPCompiler.h>
+#include <hesp/trees/BSPCompiler.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

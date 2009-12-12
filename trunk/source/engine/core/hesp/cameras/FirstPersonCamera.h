@@ -6,7 +6,7 @@
 #ifndef H_HESP_FIRSTPERSONCAMERA
 #define H_HESP_FIRSTPERSONCAMERA
 
-#include <hesp/level/objects/base/ObjectID.h>
+#include <hesp/objects/base/ObjectID.h>
 #include "Camera.h"
 
 namespace hesp {

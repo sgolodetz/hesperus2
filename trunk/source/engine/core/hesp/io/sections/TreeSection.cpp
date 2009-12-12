@@ -8,7 +8,7 @@
 #include <iostream>
 
 #include <hesp/io/util/LineIO.h>
-#include <hesp/level/trees/BSPTree.h>
+#include <hesp/trees/BSPTree.h>
 
 namespace hesp {
 

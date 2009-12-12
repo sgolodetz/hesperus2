@@ -14,8 +14,8 @@ using boost::lexical_cast;
 
 #include <hesp/io/files/PortalsFile.h>
 #include <hesp/io/files/TreeFile.h>
-#include <hesp/level/portals/PortalGenerator.h>
-#include <hesp/level/trees/BSPTree.h>
+#include <hesp/portals/PortalGenerator.h>
+#include <hesp/trees/BSPTree.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

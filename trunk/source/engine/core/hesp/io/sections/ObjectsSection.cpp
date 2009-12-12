@@ -13,9 +13,9 @@ using boost::lexical_cast;
 
 #include <hesp/io/util/LineIO.h>
 #include <hesp/io/util/PropertyIO.h>
-#include <hesp/level/objects/base/IObjectComponent.h>
-#include <hesp/level/objects/base/ObjectManager.h>
-#include <hesp/level/objects/yokes/minimus/MinimusScriptYoke.h>
+#include <hesp/objects/base/IObjectComponent.h>
+#include <hesp/objects/base/ObjectManager.h>
+#include <hesp/objects/yokes/minimus/MinimusScriptYoke.h>
 #include <hesp/util/Properties.h>
 
 namespace hesp {

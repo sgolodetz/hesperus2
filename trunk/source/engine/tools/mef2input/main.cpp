@@ -12,12 +12,12 @@
 using boost::bad_lexical_cast;
 using boost::lexical_cast;
 
+#include <hesp/brushes/PolyhedralBrush.h>
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/files/BrushesFile.h>
 #include <hesp/io/files/DefinitionsSpecifierFile.h>
 #include <hesp/io/files/LightsFile.h>
 #include <hesp/io/util/FieldIO.h>
-#include <hesp/level/brushes/PolyhedralBrush.h>
 #include <hesp/math/geom/AABB.h>
 #include <hesp/math/geom/GeomUtil.h>
 #include <hesp/util/PolygonTypes.h>

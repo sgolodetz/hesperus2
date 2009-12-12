@@ -11,14 +11,14 @@
 using boost::bad_lexical_cast;
 using boost::lexical_cast;
 
+#include <hesp/bounds/AABBBounds.h>
+#include <hesp/bounds/BoundsManager.h>
+#include <hesp/bounds/PointBounds.h>
+#include <hesp/bounds/SphereBounds.h>
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/util/PropertyIO.h>
-#include <hesp/level/bounds/AABBBounds.h>
-#include <hesp/level/bounds/BoundsManager.h>
-#include <hesp/level/bounds/PointBounds.h>
-#include <hesp/level/bounds/SphereBounds.h>
-#include <hesp/level/objects/base/ComponentPropertyTypeMap.h>
-#include <hesp/level/objects/base/ObjectSpecification.h>
+#include <hesp/objects/base/ComponentPropertyTypeMap.h>
+#include <hesp/objects/base/ObjectSpecification.h>
 #include <hesp/xml/XMLParser.h>
 
 namespace hesp {

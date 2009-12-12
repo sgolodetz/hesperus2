@@ -15,17 +15,17 @@ using boost::lexical_cast;
 #include <hesp/images/ImageLoader.h>
 #include <hesp/io/util/DirectoryFinder.h>
 #include <hesp/io/util/LineIO.h>
-#include <hesp/level/models/Animation.h>
-#include <hesp/level/models/Bone.h>
-#include <hesp/level/models/BoneHierarchy.h>
-#include <hesp/level/models/Mesh.h>
-#include <hesp/level/models/Model.h>
-#include <hesp/level/models/Pose.h>
-#include <hesp/level/models/Skeleton.h>
-#include <hesp/level/models/Submesh.h>
 #include <hesp/materials/BasicMaterial.h>
 #include <hesp/materials/TextureMaterial.h>
 #include <hesp/math/matrices/RBTMatrix.h>
+#include <hesp/models/Animation.h>
+#include <hesp/models/Bone.h>
+#include <hesp/models/BoneHierarchy.h>
+#include <hesp/models/Mesh.h>
+#include <hesp/models/Model.h>
+#include <hesp/models/Pose.h>
+#include <hesp/models/Skeleton.h>
+#include <hesp/models/Submesh.h>
 #include <hesp/textures/TextureFactory.h>
 #include <hesp/xml/XMLParser.h>
 namespace bf = boost::filesystem;

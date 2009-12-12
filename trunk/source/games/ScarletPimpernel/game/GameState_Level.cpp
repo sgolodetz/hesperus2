@@ -14,7 +14,7 @@
 #include <hesp/io/util/DirectoryFinder.h>
 #include <hesp/level/HUDViewer.h>
 #include <hesp/level/LevelViewer.h>
-#include <hesp/level/objects/base/ObjectManager.h>
+#include <hesp/objects/base/ObjectManager.h>
 #include "GameData.h"
 
 namespace bf = boost::filesystem;

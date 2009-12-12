@@ -13,8 +13,8 @@ using boost::lexical_cast;
 
 #include <hesp/io/files/OnionPortalsFile.h>
 #include <hesp/io/files/OnionTreeFile.h>
-#include <hesp/level/portals/OnionPortalGenerator.h>
-#include <hesp/level/trees/OnionTree.h>
+#include <hesp/portals/OnionPortalGenerator.h>
+#include <hesp/trees/OnionTree.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

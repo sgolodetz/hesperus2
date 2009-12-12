@@ -15,12 +15,12 @@ namespace bf = boost::filesystem;
 using boost::bad_lexical_cast;
 using boost::lexical_cast;
 
+#include <hesp/bounds/BoundsManager.h>
+#include <hesp/brushes/BrushExpander.h>
 #include <hesp/io/files/BrushesFile.h>
 #include <hesp/io/files/DefinitionsFile.h>
 #include <hesp/io/files/DefinitionsSpecifierFile.h>
 #include <hesp/io/util/DirectoryFinder.h>
-#include <hesp/level/bounds/BoundsManager.h>
-#include <hesp/level/brushes/BrushExpander.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

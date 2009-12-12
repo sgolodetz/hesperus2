@@ -9,7 +9,7 @@
 
 #include <hesp/io/files/PortalsFile.h>
 #include <hesp/io/files/VisFile.h>
-#include <hesp/level/vis/VisCalculator.h>
+#include <hesp/vis/VisCalculator.h>
 using namespace hesp;
 
 //#################### FUNCTIONS ####################

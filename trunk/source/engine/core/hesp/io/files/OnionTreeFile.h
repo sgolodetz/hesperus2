@@ -6,7 +6,7 @@
 #ifndef H_HESP_ONIONTREEFILE
 #define H_HESP_ONIONTREEFILE
 
-#include <hesp/level/trees/OnionTree.h>
+#include <hesp/trees/OnionTree.h>
 
 namespace hesp {
 

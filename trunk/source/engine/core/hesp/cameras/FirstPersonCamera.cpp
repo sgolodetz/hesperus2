@@ -6,10 +6,10 @@
 #include "FirstPersonCamera.h"
 
 #include <hesp/axes/NUVAxes.h>
-#include <hesp/level/bounds/Bounds.h>
-#include <hesp/level/bounds/BoundsManager.h>
-#include <hesp/level/objects/components/ICmpOrientation.h>
-#include <hesp/level/objects/components/ICmpSimulation.h>
+#include <hesp/bounds/Bounds.h>
+#include <hesp/bounds/BoundsManager.h>
+#include <hesp/objects/components/ICmpOrientation.h>
+#include <hesp/objects/components/ICmpSimulation.h>
 
 namespace hesp {
 

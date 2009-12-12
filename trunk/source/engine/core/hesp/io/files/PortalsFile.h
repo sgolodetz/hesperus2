@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-#include <hesp/level/portals/Portal.h>
+#include <hesp/portals/Portal.h>
 
 namespace hesp {
 

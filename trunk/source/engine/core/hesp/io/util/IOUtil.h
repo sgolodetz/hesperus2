@@ -6,7 +6,7 @@
 #ifndef H_HESP_IOUTIL
 #define H_HESP_IOUTIL
 
-#include <hesp/level/brushes/PolyhedralBrush.h>
+#include <hesp/brushes/PolyhedralBrush.h>
 #include <hesp/math/geom/Polygon.h>
 
 namespace hesp {

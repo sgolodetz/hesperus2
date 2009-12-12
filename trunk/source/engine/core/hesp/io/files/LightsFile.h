@@ -8,7 +8,7 @@
 
 #include <vector>
 
-#include <hesp/level/lighting/Light.h>
+#include <hesp/lighting/Light.h>
 
 namespace hesp {
 

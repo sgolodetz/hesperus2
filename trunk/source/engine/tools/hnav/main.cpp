@@ -10,20 +10,20 @@
 #include <boost/filesystem/operations.hpp>
 namespace bf = boost::filesystem;
 
+#include <hesp/bounds/Bounds.h>
+#include <hesp/bounds/BoundsManager.h>
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/files/DefinitionsFile.h>
 #include <hesp/io/files/DefinitionsSpecifierFile.h>
 #include <hesp/io/files/NavFile.h>
 #include <hesp/io/files/OnionTreeFile.h>
 #include <hesp/io/util/DirectoryFinder.h>
-#include <hesp/level/bounds/Bounds.h>
-#include <hesp/level/bounds/BoundsManager.h>
-#include <hesp/level/nav/AdjacencyList.h>
-#include <hesp/level/nav/AdjacencyTable.h>
-#include <hesp/level/nav/NavDataset.h>
-#include <hesp/level/nav/NavManager.h>
-#include <hesp/level/nav/NavMeshGenerator.h>
-#include <hesp/level/nav/PathTableGenerator.h>
+#include <hesp/nav/AdjacencyList.h>
+#include <hesp/nav/AdjacencyTable.h>
+#include <hesp/nav/NavDataset.h>
+#include <hesp/nav/NavManager.h>
+#include <hesp/nav/NavMeshGenerator.h>
+#include <hesp/nav/PathTableGenerator.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

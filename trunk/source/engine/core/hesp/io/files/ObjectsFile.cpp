@@ -11,7 +11,7 @@
 #include <hesp/io/sections/ModelNamesSection.h>
 #include <hesp/io/sections/ObjectsSection.h>
 #include <hesp/io/sections/SpriteNamesSection.h>
-#include <hesp/level/objects/base/ObjectManager.h>
+#include <hesp/objects/base/ObjectManager.h>
 
 namespace hesp {
 

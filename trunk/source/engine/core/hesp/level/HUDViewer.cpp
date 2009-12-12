@@ -12,9 +12,9 @@
 using boost::lexical_cast;
 
 #include <hesp/gui/Screen.h>
-#include <hesp/level/objects/components/ICmpAmmoNeedingUsable.h>
-#include <hesp/level/objects/components/ICmpHealth.h>
-#include <hesp/level/objects/components/ICmpInventory.h>
+#include <hesp/objects/components/ICmpAmmoNeedingUsable.h>
+#include <hesp/objects/components/ICmpHealth.h>
+#include <hesp/objects/components/ICmpInventory.h>
 #include <hesp/util/TextRenderer.h>
 #include "Level.h"
 

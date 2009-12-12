@@ -10,8 +10,8 @@
 #include <boost/lexical_cast.hpp>
 using boost::bad_lexical_cast;
 
-#include <hesp/level/objects/base/ObjectID.h>
 #include <hesp/math/vectors/Vector3.h>
+#include <hesp/objects/base/ObjectID.h>
 
 namespace hesp {
 

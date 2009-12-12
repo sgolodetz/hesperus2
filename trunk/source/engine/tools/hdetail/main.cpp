@@ -8,12 +8,12 @@
 #include <string>
 #include <vector>
 
+#include <hesp/brushes/PolyhedralBrush.h>
+#include <hesp/csg/CSGUtil.h>
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/files/BrushesFile.h>
 #include <hesp/io/files/TreeFile.h>
-#include <hesp/level/brushes/PolyhedralBrush.h>
-#include <hesp/level/csg/CSGUtil.h>
-#include <hesp/level/trees/BSPUtil.h>
+#include <hesp/trees/BSPUtil.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

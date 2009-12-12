@@ -9,10 +9,10 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
-#include <hesp/level/portals/OnionPortal.h>
-#include <hesp/level/portals/Portal.h>
-#include <hesp/level/vis/VisTable.h>
+#include <hesp/portals/OnionPortal.h>
+#include <hesp/portals/Portal.h>
 #include <hesp/util/PolygonTypes.h>
+#include <hesp/vis/VisTable.h>
 
 namespace hesp {
 

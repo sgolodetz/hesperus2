@@ -7,10 +7,10 @@
 #include <string>
 #include <vector>
 
+#include <hesp/csg/CSGUtil.h>
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/files/BrushesFile.h>
 #include <hesp/io/files/GeometryFile.h>
-#include <hesp/level/csg/CSGUtil.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

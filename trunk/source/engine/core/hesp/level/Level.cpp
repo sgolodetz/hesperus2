@@ -6,23 +6,23 @@
 #include "Level.h"
 
 #include <hesp/axes/NUVAxes.h>
+#include <hesp/bounds/Bounds.h>
+#include <hesp/bounds/BoundsManager.h>
 #include <hesp/input/InputState.h>
-#include <hesp/level/bounds/Bounds.h>
-#include <hesp/level/bounds/BoundsManager.h>
-#include <hesp/level/objects/base/ObjectCommand.h>
-#include <hesp/level/objects/base/ObjectManager.h>
-#include <hesp/level/objects/components/ICmpActivatable.h>
-#include <hesp/level/objects/components/ICmpModelRender.h>
-#include <hesp/level/objects/components/ICmpMovement.h>
-#include <hesp/level/objects/components/ICmpOrientation.h>
-#include <hesp/level/objects/components/ICmpSimulation.h>
-#include <hesp/level/objects/components/ICmpYoke.h>
-#include <hesp/level/objects/messages/MsgTimeElapsed.h>
-#include <hesp/level/physics/PhysicsSystem.h>
-#include <hesp/level/nav/NavDataset.h>
-#include <hesp/level/nav/NavMesh.h>
-#include <hesp/level/trees/BSPTree.h>
-#include <hesp/level/trees/TreeUtil.h>
+#include <hesp/nav/NavDataset.h>
+#include <hesp/nav/NavMesh.h>
+#include <hesp/objects/base/ObjectCommand.h>
+#include <hesp/objects/base/ObjectManager.h>
+#include <hesp/objects/components/ICmpActivatable.h>
+#include <hesp/objects/components/ICmpModelRender.h>
+#include <hesp/objects/components/ICmpMovement.h>
+#include <hesp/objects/components/ICmpOrientation.h>
+#include <hesp/objects/components/ICmpSimulation.h>
+#include <hesp/objects/components/ICmpYoke.h>
+#include <hesp/objects/messages/MsgTimeElapsed.h>
+#include <hesp/physics/PhysicsSystem.h>
+#include <hesp/trees/BSPTree.h>
+#include <hesp/trees/TreeUtil.h>
 
 namespace hesp {
 

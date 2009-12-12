@@ -6,7 +6,7 @@
 #ifndef H_HESP_TREEFILE
 #define H_HESP_TREEFILE
 
-#include <hesp/level/trees/BSPTree.h>
+#include <hesp/trees/BSPTree.h>
 
 namespace hesp {
 

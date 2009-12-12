@@ -14,7 +14,7 @@ using boost::lexical_cast;
 #include <hesp/io/files/GeometryFile.h>
 #include <hesp/io/files/OnionTreeFile.h>
 #include <hesp/io/files/TreeFile.h>
-#include <hesp/level/trees/OnionCompiler.h>
+#include <hesp/trees/OnionCompiler.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

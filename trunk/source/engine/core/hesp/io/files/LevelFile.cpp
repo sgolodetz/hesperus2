@@ -24,8 +24,8 @@ namespace bf = boost::filesystem;
 #include <hesp/io/util/DirectoryFinder.h>
 #include <hesp/level/LitGeometryRenderer.h>
 #include <hesp/level/UnlitGeometryRenderer.h>
-#include <hesp/level/models/ModelManager.h>
-#include <hesp/level/objects/components/ICmpModelRender.h>
+#include <hesp/models/ModelManager.h>
+#include <hesp/objects/components/ICmpModelRender.h>
 
 namespace hesp {
 

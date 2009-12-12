@@ -11,8 +11,8 @@
 #include <string>
 #include <vector>
 
-#include <hesp/level/objects/base/ObjectID.h>
-#include <hesp/level/physics/PhysicsMaterial.h>
+#include <hesp/objects/base/ObjectID.h>
+#include <hesp/physics/PhysicsMaterial.h>
 
 namespace hesp {
 

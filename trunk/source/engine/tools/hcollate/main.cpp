@@ -27,8 +27,8 @@ using boost::lexical_cast;
 #include <hesp/io/files/TreeFile.h>
 #include <hesp/io/files/VisFile.h>
 #include <hesp/io/util/DirectoryFinder.h>
-#include <hesp/level/objects/base/ComponentPropertyTypeMap.h>
-#include <hesp/level/objects/base/ObjectSpecification.h>
+#include <hesp/objects/base/ComponentPropertyTypeMap.h>
+#include <hesp/objects/base/ObjectSpecification.h>
 #include <hesp/util/PolygonTypes.h>
 using namespace hesp;
 

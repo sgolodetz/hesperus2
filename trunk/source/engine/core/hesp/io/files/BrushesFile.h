@@ -12,7 +12,7 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
-#include <hesp/level/brushes/PolyhedralBrush.h>
+#include <hesp/brushes/PolyhedralBrush.h>
 
 namespace hesp {
 

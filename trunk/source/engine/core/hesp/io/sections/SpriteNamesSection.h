@@ -6,7 +6,7 @@
 #ifndef H_HESP_SPRITENAMESSECTION
 #define H_HESP_SPRITENAMESSECTION
 
-#include <hesp/level/sprites/SpriteManager.h>
+#include <hesp/sprites/SpriteManager.h>
 #include "ResourceNamesSection.h"
 
 namespace hesp {

@@ -6,9 +6,9 @@
 #include "NavLinkFactory.h"
 
 #include <hesp/exceptions/Exception.h>
-#include <hesp/level/nav/StepDownLink.h>
-#include <hesp/level/nav/StepUpLink.h>
-#include <hesp/level/nav/WalkLink.h>
+#include <hesp/nav/StepDownLink.h>
+#include <hesp/nav/StepUpLink.h>
+#include <hesp/nav/WalkLink.h>
 
 namespace hesp {
 

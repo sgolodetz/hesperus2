@@ -6,7 +6,7 @@
 #ifndef H_HESP_MODELNAMESSECTION
 #define H_HESP_MODELNAMESSECTION
 
-#include <hesp/level/models/ModelManager.h>
+#include <hesp/models/ModelManager.h>
 #include "ResourceNamesSection.h"
 
 namespace hesp {

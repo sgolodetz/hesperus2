@@ -9,7 +9,7 @@
 #include <iosfwd>
 #include <vector>
 
-#include <hesp/level/vis/VisTable.h>
+#include <hesp/vis/VisTable.h>
 
 namespace hesp {
 

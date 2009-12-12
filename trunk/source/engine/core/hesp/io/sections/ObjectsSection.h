@@ -9,7 +9,7 @@
 #include <map>
 
 #include <hesp/io/util/FieldIO.h>
-#include <hesp/level/objects/base/ObjectSpecification.h>
+#include <hesp/objects/base/ObjectSpecification.h>
 
 namespace hesp {
 

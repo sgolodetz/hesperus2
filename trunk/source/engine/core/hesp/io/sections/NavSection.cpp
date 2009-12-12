@@ -13,13 +13,13 @@ using boost::lexical_cast;
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/util/LineIO.h>
 #include <hesp/io/util/NavLinkFactory.h>
-#include <hesp/level/nav/AdjacencyList.h>
-#include <hesp/level/nav/NavDataset.h>
-#include <hesp/level/nav/NavLink.h>
-#include <hesp/level/nav/NavManager.h>
-#include <hesp/level/nav/NavMesh.h>
-#include <hesp/level/nav/NavPolygon.h>
-#include <hesp/level/nav/PathTable.h>
+#include <hesp/nav/AdjacencyList.h>
+#include <hesp/nav/NavDataset.h>
+#include <hesp/nav/NavLink.h>
+#include <hesp/nav/NavManager.h>
+#include <hesp/nav/NavMesh.h>
+#include <hesp/nav/NavPolygon.h>
+#include <hesp/nav/PathTable.h>
 
 namespace hesp {
 
