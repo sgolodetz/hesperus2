@@ -1,0 +1,88 @@
+Menu File
+{
+New [N]
+Load... [O]
+-
+Save [S]
+Save As... [A+]
+-
+Export MEF 2...
+-
+Exit
+}
+
+Menu Edit
+{
+(Undo) [Z]
+(Redo) [Y]
+-
+(Cut) [X]
+(Copy) [C]
+(Paste) [V]
+-
+(Delete)
+}
+
+Menu View
+{
+(Set Grid Size...)
+(Set Zoom Level...)
+-
+Reset Camera Position
+Set Angular Camera Speed...
+Set Linear Camera Speed...
+}
+
+Menu Map
+{
+(Compile...) [B]
+-
+Information... [I]
+-
+Menu Transform
+{
+Translate...
+}
+}
+
+Menu Brush
+{
+Flip X [F+]
+Flip Y [G+]
+Flip Z [H+]
+-
+Flatten Composite [F]
+Group [G]
+Ungroup [U]
+-
+Menu CSG
+{
+(Hollow Brush...) [H]
+(Split Brush) [X+]
+-
+(Carve With Brush) [C+]
+(Intersect Brushes) [I+]
+(Union Brushes) [U+]
+}
+-
+Menu Landscape
+{
+(Decrease Resolution) [,]
+(Increase Resolution) [.]
+}
+-
+Properties... [P]
+}
+
+Menu Texture
+{
+Load Texture... [L]
+Edit Textures... [T]
+}
+
+[Options]
+
+Menu Help
+{
+About... [A]
+}
