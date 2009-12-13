@@ -16,6 +16,7 @@
 #include <hesp/objects/contactresolvers/ProjectileDamageContactResolver.h>
 #include <hesp/objects/messages/MsgObjectDestroyed.h>
 #include <hesp/objects/messages/MsgObjectPredestroyed.h>
+#include <hesp/objects/yokes/minimus/MinimusScriptYoke.h>
 #include <hesp/physics/PhysicsSystem.h>
 #include "ObjectSpecification.h"
 
@@ -31,16 +32,19 @@ bool is_yokeable(const ObjectID& id, const ObjectManager *objectManager);
 
 //#################### CONSTRUCTORS ####################
 ObjectManager::ObjectManager(const BoundsManager_CPtr& boundsManager, const ComponentPropertyTypeMap& componentPropertyTypes,
-							 const std::map<std::string,ObjectSpecification>& archetypes, const ASXEngine_Ptr& aiEngine,
+							 const std::map<std::string,ObjectSpecification>& archetypes,
 							 const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager)
 :	m_boundsManager(boundsManager),
 	m_componentPropertyTypes(componentPropertyTypes),
 	m_archetypes(archetypes),
-	m_aiEngine(aiEngine),
+	m_aiEngine(new ASXEngine),
 	m_modelManager(modelManager),
 	m_physicsSystem(new PhysicsSystem),
 	m_spriteManager(spriteManager)
 {
+	// Register classes etc. with the AI scripting engine.
+	MinimusScriptYoke::register_for_scripting(m_aiEngine);
+
 	// Set up the physics system.
 	m_physicsSystem->set_contact_resolver(PM_BULLET, PM_CHARACTER, ContactResolver_CPtr(new ProjectileDamageContactResolver(this, PM_BULLET)));
 	m_physicsSystem->set_contact_resolver(PM_BULLET, PM_WORLD, ContactResolver_CPtr(new AbsorbProjectileContactResolver(this, PM_BULLET)));
