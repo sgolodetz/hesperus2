@@ -35,8 +35,8 @@ public:
 	void render_child() const;
 	void render_first_person() const;
 	Properties save() const;
-	void update_animation(int milliseconds, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager);
-	void update_child_animation(int milliseconds, const BoneHierarchy_Ptr& parent, const std::string& parentBoneName, const RBTMatrix_CPtr& parentMatrix, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager);
+	void update_animation(int milliseconds);
+	void update_child_animation(int milliseconds, const BoneHierarchy_Ptr& parent, const std::string& parentBoneName, const RBTMatrix_CPtr& parentMatrix);
 
 	//#################### PRIVATE METHODS ####################
 private:

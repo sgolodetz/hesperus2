@@ -28,11 +28,10 @@ void CmpUserBipedYoke::check_dependencies() const
 	check_dependency<ICmpSimulation>();
 }
 
-std::vector<ObjectCommand_Ptr> CmpUserBipedYoke::generate_commands(InputState& input, const std::vector<CollisionPolygon_Ptr>& polygons,
-																   const OnionTree_CPtr& tree, const NavManager_CPtr& navManager)
+std::vector<ObjectCommand_Ptr> CmpUserBipedYoke::generate_commands(InputState& input)
 {
 	if(!m_yoke) m_yoke.reset(new UserBipedYoke(m_objectID, m_objectManager));
-	return m_yoke->generate_commands(input, polygons, tree, navManager);
+	return m_yoke->generate_commands(input);
 }
 
 Properties CmpUserBipedYoke::save() const

@@ -6,6 +6,7 @@
 #include "MinimusGotoPositionYoke.h"
 
 #include <hesp/bounds/BoundsManager.h>
+#include <hesp/database/Database.h>
 #include <hesp/nav/GlobalPathfinder.h>
 #include <hesp/nav/NavDataset.h>
 #include <hesp/nav/NavLink.h>
@@ -25,9 +26,13 @@ MinimusGotoPositionYoke::MinimusGotoPositionYoke(const ObjectID& objectID, Objec
 {}
 
 	//#################### PUBLIC METHODS ####################
-std::vector<ObjectCommand_Ptr> MinimusGotoPositionYoke::generate_commands(InputState& input, const std::vector<CollisionPolygon_Ptr>& polygons,
-																		  const OnionTree_CPtr& tree, const NavManager_CPtr& navManager)
+std::vector<ObjectCommand_Ptr> MinimusGotoPositionYoke::generate_commands(InputState& input)
 {
+	const Database& db = *m_objectManager->database();
+	NavManager_CPtr navManager = db.get("db://NavManager", navManager);
+	shared_ptr<std::vector<CollisionPolygon_Ptr> > polygons = db.get("db://OnionPolygons", polygons);
+	OnionTree_CPtr tree = db.get("db://OnionTree", tree);
+
 	// Check to make sure the yoke's still active.
 	if(m_state != YOKE_ACTIVE)
 	{
@@ -47,9 +52,9 @@ std::vector<ObjectCommand_Ptr> MinimusGotoPositionYoke::generate_commands(InputS
 		GlobalPathfinder pathfinder(navMesh, navDataset->adjacency_list(), navDataset->path_table());
 
 		int suggestedSourcePoly = cmpMovement->cur_nav_poly_index();
-		int sourcePoly = NavMeshUtil::find_nav_polygon(source, suggestedSourcePoly, polygons, tree, navMesh);
+		int sourcePoly = NavMeshUtil::find_nav_polygon(source, suggestedSourcePoly, *polygons, tree, navMesh);
 		if(sourcePoly == -1)	{ m_state = YOKE_FAILED; return std::vector<ObjectCommand_Ptr>(); }
-		int destPoly = NavMeshUtil::find_nav_polygon(m_dest, -1, polygons, tree, navMesh);
+		int destPoly = NavMeshUtil::find_nav_polygon(m_dest, -1, *polygons, tree, navMesh);
 		if(destPoly == -1)		{ m_state = YOKE_FAILED; return std::vector<ObjectCommand_Ptr>(); }
 
 		// FIXME: It's wasteful to copy the array of links each time (even though it's an array of pointers).

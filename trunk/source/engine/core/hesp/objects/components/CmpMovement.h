@@ -60,22 +60,22 @@ public:
 
 	//#################### PUBLIC METHODS ####################
 public:
-	bool attempt_navmesh_acquisition(const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavMesh_CPtr& navMesh);
+	bool attempt_navmesh_acquisition(const NavMesh_CPtr& navMesh);
 	void check_dependencies() const;
 	int cur_nav_poly_index() const;
-	void move(const Vector3d& dir, double speed, int milliseconds, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager);
+	void move(const Vector3d& dir, double speed, int milliseconds);
 	double run_speed() const;
 	Properties save() const;
 	void set_navmesh_unacquired();
-	bool single_move(const Vector3d& dir, double speed, int milliseconds, const OnionTree_CPtr& tree);
+	bool single_move(const Vector3d& dir, double speed, int milliseconds);
 	bool traversing_link() const;
 	double walk_speed() const;
 
 	//#################### PRIVATE METHODS ####################
 private:
-	bool do_direct_move(Move& move, double speed, const OnionTree_CPtr& tree);
-	void do_navmesh_move(Move& move, double speed, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavMesh_CPtr& navMesh);
-	void do_traverse_move(Move& move, double speed, const std::vector<CollisionPolygon_Ptr>& polygons, const NavMesh_CPtr& navMesh);
+	bool do_direct_move(Move& move, double speed);
+	void do_navmesh_move(Move& move, double speed, const NavMesh_CPtr& navMesh);
+	void do_traverse_move(Move& move, double speed, const NavMesh_CPtr& navMesh);
 	void update_move_direction_for_sliding(Move& move);
 	void update_recent_planes(const Plane& plane);
 };

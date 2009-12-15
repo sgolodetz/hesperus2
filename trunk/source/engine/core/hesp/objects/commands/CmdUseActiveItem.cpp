@@ -16,8 +16,7 @@ CmdUseActiveItem::CmdUseActiveItem(const ObjectID& objectID)
 {}
 
 //#################### PUBLIC METHODS ####################
-void CmdUseActiveItem::execute(const ObjectManager_Ptr& objectManager, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree,
-							   const NavManager_CPtr& navManager, int milliseconds)
+void CmdUseActiveItem::execute(const ObjectManager_Ptr& objectManager, int milliseconds)
 {
 	ICmpInventory_Ptr cmpInventory = objectManager->get_component(m_objectID, cmpInventory);	if(!cmpInventory) return;
 	ObjectID activeItem = cmpInventory->active_item();											if(!activeItem.valid()) return;

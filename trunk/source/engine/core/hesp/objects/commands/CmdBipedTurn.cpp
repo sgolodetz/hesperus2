@@ -16,8 +16,7 @@ CmdBipedTurn::CmdBipedTurn(const ObjectID& objectID, int mouseMotionX, int mouse
 {}
 
 //#################### PUBLIC METHODS ####################
-void CmdBipedTurn::execute(const ObjectManager_Ptr& objectManager, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree,
-						   const NavManager_CPtr& navManager, int milliseconds)
+void CmdBipedTurn::execute(const ObjectManager_Ptr& objectManager, int milliseconds)
 {
 	ICmpOrientation_Ptr cmpOrientation = objectManager->get_component(m_objectID, cmpOrientation);
 	NUVAxes_Ptr nuvAxes = cmpOrientation->nuv_axes();

@@ -22,7 +22,7 @@ public:
 
 	//#################### PUBLIC METHODS ####################
 public:
-	void execute(const ObjectManager_Ptr& objectManager, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager, int milliseconds);
+	void execute(const ObjectManager_Ptr& objectManager, int milliseconds);
 };
 
 }

@@ -23,9 +23,10 @@ namespace hesp {
 ObjectManager_Ptr ObjectsSection::load(std::istream& is, const BoundsManager_CPtr& boundsManager,
 									   const ComponentPropertyTypeMap& componentPropertyTypes,
 									   const std::map<std::string,ObjectSpecification>& archetypes,
-									   const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager)
+									   const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager,
+									   const Database_Ptr& database)
 {
-	ObjectManager_Ptr objectManager(new ObjectManager(boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager));
+	ObjectManager_Ptr objectManager(new ObjectManager(boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager, database));
 
 	LineIO::read_checked_line(is, "Objects");
 	LineIO::read_checked_line(is, "{");

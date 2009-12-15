@@ -7,6 +7,7 @@
 
 #include <fstream>
 
+#include <hesp/database/Database.h>
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/sections/ModelNamesSection.h>
 #include <hesp/io/sections/ObjectsSection.h>
@@ -24,7 +25,8 @@ ObjectManager_Ptr ObjectsFile::load(const std::string& filename, const BoundsMan
 	if(is.fail()) throw Exception("Could not open " + filename + " for reading");
 	ModelManager_Ptr modelManager = ModelNamesSection().load(is);
 	SpriteManager_Ptr spriteManager = SpriteNamesSection().load(is);
-	return ObjectsSection::load(is, boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager);
+	Database_Ptr database(new Database);
+	return ObjectsSection::load(is, boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager, database);
 }
 
 //#################### SAVING METHODS ####################

@@ -10,6 +10,7 @@
 #include <boost/filesystem/operations.hpp>
 namespace bf = boost::filesystem;
 
+#include <hesp/database/Database.h>
 #include <hesp/io/files/DefinitionsFile.h>
 #include <hesp/io/sections/DefinitionsSpecifierSection.h>
 #include <hesp/io/sections/LightmapsSection.h>
@@ -148,30 +149,39 @@ Loads a lit level from the specified std::istream.
 */
 Level_Ptr LevelFile::load_lit(std::istream& is)
 {
+	// Load the rendering polygons.
 	std::vector<TexturedLitPolygon_Ptr> polygons;
-	BSPTree_Ptr tree;
-	std::vector<Portal_Ptr> portals;
-	LeafVisTable_Ptr leafVis;
-	std::vector<CollisionPolygon_Ptr> onionPolygons;
-	OnionTree_Ptr onionTree;
-	std::vector<OnionPortal_Ptr> onionPortals;
-	NavManager_Ptr navManager;
-	std::string definitionsFilename;
-	ModelManager_Ptr modelManager;
-	SpriteManager_Ptr spriteManager;
-	ObjectManager_Ptr objectManager;
-
-	// Load the level data.
 	PolygonsSection::load(is, "Polygons", polygons);
-	tree = TreeSection::load(is);
+
+	// Load the BSP tree.
+	BSPTree_Ptr tree = TreeSection::load(is);
+
+	// Load the portals.
+	std::vector<Portal_Ptr> portals;
 	PolygonsSection::load(is, "Portals", portals);
-	leafVis = VisSection::load(is);
+
+	// Load the vis table.
+	LeafVisTable_Ptr leafVis = VisSection::load(is);
+
+	// Load the lightmaps.
 	std::vector<Image24_Ptr> lightmaps = LightmapsSection::load(is);
-	PolygonsSection::load(is, "OnionPolygons", onionPolygons);
-	onionTree = OnionTreeSection::load(is);
+
+	// Load the onion polygons.
+	shared_ptr<std::vector<CollisionPolygon_Ptr> > onionPolygons(new std::vector<CollisionPolygon_Ptr>);
+	PolygonsSection::load(is, "OnionPolygons", *onionPolygons);
+
+	// Load the onion tree.
+	OnionTree_Ptr onionTree = OnionTreeSection::load(is);
+
+	// Load the onion portals.
+	std::vector<OnionPortal_Ptr> onionPortals;
 	PolygonsSection::load(is, "OnionPortals", onionPortals);
-	navManager = NavSection::load(is);
-	definitionsFilename = DefinitionsSpecifierSection::load(is);
+
+	// Load the nav manager.
+	NavManager_Ptr navManager = NavSection::load(is);
+
+	// Load the objects.
+	std::string definitionsFilename = DefinitionsSpecifierSection::load(is);
 
 	bf::path settingsDir = DirectoryFinder::instance().determine_definitions_directory();
 	BoundsManager_Ptr boundsManager;
@@ -179,16 +189,26 @@ Level_Ptr LevelFile::load_lit(std::istream& is)
 	std::map<std::string,ObjectSpecification> archetypes;
 	DefinitionsFile::load((settingsDir / definitionsFilename).file_string(), boundsManager, componentPropertyTypes, archetypes);
 
-	modelManager = ModelNamesSection().load(is);
+	ModelManager_Ptr modelManager = ModelNamesSection().load(is);
 	modelManager->load_all();
 
-	spriteManager = SpriteNamesSection().load(is);
+	SpriteManager_Ptr spriteManager = SpriteNamesSection().load(is);
 	spriteManager->load_all();
 
-	objectManager = ObjectsSection::load(is, boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager);
+	Database_Ptr database(new Database);
+	database->set("db://BSPTree", tree);
+	database->set("db://NavManager", navManager);
+	database->set("db://OnionPolygons", onionPolygons);
+	database->set("db://OnionTree", onionTree);
+
+	ObjectManager_Ptr objectManager = ObjectsSection::load(is, boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager, database);
+
+	database->set("db://ObjectManager", objectManager);
+
+	// Construct the geometry renderer.
+	GeometryRenderer_Ptr geomRenderer(new LitGeometryRenderer(polygons, lightmaps));
 
 	// Construct and return the level.
-	GeometryRenderer_Ptr geomRenderer(new LitGeometryRenderer(polygons, lightmaps));
 	return Level_Ptr(new Level(geomRenderer, tree, portals, leafVis, onionPolygons, onionTree, onionPortals, navManager, objectManager));
 }
 
@@ -200,29 +220,36 @@ Loads an unlit level from the specified std::istream.
 */
 Level_Ptr LevelFile::load_unlit(std::istream& is)
 {
+	// Load the rendering polygons.
 	std::vector<TexturedPolygon_Ptr> polygons;
-	BSPTree_Ptr tree;
-	std::vector<Portal_Ptr> portals;
-	LeafVisTable_Ptr leafVis;
-	std::vector<CollisionPolygon_Ptr> onionPolygons;
-	OnionTree_Ptr onionTree;
-	std::vector<OnionPortal_Ptr> onionPortals;
-	NavManager_Ptr navManager;
-	std::string definitionsFilename;
-	ModelManager_Ptr modelManager;
-	SpriteManager_Ptr spriteManager;
-	ObjectManager_Ptr objectManager;
-
-	// Load the level data.
 	PolygonsSection::load(is, "Polygons", polygons);
-	tree = TreeSection::load(is);
+
+	// Load the BSP tree.
+	BSPTree_Ptr tree = TreeSection::load(is);
+
+	// Load the portals.
+	std::vector<Portal_Ptr> portals;
 	PolygonsSection::load(is, "Portals", portals);
-	leafVis = VisSection::load(is);
-	PolygonsSection::load(is, "OnionPolygons", onionPolygons);
-	onionTree = OnionTreeSection::load(is);
+
+	// Load the vis table.
+	LeafVisTable_Ptr leafVis = VisSection::load(is);
+
+	// Load the onion polygons.
+	shared_ptr<std::vector<CollisionPolygon_Ptr> > onionPolygons(new std::vector<CollisionPolygon_Ptr>);
+	PolygonsSection::load(is, "OnionPolygons", *onionPolygons);
+
+	// Load the onion tree.
+	OnionTree_Ptr onionTree = OnionTreeSection::load(is);
+
+	// Load the onion portals.
+	std::vector<OnionPortal_Ptr> onionPortals;
 	PolygonsSection::load(is, "OnionPortals", onionPortals);
-	navManager = NavSection::load(is);
-	definitionsFilename = DefinitionsSpecifierSection::load(is);
+
+	// Load the nav manager.
+	NavManager_Ptr navManager = NavSection::load(is);
+
+	// Load the objects.
+	std::string definitionsFilename = DefinitionsSpecifierSection::load(is);
 
 	bf::path settingsDir = DirectoryFinder::instance().determine_definitions_directory();
 	BoundsManager_Ptr boundsManager;
@@ -230,16 +257,26 @@ Level_Ptr LevelFile::load_unlit(std::istream& is)
 	std::map<std::string,ObjectSpecification> archetypes;
 	DefinitionsFile::load((settingsDir / definitionsFilename).file_string(), boundsManager, componentPropertyTypes, archetypes);
 
-	modelManager = ModelNamesSection().load(is);
+	ModelManager_Ptr modelManager = ModelNamesSection().load(is);
 	modelManager->load_all();
 
-	spriteManager = SpriteNamesSection().load(is);
+	SpriteManager_Ptr spriteManager = SpriteNamesSection().load(is);
 	spriteManager->load_all();
 
-	objectManager = ObjectsSection::load(is, boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager);
+	Database_Ptr database(new Database);
+	database->set("db://BSPTree", tree);
+	database->set("db://NavManager", navManager);
+	database->set("db://OnionPolygons", onionPolygons);
+	database->set("db://OnionTree", onionTree);
+
+	ObjectManager_Ptr objectManager = ObjectsSection::load(is, boundsManager, componentPropertyTypes, archetypes, modelManager, spriteManager, database);
+
+	database->set("db://ObjectManager", objectManager);
+
+	// Construct the geometry renderer.
+	GeometryRenderer_Ptr geomRenderer(new UnlitGeometryRenderer(polygons));
 
 	// Construct and return the level.
-	GeometryRenderer_Ptr geomRenderer(new UnlitGeometryRenderer(polygons));
 	return Level_Ptr(new Level(geomRenderer, tree, portals, leafVis, onionPolygons, onionTree, onionPortals, navManager, objectManager));
 }
 

@@ -6,6 +6,7 @@
 #include "CmpBipedAnimChooser.h"
 
 #include <hesp/bounds/BoundsManager.h>
+#include <hesp/database/Database.h>
 #include <hesp/nav/NavDataset.h>
 #include <hesp/nav/NavManager.h>
 #include <hesp/util/Properties.h>
@@ -36,14 +37,14 @@ void CmpBipedAnimChooser::check_dependencies() const
 	check_dependency<ICmpSimulation>();
 }
 
-std::string CmpBipedAnimChooser::choose_animation(const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager)
+std::string CmpBipedAnimChooser::choose_animation()
 {
 	// Determine the biped's alive/dying/dead status. If dead, early-out.
 	ICmpHealth::HealthStatus healthStatus = determine_health_status();
 	if(healthStatus == ICmpHealth::DEAD) return "dead";
 
 	// If the biped's not yet dead, determine its movement type.
-	MovementType movementType = determine_movement_type(polygons, tree, navManager);
+	MovementType movementType = determine_movement_type();
 
 	// Determine whether or not the biped is crouching.
 	bool crouching = determine_crouching();
@@ -124,8 +125,7 @@ ICmpHealth::HealthStatus CmpBipedAnimChooser::determine_health_status() const
 	return cmpHealth->status();
 }
 
-CmpBipedAnimChooser::MovementType CmpBipedAnimChooser::determine_movement_type(const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree,
-																			   const NavManager_CPtr& navManager)
+CmpBipedAnimChooser::MovementType CmpBipedAnimChooser::determine_movement_type()
 {
 	MovementType movementType = UNKNOWN;
 
@@ -133,7 +133,8 @@ CmpBipedAnimChooser::MovementType CmpBipedAnimChooser::determine_movement_type(c
 	ICmpMovement_Ptr cmpMovement = m_objectManager->get_component(m_objectID, cmpMovement);			assert(cmpMovement != NULL);
 	ICmpSimulation_CPtr cmpSimulation = m_objectManager->get_component(m_objectID, cmpSimulation);	assert(cmpSimulation != NULL);
 	int mapIndex = m_objectManager->bounds_manager()->lookup_bounds_index(cmpSimulation->bounds_group(), cmpSimulation->posture());
-	if(!cmpMovement->attempt_navmesh_acquisition(polygons, tree, navManager->dataset(mapIndex)->nav_mesh()))
+	NavManager_CPtr navManager = m_objectManager->database()->get("db://NavManager", navManager);
+	if(!cmpMovement->attempt_navmesh_acquisition(navManager->dataset(mapIndex)->nav_mesh()))
 	{
 		movementType = AIR;
 	}

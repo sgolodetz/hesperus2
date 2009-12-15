@@ -11,14 +11,6 @@
 template <typename F>
 void ASXEngine::register_constructor(F f)
 {
-#if 0
-	if(obj == "" || decl == "")
-	{
-		ASXStructorTypeString<F> structorTypeString;
-		if(obj == "") obj = structorTypeString.object_type();
-		if(decl == "") decl = structorTypeString.function_type();
-	}
-#endif
 	ASXStructorTypeString<F> structorTypeString;
 	register_constructor(f, structorTypeString.object_type(), structorTypeString.function_type());
 }

@@ -7,6 +7,7 @@
 
 #include <iostream>
 
+#include <hesp/exceptions/Exception.h>
 #include <hesp/io/util/DirectoryFinder.h>
 #include "MinimusGotoPositionYoke.h"
 namespace bf = boost::filesystem;
@@ -36,8 +37,7 @@ void MinimusScriptYoke::add_ref()
 	++m_refCount;
 }
 
-std::vector<ObjectCommand_Ptr> MinimusScriptYoke::generate_commands(InputState& input, const std::vector<CollisionPolygon_Ptr>& polygons,
-																	const OnionTree_CPtr& tree, const NavManager_CPtr& navManager)
+std::vector<ObjectCommand_Ptr> MinimusScriptYoke::generate_commands(InputState& input)
 {
 	if(!m_initialised)
 	{
@@ -54,7 +54,7 @@ std::vector<ObjectCommand_Ptr> MinimusScriptYoke::generate_commands(InputState& 
 
 	if(m_subyoke && m_subyoke->state() == YOKE_ACTIVE)
 	{
-		return m_subyoke->generate_commands(input, polygons, tree, navManager);
+		return m_subyoke->generate_commands(input);
 	}
 	else return std::vector<ObjectCommand_Ptr>();
 }

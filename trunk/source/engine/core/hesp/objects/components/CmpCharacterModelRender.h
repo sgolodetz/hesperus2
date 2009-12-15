@@ -37,7 +37,7 @@ public:
 	void render() const;
 	void render_first_person() const;
 	Properties save() const;
-	void update_animation(int milliseconds, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager);
+	void update_animation(int milliseconds);
 
 	std::string own_type() const			{ return "CharacterModelRender"; }
 	static std::string static_own_type()	{ return "CharacterModelRender"; }

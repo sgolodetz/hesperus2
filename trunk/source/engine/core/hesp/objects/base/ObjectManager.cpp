@@ -33,11 +33,13 @@ bool is_yokeable(const ObjectID& id, const ObjectManager *objectManager);
 //#################### CONSTRUCTORS ####################
 ObjectManager::ObjectManager(const BoundsManager_CPtr& boundsManager, const ComponentPropertyTypeMap& componentPropertyTypes,
 							 const std::map<std::string,ObjectSpecification>& archetypes,
-							 const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager)
-:	m_boundsManager(boundsManager),
-	m_componentPropertyTypes(componentPropertyTypes),
+							 const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager,
+							 const Database_Ptr& database)
+:	m_aiEngine(new ASXEngine),
 	m_archetypes(archetypes),
-	m_aiEngine(new ASXEngine),
+	m_boundsManager(boundsManager),
+	m_componentPropertyTypes(componentPropertyTypes),
+	m_database(database),
 	m_modelManager(modelManager),
 	m_physicsSystem(new PhysicsSystem),
 	m_spriteManager(spriteManager)
@@ -129,6 +131,11 @@ void ObjectManager::consolidate_object_ids()
 {
 	// TODO:	This only needs implementing if I want to save objects in-game. If I only save objects I just
 	//			loaded in (e.g. as part of the level-making process), their IDs will already be contiguous.
+}
+
+Database_CPtr ObjectManager::database() const
+{
+	return m_database;
 }
 
 void ObjectManager::flush_queues()

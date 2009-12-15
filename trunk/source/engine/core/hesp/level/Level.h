@@ -34,6 +34,7 @@ class Level
 	//#################### TYPEDEFS ####################
 private:
 	typedef std::vector<CollisionPolygon_Ptr> ColPolyVector;
+	typedef shared_ptr<ColPolyVector> ColPolyVector_Ptr;
 	typedef std::vector<OnionPortal_Ptr> OnionPortalVector;
 	typedef std::vector<Portal_Ptr> PortalVector;
 
@@ -43,7 +44,7 @@ private:
 	BSPTree_Ptr m_tree;
 	PortalVector m_portals;
 	LeafVisTable_Ptr m_leafVis;
-	ColPolyVector m_onionPolygons;
+	ColPolyVector_Ptr m_onionPolygons;
 	OnionTree_Ptr m_onionTree;
 	OnionPortalVector m_onionPortals;
 	NavManager_Ptr m_navManager;
@@ -53,7 +54,7 @@ private:
 public:
 	Level(const GeometryRenderer_Ptr& geomRenderer, const BSPTree_Ptr& tree,
 		  const PortalVector& portals, const LeafVisTable_Ptr& leafVis,
-		  const ColPolyVector& onionPolygons, const OnionTree_Ptr& onionTree,
+		  const ColPolyVector_Ptr& onionPolygons, const OnionTree_Ptr& onionTree,
 		  const OnionPortalVector& onionPortals, const NavManager_Ptr& navManager,
 		  const ObjectManager_Ptr& objectManager);
 

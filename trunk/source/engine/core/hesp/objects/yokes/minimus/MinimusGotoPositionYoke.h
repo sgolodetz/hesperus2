@@ -8,6 +8,7 @@
 
 #include <list>
 
+#include <hesp/math/vectors/Vector3.h>
 #include <hesp/objects/base/IYoke.h>
 #include <hesp/objects/base/ObjectID.h>
 
@@ -37,7 +38,7 @@ public:
 
 	//#################### PUBLIC METHODS ####################
 public:
-	std::vector<ObjectCommand_Ptr> generate_commands(InputState& input, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager);
+	std::vector<ObjectCommand_Ptr> generate_commands(InputState& input);
 };
 
 }

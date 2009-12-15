@@ -6,6 +6,7 @@
 #ifndef H_HESP_CMDBIPEDSETLOOK
 #define H_HESP_CMDBIPEDSETLOOK
 
+#include <hesp/math/vectors/Vector3.h>
 #include <hesp/objects/base/ObjectCommand.h>
 
 namespace hesp {
@@ -23,7 +24,7 @@ public:
 
 	//#################### PUBLIC METHODS ####################
 public:
-	void execute(const ObjectManager_Ptr& objectManager, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager, int milliseconds);
+	void execute(const ObjectManager_Ptr& objectManager, int milliseconds);
 };
 
 }

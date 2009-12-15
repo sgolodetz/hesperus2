@@ -29,7 +29,7 @@ namespace hesp {
 //#################### CONSTRUCTORS ####################
 Level::Level(const GeometryRenderer_Ptr& geomRenderer, const BSPTree_Ptr& tree,
 			 const PortalVector& portals, const LeafVisTable_Ptr& leafVis,
-			 const ColPolyVector& onionPolygons, const OnionTree_Ptr& onionTree,
+			 const ColPolyVector_Ptr& onionPolygons, const OnionTree_Ptr& onionTree,
 			 const OnionPortalVector& onionPortals, const NavManager_Ptr& navManager,
 			 const ObjectManager_Ptr& objectManager)
 :	m_geomRenderer(geomRenderer), m_tree(tree), m_portals(portals), m_leafVis(leafVis),
@@ -83,7 +83,7 @@ const ObjectManager_Ptr& Level::object_manager()
 
 const std::vector<CollisionPolygon_Ptr>& Level::onion_polygons() const
 {
-	return m_onionPolygons;
+	return *m_onionPolygons;
 }
 
 OnionTree_CPtr Level::onion_tree() const
@@ -180,7 +180,7 @@ void Level::do_animations(int milliseconds)
 	for(size_t i=0, size=animatables.size(); i<size; ++i)
 	{
 		ICmpModelRender_Ptr cmpRender = m_objectManager->get_component(animatables[i], cmpRender);
-		cmpRender->update_animation(milliseconds, m_onionPolygons, m_onionTree, m_navManager);
+		cmpRender->update_animation(milliseconds);
 	}
 }
 
@@ -198,7 +198,7 @@ void Level::do_gravity(int milliseconds)
 		ICmpSimulation_Ptr cmpSimulation = m_objectManager->get_component(moveables[i], cmpSimulation);
 		Vector3d velocity = cmpSimulation->velocity();
 		cmpSimulation->set_velocity(velocity + Vector3d(0,0,-GRAVITY_STRENGTH*(milliseconds/1000.0)));
-		if(cmpMovement->single_move(cmpSimulation->velocity(), 7.0 /* FIXME */, milliseconds, m_onionTree))
+		if(cmpMovement->single_move(cmpSimulation->velocity(), 7.0 /* FIXME */, milliseconds))
 		{
 			// A collision occurred, so set the velocity back to zero.
 			cmpSimulation->set_velocity(Vector3d(0,0,0));
@@ -226,7 +226,7 @@ void Level::do_yokes(int milliseconds, InputState& input)
 		ICmpYoke_Ptr cmpYoke = m_objectManager->get_component(yokeables[i], cmpYoke);
 		
 		// Use the object's yoke component to generate object commands.
-		std::vector<ObjectCommand_Ptr> commands = cmpYoke->generate_commands(input, m_onionPolygons, m_onionTree, m_navManager);
+		std::vector<ObjectCommand_Ptr> commands = cmpYoke->generate_commands(input);
 
 		// Append the object commands to the queue.
 		std::copy(commands.begin(), commands.end(), std::back_inserter(cmdQueue));
@@ -235,7 +235,7 @@ void Level::do_yokes(int milliseconds, InputState& input)
 	// Step 2:	Execute the object commands.
 	for(std::list<ObjectCommand_Ptr>::const_iterator it=cmdQueue.begin(), iend=cmdQueue.end(); it!=iend; ++it)
 	{
-		(*it)->execute(m_objectManager, m_onionPolygons, m_onionTree, m_navManager, milliseconds);
+		(*it)->execute(m_objectManager, milliseconds);
 	}
 }
 

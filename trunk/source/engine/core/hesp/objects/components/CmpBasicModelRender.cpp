@@ -104,12 +104,11 @@ Properties CmpBasicModelRender::save() const
 	return properties;
 }
 
-void CmpBasicModelRender::update_animation(int milliseconds, const std::vector<CollisionPolygon_Ptr>& polygons,
-										   const OnionTree_CPtr& tree, const NavManager_CPtr& navManager)
+void CmpBasicModelRender::update_animation(int milliseconds)
 {
 	// Decide which animation should be playing, and update it.
 	ICmpAnimChooser_Ptr cmpAnimChooser = m_objectManager->get_component(m_objectID, cmpAnimChooser);
-	if(cmpAnimChooser) m_animController->request_animation(cmpAnimChooser->choose_animation(polygons, tree, navManager));
+	if(cmpAnimChooser) m_animController->request_animation(cmpAnimChooser->choose_animation());
 	m_animController->update(milliseconds);
 
 	// Configure the pose.
@@ -117,13 +116,11 @@ void CmpBasicModelRender::update_animation(int milliseconds, const std::vector<C
 }
 
 void CmpBasicModelRender::update_child_animation(int milliseconds, const BoneHierarchy_Ptr& parent,
-												 const std::string& parentBoneName, const RBTMatrix_CPtr& parentMatrix,
-												 const std::vector<CollisionPolygon_Ptr>& polygons,
-												 const OnionTree_CPtr& tree, const NavManager_CPtr& navManager)
+												 const std::string& parentBoneName, const RBTMatrix_CPtr& parentMatrix)
 {
 	BoneHierarchy_Ptr child = skeleton()->bone_hierarchy();
 	child->attach_to_parent(parent, parentBoneName);
-	update_animation(milliseconds, polygons, tree, navManager);
+	update_animation(milliseconds);
 	child->detach_from_parent();
 
 	// If this object's a usable one (e.g. a weapon), update the positions and orientations of its hotspots.

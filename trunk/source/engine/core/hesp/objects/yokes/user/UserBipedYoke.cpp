@@ -37,8 +37,7 @@ UserBipedYoke::UserBipedYoke(const ObjectID& objectID, ObjectManager *objectMana
 }
 
 //#################### PUBLIC METHODS ####################
-std::vector<ObjectCommand_Ptr> UserBipedYoke::generate_commands(InputState& input, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree,
-																const NavManager_CPtr& navManager)
+std::vector<ObjectCommand_Ptr> UserBipedYoke::generate_commands(InputState& input)
 {
 	std::vector<ObjectCommand_Ptr> commands;
 

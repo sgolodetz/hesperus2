@@ -113,12 +113,11 @@ Properties CmpCharacterModelRender::save() const
 	return properties;
 }
 
-void CmpCharacterModelRender::update_animation(int milliseconds, const std::vector<CollisionPolygon_Ptr>& polygons,
-											   const OnionTree_CPtr& tree, const NavManager_CPtr& navManager)
+void CmpCharacterModelRender::update_animation(int milliseconds)
 {
 	// Decide which animation should be playing, and update it.
 	ICmpAnimChooser_Ptr cmpAnimChooser = m_objectManager->get_component(m_objectID, cmpAnimChooser);	assert(cmpAnimChooser);
-	m_animController->request_animation(cmpAnimChooser->choose_animation(polygons, tree, navManager));
+	m_animController->request_animation(cmpAnimChooser->choose_animation());
 	m_animController->update(milliseconds);
 
 	// Clear any existing pose modifiers.
@@ -173,15 +172,13 @@ void CmpCharacterModelRender::update_animation(int milliseconds, const std::vect
 		ICmpBasicModelRender_Ptr cmpItemRender = m_objectManager->get_component(activeItem, cmpItemRender);
 		if(cmpItemRender)
 		{
-			cmpItemRender->update_child_animation(milliseconds, skeleton()->bone_hierarchy(), cmpItemOwnable->attach_point(),
-												  modelMatrix, polygons, tree, navManager);
+			cmpItemRender->update_child_animation(milliseconds, skeleton()->bone_hierarchy(), cmpItemOwnable->attach_point(), modelMatrix);
 		}
 	}
 }
 
 //#################### PRIVATE METHODS ####################
-RBTMatrix_CPtr CmpCharacterModelRender::construct_model_matrix(const Vector3d& p, const Vector3d& n, const Vector3d& u,
-															   const Vector3d& v)
+RBTMatrix_CPtr CmpCharacterModelRender::construct_model_matrix(const Vector3d& p, const Vector3d& n, const Vector3d& u, const Vector3d& v)
 {
 	// Note:	The vertical axis of a character model does not rotate, unlike that for a
 	//			normal model. In other words, looking up/down should have no effect on the

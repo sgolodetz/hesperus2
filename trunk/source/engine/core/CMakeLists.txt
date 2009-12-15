@@ -101,6 +101,11 @@ hesp/csg/CSGUtil.tpp
 )
 
 ##
+SET(database_sources hesp/database/Database.cpp)
+SET(database_headers hesp/database/Database.h)
+SET(database_templates hesp/database/Database.tpp)
+
+##
 SET(datastructures_sources
 hesp/datastructures/FiniteStateMachine.cpp
 hesp/datastructures/FSMState.cpp
@@ -929,6 +934,7 @@ ${bounds_sources}
 ${brushes_sources}
 ${cameras_sources}
 ${colours_sources}
+${database_sources}
 ${datastructures_sources}
 ${gui_sources}
 ${images_sources}
@@ -983,6 +989,7 @@ ${brushes_headers}
 ${cameras_headers}
 ${colours_headers}
 ${csg_headers}
+${database_headers}
 ${datastructures_headers}
 ${exceptions_headers}
 ${gui_headers}
@@ -1034,6 +1041,7 @@ ${xml_headers}
 SET(templates
 ${brushes_templates}
 ${csg_templates}
+${database_templates}
 ${datastructures_templates}
 ${gui_templates}
 ${images_templates}
@@ -1081,6 +1089,11 @@ SOURCE_GROUP(colours\\.h FILES ${colours_headers})
 ##
 SOURCE_GROUP(csg\\.h FILES ${csg_headers})
 SOURCE_GROUP(csg\\.tpp FILES ${csg_templates})
+
+##
+SOURCE_GROUP(database\\.cpp FILES ${database_sources})
+SOURCE_GROUP(database\\.h FILES ${database_headers})
+SOURCE_GROUP(database\\.tpp FILES ${database_templates})
 
 ##
 SOURCE_GROUP(datastructures\\.cpp FILES ${datastructures_sources})

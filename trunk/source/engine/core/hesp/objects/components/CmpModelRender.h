@@ -6,6 +6,7 @@
 #ifndef H_HESP_CMPMODELRENDER
 #define H_HESP_CMPMODELRENDER
 
+#include <hesp/math/vectors/Vector3.h>
 #include "ICmpModelRender.h"
 
 namespace hesp {

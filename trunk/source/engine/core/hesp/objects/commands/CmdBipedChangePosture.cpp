@@ -7,6 +7,7 @@
 
 #include <hesp/bounds/Bounds.h>
 #include <hesp/bounds/BoundsManager.h>
+#include <hesp/database/Database.h>
 #include <hesp/objects/components/ICmpMovement.h>
 #include <hesp/objects/components/ICmpSimulation.h>
 #include <hesp/trees/OnionTree.h>
@@ -20,8 +21,7 @@ CmdBipedChangePosture::CmdBipedChangePosture(const ObjectID& objectID)
 {}
 
 //#################### PUBLIC METHODS ####################
-void CmdBipedChangePosture::execute(const ObjectManager_Ptr& objectManager, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree,
-									const NavManager_CPtr& navManager, int milliseconds)
+void CmdBipedChangePosture::execute(const ObjectManager_Ptr& objectManager, int milliseconds)
 {
 	// FIXME: Crouching is currently a "jolt" from one pose to another. It should really be a smooth transition.
 
@@ -46,6 +46,7 @@ void CmdBipedChangePosture::execute(const ObjectManager_Ptr& objectManager, cons
 	Vector3d dest = source + Vector3d(0,0,deltaZ);
 
 	// Check that changing pose won't put us in a wall.
+	OnionTree_CPtr tree = objectManager->database()->get("db://OnionTree", tree);
 	int destLeafIndex = TreeUtil::find_leaf_index(dest, tree);
 	const OnionLeaf *destLeaf = tree->leaf(destLeafIndex);
 	if(destLeaf->is_solid(newMapIndex)) return;

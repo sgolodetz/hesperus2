@@ -10,14 +10,11 @@
 using boost::shared_ptr;
 
 #include <hesp/objects/base/ObjectID.h>
-#include <hesp/util/PolygonTypes.h>
 
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
-typedef shared_ptr<const class NavManager> NavManager_CPtr;
 typedef shared_ptr<class ObjectManager> ObjectManager_Ptr;
-typedef shared_ptr<const class OnionTree> OnionTree_CPtr;
 
 class ObjectCommand
 {
@@ -27,7 +24,7 @@ public:
 
 	//#################### PUBLIC ABSTRACT METHODS ####################
 public:
-	virtual void execute(const ObjectManager_Ptr& objectManager, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavManager_CPtr& navManager, int milliseconds) = 0;
+	virtual void execute(const ObjectManager_Ptr& objectManager, int milliseconds) = 0;
 };
 
 //#################### TYPEDEFS ####################

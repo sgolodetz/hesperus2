@@ -28,6 +28,8 @@ namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
 typedef shared_ptr<const class BoundsManager> BoundsManager_CPtr;
+typedef shared_ptr<class Database> Database_Ptr;
+typedef shared_ptr<const class Database> Database_CPtr;
 typedef shared_ptr<class IObjectComponent> IObjectComponent_Ptr;
 typedef shared_ptr<const class Message> Message_CPtr;
 typedef shared_ptr<class ModelManager> ModelManager_Ptr;
@@ -52,6 +54,7 @@ private:
 	std::map<std::string,ObjectSpecification> m_archetypes;
 	BoundsManager_CPtr m_boundsManager;
 	ComponentPropertyTypeMap m_componentPropertyTypes;
+	Database_Ptr m_database;
 	std::map<std::string,GroupPredicate> m_groupPredicates;
 	IDAllocator m_idAllocator;
 	ModelManager_Ptr m_modelManager;
@@ -65,7 +68,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	ObjectManager(const BoundsManager_CPtr& boundsManager, const ComponentPropertyTypeMap& componentPropertyTypes, const std::map<std::string,ObjectSpecification>& archetypes, const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager);
+	ObjectManager(const BoundsManager_CPtr& boundsManager, const ComponentPropertyTypeMap& componentPropertyTypes, const std::map<std::string,ObjectSpecification>& archetypes, const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager, const Database_Ptr& database);
 
 	//#################### PUBLIC METHODS ####################
 public:
@@ -75,6 +78,7 @@ public:
 	void broadcast_message(const Message_CPtr& msg);
 	const ComponentPropertyTypeMap& component_property_types() const;
 	void consolidate_object_ids();
+	Database_CPtr database() const;
 	void flush_queues();
 	const ObjectSpecification& get_archetype(const std::string& archetypeName) const;
 	template <typename T> shared_ptr<T> get_component(const ObjectID& id, const shared_ptr<T>& = shared_ptr<T>());

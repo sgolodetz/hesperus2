@@ -16,6 +16,7 @@ namespace hesp {
 //#################### FORWARD DECLARATIONS ####################
 typedef shared_ptr<const class BoundsManager> BoundsManager_CPtr;
 class ComponentPropertyTypeMap;
+typedef shared_ptr<class Database> Database_Ptr;
 typedef shared_ptr<class IObjectComponent> IObjectComponent_Ptr;
 typedef shared_ptr<class ModelManager> ModelManager_Ptr;
 typedef shared_ptr<class ObjectManager> ObjectManager_Ptr;
@@ -26,7 +27,7 @@ class ObjectsSection
 {
 	//#################### LOADING METHODS ####################
 public:
-	static ObjectManager_Ptr load(std::istream& is, const BoundsManager_CPtr& boundsManager, const ComponentPropertyTypeMap& componentPropertyTypes, const std::map<std::string,ObjectSpecification>& archetypes, const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager);
+	static ObjectManager_Ptr load(std::istream& is, const BoundsManager_CPtr& boundsManager, const ComponentPropertyTypeMap& componentPropertyTypes, const std::map<std::string,ObjectSpecification>& archetypes, const ModelManager_Ptr& modelManager, const SpriteManager_Ptr& spriteManager, const Database_Ptr& database);
 
 	//#################### SAVING METHODS ####################
 public:

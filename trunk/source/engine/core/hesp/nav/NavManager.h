@@ -31,6 +31,10 @@ public:
 	void set_dataset(int index, const NavDataset_Ptr& dataset);
 };
 
+//#################### TYPEDEFS ####################
+typedef shared_ptr<NavManager> NavManager_Ptr;
+typedef shared_ptr<const NavManager> NavManager_CPtr;
+
 }
 
 #endif

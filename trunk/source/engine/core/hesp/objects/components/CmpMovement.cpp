@@ -6,6 +6,7 @@
 #include "CmpMovement.h"
 
 #include <hesp/bounds/BoundsManager.h>
+#include <hesp/database/Database.h>
 #include <hesp/math/geom/GeomUtil.h>
 #include <hesp/nav/NavDataset.h>
 #include <hesp/nav/NavLink.h>
@@ -30,13 +31,17 @@ IObjectComponent_Ptr CmpMovement::load(const Properties&)
 }
 
 //#################### PUBLIC METHODS ####################
-bool CmpMovement::attempt_navmesh_acquisition(const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavMesh_CPtr& navMesh)
+bool CmpMovement::attempt_navmesh_acquisition(const NavMesh_CPtr& navMesh)
 {
+	const Database& db = *m_objectManager->database();
+	shared_ptr<const std::vector<CollisionPolygon_Ptr> > polygons = db.get("db://OnionPolygons", polygons);
+	OnionTree_CPtr tree = db.get("db://OnionTree", tree);
+
 	ICmpPosition_CPtr cmpPosition = m_objectManager->get_component(m_objectID, cmpPosition);	assert(cmpPosition != NULL);
 	const Vector3d& position = cmpPosition->position();
 
 	// Try and find a nav polygon, starting from the last known one.
-	m_curNavPolyIndex = NavMeshUtil::find_nav_polygon(position, m_curNavPolyIndex, polygons, tree, navMesh);
+	m_curNavPolyIndex = NavMeshUtil::find_nav_polygon(position, m_curNavPolyIndex, *polygons, tree, navMesh);
 
 	return m_curNavPolyIndex != -1;
 }
@@ -51,9 +56,10 @@ int CmpMovement::cur_nav_poly_index() const
 	return m_curNavPolyIndex;
 }
 
-void CmpMovement::move(const Vector3d& dir, double speed, int milliseconds, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree,
-					   const NavManager_CPtr& navManager)
+void CmpMovement::move(const Vector3d& dir, double speed, int milliseconds)
 {
+	NavManager_CPtr navManager = m_objectManager->database()->get("db://NavManager", navManager);
+
 	ICmpSimulation_Ptr cmpSimulation = m_objectManager->get_component(m_objectID, cmpSimulation);	assert(cmpSimulation != NULL);
 
 	Move move;
@@ -68,11 +74,11 @@ void CmpMovement::move(const Vector3d& dir, double speed, int milliseconds, cons
 	{
 		oldTimeRemaining = move.timeRemaining;
 
-		if(m_curTraversal) do_traverse_move(move, speed /* FIXME: Select the appropriate speed here */, polygons, navMesh);
+		if(m_curTraversal) do_traverse_move(move, speed /* FIXME: Select the appropriate speed here */, navMesh);
 		if(move.timeRemaining == 0) break;
 
-		if(attempt_navmesh_acquisition(polygons, tree, navMesh)) do_navmesh_move(move, speed, polygons, tree, navMesh);
-		else do_direct_move(move, speed, tree);
+		if(attempt_navmesh_acquisition(navMesh)) do_navmesh_move(move, speed, navMesh);
+		else do_direct_move(move, speed);
 	} while(move.timeRemaining > 0 && oldTimeRemaining - move.timeRemaining > 0.0001);
 }
 
@@ -90,7 +96,7 @@ Properties CmpMovement::save() const
 /**
 @return	true, if a collision occurred, or false otherwise
 */
-bool CmpMovement::single_move(const Vector3d& dir, double speed, int milliseconds, const OnionTree_CPtr& tree)
+bool CmpMovement::single_move(const Vector3d& dir, double speed, int milliseconds)
 {
 	// FIXME: The bool return here is unintuitive and should be replaced with something more sensible.
 
@@ -104,7 +110,7 @@ bool CmpMovement::single_move(const Vector3d& dir, double speed, int millisecond
 	move.mapIndex = m_objectManager->bounds_manager()->lookup_bounds_index(cmpSimulation->bounds_group(), cmpSimulation->posture());
 	move.timeRemaining = milliseconds / 1000.0;
 
-	return do_direct_move(move, speed, tree);
+	return do_direct_move(move, speed);
 }
 
 void CmpMovement::set_navmesh_unacquired()
@@ -127,9 +133,11 @@ double CmpMovement::walk_speed() const
 /**
 @return	true, if a collision occurred, or false otherwise
 */
-bool CmpMovement::do_direct_move(Move& move, double speed, const OnionTree_CPtr& tree)
+bool CmpMovement::do_direct_move(Move& move, double speed)
 {
 	bool collisionOccurred = false;
+
+	OnionTree_CPtr tree = m_objectManager->database()->get("db://OnionTree", tree);
 
 	ICmpSimulation_Ptr cmpSimulation = m_objectManager->get_component(m_objectID, cmpSimulation);	assert(cmpSimulation != NULL);
 
@@ -185,15 +193,17 @@ bool CmpMovement::do_direct_move(Move& move, double speed, const OnionTree_CPtr&
 	return collisionOccurred;
 }
 
-void CmpMovement::do_navmesh_move(Move& move, double speed, const std::vector<CollisionPolygon_Ptr>& polygons, const OnionTree_CPtr& tree, const NavMesh_CPtr& navMesh)
+void CmpMovement::do_navmesh_move(Move& move, double speed, const NavMesh_CPtr& navMesh)
 {
+	shared_ptr<const std::vector<CollisionPolygon_Ptr> > polygons = m_objectManager->database()->get("db://OnionPolygons", polygons);
+
 	ICmpPosition_Ptr cmpPosition = m_objectManager->get_component(m_objectID, cmpPosition);		assert(cmpPosition != NULL);
 
 	// Step 1:		Project the movement vector onto the plane of the current nav polygon.
 
 	const NavPolygon& navPoly = *navMesh->polygons()[m_curNavPolyIndex];
 	int curColPolyIndex = navPoly.collision_poly_index();
-	const CollisionPolygon& curPoly = *polygons[curColPolyIndex];
+	const CollisionPolygon& curPoly = *(*polygons)[curColPolyIndex];
 	Plane plane = make_plane(curPoly);
 	move.dir = project_vector_onto_plane(move.dir, plane);
 	if(move.dir.length_squared() > SMALL_EPSILON*SMALL_EPSILON) move.dir.normalize();
@@ -238,7 +248,7 @@ void CmpMovement::do_navmesh_move(Move& move, double speed, const std::vector<Co
 		}
 		else
 		{
-			do_direct_move(move, speed, tree);
+			do_direct_move(move, speed);
 		}
 
 		return;
@@ -259,8 +269,10 @@ void CmpMovement::do_navmesh_move(Move& move, double speed, const std::vector<Co
 	m_curTraversal.reset(new Traversal(hitNavlink, *hit, 0));
 }
 
-void CmpMovement::do_traverse_move(Move& move, double speed, const std::vector<CollisionPolygon_Ptr>& polygons, const NavMesh_CPtr& navMesh)
+void CmpMovement::do_traverse_move(Move& move, double speed, const NavMesh_CPtr& navMesh)
 {
+	shared_ptr<const std::vector<CollisionPolygon_Ptr> > polygons = m_objectManager->database()->get("db://OnionPolygons", polygons);
+
 	ICmpPosition_Ptr cmpPosition = m_objectManager->get_component(m_objectID, cmpPosition);		assert(cmpPosition != NULL);
 
 	Traversal_CPtr traversal = m_curTraversal;
@@ -291,7 +303,7 @@ void CmpMovement::do_traverse_move(Move& move, double speed, const std::vector<C
 
 		// Move the object very slightly away from the navlink exit: this is a hack to prevent link loops.
 		int destColPolyIndex = navMesh->polygons()[link->dest_poly()]->collision_poly_index();
-		const CollisionPolygon& destPoly = *polygons[destColPolyIndex];
+		const CollisionPolygon& destPoly = *(*polygons)[destColPolyIndex];
 		Plane destPlane = make_plane(destPoly);
 		Vector3d destDir = project_vector_onto_plane(move.dir, destPlane);
 		dest += destDir * 0.001;
