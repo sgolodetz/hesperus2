@@ -13,6 +13,15 @@ SET(targetname hesperus)
 #############################
 
 ##
+SET(ai_sources
+hesp/ai/AIScriptRegistrar.cpp
+)
+
+SET(ai_headers
+hesp/ai/AIScriptRegistrar.h
+)
+
+##
 SET(audio_sources
 hesp/audio/SoundInstance.cpp
 hesp/audio/SoundInstanceUpdater.cpp
@@ -928,6 +937,7 @@ hesp/xml/XMLToken.h
 #################################################################
 
 SET(sources
+${ai_sources}
 ${audio_sources}
 ${axes_sources}
 ${bounds_sources}
@@ -982,6 +992,7 @@ ${xml_sources}
 )
 
 SET(headers
+${ai_headers}
 ${audio_headers}
 ${axes_headers}
 ${bounds_headers}
@@ -1060,6 +1071,11 @@ ${vis_templates}
 #############################
 # Specify the source groups #
 #############################
+
+##
+SOURCE_GROUP(ai\\.cpp FILES ${ai_sources})
+SOURCE_GROUP(ai\\.h FILES ${ai_headers})
+
 
 ##
 SOURCE_GROUP(audio\\.cpp FILES ${audio_sources})
