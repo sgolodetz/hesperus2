@@ -119,12 +119,18 @@ SET(datastructures_sources
 hesp/datastructures/FiniteStateMachine.cpp
 hesp/datastructures/FSMState.cpp
 hesp/datastructures/FSMTransition.cpp
+hesp/datastructures/HierarchicalStateMachine.cpp
+hesp/datastructures/HSMState.cpp
+hesp/datastructures/HSMTransition.cpp
 )
 
 SET(datastructures_headers
 hesp/datastructures/FiniteStateMachine.h
 hesp/datastructures/FSMState.h
 hesp/datastructures/FSMTransition.h
+hesp/datastructures/HierarchicalStateMachine.h
+hesp/datastructures/HSMState.h
+hesp/datastructures/HSMTransition.h
 hesp/datastructures/PriorityQueue.h
 )
 

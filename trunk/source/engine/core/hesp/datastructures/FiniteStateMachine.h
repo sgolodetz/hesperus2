@@ -29,10 +29,6 @@ private:
 	//#################### PRIVATE VARIABLES ####################
 private:
 	FSMState_Ptr m_currentState;
-
-	// Note:	These data structures will need to be changed if we ever want to support removal of states/transitions,
-	//			but the class interface will stay the same. This is by design - I'm avoiding implementing the removal
-	//			functions up-front because I may never actually need them.
 	StateMap m_stateMap;
 	TransitionMap m_transitionMap;
 
@@ -41,10 +37,6 @@ public:
 	void add_state(const FSMState_Ptr& state);
 	void add_transition(const FSMTransition_Ptr& transition);
 	bool execute();
-#if 0
-	void remove_state(const std::string& name);
-	void remove_transition(const std::string& name);
-#endif
 	void set_initial_state(const std::string& name);
 };
 
