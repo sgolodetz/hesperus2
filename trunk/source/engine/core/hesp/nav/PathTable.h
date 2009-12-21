@@ -6,6 +6,7 @@
 #ifndef H_HESP_PATHTABLE
 #define H_HESP_PATHTABLE
 
+#include <climits>
 #include <list>
 #include <vector>
 

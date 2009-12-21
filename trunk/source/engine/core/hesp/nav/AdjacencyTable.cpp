@@ -5,6 +5,8 @@
 
 #include "AdjacencyTable.h"
 
+#include <climits>
+
 #include <hesp/exceptions/Exception.h>
 #include "AdjacencyList.h"
 
