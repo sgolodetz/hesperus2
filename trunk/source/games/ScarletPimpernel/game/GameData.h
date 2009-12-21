@@ -11,7 +11,7 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
-#include <hesp/audio/SoundSystem.h>
+#include <hesp/audio/ISoundSystem.h>
 #include <hesp/input/InputState.h>
 
 namespace hesp {
@@ -28,7 +28,7 @@ private:
 	std::string m_levelFilename;
 	int m_milliseconds;
 	bool m_quitRequested;
-	SoundSystem m_soundSystem;
+	ISoundSystem_Ptr m_soundSystem;
 
 	//#################### CONSTRUCTORS ####################
 public:
@@ -45,7 +45,8 @@ public:
 	void set_level_filename(const std::string& levelFilename);
 	void set_milliseconds(int milliseconds);
 	void set_quit_requested();
-	SoundSystem& sound_system();
+	void set_sound_system(const ISoundSystem_Ptr& soundSystem);
+	ISoundSystem_Ptr sound_system();
 };
 
 //#################### TYPEDEFS ####################

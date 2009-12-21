@@ -23,6 +23,7 @@ hesp/ai/AIScriptRegistrar.h
 
 ##
 SET(audio_sources
+hesp/audio/NullSoundSystem.cpp
 hesp/audio/SoundInstance.cpp
 hesp/audio/SoundInstanceUpdater.cpp
 hesp/audio/SoundListenerUpdater.cpp
@@ -30,7 +31,10 @@ hesp/audio/SoundSystem.cpp
 )
 
 SET(audio_headers
+hesp/audio/ISoundSystem.h
+hesp/audio/NullSoundSystem.h
 hesp/audio/SoundInstance.h
+hesp/audio/SoundInstanceHandle.h
 hesp/audio/SoundInstanceUpdater.h
 hesp/audio/SoundListenerUpdater.h
 hesp/audio/SoundSystem.h

@@ -11,6 +11,7 @@
 
 #include <ASXEngine.h>
 
+#include <hesp/audio/SoundSystem.h>
 #include <hesp/datastructures/FiniteStateMachine.h>
 #include <hesp/gui/Screen.h>
 #include <hesp/io/util/DirectoryFinder.h>
@@ -43,11 +44,18 @@ try
 	options.set("fullScreen",	configModule->get_global_variable<bool>("fullScreen"));
 	options.set("levelName",	configModule->get_global_variable<std::string>("levelName"));
 	options.set("profile",		configModule->get_global_variable<std::string>("profile"));
+	options.set("soundOn",		configModule->get_global_variable<bool>("soundOn"));
+
+#ifdef __linux__
+	// Disable sound on Linux, where playing MIDI files is causing a problem.
+	options.set("soundOn", false);
+#endif
 
 	int width						= options.get<int>("width");
 	int height						= options.get<int>("height");
 	bool fullScreen					= options.get<bool>("fullScreen");
 	const std::string& levelName	= options.get<std::string>("levelName");
+	bool soundOn					= options.get<bool>("soundOn");
 
 	// Set up the window.
 	if(SDL_Init(SDL_INIT_VIDEO) < 0) quit(EXIT_FAILURE);
@@ -72,6 +80,12 @@ try
 
 	if(glewInit() != GLEW_OK) quit_with_error("GLEW could not be initialised");
 	if(!glewGetExtension("GL_ARB_multitexture")) quit_with_error("Multitexturing not supported");
+
+	// Set up the sound system if necessary.
+	if(soundOn)
+	{
+		m_data->set_sound_system(ISoundSystem_Ptr(new SoundSystem));
+	}
 
 	// Set the initial game state.
 	m_fsm->set_initial_state(initialState);

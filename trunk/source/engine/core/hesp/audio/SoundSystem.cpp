@@ -5,9 +5,6 @@
 
 #include "SoundSystem.h"
 
-#include <boost/shared_ptr.hpp>
-using boost::shared_ptr;
-
 #include <fmod_errors.h>
 
 #include <hesp/exceptions/Exception.h>
@@ -119,7 +116,7 @@ Destroy the specified sound instance (this has the effect of stopping the sound)
 
 @param handle	A handle to the instance
 */
-void SoundSystem::destroy_instance(const InstanceHandle& handle)
+void SoundSystem::destroy_instance(const SoundInstanceHandle& handle)
 {
 	shared_ptr<int> id = handle.m_id.lock();
 	if(id) destroy_instance(m_instances.find(*id));		// note that the lock only succeeds if *id is in the map
@@ -161,7 +158,7 @@ which is currently playing.
 @param handle	A handle to the instance
 @return			true, if the handle refers to a playing instance, or false otherwise
 */
-bool SoundSystem::is_playing(const InstanceHandle& handle) const
+bool SoundSystem::is_playing(const SoundInstanceHandle& handle) const
 {
 	shared_ptr<int> id = handle.m_id.lock();
 	if(!id) return false;
@@ -180,7 +177,7 @@ Plays the sound with the specified name.
 @param name		The name of the sound
 @return			A handle to the instance of the played sound
 */
-SoundSystem::InstanceHandle SoundSystem::play_sound(const std::string& name)
+SoundInstanceHandle SoundSystem::play_sound(const std::string& name)
 {
 	return play_sound_sub(name, boost::none);
 }
@@ -192,7 +189,7 @@ Plays the 3D sound with the specified name.
 @param updateFunc	The function used to update the sound's position and velocity each frame
 @return				A handle to the instance of the played sound
 */
-SoundSystem::InstanceHandle SoundSystem::play_3d_sound(const std::string& name, const InstanceUpdateFunc& updateFunc)
+SoundInstanceHandle SoundSystem::play_3d_sound(const std::string& name, const InstanceUpdateFunc& updateFunc)
 {
 	return play_sound_sub(name, updateFunc);
 }
@@ -253,7 +250,7 @@ SoundSystem::InstanceMap::iterator SoundSystem::destroy_instance(InstanceMap::it
 	return it;
 }
 
-SoundSystem::InstanceHandle
+SoundInstanceHandle
 SoundSystem::play_sound_sub(const std::string& name, const boost::optional<InstanceUpdateFunc>& updateFunc)
 {
 	SoundMap::iterator it = m_sounds.find(name);
@@ -276,7 +273,7 @@ SoundSystem::play_sound_sub(const std::string& name, const boost::optional<Insta
 	result = channel->setPaused(false);
 	check(result);
 
-	return InstanceHandle(weak_ptr<int>(id));
+	return SoundInstanceHandle(weak_ptr<int>(id));
 }
 
 }

@@ -24,7 +24,7 @@ class GameState_ButtonsMenu : public GameState
 	//#################### PROTECTED VARIABLES ####################
 protected:
 	GameData_Ptr m_gameData;
-	boost::optional<SoundSystem::InstanceHandle> m_menuSoundInstance;
+	boost::optional<SoundInstanceHandle> m_menuSoundInstance;
 
 	//#################### CONSTRUCTORS ####################
 public:
