@@ -17,8 +17,8 @@ using boost::shared_ptr;
 
 #include <ASXEngine.h>
 
-#include <hesp/datastructures/PriorityQueue.h>
 #include <hesp/util/IDAllocator.h>
+#include <hesp/util/PriorityQueue.h>
 #include "ComponentPropertyTypeMap.h"
 #include "ListenerTable.h"
 #include "ObjectID.h"

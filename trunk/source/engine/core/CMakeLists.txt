@@ -119,15 +119,6 @@ SET(database_headers hesp/database/Database.h)
 SET(database_templates hesp/database/Database.tpp)
 
 ##
-SET(datastructures_headers
-hesp/datastructures/PriorityQueue.h
-)
-
-SET(datastructures_templates
-hesp/datastructures/PriorityQueue.tpp
-)
-
-##
 SET(exceptions_headers
 hesp/exceptions/Exception.h
 hesp/exceptions/FileNotFoundException.h
@@ -906,6 +897,7 @@ SET(util_headers
 hesp/util/ConfigOptions.h
 hesp/util/IDAllocator.h
 hesp/util/PolygonTypes.h
+hesp/util/PriorityQueue.h
 hesp/util/Properties.h
 hesp/util/ResourceManager.h
 hesp/util/TextRenderer.h
@@ -913,6 +905,7 @@ hesp/util/TextRenderer.h
 
 SET(util_templates
 hesp/util/ConfigOptions.tpp
+hesp/util/PriorityQueue.tpp
 hesp/util/Properties.tpp
 hesp/util/ResourceManager.tpp
 )
@@ -1017,7 +1010,6 @@ ${cameras_headers}
 ${colours_headers}
 ${csg_headers}
 ${database_headers}
-${datastructures_headers}
 ${exceptions_headers}
 ${gui_headers}
 ${images_headers}
@@ -1070,7 +1062,6 @@ SET(templates
 ${brushes_templates}
 ${csg_templates}
 ${database_templates}
-${datastructures_templates}
 ${gui_templates}
 ${images_templates}
 ${io_files_templates}
@@ -1127,10 +1118,6 @@ SOURCE_GROUP(csg\\.tpp FILES ${csg_templates})
 SOURCE_GROUP(database\\.cpp FILES ${database_sources})
 SOURCE_GROUP(database\\.h FILES ${database_headers})
 SOURCE_GROUP(database\\.tpp FILES ${database_templates})
-
-##
-SOURCE_GROUP(datastructures\\.h FILES ${datastructures_headers})
-SOURCE_GROUP(datastructures\\.tpp FILES ${datastructures_templates})
 
 ##
 SOURCE_GROUP(exceptions\\.h FILES ${exceptions_headers})
