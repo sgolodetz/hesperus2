@@ -721,10 +721,12 @@ hesp/objects/contactresolvers/ProjectileDamageContactResolver.h
 
 ##
 SET(objects_forcegenerators_sources
+hesp/objects/forcegenerators/SpringForceGenerator.cpp
 hesp/objects/forcegenerators/WeightForceGenerator.cpp
 )
 
 SET(objects_forcegenerators_headers
+hesp/objects/forcegenerators/SpringForceGenerator.h
 hesp/objects/forcegenerators/WeightForceGenerator.h
 )
 

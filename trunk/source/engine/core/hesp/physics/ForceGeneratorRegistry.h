@@ -7,7 +7,9 @@
 #define H_HESP_FORCEGENERATORREGISTRY
 
 #include <map>
+#include <set>
 #include <string>
+#include <utility>
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
@@ -22,10 +24,12 @@ class ForceGeneratorRegistry
 	//#################### TYPEDEFS ####################
 public:
 	typedef std::map<std::string,ForceGenerator_CPtr> ForceGenerators;
+	typedef std::pair<int,std::string> ForceGeneratorHandle;
 
 	//#################### PRIVATE VARIABLES ####################
 private:
 	std::map<int,ForceGenerators> m_generators;
+	std::map<int,std::set<ForceGeneratorHandle> > m_references;
 
 	//#################### PUBLIC METHODS ####################
 public:

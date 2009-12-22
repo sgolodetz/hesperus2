@@ -15,6 +15,11 @@ WeightForceGenerator::WeightForceGenerator(double gravityStrength)
 {}
 
 //#################### PUBLIC METHODS ####################
+std::vector<PhysicsObjectID> WeightForceGenerator::referenced_objects() const
+{
+	return std::vector<PhysicsObjectID>();
+}
+
 void WeightForceGenerator::update_force(PhysicsObject& object) const
 {
 	double invMass = object.inverse_mass();

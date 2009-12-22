@@ -22,6 +22,7 @@ public:
 
 	//#################### PUBLIC METHODS ####################
 public:
+	std::vector<PhysicsObjectID> referenced_objects() const;
 	void update_force(PhysicsObject& object) const;
 };
 
