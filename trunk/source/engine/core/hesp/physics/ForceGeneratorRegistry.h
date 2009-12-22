@@ -24,6 +24,7 @@ class ForceGeneratorRegistry
 	//#################### TYPEDEFS ####################
 public:
 	typedef std::map<std::string,ForceGenerator_CPtr> ForceGenerators;
+private:
 	typedef std::pair<int,std::string> ForceGeneratorHandle;
 
 	//#################### PRIVATE VARIABLES ####################
