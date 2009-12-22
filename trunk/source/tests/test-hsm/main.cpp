@@ -5,9 +5,9 @@
 
 #include <iostream>
 
-#include <hesp/datastructures/HierarchicalStateMachine.h>
-#include <hesp/datastructures/HSMState.h>
-#include <hesp/datastructures/HSMTransition.h>
+#include <hesp/statemachines/HierarchicalStateMachine.h>
+#include <hesp/statemachines/HSMState.h>
+#include <hesp/statemachines/HSMTransition.h>
 using namespace hesp;
 
 class TestState : public HSMState

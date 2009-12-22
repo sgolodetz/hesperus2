@@ -11,7 +11,7 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
-#include <hesp/datastructures/FSMState.h>
+#include <hesp/statemachines/FSMState.h>
 
 namespace hesp {
 

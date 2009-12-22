@@ -119,22 +119,7 @@ SET(database_headers hesp/database/Database.h)
 SET(database_templates hesp/database/Database.tpp)
 
 ##
-SET(datastructures_sources
-hesp/datastructures/FiniteStateMachine.cpp
-hesp/datastructures/FSMState.cpp
-hesp/datastructures/FSMTransition.cpp
-hesp/datastructures/HierarchicalStateMachine.cpp
-hesp/datastructures/HSMState.cpp
-hesp/datastructures/HSMTransition.cpp
-)
-
 SET(datastructures_headers
-hesp/datastructures/FiniteStateMachine.h
-hesp/datastructures/FSMState.h
-hesp/datastructures/FSMTransition.h
-hesp/datastructures/HierarchicalStateMachine.h
-hesp/datastructures/HSMState.h
-hesp/datastructures/HSMTransition.h
 hesp/datastructures/PriorityQueue.h
 )
 
@@ -838,6 +823,25 @@ hesp/sprites/SpriteManager.h
 )
 
 ##
+SET(statemachines_sources
+hesp/statemachines/FiniteStateMachine.cpp
+hesp/statemachines/FSMState.cpp
+hesp/statemachines/FSMTransition.cpp
+hesp/statemachines/HierarchicalStateMachine.cpp
+hesp/statemachines/HSMState.cpp
+hesp/statemachines/HSMTransition.cpp
+)
+
+SET(statemachines_headers
+hesp/statemachines/FiniteStateMachine.h
+hesp/statemachines/FSMState.h
+hesp/statemachines/FSMTransition.h
+hesp/statemachines/HierarchicalStateMachine.h
+hesp/statemachines/HSMState.h
+hesp/statemachines/HSMTransition.h
+)
+
+##
 SET(textures_sources
 hesp/textures/Image24Texture.cpp
 hesp/textures/Image32Texture.cpp
@@ -957,7 +961,6 @@ ${brushes_sources}
 ${cameras_sources}
 ${colours_sources}
 ${database_sources}
-${datastructures_sources}
 ${gui_sources}
 ${images_sources}
 ${input_sources}
@@ -996,6 +999,7 @@ ${objects_yokes_user_sources}
 ${physics_sources}
 ${portals_sources}
 ${sprites_sources}
+${statemachines_sources}
 ${textures_sources}
 ${trees_sources}
 ${util_sources}
@@ -1054,6 +1058,7 @@ ${ogl_headers}
 ${physics_headers}
 ${portals_headers}
 ${sprites_headers}
+${statemachines_headers}
 ${textures_headers}
 ${trees_headers}
 ${util_headers}
@@ -1124,7 +1129,6 @@ SOURCE_GROUP(database\\.h FILES ${database_headers})
 SOURCE_GROUP(database\\.tpp FILES ${database_templates})
 
 ##
-SOURCE_GROUP(datastructures\\.cpp FILES ${datastructures_sources})
 SOURCE_GROUP(datastructures\\.h FILES ${datastructures_headers})
 SOURCE_GROUP(datastructures\\.tpp FILES ${datastructures_templates})
 
@@ -1272,6 +1276,10 @@ SOURCE_GROUP(portals\\.tpp FILES ${portals_templates})
 ##
 SOURCE_GROUP(sprites\\.cpp FILES ${sprites_sources})
 SOURCE_GROUP(sprites\\.h FILES ${sprites_headers})
+
+##
+SOURCE_GROUP(statemachines\\.cpp FILES ${statemachines_sources})
+SOURCE_GROUP(statemachines\\.h FILES ${statemachines_headers})
 
 ##
 SOURCE_GROUP(textures\\.cpp FILES ${textures_sources})

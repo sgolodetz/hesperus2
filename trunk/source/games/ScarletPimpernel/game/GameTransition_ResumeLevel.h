@@ -9,7 +9,7 @@
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
 
-#include <hesp/datastructures/FSMTransition.h>
+#include <hesp/statemachines/FSMTransition.h>
 
 namespace hesp {
 

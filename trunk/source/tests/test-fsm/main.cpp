@@ -5,9 +5,9 @@
 
 #include <iostream>
 
-#include <hesp/datastructures/FiniteStateMachine.h>
-#include <hesp/datastructures/FSMState.h>
-#include <hesp/datastructures/FSMTransition.h>
+#include <hesp/statemachines/FiniteStateMachine.h>
+#include <hesp/statemachines/FSMState.h>
+#include <hesp/statemachines/FSMTransition.h>
 using namespace hesp;
 
 //#################### SHARED DATA ####################

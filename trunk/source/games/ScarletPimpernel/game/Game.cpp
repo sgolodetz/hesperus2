@@ -12,9 +12,9 @@
 #include <ASXEngine.h>
 
 #include <hesp/audio/SoundSystem.h>
-#include <hesp/datastructures/FiniteStateMachine.h>
 #include <hesp/gui/Screen.h>
 #include <hesp/io/util/DirectoryFinder.h>
+#include <hesp/statemachines/FiniteStateMachine.h>
 #include <hesp/util/ConfigOptions.h>
 #include "GameData.h"
 

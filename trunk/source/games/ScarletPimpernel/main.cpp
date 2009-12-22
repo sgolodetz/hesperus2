@@ -6,9 +6,9 @@
 #include <cstdlib>
 #include <iostream>
 
-#include <hesp/datastructures/FiniteStateMachine.h>
 #include <hesp/exceptions/Exception.h>
 #include <hesp/io/util/DirectoryFinder.h>
+#include <hesp/statemachines/FiniteStateMachine.h>
 #include "game/Game.h"
 #include "game/GameData.h"
 #include "game/GameState_InGameMenu.h"
