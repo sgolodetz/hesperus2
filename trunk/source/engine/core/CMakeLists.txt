@@ -13,49 +13,6 @@ SET(targetname hesperus)
 #############################
 
 ##
-SET(ai_sources
-hesp/ai/AiScriptRegistrar.cpp
-)
-
-SET(ai_headers
-hesp/ai/AiScriptRegistrar.h
-)
-
-##
-SET(ai_behaviours_sources
-hesp/ai/behaviours/AiBehaviour.cpp
-hesp/ai/behaviours/AiCompositeBehaviour.cpp
-hesp/ai/behaviours/AiGotoPositionBehaviour.cpp
-hesp/ai/behaviours/AiSelectBehaviour.cpp
-hesp/ai/behaviours/AiSequenceBehaviour.cpp
-)
-
-SET(ai_behaviours_headers
-hesp/ai/behaviours/AiBehaviour.h
-hesp/ai/behaviours/AiCompositeBehaviour.h
-hesp/ai/behaviours/AiGotoPositionBehaviour.h
-hesp/ai/behaviours/AiSelectBehaviour.h
-hesp/ai/behaviours/AiSequenceBehaviour.h
-)
-
-##
-SET(ai_hsm_sources
-hesp/ai/hsm/AiHSM.cpp
-hesp/ai/hsm/AiHSMState.cpp
-hesp/ai/hsm/AiHSMTransition.cpp
-hesp/ai/hsm/ScriptedAiHSMState.cpp
-hesp/ai/hsm/ScriptedAiHSMTransition.cpp
-)
-
-SET(ai_hsm_headers
-hesp/ai/hsm/AiHSM.h
-hesp/ai/hsm/AiHSMState.h
-hesp/ai/hsm/AiHSMTransition.h
-hesp/ai/hsm/ScriptedAiHSMState.h
-hesp/ai/hsm/ScriptedAiHSMTransition.h
-)
-
-##
 SET(audio_sources
 hesp/audio/NullSoundSystem.cpp
 hesp/audio/SoundInstance.cpp
@@ -533,6 +490,49 @@ hesp/nav/WalkLink.h
 )
 
 ##
+SET(objects_ai_sources
+hesp/objects/ai/AiScriptRegistrar.cpp
+)
+
+SET(objects_ai_headers
+hesp/objects/ai/AiScriptRegistrar.h
+)
+
+##
+SET(objects_ai_behaviours_sources
+hesp/objects/ai/behaviours/AiBehaviour.cpp
+hesp/objects/ai/behaviours/AiCompositeBehaviour.cpp
+hesp/objects/ai/behaviours/AiGotoPositionBehaviour.cpp
+hesp/objects/ai/behaviours/AiSelectBehaviour.cpp
+hesp/objects/ai/behaviours/AiSequenceBehaviour.cpp
+)
+
+SET(objects_ai_behaviours_headers
+hesp/objects/ai/behaviours/AiBehaviour.h
+hesp/objects/ai/behaviours/AiCompositeBehaviour.h
+hesp/objects/ai/behaviours/AiGotoPositionBehaviour.h
+hesp/objects/ai/behaviours/AiSelectBehaviour.h
+hesp/objects/ai/behaviours/AiSequenceBehaviour.h
+)
+
+##
+SET(objects_ai_hsm_sources
+hesp/objects/ai/hsm/AiHSM.cpp
+hesp/objects/ai/hsm/AiHSMState.cpp
+hesp/objects/ai/hsm/AiHSMTransition.cpp
+hesp/objects/ai/hsm/ScriptedAiHSMState.cpp
+hesp/objects/ai/hsm/ScriptedAiHSMTransition.cpp
+)
+
+SET(objects_ai_hsm_headers
+hesp/objects/ai/hsm/AiHSM.h
+hesp/objects/ai/hsm/AiHSMState.h
+hesp/objects/ai/hsm/AiHSMTransition.h
+hesp/objects/ai/hsm/ScriptedAiHSMState.h
+hesp/objects/ai/hsm/ScriptedAiHSMTransition.h
+)
+
+##
 SET(objects_base_sources
 hesp/objects/base/ComponentPropertyTypeMap.cpp
 hesp/objects/base/IObjectComponent.cpp
@@ -980,9 +980,6 @@ hesp/xml/XMLToken.h
 #################################################################
 
 SET(sources
-${ai_sources}
-${ai_behaviours_sources}
-${ai_hsm_sources}
 ${audio_sources}
 ${axes_sources}
 ${bounds_sources}
@@ -1006,6 +1003,9 @@ ${math_quaternions_sources}
 ${math_vectors_sources}
 ${models_sources}
 ${nav_sources}
+${objects_ai_sources}
+${objects_ai_behaviours_sources}
+${objects_ai_hsm_sources}
 ${objects_base_sources}
 ${objects_commands_sources}
 ${objects_components_Activatable_sources}
@@ -1037,9 +1037,6 @@ ${xml_sources}
 )
 
 SET(headers
-${ai_headers}
-${ai_behaviours_headers}
-${ai_hsm_headers}
 ${audio_headers}
 ${axes_headers}
 ${bounds_headers}
@@ -1065,6 +1062,9 @@ ${math_quaternions_headers}
 ${math_vectors_headers}
 ${models_headers}
 ${nav_headers}
+${objects_ai_headers}
+${objects_ai_behaviours_headers}
+${objects_ai_hsm_headers}
 ${objects_base_headers}
 ${objects_commands_headers}
 ${objects_components_Activatable_headers}
@@ -1117,18 +1117,6 @@ ${vis_templates}
 #############################
 # Specify the source groups #
 #############################
-
-##
-SOURCE_GROUP(ai\\.cpp FILES ${ai_sources})
-SOURCE_GROUP(ai\\.h FILES ${ai_headers})
-
-##
-SOURCE_GROUP(ai\\behaviours\\.cpp FILES ${ai_behaviours_sources})
-SOURCE_GROUP(ai\\behaviours\\.h FILES ${ai_behaviours_headers})
-
-##
-SOURCE_GROUP(ai\\hsm\\.cpp FILES ${ai_hsm_sources})
-SOURCE_GROUP(ai\\hsm\\.h FILES ${ai_hsm_headers})
 
 ##
 SOURCE_GROUP(audio\\.cpp FILES ${audio_sources})
@@ -1237,6 +1225,18 @@ SOURCE_GROUP(models\\.h FILES ${models_headers})
 ##
 SOURCE_GROUP(nav\\.cpp FILES ${nav_sources})
 SOURCE_GROUP(nav\\.h FILES ${nav_headers})
+
+##
+SOURCE_GROUP(objects\\ai\\.cpp FILES ${objects_ai_sources})
+SOURCE_GROUP(objects\\ai\\.h FILES ${objects_ai_headers})
+
+##
+SOURCE_GROUP(objects\\ai\\behaviours\\.cpp FILES ${objects_ai_behaviours_sources})
+SOURCE_GROUP(objects\\ai\\behaviours\\.h FILES ${objects_ai_behaviours_headers})
+
+##
+SOURCE_GROUP(objects\\ai\\hsm\\.cpp FILES ${objects_ai_hsm_sources})
+SOURCE_GROUP(objects\\ai\\hsm\\.h FILES ${objects_ai_hsm_headers})
 
 ##
 SOURCE_GROUP(objects\\base\\.cpp FILES ${objects_base_sources})

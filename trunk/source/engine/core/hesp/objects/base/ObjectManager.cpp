@@ -5,7 +5,7 @@
 
 #include "ObjectManager.h"
 
-#include <hesp/ai/AiScriptRegistrar.h>
+#include <hesp/objects/ai/AiScriptRegistrar.h>
 #include <hesp/objects/components/ICmpActivatable.h>
 #include <hesp/objects/components/ICmpInventory.h>
 #include <hesp/objects/components/ICmpModelRender.h>
