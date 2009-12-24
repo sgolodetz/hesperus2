@@ -26,7 +26,7 @@ class MinimusGotoPositionYoke : public IYoke
 	//#################### PRIVATE VARIABLES ####################
 private:
 	ObjectID m_objectID;
-	ObjectManager *m_objectManager;
+	const ObjectManager *m_objectManager;
 
 	Vector3d m_dest;
 	std::vector<NavLink_Ptr> m_links;
@@ -34,7 +34,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	MinimusGotoPositionYoke(const ObjectID& objectID, ObjectManager *objectManager, const Vector3d& dest);
+	MinimusGotoPositionYoke(const ObjectID& objectID, const ObjectManager *objectManager, const Vector3d& dest);
 
 	//#################### PUBLIC METHODS ####################
 public:

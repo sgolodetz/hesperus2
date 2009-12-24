@@ -21,7 +21,7 @@
 namespace hesp {
 
 //#################### CONSTRUCTORS ####################
-MinimusGotoPositionYoke::MinimusGotoPositionYoke(const ObjectID& objectID, ObjectManager *objectManager, const Vector3d& dest)
+MinimusGotoPositionYoke::MinimusGotoPositionYoke(const ObjectID& objectID, const ObjectManager *objectManager, const Vector3d& dest)
 :	m_objectID(objectID), m_objectManager(objectManager), m_dest(dest)
 {}
 
@@ -40,7 +40,7 @@ std::vector<ObjectCommand_Ptr> MinimusGotoPositionYoke::generate_commands(InputS
 	}
 
 	ICmpMovement_CPtr cmpMovement = m_objectManager->get_component(m_objectID, cmpMovement);		assert(cmpMovement != NULL);
-	ICmpSimulation_Ptr cmpSimulation = m_objectManager->get_component(m_objectID, cmpSimulation);	assert(cmpSimulation != NULL);
+	ICmpSimulation_CPtr cmpSimulation = m_objectManager->get_component(m_objectID, cmpSimulation);	assert(cmpSimulation != NULL);
 
 	const Vector3d& source = cmpSimulation->position();
 
