@@ -22,6 +22,40 @@ hesp/ai/AiScriptRegistrar.h
 )
 
 ##
+SET(ai_behaviours_sources
+hesp/ai/behaviours/AiBehaviour.cpp
+hesp/ai/behaviours/AiCompositeBehaviour.cpp
+hesp/ai/behaviours/AiGotoPositionBehaviour.cpp
+hesp/ai/behaviours/AiSelectBehaviour.cpp
+hesp/ai/behaviours/AiSequenceBehaviour.cpp
+)
+
+SET(ai_behaviours_headers
+hesp/ai/behaviours/AiBehaviour.h
+hesp/ai/behaviours/AiCompositeBehaviour.h
+hesp/ai/behaviours/AiGotoPositionBehaviour.h
+hesp/ai/behaviours/AiSelectBehaviour.h
+hesp/ai/behaviours/AiSequenceBehaviour.h
+)
+
+##
+SET(ai_hsm_sources
+hesp/ai/hsm/AiHSM.cpp
+hesp/ai/hsm/AiHSMState.cpp
+hesp/ai/hsm/AiHSMTransition.cpp
+hesp/ai/hsm/ScriptedAiHSMState.cpp
+hesp/ai/hsm/ScriptedAiHSMTransition.cpp
+)
+
+SET(ai_hsm_headers
+hesp/ai/hsm/AiHSM.h
+hesp/ai/hsm/AiHSMState.h
+hesp/ai/hsm/AiHSMTransition.h
+hesp/ai/hsm/ScriptedAiHSMState.h
+hesp/ai/hsm/ScriptedAiHSMTransition.h
+)
+
+##
 SET(audio_sources
 hesp/audio/NullSoundSystem.cpp
 hesp/audio/SoundInstance.cpp
@@ -947,6 +981,8 @@ hesp/xml/XMLToken.h
 
 SET(sources
 ${ai_sources}
+${ai_behaviours_sources}
+${ai_hsm_sources}
 ${audio_sources}
 ${axes_sources}
 ${bounds_sources}
@@ -1002,6 +1038,8 @@ ${xml_sources}
 
 SET(headers
 ${ai_headers}
+${ai_behaviours_headers}
+${ai_hsm_headers}
 ${audio_headers}
 ${axes_headers}
 ${bounds_headers}
@@ -1084,6 +1122,13 @@ ${vis_templates}
 SOURCE_GROUP(ai\\.cpp FILES ${ai_sources})
 SOURCE_GROUP(ai\\.h FILES ${ai_headers})
 
+##
+SOURCE_GROUP(ai\\behaviours\\.cpp FILES ${ai_behaviours_sources})
+SOURCE_GROUP(ai\\behaviours\\.h FILES ${ai_behaviours_headers})
+
+##
+SOURCE_GROUP(ai\\hsm\\.cpp FILES ${ai_hsm_sources})
+SOURCE_GROUP(ai\\hsm\\.h FILES ${ai_hsm_headers})
 
 ##
 SOURCE_GROUP(audio\\.cpp FILES ${audio_sources})
