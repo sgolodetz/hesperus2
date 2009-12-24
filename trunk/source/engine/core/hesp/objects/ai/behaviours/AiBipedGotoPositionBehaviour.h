@@ -1,10 +1,10 @@
 /***
- * hesperus: AiGotoPositionBehaviour.h
+ * hesperus: AiBipedGotoPositionBehaviour.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_HESP_AIGOTOPOSITIONBEHAVIOUR
-#define H_HESP_AIGOTOPOSITIONBEHAVIOUR
+#ifndef H_HESP_AIBIPEDGOTOPOSITIONBEHAVIOUR
+#define H_HESP_AIBIPEDGOTOPOSITIONBEHAVIOUR
 
 #include <hesp/math/vectors/Vector3.h>
 #include <hesp/objects/base/ObjectID.h>
@@ -15,7 +15,7 @@ namespace hesp {
 //#################### FORWARD DECLARATIONS ####################
 class ObjectManager;
 
-class AiGotoPositionBehaviour : public AiBehaviour
+class AiBipedGotoPositionBehaviour : public AiBehaviour
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
@@ -25,11 +25,11 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	AiGotoPositionBehaviour(const ObjectID& objectID, const ObjectManager *objectManager, const Vector3d& dest);
+	AiBipedGotoPositionBehaviour(const ObjectID& objectID, const ObjectManager *objectManager, const Vector3d& dest);
 
 	//#################### PUBLIC METHODS ####################
 public:
-	std::vector<ObjectCommand_Ptr> generate_commands(const SteeringPipeline_CPtr& steeringPipeline);
+	std::vector<ObjectCommand_Ptr> generate_commands();
 };
 
 }
