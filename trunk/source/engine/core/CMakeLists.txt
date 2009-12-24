@@ -533,6 +533,15 @@ hesp/objects/ai/hsm/ScriptedAiHSMTransition.h
 )
 
 ##
+SET(objects_ai_steering_sources
+)
+
+SET(objects_ai_steering_headers
+hesp/objects/ai/steering/BipedSteeringPipeline.h
+hesp/objects/ai/steering/SteeringPipeline.h
+)
+
+##
 SET(objects_base_sources
 hesp/objects/base/ComponentPropertyTypeMap.cpp
 hesp/objects/base/IObjectComponent.cpp
@@ -1006,6 +1015,7 @@ ${nav_sources}
 ${objects_ai_sources}
 ${objects_ai_behaviours_sources}
 ${objects_ai_hsm_sources}
+${objects_ai_steering_sources}
 ${objects_base_sources}
 ${objects_commands_sources}
 ${objects_components_Activatable_sources}
@@ -1065,6 +1075,7 @@ ${nav_headers}
 ${objects_ai_headers}
 ${objects_ai_behaviours_headers}
 ${objects_ai_hsm_headers}
+${objects_ai_steering_headers}
 ${objects_base_headers}
 ${objects_commands_headers}
 ${objects_components_Activatable_headers}
@@ -1237,6 +1248,10 @@ SOURCE_GROUP(objects\\ai\\behaviours\\.h FILES ${objects_ai_behaviours_headers})
 ##
 SOURCE_GROUP(objects\\ai\\hsm\\.cpp FILES ${objects_ai_hsm_sources})
 SOURCE_GROUP(objects\\ai\\hsm\\.h FILES ${objects_ai_hsm_headers})
+
+##
+SOURCE_GROUP(objects\\ai\\steering\\.cpp FILES ${objects_ai_steering_sources})
+SOURCE_GROUP(objects\\ai\\steering\\.h FILES ${objects_ai_steering_headers})
 
 ##
 SOURCE_GROUP(objects\\base\\.cpp FILES ${objects_base_sources})

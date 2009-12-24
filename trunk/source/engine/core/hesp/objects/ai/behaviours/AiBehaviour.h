@@ -15,6 +15,7 @@ namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
 typedef shared_ptr<class ObjectCommand> ObjectCommand_Ptr;
+typedef shared_ptr<const class SteeringPipeline> SteeringPipeline_CPtr;
 
 class AiBehaviour
 {
@@ -24,7 +25,7 @@ public:
 
 	//#################### PUBLIC ABSTRACT METHODS ####################
 public:
-	virtual std::vector<ObjectCommand_Ptr> generate_commands() = 0;
+	virtual std::vector<ObjectCommand_Ptr> generate_commands(const SteeringPipeline_CPtr& steeringPipeline) = 0;
 };
 
 //#################### TYPEDEFS ####################
