@@ -14,11 +14,11 @@ SET(targetname hesperus)
 
 ##
 SET(ai_sources
-hesp/ai/AIScriptRegistrar.cpp
+hesp/ai/AiScriptRegistrar.cpp
 )
 
 SET(ai_headers
-hesp/ai/AIScriptRegistrar.h
+hesp/ai/AiScriptRegistrar.h
 )
 
 ##

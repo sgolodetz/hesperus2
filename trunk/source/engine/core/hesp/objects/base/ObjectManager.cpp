@@ -5,7 +5,7 @@
 
 #include "ObjectManager.h"
 
-#include <hesp/ai/AIScriptRegistrar.h>
+#include <hesp/ai/AiScriptRegistrar.h>
 #include <hesp/objects/components/ICmpActivatable.h>
 #include <hesp/objects/components/ICmpInventory.h>
 #include <hesp/objects/components/ICmpModelRender.h>
@@ -46,7 +46,7 @@ ObjectManager::ObjectManager(const BoundsManager_CPtr& boundsManager, const Comp
 	m_spriteManager(spriteManager)
 {
 	// Register classes with the AI scripting engine.
-	AIScriptRegistrar::run(m_aiEngine);
+	AiScriptRegistrar::run(m_aiEngine);
 
 	// Set up the physics system.
 	m_physicsSystem->set_contact_resolver(PM_BULLET, PM_CHARACTER, ContactResolver_CPtr(new ProjectileDamageContactResolver(this, PM_BULLET)));

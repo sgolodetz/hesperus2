@@ -1,5 +1,5 @@
 /***
- * hesperus: AIScriptRegistrar.h
+ * hesperus: AiScriptRegistrar.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
@@ -10,7 +10,7 @@
 
 namespace hesp {
 
-struct AIScriptRegistrar
+struct AiScriptRegistrar
 {
 	//#################### PUBLIC METHODS ####################
 	static void run(const ASXEngine_Ptr& engine);
