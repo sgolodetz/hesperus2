@@ -1,10 +1,10 @@
 /***
- * hesperus: AiBipedGotoPositionBehaviour.h
+ * hesperus: AiBipedMoveToPositionBehaviour.h
  * Copyright Stuart Golodetz, 2009. All rights reserved.
  ***/
 
-#ifndef H_HESP_AIBIPEDGOTOPOSITIONBEHAVIOUR
-#define H_HESP_AIBIPEDGOTOPOSITIONBEHAVIOUR
+#ifndef H_HESP_AIBIPEDMOVETOPOSITIONBEHAVIOUR
+#define H_HESP_AIBIPEDMOVETOPOSITIONBEHAVIOUR
 
 #include <hesp/math/vectors/Vector3.h>
 #include <hesp/objects/base/ObjectID.h>
@@ -16,7 +16,7 @@ namespace hesp {
 typedef shared_ptr<class AiSequenceBehaviour> AiSequenceBehaviour_Ptr;
 class ObjectManager;
 
-class AiBipedGotoPositionBehaviour : public AiBehaviour
+class AiBipedMoveToPositionBehaviour : public AiBehaviour
 {
 	//#################### PRIVATE VARIABLES ####################
 private:
@@ -28,7 +28,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	AiBipedGotoPositionBehaviour(const ObjectID& objectID, const ObjectManager *objectManager, const Vector3d& dest);
+	AiBipedMoveToPositionBehaviour(const ObjectID& objectID, const ObjectManager *objectManager, const Vector3d& dest);
 
 	//#################### PUBLIC METHODS ####################
 public:

@@ -501,7 +501,7 @@ hesp/objects/ai/AiScriptRegistrar.h
 ##
 SET(objects_ai_behaviours_sources
 hesp/objects/ai/behaviours/AiBehaviour.cpp
-hesp/objects/ai/behaviours/AiBipedGotoPositionBehaviour.cpp
+hesp/objects/ai/behaviours/AiBipedMoveToPositionBehaviour.cpp
 hesp/objects/ai/behaviours/AiBipedMoveTowardsBehaviour.cpp
 hesp/objects/ai/behaviours/AiBipedRunTowardsBehaviour.cpp
 hesp/objects/ai/behaviours/AiBipedWalkTowardsBehaviour.cpp
@@ -511,7 +511,7 @@ hesp/objects/ai/behaviours/AiSequenceBehaviour.cpp
 
 SET(objects_ai_behaviours_headers
 hesp/objects/ai/behaviours/AiBehaviour.h
-hesp/objects/ai/behaviours/AiBipedGotoPositionBehaviour.h
+hesp/objects/ai/behaviours/AiBipedMoveToPositionBehaviour.h
 hesp/objects/ai/behaviours/AiBipedMoveTowardsBehaviour.h
 hesp/objects/ai/behaviours/AiBipedRunTowardsBehaviour.h
 hesp/objects/ai/behaviours/AiBipedWalkTowardsBehaviour.h
