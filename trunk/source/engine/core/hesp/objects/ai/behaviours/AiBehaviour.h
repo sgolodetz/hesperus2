@@ -18,6 +18,15 @@ typedef shared_ptr<class ObjectCommand> ObjectCommand_Ptr;
 
 class AiBehaviour
 {
+	//#################### ENUMERATIONS ####################
+public:
+	enum Status
+	{
+		FAILED,
+		SUCCEEDED,
+		UNFINISHED,
+	};
+
 	//#################### DESTRUCTOR ####################
 public:
 	virtual ~AiBehaviour();
@@ -25,6 +34,7 @@ public:
 	//#################### PUBLIC ABSTRACT METHODS ####################
 public:
 	virtual std::vector<ObjectCommand_Ptr> generate_commands() = 0;
+	virtual Status status() const = 0;
 };
 
 //#################### TYPEDEFS ####################

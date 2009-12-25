@@ -13,6 +13,7 @@
 namespace hesp {
 
 //#################### FORWARD DECLARATIONS ####################
+typedef shared_ptr<class AiSequenceBehaviour> AiSequenceBehaviour_Ptr;
 class ObjectManager;
 
 class AiBipedGotoPositionBehaviour : public AiBehaviour
@@ -23,6 +24,8 @@ private:
 	const ObjectManager *m_objectManager;
 	Vector3d m_dest;
 
+	AiSequenceBehaviour_Ptr m_plan;
+
 	//#################### CONSTRUCTORS ####################
 public:
 	AiBipedGotoPositionBehaviour(const ObjectID& objectID, const ObjectManager *objectManager, const Vector3d& dest);
@@ -30,6 +33,11 @@ public:
 	//#################### PUBLIC METHODS ####################
 public:
 	std::vector<ObjectCommand_Ptr> generate_commands();
+	Status status() const;
+
+	//#################### PRIVATE METHODS ####################
+private:
+	void make_plan();
 };
 
 }

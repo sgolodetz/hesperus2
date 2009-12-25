@@ -7,6 +7,7 @@
 
 namespace hesp {
 
-// TODO
+//#################### DESTRUCTOR ####################
+AiBehaviour::~AiBehaviour() {}
 
 }
