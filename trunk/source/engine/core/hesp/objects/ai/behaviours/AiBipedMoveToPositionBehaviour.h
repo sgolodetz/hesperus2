@@ -25,6 +25,7 @@ private:
 	Vector3d m_dest;
 
 	AiSequenceBehaviour_Ptr m_plan;
+	Status m_status;
 
 	//#################### CONSTRUCTORS ####################
 public:
