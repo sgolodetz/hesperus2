@@ -39,12 +39,14 @@ try
 
 	// FIXME: These should eventually be loaded in in a more sensible way.
 	ConfigOptions& options = ConfigOptions::instance();
-	options.set("width",		configModule->get_global_variable<int>("width"));
-	options.set("height",		configModule->get_global_variable<int>("height"));
-	options.set("fullScreen",	configModule->get_global_variable<bool>("fullScreen"));
-	options.set("levelName",	configModule->get_global_variable<std::string>("levelName"));
-	options.set("profile",		configModule->get_global_variable<std::string>("profile"));
-	options.set("soundOn",		configModule->get_global_variable<bool>("soundOn"));
+	options.set("width",			configModule->get_global_variable<int>("width"));
+	options.set("height",			configModule->get_global_variable<int>("height"));
+	options.set("fullScreen",		configModule->get_global_variable<bool>("fullScreen"));
+	options.set("levelName",		configModule->get_global_variable<std::string>("levelName"));
+	options.set("profile",			configModule->get_global_variable<std::string>("profile"));
+	options.set("renderNavMeshes",	configModule->get_global_variable<bool>("renderNavMeshes"));
+	options.set("renderPortals",	configModule->get_global_variable<bool>("renderPortals"));
+	options.set("soundOn",			configModule->get_global_variable<bool>("soundOn"));
 
 #ifdef __linux__
 	// Disable sound on Linux, where playing MIDI files is causing a problem.

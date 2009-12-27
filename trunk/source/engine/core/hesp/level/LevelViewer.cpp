@@ -19,6 +19,7 @@
 #include <hesp/objects/components/ICmpModelRender.h>
 #include <hesp/sprites/SpriteManager.h>
 #include <hesp/trees/BSPTree.h>
+#include <hesp/util/ConfigOptions.h>
 #include "GeometryRenderer.h"
 
 namespace hesp {
@@ -76,16 +77,20 @@ void LevelViewer::render_level() const
 	std::cout << "Polygon Count " << polyIndices.size() << std::endl;
 #endif
 
+	ConfigOptions& configOptions = ConfigOptions::instance();
+
 	// Render the navigation meshes.
-#if 0
-	render_navmeshes();
-	render_navlinks();
-#endif
+	if(configOptions.get<bool>("renderNavMeshes"))
+	{
+		render_navmeshes();
+		render_navlinks();
+	}
 
 	// Render the portals.
-#if 0
-	render_portals();
-#endif
+	if(configOptions.get<bool>("renderPortals"))
+	{
+		render_portals();
+	}
 
 	// Render the visible objects. (These must be done after everything else to ensure that
 	// things like the crosshair and active item are not obscured by the rest of the scene
