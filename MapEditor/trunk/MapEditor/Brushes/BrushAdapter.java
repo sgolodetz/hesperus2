@@ -4,7 +4,8 @@ import MapEditor.Graphics.IRenderer;
 import MapEditor.Math.Vectors.*;
 import java.awt.*;
 import java.io.PrintWriter;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.GLU;
 
 /**
 This class exists so that brushes that don't need to implement all the IBrush methods
@@ -26,7 +27,7 @@ abstract class BrushAdapter implements IBrush
 	public Dialog properties_dialog(Frame owner)								{ return null; }
 
 	public void render(IRenderer renderer, Color overrideColour)				{ throw new UnsupportedOperationException(); }
-	public void render3D(GL gl, GLU glu)										{ throw new UnsupportedOperationException(); }
+	public void render3D(GL2 gl, GLU glu)										{ throw new UnsupportedOperationException(); }
 
 	public void select(IBrushContainer container)								{}
 

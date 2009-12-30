@@ -14,7 +14,8 @@ import java.awt.Cursor;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.GLU;
 
 /**
 This class represents landscapes made of cubic spline surfaces.
@@ -569,12 +570,12 @@ public class LandscapeBrush extends ResizableTranslatableBrush
 		}
 	}
 
-	public void render3D(GL gl, GLU glu)
+	public void render3D(GL2 gl, GLU glu)
 	{
 		render3D_mesh(gl, glu);
 	}
 
-	public void render3D_selected(GL gl, GLU glu)
+	public void render3D_selected(GL2 gl, GLU glu)
 	{
 		// TODO: Do something to distinguish this from the unselected case, like changing the colour.
 		render3D_mesh(gl, glu);
@@ -926,7 +927,7 @@ public class LandscapeBrush extends ResizableTranslatableBrush
 
 	@param gl	The OpenGL context with which to render the mesh
 	*/
-	private void render3D_grid(GL gl)
+	private void render3D_grid(GL2 gl)
 	{
 		render3D_mesh(gl, calculate_grid());
 	}
@@ -942,7 +943,7 @@ public class LandscapeBrush extends ResizableTranslatableBrush
 	@param gl	The OpenGL context with which to render the manipulators
 	@param grid	The grid in which the manipulators lie
 	*/
-	private void render3D_manipulators(GL gl, Vector3d[][] grid)
+	private void render3D_manipulators(GL2 gl, Vector3d[][] grid)
 	{
 		final double SIZE = 4;
 		Vector3d delta = new Vector3d(SIZE/2, SIZE/2, SIZE/2), p1 = new Vector3d(), p2 = new Vector3d();
@@ -977,7 +978,7 @@ public class LandscapeBrush extends ResizableTranslatableBrush
 	@param gl				The OpenGL context with which to render the mesh
 	@param glu				The corresponding GLU context
 	*/
-	private void render3D_mesh(GL gl, GLU glu)
+	private void render3D_mesh(GL2 gl, GLU glu)
 	{
 		if(m_meshNeedsUpdating)
 		{
@@ -995,7 +996,7 @@ public class LandscapeBrush extends ResizableTranslatableBrush
 	@param gl	The OpenGL context with which to render the mesh
 	@param mesh	The mesh points
 	*/
-	private void render3D_mesh(GL gl, Vector3d[][] mesh)
+	private void render3D_mesh(GL2 gl, Vector3d[][] mesh)
 	{
 		gl.glDisable(GL.GL_CULL_FACE);
 
@@ -1022,7 +1023,7 @@ public class LandscapeBrush extends ResizableTranslatableBrush
 		gl.glEnable(GL.GL_CULL_FACE);
 	}
 
-	private void render3D_textured_mesh(GL gl, GLU glu, Vector3d[][] mesh)
+	private void render3D_textured_mesh(GL2 gl, GLU glu, Vector3d[][] mesh)
 	{
 		gl.glDisable(GL.GL_CULL_FACE);
 
@@ -1030,7 +1031,7 @@ public class LandscapeBrush extends ResizableTranslatableBrush
 		if(texture != null)		// if there's a texture to use, render a textured landscape
 		{
 			gl.glEnable(GL.GL_TEXTURE_2D);
-			texture.bind(gl, glu);
+			texture.bind(gl);
 
 			// Render the textured mesh itself.
 			gl.glColor3f(1.0f, 1.0f, 1.0f);

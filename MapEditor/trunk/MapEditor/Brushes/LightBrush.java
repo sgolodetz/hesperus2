@@ -9,7 +9,8 @@ import MapEditor.Misc.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.*;
 
 /**
 This class represents a point light brush.
@@ -169,11 +170,11 @@ public class LightBrush extends TranslatableBrush
 		render2D_light(renderer);
 	}
 
-	public void render3D(GL gl, GLU glu)
+	public void render3D(GL2 gl, GLU glu)
 	{
 		float[] colour = null;
 		colour = m_colour.getRGBComponents(colour);
-		gl.glColor3fv(colour);
+		gl.glColor3fv(colour, 0);
 
 		render3D_light(gl, glu);
 	}
@@ -191,7 +192,7 @@ public class LightBrush extends TranslatableBrush
 		renderer.draw_line(new Vector3d(x, y, z + ARM_LENGTH), new Vector3d(x, y, z - ARM_LENGTH));
 	}
 
-	public void render3D_selected(GL gl, GLU glu)
+	public void render3D_selected(GL2 gl, GLU glu)
 	{
 		render3D(gl, glu);
 
@@ -283,7 +284,7 @@ public class LightBrush extends TranslatableBrush
 		render_centre_cross(renderer);
 	}
 
-	private void render3D_light(GL gl, GLU glu)
+	private void render3D_light(GL2 gl, GLU glu)
 	{
 		Vector3d centre = m_boundingBox.centre();
 		GLUquadric quadric = glu.gluNewQuadric();

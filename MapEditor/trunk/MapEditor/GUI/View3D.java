@@ -15,7 +15,9 @@ import java.awt.event.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.TreeMap;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.awt.GLCanvas;
+import javax.media.opengl.glu.GLU;
 
 /**
 This class implements a 3D view of the map.
@@ -142,7 +144,7 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 	@param gl	The OpenGL object with which to render the map
 	@param glu	The corresponding GLU object
 	*/
-	private void render_map(GL gl, GLU glu)
+	private void render_map(GL2 gl, GLU glu)
 	{
 		if(Options.is_set("Texture-Editing Mode"))
 		{
@@ -158,7 +160,7 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 				for(Polygon p: m_map.get_selected_faces())
 				{
 					Vector3d[] verts = p.get_vertices();
-					gl.glBegin(GL.GL_POLYGON);
+					gl.glBegin(GL2.GL_POLYGON);
 						for(int i=0, len=verts.length; i<len; ++i)
 						{
 							gl.glVertex3d(verts[i].x, verts[i].y, verts[i].z);
@@ -213,9 +215,9 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 
 		reset_camera();
 
-		GLCapabilities capabilities = new GLCapabilities();
+		GLCapabilities capabilities = new GLCapabilities(null);
 		capabilities.setStencilBits(1);
-		m_canvas = GLDrawableFactory.getFactory().createGLCanvas(capabilities);
+		m_canvas = new GLCanvas(capabilities);
 
 		// Note:	This fixes the canvas flickering problem, at the cost of using a proprietary API
 		//			which may be removed at a later date.
@@ -513,10 +515,10 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 
 	//################## PUBLIC METHODS ##################//
 	// GLEventListener methods
-	public void display(GLDrawable drawable)
+	public void display(GLAutoDrawable drawable)
 	{
-		GL gl = drawable.getGL();
-		GLU glu = drawable.getGLU();
+		GL2 gl = drawable.getGL().getGL2();
+		GLU glu = new GLU();
 
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
@@ -539,28 +541,28 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 		// Enable/disable wireframe mode, depending on the user's preference.
 		if(Options.is_set("Render In Wireframe"))
 		{
-			gl.glPolygonMode(GL.GL_FRONT, GL.GL_LINE);
-			gl.glPolygonMode(GL.GL_BACK, GL.GL_LINE);
+			gl.glPolygonMode(GL.GL_FRONT, GL2.GL_LINE);
+			gl.glPolygonMode(GL.GL_BACK, GL2.GL_LINE);
 			gl.glDisable(GL.GL_CULL_FACE);
 		}
 		else
 		{
-			gl.glPolygonMode(GL.GL_FRONT, GL.GL_FILL);
-			gl.glPolygonMode(GL.GL_BACK, GL.GL_FILL);
+			gl.glPolygonMode(GL.GL_FRONT, GL2.GL_FILL);
+			gl.glPolygonMode(GL.GL_BACK, GL2.GL_FILL);
 			gl.glEnable(GL.GL_CULL_FACE);
 		}
 
 		render_map(gl, glu);
 	}
 
-	public void displayChanged(GLDrawable drawable, boolean modeChanged, boolean deviceChanged) {}
+	public void dispose(GLAutoDrawable drawable) {}
 
 	final public GLCanvas get_canvas()
 	{
 		return m_canvas;
 	}
 
-	public void init(GLDrawable drawable) {}
+	public void init(GLAutoDrawable drawable) {}
 
 	/**
 	Resets (or sets, the first time it's called) the camera to its initial position and orientation.
@@ -570,10 +572,9 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 		m_camera = new Camera(new Vector3d(-20, -20, 10), new Vector3d(1, 1, 0), new Vector3d(0, 0, 1));
 	}
 
-	public void reshape(GLDrawable drawable, int x, int y, int width, int height)
+	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
 	{
-		GL gl = drawable.getGL();
-		GLU glu = drawable.getGLU();
+		GL2 gl = drawable.getGL().getGL2();
 
 		// Cache the new width and height values.
 		m_width = width;
@@ -586,7 +587,7 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
 		// Set up the projection matrix.
-		gl.glMatrixMode(GL.GL_PROJECTION);
+		gl.glMatrixMode(GL2.GL_PROJECTION);
 		gl.glLoadIdentity();
 
 		double aspect = (double)width/(double)height;
@@ -597,7 +598,7 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 		gl.glFrustum(m_minX, m_maxX, m_minY, m_maxY, NEAR, FAR);
 
 		// Select and reset the modelview matrix.
-		gl.glMatrixMode(GL.GL_MODELVIEW);
+		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity();
 
 		// Set up and enable a z-buffer.

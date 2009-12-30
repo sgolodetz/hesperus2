@@ -2,7 +2,8 @@ package MapEditor.GUI;
 
 import MapEditor.Math.MathUtil;
 import MapEditor.Math.Vectors.*;
-import net.java.games.jogl.*;
+import javax.media.opengl.GL2;
+import javax.media.opengl.glu.GLU;
 
 /**
 This class represents a camera for 3D views. Cameras are defined with
@@ -180,7 +181,7 @@ public class Camera
 	@param gl	The OpenGL object associated with the context in which to set the view
 	@param glu	The GLU object associated with the context in which to set the view
 	*/
-	public void set_view(GL gl, GLU glu)
+	public void set_view(GL2 gl, GLU glu)
 	{
 		gl.glLoadIdentity();
 		glu.gluLookAt(	m_position.x, m_position.y, m_position.z,

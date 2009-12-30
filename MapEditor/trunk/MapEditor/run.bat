@@ -1,2 +1,2 @@
 @echo off
-java -jar MapEditor.jar
+java -Djava.library.path=..\libraries\jogl\lib -jar MapEditor.jar

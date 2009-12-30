@@ -3,11 +3,11 @@ package MapEditor.Graphics;
 import MapEditor.Math.Vectors.Vector3d;
 import java.awt.*;
 import java.awt.event.*;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
 
 public class GraphicsUtil
 {
-	public static void draw_cuboid(GL gl, Vector3d p1, Vector3d p2)
+	public static void draw_cuboid(GL2 gl, Vector3d p1, Vector3d p2)
 	{
 		gl.glBegin(GL.GL_LINE_LOOP);
 			gl.glVertex3d(p1.x, p1.y, p1.z);

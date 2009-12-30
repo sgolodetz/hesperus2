@@ -12,7 +12,8 @@ import java.awt.Stroke;
 import java.awt.event.*;
 import java.io.PrintWriter;
 import java.util.LinkedList;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.GLU;
 
 /**
 This class handles the splitting of an {@link ArchitectureBrush} across a plane.
@@ -176,7 +177,7 @@ public class SplitterBrush extends BrushAdapter implements Constants, GeomConsta
 		renderer.set_stroke(new BasicStroke());
 	}
 
-	public void render3D(GL gl, GLU glu)
+	public void render3D(GL2 gl, GLU glu)
 	{
 		// This isn't an unnecessary function, even though splitter brushes only exist when
 		// they're selected. There are occasions when it makes sense to render brushes as
@@ -185,7 +186,7 @@ public class SplitterBrush extends BrushAdapter implements Constants, GeomConsta
 		m_brush.render3D(gl, glu);
 	}
 
-	public void render3D_selected(GL gl, GLU glu)
+	public void render3D_selected(GL2 gl, GLU glu)
 	{
 		m_brush.render3D_selected(gl, glu);
 

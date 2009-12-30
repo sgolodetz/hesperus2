@@ -16,7 +16,8 @@ import java.awt.Point;
 import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedList;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.GLU;
 
 /**
 This class represents convex polyhedral brushes, in other words brushes consisting of convex faces which
@@ -264,7 +265,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 		}
 	}
 
-	public void render3D(GL gl, GLU glu)
+	public void render3D(GL2 gl, GLU glu)
 	{
 		switch(m_properties.get_function())
 		{
@@ -303,7 +304,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 		}
 	}
 
-	public void render3D_selected(GL gl, GLU glu)
+	public void render3D_selected(GL2 gl, GLU glu)
 	{
 		switch(m_properties.get_function())
 		{
@@ -1050,13 +1051,13 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 	@param gl		The OpenGL object to use for rendering
 	@param colour	The colour with which to colour the polygons
 	*/
-	private void render_flatshaded_polygons(GL gl, float[] colour)
+	private void render_flatshaded_polygons(GL2 gl, float[] colour)
 	{
-		gl.glColor3fv(colour);
+		gl.glColor3fv(colour, 0);
 		for(Polygon p: m_polys)
 		{
 			Vector3d[] verts = p.get_vertices();
-			gl.glBegin(GL.GL_POLYGON);
+			gl.glBegin(GL2.GL_POLYGON);
 				for(int i=0, len=verts.length; i<len; ++i)
 				{
 					gl.glVertex3d(verts[i].x, verts[i].y, verts[i].z);
@@ -1074,12 +1075,12 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 					of length 3 - colours[j][0] contains the red component of the colour,
 					colours[j][1] the green component and colours[j][2] the blue component)
 	*/
-	private void render_multicoloured_polygons(GL gl, float[][] colours)
+	private void render_multicoloured_polygons(GL2 gl, float[][] colours)
 	{
 		for(Polygon p: m_polys)
 		{
 			Vector3d[] verts = p.get_vertices();
-			gl.glBegin(GL.GL_POLYGON);
+			gl.glBegin(GL2.GL_POLYGON);
 				for(int i=0, len=verts.length; i<len; ++i)
 				{
 					int j = i%3;
@@ -1141,7 +1142,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 
 	@param gl	The OpenGL object to use for rendering
 	*/
-	private void render_normals(GL gl)
+	private void render_normals(GL2 gl)
 	{
 		gl.glBegin(GL.GL_LINES);
 			for(Polygon p: m_polys)
@@ -1178,10 +1179,10 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 		render_transformation_effects(renderer);
 	}
 
-	private void render_wireframe_polygons(GL gl, float[] colour)
+	private void render_wireframe_polygons(GL2 gl, float[] colour)
 	{
-		gl.glPushAttrib(GL.GL_ENABLE_BIT | GL.GL_POLYGON_BIT);
-		gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL.GL_LINE);
+		gl.glPushAttrib(GL2.GL_ENABLE_BIT | GL2.GL_POLYGON_BIT);
+		gl.glPolygonMode(GL.GL_FRONT_AND_BACK, GL2.GL_LINE);
 		gl.glDisable(GL.GL_CULL_FACE);
 
 		render_flatshaded_polygons(gl, colour);
@@ -1189,7 +1190,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 		gl.glPopAttrib();
 	}
 
-	private void render3D_NORMAL(GL gl, GLU glu)
+	private void render3D_NORMAL(GL2 gl, GLU glu)
 	{
 		if(Options.is_set("Render Textures"))
 		{
@@ -1200,9 +1201,9 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 				if(texture != null)		// if there's a texture to use, render a textured polygon
 				{
 					gl.glEnable(GL.GL_TEXTURE_2D);
-					texture.bind(gl, glu);
+					texture.bind(gl);
 
-					gl.glBegin(GL.GL_POLYGON);
+					gl.glBegin(GL2.GL_POLYGON);
 						gl.glColor3f(1.0f, 1.0f, 1.0f);
 						for(Vector3d v: p.get_vertices())
 						{
@@ -1216,7 +1217,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 				}
 				else					// otherwise, render a blank white polygon
 				{
-					gl.glBegin(GL.GL_POLYGON);
+					gl.glBegin(GL2.GL_POLYGON);
 						gl.glColor3f(1.0f, 1.0f, 1.0f);
 						for(Vector3d v: p.get_vertices()) gl.glVertex3d(v.x, v.y, v.z);
 					gl.glEnd();
@@ -1243,7 +1244,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 		}
 	}
 
-	private void render3D_selected_NORMAL(GL gl, GLU glu)
+	private void render3D_selected_NORMAL(GL2 gl, GLU glu)
 	{
 		if(Options.is_set("Render Textures"))
 		{
@@ -1254,7 +1255,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 				if(texture != null)		// if there's a texture to use, render a textured polygon
 				{
 					gl.glEnable(GL.GL_TEXTURE_2D);
-					texture.bind(gl, glu);
+					texture.bind(gl);
 
 					// Set up the stencil buffer to write 1 when the depth test passes, and 0 otherwise.
 					gl.glStencilFunc(GL.GL_ALWAYS, 1, 1);
@@ -1262,7 +1263,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 					gl.glEnable(GL.GL_STENCIL_TEST);
 
 					// Render the textured polygon.
-					gl.glBegin(GL.GL_POLYGON);
+					gl.glBegin(GL2.GL_POLYGON);
 						gl.glColor3f(1.0f, 1.0f, 1.0f);
 						for(Vector3d v: p.get_vertices())
 						{
@@ -1282,7 +1283,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 					// Render the selection highlight polygon by blending it with the texture underneath.
 					gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
 					gl.glEnable(GL.GL_BLEND);
-					gl.glBegin(GL.GL_POLYGON);
+					gl.glBegin(GL2.GL_POLYGON);
 						gl.glColor4f(1.0f, 0.0f, 0.0f, 0.5f);
 						for(Vector3d v: p.get_vertices())
 						{
@@ -1296,7 +1297,7 @@ public class PolyhedralBrush extends ArchitectureBrush implements Constants, Geo
 				}
 				else				// otherwise, render a blank white polygon
 				{
-					gl.glBegin(GL.GL_POLYGON);
+					gl.glBegin(GL2.GL_POLYGON);
 						gl.glColor3f(1.0f, 1.0f, 1.0f);
 						for(Vector3d v: p.get_vertices()) gl.glVertex3d(v.x, v.y, v.z);
 					gl.glEnd();

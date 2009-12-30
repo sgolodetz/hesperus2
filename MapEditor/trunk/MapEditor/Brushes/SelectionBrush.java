@@ -11,7 +11,8 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Stroke;
 import java.util.LinkedList;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.GLU;
 
 /**
 This class represents a selection. You drag it out on the screen, and you can resize it or translate it as you
@@ -88,17 +89,17 @@ public class SelectionBrush extends ResizableTranslatableBrush
 		render_transformation_effects(renderer);
 	}
 
-	public void render3D_selected(GL gl, GLU glu)
+	public void render3D_selected(GL2 gl, GLU glu)
 	{
 		Vector3d[] bounds = m_boundingBox.get_bounds();
 		gl.glColor3f(1.0f, 1.0f, 1.0f);
 
 		gl.glLineStipple(1, (short)0x00ff);
-		gl.glEnable(GL.GL_LINE_STIPPLE);
+		gl.glEnable(GL2.GL_LINE_STIPPLE);
 
 		GraphicsUtil.draw_cuboid(gl, bounds[0], bounds[1]);
 
-		gl.glDisable(GL.GL_LINE_STIPPLE);
+		gl.glDisable(GL2.GL_LINE_STIPPLE);
 	}
 
 	public double selection_metric(Vector2d p, IRenderer renderer)

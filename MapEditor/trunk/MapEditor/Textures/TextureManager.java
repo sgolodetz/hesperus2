@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import javax.imageio.*;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
 
 /**
 This class represents texture managers, which (obviously) manage textures.

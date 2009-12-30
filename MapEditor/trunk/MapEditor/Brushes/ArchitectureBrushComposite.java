@@ -16,7 +16,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.LinkedList;
-import net.java.games.jogl.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.GLU;
 
 public class ArchitectureBrushComposite extends ArchitectureBrush implements GeomConstants
 {
@@ -264,7 +265,7 @@ public class ArchitectureBrushComposite extends ArchitectureBrush implements Geo
 		}
 	}
 
-	public void render3D(GL gl, GLU glu)
+	public void render3D(GL2 gl, GLU glu)
 	{
 		for(Pair<ArchitectureBrush,BrushData> p: m_brushes)
 		{
@@ -290,7 +291,7 @@ public class ArchitectureBrushComposite extends ArchitectureBrush implements Geo
 		render_transformation_effects(renderer);
 	}
 
-	public void render3D_selected(GL gl, GLU glu)
+	public void render3D_selected(GL2 gl, GLU glu)
 	{
 		for(Pair<ArchitectureBrush,BrushData> p: m_brushes)
 		{

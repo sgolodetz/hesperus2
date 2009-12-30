@@ -6,7 +6,7 @@ set MapEditorHTMLFiles=MapEditor/*.html MapEditor/Brushes/*.html MapEditor/BSP/*
 
 jar cMf MapEditor-Resources.jar Resources/*.*
 cd ..
-javac %MapEditorSourceFiles%
+javac -cp .;libraries/jogl/lib/jogl.all.jar;libraries/jogl/lib/nativewindow.all.jar;libraries/jogl/lib/gluegen-rt.jar %MapEditorSourceFiles%
 jar cmf MapEditor/Manifest.txt MapEditor/MapEditor.jar %MapEditorClassFiles%
 jar cMf MapEditor/MapEditor-Source.jar %MapEditorSourceFiles% %MapEditorHTMLFiles% MapEditor/*.bat MapEditor/*.jpg MapEditor/*.txt MapEditor/MapEditor.vcproj MapEditor/MapEditor.sln MapEditor/MapEditor-Resources.jar
 cd MapEditor
