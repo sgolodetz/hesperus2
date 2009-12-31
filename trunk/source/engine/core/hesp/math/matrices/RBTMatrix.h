@@ -47,15 +47,15 @@ public:
 	RBTMatrix_Ptr inverse() const;
 	std::vector<double> rep() const;
 	void reset_to_zeros();
-};
 
-//#################### GLOBAL OPERATORS ####################
-RBTMatrix_Ptr& operator+=(RBTMatrix_Ptr& lhs, const RBTMatrix_CPtr& rhs);
-RBTMatrix_Ptr& operator*=(RBTMatrix_Ptr& lhs, const RBTMatrix_CPtr& rhs);
-RBTMatrix_Ptr& operator*=(RBTMatrix_Ptr& lhs, double scale);
-RBTMatrix_Ptr operator*(const RBTMatrix_CPtr& lhs, const RBTMatrix_CPtr& rhs);
-RBTMatrix_Ptr operator*(const RBTMatrix_CPtr& lhs, double scale);
-RBTMatrix_Ptr operator*(double scale, const RBTMatrix_CPtr& rhs);
+	//#################### FRIENDS ####################
+	friend RBTMatrix_Ptr& operator+=(RBTMatrix_Ptr& lhs, const RBTMatrix_CPtr& rhs);
+	friend RBTMatrix_Ptr& operator*=(RBTMatrix_Ptr& lhs, const RBTMatrix_CPtr& rhs);
+	friend RBTMatrix_Ptr& operator*=(RBTMatrix_Ptr& lhs, double scale);
+	friend RBTMatrix_Ptr operator*(const RBTMatrix_CPtr& lhs, const RBTMatrix_CPtr& rhs);
+	friend RBTMatrix_Ptr operator*(const RBTMatrix_CPtr& lhs, double scale);
+	friend RBTMatrix_Ptr operator*(double scale, const RBTMatrix_CPtr& rhs);
+};
 
 }
 

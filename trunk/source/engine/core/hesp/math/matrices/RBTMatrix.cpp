@@ -36,7 +36,7 @@ RBTMatrix_Ptr RBTMatrix::from_axis_angle_translation(Vector3d axis, double angle
 	}
 
 	RBTMatrix_Ptr ret(new RBTMatrix);
-	RBTMatrix& mat = *ret;
+	double (&M)[3][4] = ret->m;
 
 	double c = cos(angle);
 	double s = sin(angle);
@@ -47,9 +47,9 @@ RBTMatrix_Ptr RBTMatrix::from_axis_angle_translation(Vector3d axis, double angle
 	const double& z = axis.z;
 
 	// See p.62 of "Mathematics for 3D Game Programming & Computer Graphics" (Eric Lengyel).
-	mat(0,0) = t*x*x + c;		mat(0,1) = t*x*y - s*z;		mat(0,2) = t*x*z + s*y;		mat(0,3) = translation.x;
-	mat(1,0) = t*x*y + s*z;		mat(1,1) = t*y*y + c;		mat(1,2) = t*y*z - s*x;		mat(1,3) = translation.y;
-	mat(2,0) = t*x*z - s*y;		mat(2,1) = t*y*z + s*x;		mat(2,2) = t*z*z + c;		mat(2,3) = translation.z;
+	M[0][0] = t*x*x + c;		M[0][1] = t*x*y - s*z;		M[0][2] = t*x*z + s*y;		M[0][3] = translation.x;
+	M[1][0] = t*x*y + s*z;		M[1][1] = t*y*y + c;		M[1][2] = t*y*z - s*x;		M[1][3] = translation.y;
+	M[2][0] = t*x*z - s*y;		M[2][1] = t*y*z + s*x;		M[2][2] = t*z*z + c;		M[2][3] = translation.z;
 
 	return ret;
 }
@@ -57,8 +57,8 @@ RBTMatrix_Ptr RBTMatrix::from_axis_angle_translation(Vector3d axis, double angle
 RBTMatrix_Ptr RBTMatrix::identity()
 {
 	RBTMatrix_Ptr ret(new RBTMatrix);
-	RBTMatrix& mat = *ret;
-	mat(0,0) = mat(1,1) = mat(2,2) = 1;
+	double (&M)[3][4] = ret->m;
+	M[0][0] = M[1][1] = M[2][2] = 1;
 	return ret;
 }
 
@@ -83,28 +83,28 @@ double RBTMatrix::operator()(int i, int j) const
 //#################### PUBLIC METHODS ####################
 void RBTMatrix::add_scaled(const RBTMatrix_CPtr& mat, double scale)
 {
-	const double (&r)[3][4] = mat->m;
+	const double (&R)[3][4] = mat->m;
 #if 0
 	// Original version
 	for(int i=0; i<3; ++i)
 		for(int j=0; j<4; ++j)
 		{
-			m[i][j] += r[i][j] * scale;
+			m[i][j] += R[i][j] * scale;
 		}
 #else
 	// Unrolled version
-	m[0][0] += r[0][0] * scale;
-	m[0][1] += r[0][1] * scale;
-	m[0][2] += r[0][2] * scale;
-	m[0][3] += r[0][3] * scale;
-	m[1][0] += r[1][0] * scale;
-	m[1][1] += r[1][1] * scale;
-	m[1][2] += r[1][2] * scale;
-	m[1][3] += r[1][3] * scale;
-	m[2][0] += r[2][0] * scale;
-	m[2][1] += r[2][1] * scale;
-	m[2][2] += r[2][2] * scale;
-	m[2][3] += r[2][3] * scale;
+	m[0][0] += R[0][0] * scale;
+	m[0][1] += R[0][1] * scale;
+	m[0][2] += R[0][2] * scale;
+	m[0][3] += R[0][3] * scale;
+	m[1][0] += R[1][0] * scale;
+	m[1][1] += R[1][1] * scale;
+	m[1][2] += R[1][2] * scale;
+	m[1][3] += R[1][3] * scale;
+	m[2][0] += R[2][0] * scale;
+	m[2][1] += R[2][1] * scale;
+	m[2][2] += R[2][2] * scale;
+	m[2][3] += R[2][3] * scale;
 #endif
 }
 
@@ -179,11 +179,11 @@ RBTMatrix_Ptr RBTMatrix::inverse() const
 	Vector3d t(m[0][3], m[1][3], m[2][3]);
 
 	RBTMatrix_Ptr inv(new RBTMatrix);
-	RBTMatrix& i = *inv;
+	double (&I)[3][4] = inv->m;
 
-	i(0,0) = u.x;	i(0,1) = u.y;	i(0,2) = u.z;	i(0,3) = -u.dot(t);
-	i(1,0) = v.x;	i(1,1) = v.y;	i(1,2) = v.z;	i(1,3) = -v.dot(t);
-	i(2,0) = w.x;	i(2,1) = w.y;	i(2,2) = w.z;	i(2,3) = -w.dot(t);
+	I[0][0] = u.x;	I[0][1] = u.y;	I[0][2] = u.z;	I[0][3] = -u.dot(t);
+	I[1][0] = v.x;	I[1][1] = v.y;	I[1][2] = v.z;	I[1][3] = -v.dot(t);
+	I[2][0] = w.x;	I[2][1] = w.y;	I[2][2] = w.z;	I[2][3] = -w.dot(t);
 
 	return inv;
 }
@@ -205,13 +205,16 @@ void RBTMatrix::reset_to_zeros()
 			m[i][j] = 0;
 }
 
-//#################### GLOBAL OPERATORS ####################
+//#################### FRIENDS ####################
 RBTMatrix_Ptr& operator+=(RBTMatrix_Ptr& lhs, const RBTMatrix_CPtr& rhs)
 {
+	double (&L)[3][4] = lhs->m;
+	const double (&R)[3][4] = rhs->m;
+
 	for(int i=0; i<3; ++i)
 		for(int j=0; j<4; ++j)
 		{
-			(*lhs)(i,j) += (*rhs)(i,j);
+			L[i][j] += R[i][j];
 		}
 
 	return lhs;
@@ -226,10 +229,12 @@ RBTMatrix_Ptr& operator*=(RBTMatrix_Ptr& lhs, const RBTMatrix_CPtr& rhs)
 
 RBTMatrix_Ptr& operator*=(RBTMatrix_Ptr& lhs, double scale)
 {
+	double (&L)[3][4] = lhs->m;
+
 	for(int i=0; i<3; ++i)
 		for(int j=0; j<4; ++j)
 		{
-			(*lhs)(i,j) *= scale;
+			L[i][j] *= scale;
 		}
 
 	return lhs;
@@ -239,20 +244,20 @@ RBTMatrix_Ptr operator*(const RBTMatrix_CPtr& lhs, const RBTMatrix_CPtr& rhs)
 {
 	RBTMatrix_Ptr ret = RBTMatrix::zeros();
 
-	const RBTMatrix& lmat = *lhs;
-	const RBTMatrix& rmat = *rhs;
-	RBTMatrix& mat = *ret;
+	const double (&L)[3][4] = lhs->m;
+	const double (&R)[3][4] = rhs->m;
+	double (&M)[3][4] = ret->m;
 
 	for(int i=0; i<3; ++i)
 		for(int j=0; j<4; ++j)
 			for(int k=0; k<3; ++k)
 			{
-				mat(i,j) += lmat(i,k) * rmat(k,j);
+				M[i][j] += L[i][k] * R[k][j];
 			}
 
 	for(int i=0; i<3; ++i)
 	{
-		mat(i,3) += lmat(i,3);
+		M[i][3] += L[i][3];
 	}
 
 	return ret;
