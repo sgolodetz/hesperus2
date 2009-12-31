@@ -83,11 +83,29 @@ double RBTMatrix::operator()(int i, int j) const
 //#################### PUBLIC METHODS ####################
 void RBTMatrix::add_scaled(const RBTMatrix_CPtr& mat, double scale)
 {
+	const double (&r)[3][4] = mat->m;
+#if 0
+	// Original version
 	for(int i=0; i<3; ++i)
 		for(int j=0; j<4; ++j)
 		{
-			m[i][j] += (*mat)(i,j) * scale;
+			m[i][j] += r[i][j] * scale;
 		}
+#else
+	// Unrolled version
+	m[0][0] += r[0][0] * scale;
+	m[0][1] += r[0][1] * scale;
+	m[0][2] += r[0][2] * scale;
+	m[0][3] += r[0][3] * scale;
+	m[1][0] += r[1][0] * scale;
+	m[1][1] += r[1][1] * scale;
+	m[1][2] += r[1][2] * scale;
+	m[1][3] += r[1][3] * scale;
+	m[2][0] += r[2][0] * scale;
+	m[2][1] += r[2][1] * scale;
+	m[2][2] += r[2][2] * scale;
+	m[2][3] += r[2][3] * scale;
+#endif
 }
 
 /**
