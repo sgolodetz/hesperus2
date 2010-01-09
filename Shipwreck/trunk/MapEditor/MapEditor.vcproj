@@ -198,7 +198,6 @@
 	<Files>
 		<Filter
 			Name="Source Files"
-			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat;java"
 			>
 			<File
 				RelativePath="MainWindow.java"
@@ -630,29 +629,23 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl"
-			>
-		</Filter>
-		<Filter
 			Name="Resource Files"
-			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 			>
+			<File
+				RelativePath="Resources\Menus.txt"
+				>
+			</File>
+			<File
+				RelativePath="Resources\Version.txt"
+				>
+			</File>
 		</Filter>
 		<File
-			RelativePath="Resources\Menus.txt"
+			RelativePath="..\notes\Readme.txt"
 			>
 		</File>
 		<File
-			RelativePath="Readme.txt"
-			>
-		</File>
-		<File
-			RelativePath="tricky.map"
-			>
-		</File>
-		<File
-			RelativePath="Resources\Version.txt"
+			RelativePath="..\maps\tricky.map"
 			>
 		</File>
 	</Files>

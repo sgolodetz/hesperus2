@@ -1,5 +1,4 @@
 @echo off
-cd ..
 java MapEditor.BSP.TreeUtil
 echo ---
 java MapEditor.Commands.Command
@@ -23,4 +22,3 @@ echo ---
 java MapEditor.Misc.MiscUtil
 echo ---
 java MapEditor.Textures.TexturePlane
-cd MapEditor
