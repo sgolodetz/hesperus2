@@ -12,7 +12,6 @@ import MapEditor.Misc.*;
 import MapEditor.Textures.*;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.io.*;
 import java.util.Iterator;
 import java.util.LinkedList;

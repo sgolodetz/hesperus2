@@ -11,7 +11,6 @@ import MapEditor.Math.Vectors.*;
 import MapEditor.Misc.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.LinkedList;
 
 public class DesignCanvas extends Canvas implements BrushConstants, IRepaintListener, IScrollable, IStatusSource<String>
 {

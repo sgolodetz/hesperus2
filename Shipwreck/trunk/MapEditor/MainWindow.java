@@ -545,7 +545,7 @@ public final class MainWindow extends Frame implements ActionListener
 		while(true)
 		{
 			line = br.readLine().trim();
-			if(line == null) throw new IOException("Parse Error in Resources/Menu.txt: Expected }");
+			if(line == null) throw new IOException("Parse Error in resources/Menu.txt: Expected }");
 			if(line.equals("")) continue;
 			if(line.equals("}")) break;
 
@@ -611,11 +611,11 @@ public final class MainWindow extends Frame implements ActionListener
 
 			return mi;
 		}
-		else throw new IOException("Parse Error in Resources/Menus.txt: Invalid item definition");
+		else throw new IOException("Parse Error in resources/Menus.txt: Invalid item definition");
 	}
 
 	/**
-	Loads the menus from a file (namely Resources/Menus.txt).
+	Loads the menus from a file (namely resources/Menus.txt).
 
 	<p><b>Preconditions:</b>
 	<dl>
@@ -631,7 +631,7 @@ public final class MainWindow extends Frame implements ActionListener
 
 		try
 		{
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("Resources/Menus.txt")));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("resources/Menus.txt")));
 			String line;
 			while((line = br.readLine()) != null)
 			{
@@ -646,7 +646,7 @@ public final class MainWindow extends Frame implements ActionListener
 					String menuName = line.substring(5);
 					menu = load_menu(menuName, menuName, br);
 				}
-				else throw new IOException("Parse Error in Resources/Menus.txt: Items added to the menu bar must be menus (i.e. prefixed with 'Menu')");
+				else throw new IOException("Parse Error in resources/Menus.txt: Items added to the menu bar must be menus (i.e. prefixed with 'Menu')");
 
 				mb.add(menu);
 			}
@@ -698,7 +698,7 @@ public final class MainWindow extends Frame implements ActionListener
 	*/
 	private void read_version_number() throws IOException
 	{
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("Resources/Version.txt")));
+		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("resources/Version.txt")));
 		m_editorVersion = br.readLine();
 	}
 
