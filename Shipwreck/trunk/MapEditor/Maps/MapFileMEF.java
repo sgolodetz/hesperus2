@@ -247,9 +247,20 @@ public class MapFileMEF implements IMapLoader, IMapSaver	// .mef stands for "Map
 			line = line.trim();
 			int space = line.indexOf(' ');
 			if(space == -1) throw new IOException("Error reading texture details");
-			if(TextureManager.instance().load_texture(line.substring(0, space), line.substring(space+1)) == null)
+			String name = line.substring(0, space);
+			String filename = line.substring(space+1);
+			if(TextureManager.instance().load_texture(name, filename) == null)
 			{
-				System.err.println("Missing texture file: " + line.substring(space+1));
+				if(TextureManager.instance().load_texture(name, "textures/" + name.toLowerCase() + ".jpg") != null)
+				{
+					// If there's a texture of the same name in the built-in texture directory, load that instead and issue a warning.
+					System.err.println("Missing texture file: " + filename + " (built-in substitute used)");
+				}
+				else
+				{
+					// Otherwise, issue a missing texture error.
+					System.err.println("Missing texture file: " + line.substring(space+1));
+				}
 			}
 		}
 	}
