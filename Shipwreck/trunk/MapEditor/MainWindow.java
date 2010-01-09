@@ -185,9 +185,9 @@ public final class MainWindow extends Frame implements ActionListener
 
 		CommandManager.instance().set_repaint_listener(m_map);
 
-		TextureManager.instance().load_texture("HINT", "hint.jpg");
-		TextureManager.instance().load_texture("LANDSCAPE", "landscape.jpg");
-		TextureManager.instance().load_texture("NULL", "null.jpg");
+		TextureManager.instance().load_texture("HINT", "textures/hint.jpg");
+		TextureManager.instance().load_texture("LANDSCAPE", "textures/landscape.jpg");
+		TextureManager.instance().load_texture("NULL", "textures/null.jpg");
 	}
 
 	public void actionPerformed(ActionEvent e)

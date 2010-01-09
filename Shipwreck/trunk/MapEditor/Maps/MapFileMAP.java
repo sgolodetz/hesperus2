@@ -118,7 +118,7 @@ public class MapFileMAP implements IMapLoader	// .map files are output by editor
 
 				// FIXME: Eventually we want to load textures from the .wad file.
 				TextureManager.instance().unload_all();
-				TextureManager.instance().load_texture("NULL", "null.jpg");
+				TextureManager.instance().load_texture("NULL", "textures/null.jpg");
 
 				// Check the .map version number is the one we can read (namely 220).
 				String version = properties.get("mapversion");
