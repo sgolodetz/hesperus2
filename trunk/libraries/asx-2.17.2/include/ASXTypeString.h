@@ -19,7 +19,7 @@ struct ASXSimpleTypeString
 
 	explicit ASXSimpleTypeString(const std::string& name_) : name(name_) {}
 
-	std::string operator()()
+	std::string operator()() const
 	{
 		std::ostringstream os;
 		if(prefix != "") os << prefix << ' ';
@@ -29,7 +29,7 @@ struct ASXSimpleTypeString
 		return os.str();
 	}
 
-	virtual std::string type() = 0;
+	virtual std::string type() const = 0;
 
 	ASXSimpleTypeString& as_param()
 	{
@@ -44,7 +44,7 @@ struct ASXSimpleTypeString
 template <typename T> struct ASXTypeString : ASXSimpleTypeString
 {
 	explicit ASXTypeString(const std::string& name_ = "") : ASXSimpleTypeString(name_) {}
-	std::string type() { return T::type_string(); }
+	std::string type() const { return T::type_string(); }
 };
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,37 +54,37 @@ template <typename T> struct ASXTypeString : ASXSimpleTypeString
 template <> struct ASXTypeString<bool> : ASXSimpleTypeString
 {
 	explicit ASXTypeString(const std::string& name_ = "") : ASXSimpleTypeString(name_) {}
-	std::string type() { return "bool"; }
+	std::string type() const { return "bool"; }
 };
 
 template <> struct ASXTypeString<double> : ASXSimpleTypeString
 {
 	explicit ASXTypeString(const std::string& name_ = "") : ASXSimpleTypeString(name_) {}
-	std::string type() { return "double"; }
+	std::string type() const { return "double"; }
 };
 
 template <> struct ASXTypeString<float> : ASXSimpleTypeString
 {
 	explicit ASXTypeString(const std::string& name_ = "") : ASXSimpleTypeString(name_) {}
-	std::string type() { return "float"; }
+	std::string type() const { return "float"; }
 };
 
 template <> struct ASXTypeString<int> : ASXSimpleTypeString
 {
 	explicit ASXTypeString(const std::string& name_ = "") : ASXSimpleTypeString(name_) {}
-	std::string type() { return "int"; }
+	std::string type() const { return "int"; }
 };
 
 template <> struct ASXTypeString<std::string> : ASXSimpleTypeString
 {
 	explicit ASXTypeString(const std::string& name_ = "") : ASXSimpleTypeString(name_) {}
-	std::string type() { return "string"; }
+	std::string type() const { return "string"; }
 };
 
 template <> struct ASXTypeString<void> : ASXSimpleTypeString
 {
 	explicit ASXTypeString(const std::string& name_ = "") : ASXSimpleTypeString(name_) {}
-	std::string type() { return "void"; }
+	std::string type() const { return "void"; }
 };
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -160,7 +160,7 @@ template <typename R> struct ASXTypeString<R ()>
 
 	explicit ASXTypeString(const std::string& name_) : name(name_) {}
 
-	std::string operator()()
+	std::string operator()() const
 	{
 		std::ostringstream os;
 		os << ASXTypeString<R>()() << ' ' << name << "()";
@@ -175,7 +175,7 @@ template <typename R, typename Arg0> struct ASXTypeString<R (Arg0)>
 
 	explicit ASXTypeString(const std::string& name_) : name(name_) {}
 
-	std::string operator()()
+	std::string operator()() const
 	{
 		std::ostringstream os;
 		os << ASXTypeString<R>()() << ' ' << name << '(';
@@ -192,7 +192,7 @@ template <typename R, typename Arg0, typename Arg1> struct ASXTypeString<R (Arg0
 
 	explicit ASXTypeString(const std::string& name_) : name(name_) {}
 
-	std::string operator()()
+	std::string operator()() const
 	{
 		std::ostringstream os;
 		os << ASXTypeString<R>()() << ' ' << name << '(';
@@ -210,7 +210,7 @@ template <typename R, typename Arg0, typename Arg1, typename Arg2> struct ASXTyp
 
 	explicit ASXTypeString(const std::string& name_) : name(name_) {}
 
-	std::string operator()()
+	std::string operator()() const
 	{
 		std::ostringstream os;
 		os << ASXTypeString<R>()() << ' ' << name << '(';

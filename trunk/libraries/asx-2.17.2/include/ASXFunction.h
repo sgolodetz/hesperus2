@@ -25,7 +25,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	ASXFunction(const ASXContext& context)
+	explicit ASXFunction(const ASXContext& context)
 	:	m_context(context)
 	{}
 
@@ -52,7 +52,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	ASXFunction(const ASXContext& context)
+	explicit ASXFunction(const ASXContext& context)
 	:	m_context(context)
 	{}
 
@@ -81,7 +81,7 @@ private:
 
 	//#################### CONSTRUCTORS ####################
 public:
-	ASXFunction(const ASXContext& context)
+	explicit ASXFunction(const ASXContext& context)
 	:	m_context(context)
 	{}
 
