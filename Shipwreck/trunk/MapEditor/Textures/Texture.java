@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.nio.ByteBuffer;
 import java.util.LinkedList;
 import javax.media.opengl.*;
-import javax.media.opengl.glu.GLU;
 
 /**
 This class represents textures. Note that there is no way to instantiate textures from outside
@@ -107,7 +106,6 @@ public class Texture
 	Makes the texture current in the OpenGL context specified.
 
 	@param gl	The OpenGL context in which to make the texture current
-	@param glu	The corresponding GLU context
 	*/
 	public void bind(GL2 gl)
 	{
