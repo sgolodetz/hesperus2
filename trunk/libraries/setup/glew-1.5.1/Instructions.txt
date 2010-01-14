@@ -1,5 +1,5 @@
 GLEW 1.5.1 Setup Instructions
-Last Updated by Stuart Golodetz on 22/11/09
+Last Updated by Stuart Golodetz on 14/01/10
 -------------------------------------------
 
 1) Extract glew-1.5.1-src.tgz into the libraries directory.
@@ -26,5 +26,5 @@ Last Updated by Stuart Golodetz on 22/11/09
 
 	a) Change to the glew-1.5.1 directory.
 	b) Run "fromdos config/config.guess" to convert its line endings to UNIX-style '\n'.
-	c) Make sure the development files for libxmu are installed (use the package manager).
+	c) Make sure the development files for libxi and libxmu are installed (use the package manager).
 	d) Run "make".
