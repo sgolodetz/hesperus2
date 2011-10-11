@@ -219,11 +219,6 @@ public class View3D implements Constants, GLEventListener, IRepaintListener
 		capabilities.setStencilBits(1);
 		m_canvas = new GLCanvas(capabilities);
 
-		// Note:	This fixes the canvas flickering problem, at the cost of using a proprietary API
-		//			which may be removed at a later date.
-		sun.awt.SunToolkit sunToolkit = (sun.awt.SunToolkit)Toolkit.getDefaultToolkit();
-		sunToolkit.disableBackgroundErase(m_canvas);
-
 		m_canvas.addGLEventListener(this);
 
 		m_canvas.addMouseListener(new MouseAdapter()

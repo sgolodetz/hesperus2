@@ -1,0 +1,4 @@
+libraries/jogl/
+*.class
+
+MapEditor.jar

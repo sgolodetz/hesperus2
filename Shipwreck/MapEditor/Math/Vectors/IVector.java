@@ -46,12 +46,12 @@ interface IVector<T> extends Constants
 	double dot(final T rhs);
 
 	/**
-	Determines if this vector is equal to the parameter vector.
+	Determines if this vector is equal to the parameter object.
 
-	@param rhs	The vector we wish to check for equality with this vector
-	@return		true if the two vectors are equal, otherwise false
+	@param rhs	The object we wish to check for equality with this vector
+	@return		true if the parameter is a vector equal to this one, otherwise false
 	*/
-	boolean equals(T rhs);
+	boolean equals(Object rhs);
 
 	/**
 	Returns this vector's length.
