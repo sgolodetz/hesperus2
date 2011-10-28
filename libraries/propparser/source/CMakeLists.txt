@@ -2,7 +2,7 @@
 # Top-level CMakeLists.txt for propparser #
 ###########################################
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 
 PROJECT(propparser)
 
@@ -47,9 +47,9 @@ SOURCE_GROUP(others FILES ${others})
 # Specify the target and where to put it #
 ##########################################
 
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${propparser_BINARY_DIR}/lib)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${propparser_BINARY_DIR}/lib)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${propparser_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${propparser_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${propparser_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${propparser_BINARY_DIR}/lib)
 ADD_LIBRARY(${targetname} STATIC ${sources} ${headers} ${others})
 
 SET_TARGET_PROPERTIES(${targetname} PROPERTIES DEBUG_OUTPUT_NAME "propparser_d")

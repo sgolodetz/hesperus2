@@ -2,7 +2,7 @@
 # Top-level CMakeLists.txt for asx-2.17.2 #
 ###########################################
 
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 
 PROJECT(asx-2.17.2)
 
@@ -91,9 +91,9 @@ add_on/scriptstdstring
 # Specify the target and where to put it #
 ##########################################
 
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${asx-2.17.2_BINARY_DIR}/lib)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${asx-2.17.2_BINARY_DIR}/lib)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${asx-2.17.2_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${asx-2.17.2_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${asx-2.17.2_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${asx-2.17.2_BINARY_DIR}/lib)
 ADD_LIBRARY(${targetname} STATIC ${sources} ${headers} ${templates})
 
 SET_TARGET_PROPERTIES(${targetname} PROPERTIES DEBUG_OUTPUT_NAME "asx_d")
