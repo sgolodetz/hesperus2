@@ -92,12 +92,9 @@ add_on/scriptstdstring
 ##########################################
 
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${asx-2.17.2_BINARY_DIR}/lib)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${asx-2.17.2_BINARY_DIR}/lib)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${asx-2.17.2_BINARY_DIR}/lib)
 ADD_LIBRARY(${targetname} STATIC ${sources} ${headers} ${templates})
-IF(MSVC_IDE)
-	# A hack to get around the "Debug" and "Release" directories Visual Studio tries to add
-	SET_TARGET_PROPERTIES(${targetname} PROPERTIES PREFIX "../")
-	SET_TARGET_PROPERTIES(${targetname} PROPERTIES IMPORT_PREFIX "../")
-ENDIF(MSVC_IDE)
 
 SET_TARGET_PROPERTIES(${targetname} PROPERTIES DEBUG_OUTPUT_NAME "asx_d")
 

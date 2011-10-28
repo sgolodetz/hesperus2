@@ -1,8 +1,10 @@
 propparser Instructions
-Last Updated by Stuart Golodetz on 24/11/09
+Last Updated by Stuart Golodetz on 21/10/11
 -------------------------------------------
 
 1) Make sure you have Bison and Flex installed.
+
+If you encounter problems, make sure they are installed to a path without spaces, e.g. C:\GnuWin32, and that the bin directory is added to the system path.
 
 2) Build propparser using CMake, setting CMAKE_INSTALL_PREFIX to the propparser directory itself.
 

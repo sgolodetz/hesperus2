@@ -1,10 +1,14 @@
 FMOD 4.28.02 Setup Instructions
-Last Updated by Stuart Golodetz on 24/11/09
+Last Updated by Stuart Golodetz on 12/10/11
 -------------------------------------------
 
-On Windows:
+On Windows (32-bit):
 
 Extract fmodapi42802win32.rar into the libraries directory.
+
+On Windows (64-bit):
+
+Extract fmodapi42802win64.rar into the libraries directory.
 
 On Linux (32-bit):
 

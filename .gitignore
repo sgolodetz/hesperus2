@@ -1,0 +1,11 @@
+build/
+libraries/angelscript_2.17.2/
+libraries/asx-2.17.2/build/
+libraries/asx-2.17.2/lib/
+libraries/boost_1_41_0/
+libraries/FMOD-4.28.02/
+libraries/glew-1.5.1/
+libraries/lodepng-20080927/
+libraries/propparser/build/
+libraries/propparser/lib/
+libraries/SDL-1.2.14/

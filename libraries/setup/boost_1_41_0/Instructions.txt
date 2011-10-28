@@ -1,5 +1,5 @@
 Boost 1.41.0 Setup Instructions
-Last Updated by Stuart Golodetz on 22/11/09
+Last Updated by Stuart Golodetz on 13/10/11
 -------------------------------------------
 
 1. Extract boost_1_41_0.tar.gz into the libraries directory.
@@ -30,6 +30,10 @@ bjam --libdir=..\boost_1_41_0\lib --includedir=..\boost_1_41_0\include --with-da
 Windows (Visual Studio 2008):
 
 bjam --libdir=..\boost_1_41_0\lib --includedir=..\boost_1_41_0\include --with-date_time --with-filesystem --build-type=complete toolset=msvc-9.0 install
+
+Windows (Visual Studio 2010):
+
+bjam --libdir=..\boost_1_41_0\lib --includedir=..\boost_1_41_0\include --with-date_time --with-filesystem --build-type=complete toolset=msvc-10.0 install
 
 Linux:
 

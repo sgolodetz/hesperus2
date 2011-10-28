@@ -48,12 +48,9 @@ SOURCE_GROUP(others FILES ${others})
 ##########################################
 
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${propparser_BINARY_DIR}/lib)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${propparser_BINARY_DIR}/lib)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${propparser_BINARY_DIR}/lib)
 ADD_LIBRARY(${targetname} STATIC ${sources} ${headers} ${others})
-IF(MSVC_IDE)
-	# A hack to get around the "Debug" and "Release" directories Visual Studio tries to add
-	SET_TARGET_PROPERTIES(${targetname} PROPERTIES PREFIX "../")
-	SET_TARGET_PROPERTIES(${targetname} PROPERTIES IMPORT_PREFIX "../")
-ENDIF(MSVC_IDE)
 
 SET_TARGET_PROPERTIES(${targetname} PROPERTIES DEBUG_OUTPUT_NAME "propparser_d")
 

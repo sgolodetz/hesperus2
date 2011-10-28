@@ -1362,8 +1362,9 @@ INCLUDE(${hesperus2_SOURCE_DIR}/UseSDL.cmake)
 # Specify the target and where to put it #
 ##########################################
 
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${hesperus2_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${hesperus2_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${hesperus2_BINARY_DIR}/lib)
+SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${hesperus2_BINARY_DIR}/lib)
 ADD_LIBRARY(${targetname} STATIC ${sources} ${headers} ${templates})
-INCLUDE(${hesperus2_SOURCE_DIR}/VCTargetHack.cmake)
 
 SET_TARGET_PROPERTIES(${targetname} PROPERTIES DEBUG_OUTPUT_NAME "hesperus_d")

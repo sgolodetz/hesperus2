@@ -6,6 +6,7 @@
 #include "AiSequenceBehaviour.h"
 
 #include <algorithm>
+#include <iterator>
 
 #include <hesp/exceptions/Exception.h>
 
