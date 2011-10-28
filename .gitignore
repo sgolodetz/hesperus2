@@ -1,4 +1,5 @@
 build/
+install/
 libraries/angelscript_2.17.2/
 libraries/asx-2.17.2/build/
 libraries/asx-2.17.2/lib/
