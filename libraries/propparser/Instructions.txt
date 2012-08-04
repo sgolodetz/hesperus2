@@ -1,5 +1,5 @@
 propparser Instructions
-Last Updated by Stuart Golodetz on 21/10/11
+Last Updated by Stuart Golodetz on 04/08/12
 -------------------------------------------
 
 1) Make sure you have Bison and Flex installed.
@@ -10,7 +10,9 @@ If you encounter problems, make sure they are installed to a path without spaces
 
 ***
 
-Note:
+Notes:
+
+(a)
 
 It may be necessary to add the modules FindBISON.cmake and FindFLEX.cmake to CMake's module path.
 
@@ -21,3 +23,7 @@ On Windows (using CMake 2.6 as an example), this is located at:
 On Linux, it tends to be at:
 
 /usr/share/cmake-2.6/Modules
+
+(b)
+
+On Windows, it may be necessary to add the GnuWin32\bin directory to the system path so that the m4 executable can be found.
