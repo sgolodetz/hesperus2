@@ -105,6 +105,7 @@ void LevelViewer::render_navlinks() const
 	const std::map<int,NavDataset_CPtr> navDatasets = m_level->nav_manager()->datasets();
 	for(std::map<int,NavDataset_CPtr>::const_iterator it=navDatasets.begin(), iend=navDatasets.end(); it!=iend; ++it)
 	{
+		if(it == navDatasets.begin()) continue;
 		const std::vector<NavLink_Ptr>& navLinks = it->second->nav_mesh()->links();
 		int linkCount = static_cast<int>(navLinks.size());
 		for(int j=0; j<linkCount; ++j)
@@ -120,7 +121,6 @@ void LevelViewer::render_navmeshes() const
 
 	glPushAttrib(GL_ENABLE_BIT | GL_POLYGON_BIT);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glDisable(GL_CULL_FACE);
 
 	Colour3d colours[] = { Colour3d(1,0,0), Colour3d(0,1,0), Colour3d(0,0,1) };
@@ -129,8 +129,37 @@ void LevelViewer::render_navmeshes() const
 	const std::map<int,NavDataset_CPtr> navDatasets = m_level->nav_manager()->datasets();
 	const std::vector<CollisionPolygon_Ptr>& onionPolygons = m_level->onion_polygons();
 
+	glColor4d(1.0, 1.0, 1.0, 0.25);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glDepthMask(GL_FALSE);
+
 	for(std::map<int,NavDataset_CPtr>::const_iterator it=navDatasets.begin(), iend=navDatasets.end(); it!=iend; ++it)
 	{
+		if(it == navDatasets.begin()) continue;
+		const std::vector<NavPolygon_Ptr>& navPolys = it->second->nav_mesh()->polygons();
+		int polyCount = static_cast<int>(navPolys.size());
+		for(int j=0; j<polyCount; ++j)
+		{
+			const CollisionPolygon_Ptr& onionPoly = onionPolygons[navPolys[j]->collision_poly_index()];
+			int vertCount = onionPoly->vertex_count();
+			glBegin(GL_POLYGON);
+				for(int k=0; k<vertCount; ++k)
+				{
+					const Vector3d& v = onionPoly->vertex(k);
+					glVertex3d(v.x, v.y, v.z);
+				}
+			glEnd();
+		}
+	}
+
+	glDisable(GL_BLEND);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glDepthMask(GL_TRUE);
+
+	for(std::map<int,NavDataset_CPtr>::const_iterator it=navDatasets.begin(), iend=navDatasets.end(); it!=iend; ++it)
+	{
+		if(it == navDatasets.begin()) continue;
 		int c = it->first % colourCount;
 		glColor3d(colours[c].r, colours[c].g, colours[c].b);
 

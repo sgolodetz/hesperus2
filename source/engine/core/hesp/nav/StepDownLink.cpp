@@ -46,13 +46,30 @@ NavLink_Ptr StepDownLink::load(const std::string& data)
 
 void StepDownLink::render() const
 {
-	Vector3d s = (m_sourceEdge.e1 + m_sourceEdge.e2) / 2;
+	Vector3d alongSource = m_sourceEdge.e2 - m_sourceEdge.e1;
+	alongSource *= 0.5;
+	Vector3d alongDest = (m_sourceEdge.e2 + m_destEdge.e2 - m_sourceEdge.e1 - m_destEdge.e1) / 2;
+	alongDest *= 0.5;
+	Vector3d midS = (m_sourceEdge.e1 + m_sourceEdge.e2) / 2;
+	Vector3d midD = (m_sourceEdge.e1 + m_sourceEdge.e2 + m_destEdge.e1 + m_destEdge.e2) / 4;
+	Vector3d s1 = midS - alongSource, s2 = midS + alongSource;
+	Vector3d d1 = midD - alongDest, d2 = midD + alongDest;
+	glDisable(GL_CULL_FACE);
+	glBegin(GL_POLYGON);
+		glColor3d(1,1,0);
+		glVertex3d(s1.x, s1.y, s1.z);
+		glVertex3d(s2.x, s2.y, s2.z);
+		glVertex3d(d2.x, d2.y, d2.z);
+		glVertex3d(d1.x, d1.y, d1.z);
+	glEnd();
+	glEnable(GL_CULL_FACE);
+	/*Vector3d s = (m_sourceEdge.e1 + m_sourceEdge.e2) / 2;
 	Vector3d d = (m_sourceEdge.e1 + m_sourceEdge.e2 + m_destEdge.e1 + m_destEdge.e2) / 4;
 	glBegin(GL_LINES);
 		glColor3d(1,1,0);
 		glVertex3d(s.x, s.y, s.z);
 		glVertex3d(d.x, d.y, d.z);
-	glEnd();
+	glEnd();*/
 }
 
 }

@@ -62,12 +62,18 @@ void WalkLink::render() const
 	Vector3d alongEdge = (m_edge.e2 - m_edge.e1);
 	Vector3d acrossEdge = alongEdge.cross(Vector3d(0,0,1)).normalize();
 	acrossEdge *= 0.2;
-	Vector3d s = mid + acrossEdge, d = mid - acrossEdge;
-	glBegin(GL_LINES);
+	alongEdge *= 0.1;
+	Vector3d s1 = mid + acrossEdge - alongEdge, s2 = mid + acrossEdge + alongEdge;
+	Vector3d d1 = mid - acrossEdge - alongEdge, d2 = mid - acrossEdge + alongEdge;
+	glDisable(GL_CULL_FACE);
+	glBegin(GL_POLYGON);
 		glColor3d(0,1,1);
-		glVertex3d(s.x, s.y, s.z);
-		glVertex3d(d.x, d.y, d.z);
+		glVertex3d(s1.x, s1.y, s1.z);
+		glVertex3d(s2.x, s2.y, s2.z);
+		glVertex3d(d2.x, d2.y, d2.z);
+		glVertex3d(d1.x, d1.y, d1.z);
 	glEnd();
+	glEnable(GL_CULL_FACE);
 }
 
 Vector3d WalkLink::source_position() const
