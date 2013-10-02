@@ -105,7 +105,7 @@ void LevelViewer::render_navlinks() const
 	const std::map<int,NavDataset_CPtr> navDatasets = m_level->nav_manager()->datasets();
 	for(std::map<int,NavDataset_CPtr>::const_iterator it=navDatasets.begin(), iend=navDatasets.end(); it!=iend; ++it)
 	{
-		if(it == navDatasets.begin()) continue;
+		//if(it == navDatasets.begin()) continue;
 		const std::vector<NavLink_Ptr>& navLinks = it->second->nav_mesh()->links();
 		int linkCount = static_cast<int>(navLinks.size());
 		for(int j=0; j<linkCount; ++j)
@@ -136,7 +136,7 @@ void LevelViewer::render_navmeshes() const
 
 	for(std::map<int,NavDataset_CPtr>::const_iterator it=navDatasets.begin(), iend=navDatasets.end(); it!=iend; ++it)
 	{
-		if(it == navDatasets.begin()) continue;
+		//if(it == navDatasets.begin()) continue;
 		const std::vector<NavPolygon_Ptr>& navPolys = it->second->nav_mesh()->polygons();
 		int polyCount = static_cast<int>(navPolys.size());
 		for(int j=0; j<polyCount; ++j)
@@ -159,7 +159,7 @@ void LevelViewer::render_navmeshes() const
 
 	for(std::map<int,NavDataset_CPtr>::const_iterator it=navDatasets.begin(), iend=navDatasets.end(); it!=iend; ++it)
 	{
-		if(it == navDatasets.begin()) continue;
+		//if(it == navDatasets.begin()) continue;
 		int c = it->first % colourCount;
 		glColor3d(colours[c].r, colours[c].g, colours[c].b);
 
@@ -210,7 +210,7 @@ void LevelViewer::render_objects() const
 
 	// Note:	First-person rendering means rendering the active item (e.g. the weapon held by the player) but
 	//			not the actual player model.
-	if(cmpFirstPersonRender) cmpFirstPersonRender->render_first_person();
+	//if(cmpFirstPersonRender) cmpFirstPersonRender->render_first_person();
 
 	glPopAttrib();
 }

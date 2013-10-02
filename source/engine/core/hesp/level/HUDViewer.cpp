@@ -52,7 +52,7 @@ try
 	// Render it in the bottom-left of the screen.
 	TextRenderer textRenderer("Impact", 14);
 	std::string ammoStr = "Ammo: " + lexical_cast<std::string>(ammoCount);
-	textRenderer.write_aligned(ammoStr, 20, h-20, TextRenderer::HALIGN_LEFT, TextRenderer::VALIGN_BOTTOM, Colour3d(1,1,1));
+	//textRenderer.write_aligned(ammoStr, 20, h-20, TextRenderer::HALIGN_LEFT, TextRenderer::VALIGN_BOTTOM, Colour3d(1,1,1));
 }
 catch(Exception&) {}
 
