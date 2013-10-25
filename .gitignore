@@ -10,3 +10,4 @@ libraries/lodepng-20080927/
 libraries/propparser/build/
 libraries/propparser/lib/
 libraries/SDL-1.2.14/
+*.bsp
