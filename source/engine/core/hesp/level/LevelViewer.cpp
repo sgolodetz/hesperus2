@@ -221,12 +221,15 @@ void LevelViewer::render_portals() const
 
 	glPushAttrib(GL_ENABLE_BIT | GL_POLYGON_BIT);
 
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glDisable(GL_CULL_FACE);
 
-	glColor3d(1,1,1);
-
 	const PortalVector& portals = m_level->portals();
+
+	glColor4d(1.0, 1.0, 1.0, 0.1);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glDepthMask(GL_FALSE);
+
 	for(PortalVector::const_iterator it=portals.begin(), iend=portals.end(); it!=iend; ++it)
 	{
 		const Portal& portal = **it;
@@ -239,6 +242,30 @@ void LevelViewer::render_portals() const
 			}
 		glEnd();
 	}
+
+	glDisable(GL_BLEND);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glDepthMask(GL_TRUE);
+	glPolygonOffset(-40.0, 0.0);
+	glEnable(GL_POLYGON_OFFSET_LINE);
+
+	glColor3d(1,0,0);
+
+	for(PortalVector::const_iterator it=portals.begin(), iend=portals.end(); it!=iend; ++it)
+	{
+		const Portal& portal = **it;
+		int vertCount = portal.vertex_count();
+		glBegin(GL_POLYGON);
+			for(int j=0; j<vertCount; ++j)
+			{
+				const Vector3d& v = portal.vertex(j);
+				glVertex3d(v.x, v.y, v.z);
+			}
+		glEnd();
+	}
+
+	glPolygonOffset(0.0, 0.0);
+	glDisable(GL_POLYGON_OFFSET_LINE);
 
 	glPopAttrib();
 }

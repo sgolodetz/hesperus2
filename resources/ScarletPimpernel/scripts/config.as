@@ -7,8 +7,8 @@ int width = 1024;
 int height = 768;
 
 bool fullScreen = false;
-string levelName = "tricky";
+string levelName = "bowtie";
 string profile = "smg";
-bool renderNavMeshes = true;
-bool renderPortals = false;
+bool renderNavMeshes = false;
+bool renderPortals = true;
 bool soundOn = true;
