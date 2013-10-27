@@ -1,2 +1,0 @@
-@echo off
-javadoc -classpath .;libraries/jogl/lib/jogl.all.jar;libraries/jogl/lib/nativewindow.all.jar;libraries/jogl/lib/gluegen-rt.jar MapEditor MapEditor.Brushes MapEditor.BSP MapEditor.Commands MapEditor.CSG MapEditor.Event MapEditor.Geom MapEditor.Geom.Planar MapEditor.Geom.Splines MapEditor.Graphics MapEditor.GUI MapEditor.Maps MapEditor.Math MapEditor.Math.Matrices MapEditor.Math.Vectors MapEditor.Misc MapEditor.Test MapEditor.Textures -package -d docs

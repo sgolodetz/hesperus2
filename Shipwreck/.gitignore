@@ -1,4 +1,6 @@
+bin/
+build/
+dist/
+docs/
+docsfull/
 libraries/jogl/
-*.class
-
-MapEditor.jar

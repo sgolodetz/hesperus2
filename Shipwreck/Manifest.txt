@@ -1,2 +1,0 @@
-Class-Path: libraries/jogl/lib/jogl.all.jar libraries/jogl/lib/nativewindow.all.jar libraries/jogl/lib/gluegen-rt.jar
-Main-Class: MapEditor.MainWindow

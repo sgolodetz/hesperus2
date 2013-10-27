@@ -1,0 +1,142 @@
+<project name="Shipwreck" default="dist" basedir=".">
+	<!-- Useful Directories -->
+
+	<property name="build" value="build"/>
+	<property name="dist" value="dist"/>
+	<property name="docs" value="docs"/>
+	<property name="docsfull" value="docsfull"/>
+	<property name="lib" value="libraries"/>
+	<property name="runners" value="runners"/>
+	<property name="src" value="src"/>
+
+	<property name="jar" value="${dist}/shipwreck.jar"/>
+	<property name="jogllib" value="${lib}/jogl/lib"/>
+
+	<!-- Classpath -->
+
+	<path id="compile.classpath">
+		<pathelement location="${jogllib}/gluegen-rt.jar"/>
+		<pathelement location="${jogllib}/jogl.all.jar"/>
+		<pathelement location="${jogllib}/nativewindow.all.jar"/>
+	</path>
+
+	<!-- Compilation Goals -->
+
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${dist}"/>
+	</target>
+
+	<target name="init">
+		<tstamp/>
+	</target>
+
+	<target name="compile" depends="init">
+		<mkdir dir="${build}"/>
+		<javac srcdir="${src}" destdir="${build}" classpathref="compile.classpath" includeantruntime="false"/>
+	</target>
+
+	<target name="dist" depends="compile">
+		<mkdir dir="${dist}"/>
+		<jar jarfile="${jar}">
+			<fileset dir="${build}"/>
+			<manifest>
+				<attribute name="Main-Class" value="net.gxstudios.shipwreck.MainWindow"/>
+				<attribute name="Class-Path" value="${jogllib}/jogl.all.jar ${jogllib}/nativewindow.all.jar ${jogllib}/gluegen-rt.jar"/>
+			</manifest>
+		</jar>
+		<copy todir="${dist}" file="${runners}/run.bat"/>
+		<copy todir="${dist}" file="${runners}/run.sh"/>
+		<copy todir="${dist}/${lib}/jogl">
+			<fileset dir="${lib}/jogl"/>
+		</copy>
+		<copy todir="${dist}/resources">
+			<fileset dir="resources"/>
+		</copy>
+		<copy todir="${dist}/textures">
+			<fileset dir="textures"/>
+		</copy>
+	</target>
+
+	<target name="distmaps" depends="dist">
+		<copy todir="${dist}/maps">
+			<fileset dir="maps"/>
+		</copy>
+	</target>
+
+	<target name="redist" depends="clean,dist"/>
+
+	<target name="redistmaps" depends="clean,distmaps"/>
+
+	<target name="package" depends="redist">
+		<zip destfile="shipwreck-${DSTAMP}.zip">
+			<zipfileset dir="${dist}" prefix="shipwreck"/>
+		</zip>
+	</target>
+
+	<target name="packagemaps" depends="redistmaps">
+		<zip destfile="shipwreck-withmaps-${DSTAMP}.zip">
+			<zipfileset dir="${dist}" prefix="shipwreck"/>
+		</zip>
+	</target>
+
+	<!-- Documentation Goals -->
+
+	<target name="cleandocs">
+		<delete dir="${docs}"/>
+		<delete dir="${docsfull}"/>
+	</target>
+
+	<target name="makedocs">
+		<javadoc
+			sourcepath="${src}"
+			destdir="${docs}"
+			classpathref="compile.classpath"
+			package="yes"
+		/>
+	</target>
+
+	<target name="makefulldocs">
+		<javadoc
+			sourcepath="${src}"
+			destdir="${docsfull}"
+			classpathref="compile.classpath"
+			private="yes"
+		/>
+	</target>
+
+	<!-- Other Goals -->
+
+	<target name="run">
+		<java dir="${dist}" jar="${jar}" fork="true">
+			<sysproperty key="java.library.path" value="${jogllib}"/>
+		</java>
+	</target>
+
+	<!-- TODO: Replace these tests with JUnit ones. -->
+	<target name="test" depends="compile">
+		<java dir="${build}" classname="net.gxstudios.shipwreck.bsp.TreeUtil" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.commands.Command" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.csg.CSGUtil" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.geom.planar.GeomUtil" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.geom.splines.CubicBSpline" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.geom.splines.SplineUtil" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.math.MathUtil" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.math.matrices.Matrix" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.math.vectors.Vector3d" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.math.vectors.VectorUtil" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.misc.MiscUtil" fork="true"/>
+			<echo message="---"/>
+		<java dir="${build}" classname="net.gxstudios.shipwreck.textures.TexturePlane" fork="true"/>
+	</target>
+</project>
