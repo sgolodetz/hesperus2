@@ -202,6 +202,7 @@ public abstract class ArchitectureBrush extends TransformableBrush
 		}
 	}
 
+	@SuppressWarnings("serial")
 	private class PropertiesDialog extends Dialog
 	{
 		//################## CONSTRUCTORS ##################//

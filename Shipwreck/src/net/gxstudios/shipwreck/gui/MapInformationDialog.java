@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 import net.gxstudios.shipwreck.maps.Map;
 import net.gxstudios.shipwreck.maps.MapDetails;
 
+@SuppressWarnings("serial")
 public class MapInformationDialog extends Dialog
 {
 	public MapInformationDialog(Frame owner, Map map)

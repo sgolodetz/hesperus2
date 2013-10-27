@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 This class implements a general input dialog which can be used to query the
 user for a string.
 */
+@SuppressWarnings("serial")
 public class InputDialog extends Dialog
 {
 	//################## PRIVATE VARIABLES ##################//

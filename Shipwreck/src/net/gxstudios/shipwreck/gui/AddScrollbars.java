@@ -11,6 +11,7 @@ import java.awt.event.AdjustmentListener;
 This class (which uses the Decorator pattern) can add scrollbars to any component which implements the
 {@link IScrollable} interface.
 */
+@SuppressWarnings("serial")
 public class AddScrollbars extends Panel
 {
 	/** The component, casted to IScrollable for ease of use */

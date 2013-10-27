@@ -40,7 +40,7 @@ public class SplineUtil implements Constants
 														   IConstraint xConstraint1, IConstraint xConstraint2,
 														   IConstraint yConstraint1, IConstraint yConstraint2)
 	{
-		final int cols = grid[0].length, rows = grid.length;
+		final int rows = grid.length;
 
 		// Calculate the splines in the x direction by interpolating grid points.
 		CubicBSpline[] xSplines = new CubicBSpline[rows];

@@ -19,6 +19,7 @@ import net.gxstudios.shipwreck.maps.Map;
 import net.gxstudios.shipwreck.maps.MapCommands;
 import net.gxstudios.shipwreck.math.vectors.Vector3d;
 
+@SuppressWarnings("serial")
 public class MapTranslationDialog extends Dialog
 {
 	//################## PRIVATE VARIABLES ##################//

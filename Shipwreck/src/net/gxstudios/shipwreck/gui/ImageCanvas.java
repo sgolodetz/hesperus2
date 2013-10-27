@@ -9,6 +9,7 @@ import java.awt.Image;
 This class implements a canvas that is completely filled by a given image. It's used
 for rendering thumbnails in the texture dialog.
 */
+@SuppressWarnings("serial")
 public class ImageCanvas extends Canvas
 {
 	//################## PRIVATE VARIABLES ##################//

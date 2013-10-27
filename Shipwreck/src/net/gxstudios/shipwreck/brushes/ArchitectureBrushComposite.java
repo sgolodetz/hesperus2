@@ -38,7 +38,6 @@ public class ArchitectureBrushComposite extends ArchitectureBrush implements Geo
 														// revert back to its component brushes when deselected?
 	private Color m_colour;								// the colour with which we will render the brush on a design canvas
 	private LinkedList<Pair<ArchitectureBrush,BrushData>> m_brushes = new LinkedList<Pair<ArchitectureBrush,BrushData>>();
-	private static int s_colourIndex = 0;
 
 	//################## CONSTRUCTORS ##################//
 	public ArchitectureBrushComposite()

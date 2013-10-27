@@ -42,6 +42,7 @@ import net.gxstudios.shipwreck.math.vectors.Vector3d;
 import net.gxstudios.shipwreck.math.vectors.VectorUtil;
 import net.gxstudios.shipwreck.misc.Options;
 
+@SuppressWarnings("serial")
 public class DesignCanvas extends Canvas implements BrushConstants, IRepaintListener, IScrollable, IStatusSource<String>
 {
 	// Note: There are three coordinate systems active in a design canvas:

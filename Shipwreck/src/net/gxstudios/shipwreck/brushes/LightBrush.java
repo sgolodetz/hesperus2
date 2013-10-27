@@ -319,6 +319,7 @@ public class LightBrush extends TranslatableBrush
 	}
 
 	//################## NESTED CLASSES ##################//
+	@SuppressWarnings("serial")
 	private class PropertiesDialog extends Dialog
 	{
 		//################## CONSTRUCTORS ##################//

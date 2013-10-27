@@ -129,7 +129,7 @@ public class Matrix implements Constants
 		// Check the preconditions.
 		if(lhs.columns() != rhs.rows()) throw new java.lang.Error();
 
-		final int lColumns = lhs.columns(), rColumns = rhs.columns(), lRows = lhs.rows(), rRows = rhs.rows();
+		final int lColumns = lhs.columns(), rColumns = rhs.columns(), lRows = lhs.rows();
 		final double[][] lElements = lhs.get_elements(), rElements = rhs.get_elements();
 
 		double[][] elements = new double[lRows][rColumns];	// note that these are all initialised to 0
@@ -235,7 +235,7 @@ public class Matrix implements Constants
 		Matrix m = mat.copy();
 		LinkedList<IElementaryRowOperation> eroSequence = new LinkedList<IElementaryRowOperation>();
 
-		final int cols = m.columns(), rows = m.rows();
+		final int rows = m.rows();
 
 		int startCol = 0;
 

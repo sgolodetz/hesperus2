@@ -31,6 +31,7 @@ import net.gxstudios.shipwreck.textures.TextureConstants;
 import net.gxstudios.shipwreck.textures.TextureManager;
 import net.gxstudios.shipwreck.textures.TexturePlane;
 
+@SuppressWarnings("serial")
 public class TextureDialog extends Dialog implements ISelectionListener, TextureConstants
 {
 	//################## PRIVATE VARIABLES ##################//

@@ -7,6 +7,7 @@ import java.util.Vector;
 import net.gxstudios.shipwreck.event.IStatusListener;
 import net.gxstudios.shipwreck.event.IStatusSource;
 
+@SuppressWarnings("serial")
 public class StatusBar extends Label
 {
 	private Vector<String> m_sources = new Vector<String>();

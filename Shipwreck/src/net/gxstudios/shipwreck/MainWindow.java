@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.CheckboxMenuItem;
 import java.awt.Color;
-import java.awt.Dialog;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.awt.GridLayout;
@@ -58,6 +57,7 @@ import net.gxstudios.shipwreck.maps.MapFileMEF;
 import net.gxstudios.shipwreck.misc.Options;
 import net.gxstudios.shipwreck.textures.TextureManager;
 
+@SuppressWarnings("serial")
 public final class MainWindow extends Frame implements ActionListener
 {
 	private IBrush m_copiedBrush = null;
@@ -309,7 +309,7 @@ public final class MainWindow extends Frame implements ActionListener
 				else
 				{
 					change_map_name(dialog.getDirectory() + dialog.getFile());
-					MapFileMEF.instance().save_MEF2(m_map, m_mapFilename);
+					MapFileMEF.save_MEF2(m_map, m_mapFilename);
 				}
 			}
 		}
@@ -395,11 +395,11 @@ public final class MainWindow extends Frame implements ActionListener
 		}
 		else if(ac.equals("Map_Information..."))
 		{
-			MapInformationDialog dialog = new MapInformationDialog(this, m_map);
+			new MapInformationDialog(this, m_map);
 		}
 		else if(ac.equals("Map_Transform_Translate..."))
 		{
-			MapTranslationDialog dialog = new MapTranslationDialog(this, m_map);
+			new MapTranslationDialog(this, m_map);
 		}
 		else if(ac.equals("Brush_Flip X"))
 		{
@@ -531,7 +531,7 @@ public final class MainWindow extends Frame implements ActionListener
 			IBrush b = m_map.get_selected_brush();
 			if(b != null)
 			{
-				Dialog dialog = b.properties_dialog(this);
+				b.properties_dialog(this);
 			}
 		}
 		else if(ac.equals("Texture_Load Texture..."))
@@ -549,7 +549,7 @@ public final class MainWindow extends Frame implements ActionListener
 		}
 		else if(ac.equals("Texture_Edit Textures..."))
 		{
-			TextureDialog td = new TextureDialog(this, m_map);
+			new TextureDialog(this, m_map);
 		}
 		else if(ac.equals("Help_About..."))
 		{
